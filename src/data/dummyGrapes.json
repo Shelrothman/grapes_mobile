@@ -1,0 +1,136 @@
+{
+    "items": [
+        {
+            "item_id": 0,
+            "creation_date": 1586300799,
+            "day": {
+                "g": "massage",
+                "r": "walk outside",
+                "a": "call the dentist back",
+                "p": "read a book",
+                "e": "go to the gym",
+                "s": "call mom"
+            }
+        },
+        {
+            "item_id": 1,
+            "creation_date": 1586387199,
+            "day": {
+                "g": "take a lunch break",
+                "r": "painting",
+                "a": "call friend back",
+                "p": "watch a show",
+                "e": "pushups",
+                "s": "call friend"
+            }
+        },
+        {
+            "item_id": 2,
+            "creation_date": 1586473599,
+            "day": {
+                "g": "meditate",
+                "r": "go for a nature walk",
+                "a": "finish a work project",
+                "p": "try a new recipe",
+                "e": "yoga session",
+                "s": "have lunch with a colleague"
+            }
+        },
+        {
+            "item_id": 3,
+            "creation_date": 1586559999,
+            "day": {
+                "g": "take a warm bath",
+                "r": "listen to soothing music",
+                "a": "organize your workspace",
+                "p": "have a picnic",
+                "e": "dancing",
+                "s": "attend a social event"
+            }
+        },
+        {
+            "item_id": 4,
+            "creation_date": 1586646399,
+            "day": {
+                "g": "practice deep breathing",
+                "r": "watch a sunset",
+                "a": "complete a DIY project",
+                "p": "visit a museum",
+                "e": "swimming",
+                "s": "go for a coffee with a friend"
+            }
+        },
+        {
+            "item_id": 5,
+            "creation_date": 1586732799,
+            "day": {
+                "g": "have a spa day at home",
+                "r": "take a leisurely bike ride",
+                "a": "learn a new language",
+                "p": "listen to your favorite podcast",
+                "e": "hiking",
+                "s": "attend a family gathering"
+            }
+        },
+        {
+            "item_id": 6,
+            "creation_date": 1586819199,
+            "day": {
+                "g": "practice self-care rituals",
+                "r": "watch a comedy movie",
+                "a": "complete a challenging puzzle",
+                "p": "indulge in your favorite dessert",
+                "e": "play a sport",
+                "s": "catch up with a childhood friend"
+            }
+        },
+        {
+            "item_id": 7,
+            "creation_date": 1586905599,
+            "day": {
+                "g": "write in a gratitude journal",
+                "r": "have a cozy bonfire",
+                "a": "achieve a personal milestone",
+                "p": "go stargazing",
+                "e": "cycling",
+                "s": "join a club or group"
+            }
+        },
+        {
+            "item_id": 8,
+            "creation_date": 1586991999,
+            "day": {
+                "g": "practice mindfulness",
+                "r": "read a captivating novel",
+                "a": "learn a new instrument",
+                "p": "visit a theme park",
+                "e": "pilates",
+                "s": "organize a game night with friends"
+            }
+        },
+        {
+            "item_id": 9,
+            "creation_date": 1587078399,
+            "day": {
+                "g": "take a nature photography walk",
+                "r": "have a bubble bath",
+                "a": "run a marathon",
+                "p": "go shopping",
+                "e": "kickboxing",
+                "s": "volunteer for a community project"
+            }
+        },
+        {
+            "item_id": 10,
+            "creation_date": 1587164799,
+            "day": {
+                "g": "practice yoga",
+                "r": "listen to calming sounds of nature",
+                "a": "complete a home renovation task",
+                "p": "attend a live concert",
+                "e": "rock climbing",
+                "s": "join a book club"
+            }
+        }
+    ]
+}
