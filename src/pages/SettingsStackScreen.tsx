@@ -1,42 +1,71 @@
 import { View, Text, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { About, Account, 
+import {
+    About, Account,
     // Edit, 
     // Share 
 } from './';
+// import { ParamListBase } from '@react-navigation/native';
 
 // 🍇🍇🍇
 
 
-
-function SettingsScreen({ navigation }: any) {
+/*
+function SettingsScreen({ navigation }: any) { // TODO will need to use this similar logic for the linking of editing/sharing from the home page
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            {/* <Text>Settings screen</Text> */}
             <Button
                 title="About GRAPES™"
                 onPress={() => navigation.navigate('About')}
             />
             <br />
             <Button
-                title="Account Settings & Preferences"
-                onPress={() => navigation.navigate('About')}
+                title="Edit Account Settings & Preferences"
+                onPress={() => navigation.navigate('Account')}
             />
-            
+
         </View>
     );
 }
+const SettingsStack = createNativeStackNavigator<ParamListBase>()
+*/
 
-const SettingsStack = createNativeStackNavigator() as any;
-
+const Tab = createBottomTabNavigator();
 export function SettingsStackScreen() {
     return (
-        <SettingsStack.Navigator>
-            <SettingsStack.Screen name="More.." component={SettingsScreen} />
-            <SettingsStack.Screen name="About" component={About} options={{ title: 'About GRAPES™' }} />
-            <SettingsStack.Screen name="Account Settings & Preferences" component={Account} />
-        </SettingsStack.Navigator>
+        <>
+            {/* <SettingsStack.Navigator> */}
+            <Tab.Navigator
+                screenOptions={({ route }) => ({
+                    tabBarIcon: ({ focused, color }) => {
+                        let iconName: string = 'ios-information-circle-outline';
+                        if (route.name) {
+                            if (route.name === 'Account') {
+                                iconName = focused ? 'account-settings' : 'account-settings-outline';
+                            } else if (route.name === 'About') {
+                                iconName = focused ? 'information' : 'information-outline';
+                            }
+                            // else if (route.name === 'More') {
+                                // iconName = focused ? 'ios-ellipsis-vertical-circle-sharp' : 'ios-ellipsis-vertical-circle-outline';
+                            // }
+                        }
+                        return <MaterialCommunityIcons name={iconName} size={20} color={color} />;
+                    },
+                    tabBarActiveTintColor: 'green',
+                    tabBarInactiveTintColor: 'gray',
+                    tabBarStyle: { backgroundColor: 'lightgreen', paddingBottom: 20 },
+                    tabBarIndicatorStyle: { backgroundColor: 'darkgreen', height: 5 },
+                })}>
+                {/* <SettingsStack.Screen name="More" options={{title: "Settings and Information" }} component={SettingsScreen} /> */}
+                <Tab.Screen name="About" component={About} options={{ title: 'About GRAPES™' }} />
+                <Tab.Screen name="Account" component={Account} options={{ title: 'My Account' }} />
+                {/* </SettingsStack.Navigator> */}
+            </Tab.Navigator>
+        </>
     );
 }
