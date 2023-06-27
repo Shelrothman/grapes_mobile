@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, FlatList } from 'react-native';
 import * as grapes from '../data/dummyGrapes.json';
 import { HomeGrapeItem } from '../components/HomeGrapeItem';
 
-
+// ! PU hurr
 export function Home() {
     return (
         <View style={styles.container}>
