@@ -6,7 +6,6 @@ import { HomeGrapeItem } from '../components/HomeGrapeItem';
 export function Home() {
     return (
         <View style={styles.container}>
-            <Text>Home</Text>
             <FlatList
                 data={grapes.items}
                 renderItem={({ item }) => <HomeGrapeItem grape={item} />}

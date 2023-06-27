@@ -9,7 +9,7 @@ import { Grape, GrapeDay } from '../types';
 type HomeGrapeItemProps = {
     grape: Grape;
 };
-
+// TODO: use this info for the dewfaut/placeholder for the editing instead
 const GRAPE_DAY = {
     "g": 'Gentle with Self',
     "r": 'Relaxation',
@@ -18,6 +18,11 @@ const GRAPE_DAY = {
     "e": 'Exercise',
     "s": 'Social',
 }
+//                    <View style={styles.small_container}>
+// @ts-ignore
+{/* <Text style={styles.small_text}>{GRAPE_DAY[ day.letter ]}</Text> */}
+// </View> */}
+// const currentTimeStampInMilliseconds = (new Date()).getTime();
 
 export function HomeGrapeItem({ grape }: HomeGrapeItemProps) {
 
@@ -32,12 +37,6 @@ export function HomeGrapeItem({ grape }: HomeGrapeItemProps) {
                         {day.value}
                     </Text>
                 </View>
-                {/* // TODO: use this info for the dewfaut/placeholder for the editing instead */}
-                {/* <br />
-                    <View style={styles.small_container}>
-                         @ts-ignore
-                        <Text style={styles.small_text}>{GRAPE_DAY[ day.letter ]}</Text>
-                    </View> */}
             </View>
         )
     })
@@ -46,14 +45,12 @@ export function HomeGrapeItem({ grape }: HomeGrapeItemProps) {
 
     return (
         <View style={styles.container}>
-            {/* <Text style={styles.stats}>
-                {question.score} votes · {question.answer_count} answers ·{' '}
-                {question.view_count} views
-            </Text> */}
             <Text style={styles.title}>
                 {new Date(grape.creation_date * 1000).toDateString()}
             </Text>
             {letterRow}
+            <br />
+            <Text>🍇🍇🍇🍇🍇🍇🍇🍇🍇🍇🍇🍇🍇🍇🍇🍇</Text>
         </View>
     )
 }
@@ -61,7 +58,7 @@ export function HomeGrapeItem({ grape }: HomeGrapeItemProps) {
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 20, // btwn each card
+        marginBottom: 10, // btwn each card
         // borderTopColor: '#4E1E66',
         // borderTopWidth: 0.5,
     },
@@ -94,7 +91,6 @@ const styles = StyleSheet.create({
     },
     letterValue: {
         display: 'flex',
-
         padding: 10,
     },
     letterValue_alt: {

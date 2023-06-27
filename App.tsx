@@ -16,7 +16,7 @@ import {
 //* HEX COLOR: #8031A7; for grapes purple
 // * or a darker: #4E1E66 for grapes purple
 //*              #889CAF
-
+// grape emoji: 🍇
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -39,10 +39,12 @@ export default function App() {
                         }
                         return <Ionicons name={iconName} size={20} color={color} />;
                     },
-                    tabBarActiveTintColor: '#003B1B',
+                    // headerShown: route.name === 'Home' ? false : true,
+                    // headerShown: false,
+                    tabBarActiveTintColor: '#8ABD91',
                     tabBarInactiveTintColor: '#f3f0f5', // text color for words that are not selected
-                    tabBarStyle: { backgroundColor: '#8ABD91', paddingTop: 30 },
-                    tabBarIndicatorStyle: { backgroundColor: '#49415a', height: 5 },
+                    tabBarStyle: { backgroundColor: '#4E1E66', paddingTop: 30 },
+                    tabBarIndicatorStyle: { backgroundColor: '#8ABD91', height: 5 },
                 })}>
                 <Tab.Screen name="Home" component={Home}
                     options={{ title: 'Home' }}
