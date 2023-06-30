@@ -1,7 +1,7 @@
 import { SafeAreaView, Text, StyleSheet } from 'react-native';
 import { Link } from 'expo-router';
 
-// * use alwasy safgeareview unless u want to have content go farther for specific reason
+// * use alwasy SafeAreaView unless u want to have content go farther for specific reason
 // https://stackoverflow.com/questions/60552518/should-i-always-use-safeareaview-in-react-native
 
 export default function Edit() {

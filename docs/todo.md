@@ -9,3 +9,22 @@ https://github.com/codingki/react-native-expo-template/tree/master/template-type
 
 - once frontend is mostly initially done then use supabase like bring it in.
 - https://supabase.com/dashboard/project/vvjtgmzgmrunbhvshgxy
+
+
+
+{/* <Link href="/Edit">
+<FontAwesome name="edit" size={20} color="#4E1E66" />
+</Link> */}
+{/*  <Link href="/share">
+<FontAwesome name="share-square" size={20} color="#4E1E66" />
+</Link> */}
+
+    buttonWrapper: {
+        flexDirection: 'row',
+        display: 'flex',
+        justifyContent: 'space-between',
+        gap: 6,
+    },
+
+
+*/}

@@ -31,7 +31,6 @@ export function HomeGrapeDay({ grape }: HomeGrapeItemProps) {
     )
 }
 
-// TODO if the date is not the toip one, then dont show the edit.
 
 const styles = StyleSheet.create({
     container: {

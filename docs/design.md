@@ -5,3 +5,6 @@ bluish: #889CAF
 dark: #2E3944
 light grape: #8031A7
 dark grape: #4E1E66
+
+
+<!-- TODO reasses the colors being used -->
