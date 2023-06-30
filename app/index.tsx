@@ -1,17 +1,11 @@
-import { StyleSheet, Text, View, FlatList, SafeAreaView, ActivityIndicator } from 'react-native';
+// import { StyleSheet, Text, View, FlatList, SafeAreaView, ActivityIndicator } from 'react-native';
 // import QuestionListItem from '../src/components/QuestionListItem';
-
-
 import { useNavigation } from 'expo-router';
 import { useState, useLayoutEffect, SetStateAction } from 'react';
-
-import { HomeGrapeItem } from '../src/components/HomeGrapeItem';
+import { Home } from '../src/components/Home';
 // import { useQuery } from 'urql';
-import * as grapes from '../src/data/dummyGrapes.json';
 
 
-// TODO make edit and share be a link from individual letter 
-// !! PU here need to route to the letter_id page yea.....
 // ** right now it works goes to a dummy page but okay cool then just gotta do it for the sharing share by id and booya ya i can add ?params or somethuing.
 // ** youre a derp its because i didnt DEFAULt export the page so it wasnt working.
 
@@ -33,22 +27,10 @@ import { SettingsStackScreen } from '../src/components/SettingsStackScreen';
 const Tab = createMaterialTopTabNavigator();
 
 
-const Home = () => {
-    return (
-        <View style={styles_home.container}>
-            <Text style={styles_home.title}>G.R.A.P.E.S</Text>
-            {/* <Text>G:{GD.g} R:{GD.r} A:{GD.a} P:{GD.p} E:{GD.e} S:{GD.s} </Text> */}
-            <FlatList
-                data={grapes.items}
-                renderItem={({ item }) => <HomeGrapeItem grape={item} />}
-                showsVerticalScrollIndicator={false}
-            />
-        </View>
-    );
-}
 
 
-export default function Page() {
+
+export default function HomePage() {
 
     const [ searchTerm, setSearchTerm ] = useState('');
 
@@ -104,7 +86,6 @@ export default function Page() {
 
     return (
         <>
-            {/* <NavigationContainer> */}
             <Tab.Navigator
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ focused, color }) => {
@@ -121,23 +102,9 @@ export default function Page() {
                 <Tab.Screen name="More" component={SettingsStackScreen} options={{ title: 'M🍇re' }} />
             </Tab.Navigator>
             <StatusBar style='auto' hidden={true} />
-            {/* </NavigationContainer> */}
         </>
     )
 }
 
 
 
-const styles_home = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#889CAF',
-        alignItems: 'center',
-        // justifyContent: 'center',
-    },
-    title: {
-        // fontSize: 20,
-        fontWeight: 'bold',
-        color: '#4E1E66',
-    },
-});

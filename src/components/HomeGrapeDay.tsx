@@ -17,12 +17,7 @@ type HomeGrapeItemProps = {
 
 // const currentTimeStampInMilliseconds = (new Date()).getTime();
 
-// !!! PU here! I think we want to go with expo-router instead so go ahead and
-// ! set that up like in SOclone and using the app/ folder and that way we have those routes in there like an express app and do that and yes.
-
-// const Stack = createStackNavigator();
-
-export function HomeGrapeItem({ grape }: HomeGrapeItemProps) {
+export function HomeGrapeDay({ grape }: HomeGrapeItemProps) {
 
     const letterRow = grape.day.map((day: GrapeDay, x: number) => {
         return (
@@ -36,10 +31,10 @@ export function HomeGrapeItem({ grape }: HomeGrapeItemProps) {
                     </Text>
                 </View>
                 <View style={styles.buttonWrapper}>
-                     <Link href="/hello-letter">
+                    <Link href="/Edit">
                         <FontAwesome name="edit" size={20} color="#4E1E66" />
                     </Link>
-                  {/*  <Link href="/share">
+                    {/*  <Link href="/share">
                         <FontAwesome name="share-square" size={20} color="#4E1E66" />
                     </Link> */}
                     {/* <Stack.Group>
@@ -70,14 +65,11 @@ export function HomeGrapeItem({ grape }: HomeGrapeItemProps) {
 const styles = StyleSheet.create({
     container: {
         marginBottom: 10, // btwn each card
-        // borderTopColor: '#4E1E66',
-        // borderTopWidth: 0.5,
     },
     buttonWrapper: {
         flexDirection: 'row',
         display: 'flex',
         justifyContent: 'space-between',
-        // alignItems: 'flex-end',
         gap: 6,
     },
     emojiRow: {

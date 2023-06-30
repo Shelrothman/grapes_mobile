@@ -1,13 +1,6 @@
 import { useSearchParams } from "expo-router";
 import { View, Text, FlatList, ActivityIndicator } from 'react-native';
-
-
-
-
-
-
-
-
+import { Link } from 'expo-router';
 
 
 
