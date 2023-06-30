@@ -1,24 +1,45 @@
-import { useSearchParams } from "expo-router";
-import { View, Text, FlatList, ActivityIndicator } from 'react-native';
+import { usePathname } from "expo-router";
+import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { Link } from 'expo-router';
 
 
 
 const GrapeLetterPage = () => {
-    const { grape_letter_id } = useSearchParams();
+    // const { grape_letter_id } = useSearchParams(); its not a searchParame
+    // console.log(grape_letter_id)
+
+    let grape_letter_id = usePathname().replace('/', '');
+
+    // console.log(usePathname());
 
     return (
-        <View style={{ backgroundColor: 'white', flex: 1 }}>
-            {/* <FlatList
-                data={question.answers}
-                renderItem={({ item }) => <AnswerListItem answer={item} />}
-                ListHeaderComponent={() => <QuestionHeader question={question} />}
-            /> */}
-            <Text>
-            {grape_letter_id}
+
+        <SafeAreaView style={styles.container}>
+            <Link href="../">{`<`}Back</Link>
+            <Text style={styles.title}>
+                Viewing Grape: {grape_letter_id}
             </Text>
-        </View>
+        </SafeAreaView>
     );
 }
+
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#889CAF',
+        // alignItems: 'center',
+        // paddingTop: 50,
+        // justifyContent: 'center',
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#4E1E66',
+    },
+});
+
+
 
 export default GrapeLetterPage;

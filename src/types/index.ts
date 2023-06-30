@@ -8,3 +8,8 @@ export type GrapeDay = {
     letter: string;
     value: string;
 }
+
+// export type GrapeLetter = {
+//     letter: string;
+//     value: string;
+// }

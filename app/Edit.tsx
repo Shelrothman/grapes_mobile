@@ -1,16 +1,17 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { SafeAreaView, Text, StyleSheet } from 'react-native';
 import { Link } from 'expo-router';
 
-
+// * use alwasy safgeareview unless u want to have content go farther for specific reason
+// https://stackoverflow.com/questions/60552518/should-i-always-use-safeareaview-in-react-native
 
 export default function Edit() {
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Text style={styles.title}>Edit</Text>
             <Link href="../">
                 <Text>Go Back</Text>
             </Link>
-        </View>
+        </SafeAreaView>
     )
 }
 

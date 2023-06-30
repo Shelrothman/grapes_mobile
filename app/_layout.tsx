@@ -1,5 +1,5 @@
 import { Stack } from 'expo-router';
-
+import { StyleSheet, View } from 'react-native';
 
 /*
 okay.. link on one,, one of the grapes to just that grape day
@@ -61,9 +61,19 @@ const RootLayout = () => {
             <Stack.Screen name="Share" options={{ headerShown: false }} />
             <Stack.Screen name="Edit" options={{ headerShown: false }} />
             {/* i dont think we need one for the grape_id... */}
+            <Stack.Screen name="[grape_id]" options={{ headerShown: false }} />
         </Stack>
         // </Provider>
     );
 };
 
-export default RootLayout;
+
+// const styles_root = StyleSheet.create({
+//     container: {
+//         paddingTop: 50,
+//         flex: 1,
+//     },
+// });
+
+
+export default RootLayout

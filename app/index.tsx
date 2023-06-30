@@ -101,7 +101,9 @@ export default function HomePage() {
                 <Tab.Screen name="Global" component={Global} options={{ title: 'Feed' }} />
                 <Tab.Screen name="More" component={SettingsStackScreen} options={{ title: 'M🍇re' }} />
             </Tab.Navigator>
-            <StatusBar style='auto' hidden={true} />
+            <StatusBar style='auto'
+            // hidden={true} 
+            />
         </>
     )
 }

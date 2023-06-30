@@ -1,5 +1,20 @@
-/**
- * this is the screen that shows the details of a grapeDayh
- * and allows you to edit it if its the current day
- * allows you to share by letter
- */
+{/* <Link href="/Edit">
+<FontAwesome name="edit" size={20} color="#4E1E66" />
+</Link> */}
+{/*  <Link href="/share">
+<FontAwesome name="share-square" size={20} color="#4E1E66" />
+</Link> */}
+{/* <Stack.Group>
+<Stack.Screen name="Edit" component={Edit} />
+<Stack.Screen name="Share" component={Edit} />
+</Stack.Group> 
+
+    buttonWrapper: {
+        flexDirection: 'row',
+        display: 'flex',
+        justifyContent: 'space-between',
+        gap: 6,
+    },
+
+
+*/}
