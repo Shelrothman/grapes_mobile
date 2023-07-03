@@ -1,3 +1,14 @@
+
+
+
+<!-- !NEXT: continue making all the ui stuff and make all the screens nice and just do everything yo can basically with dummy data get that allll set up and THEN then use superbase and use that starter expo from there for auth.. so do auth and then the dn in supabase and then refactor code to query from there and yea.  -->
+
+
+
+
+
+
+
 - a customizavle widget for their homescreen that displays their current days agenda or displays urge to go mke ojne for today if they havent yet
 
 

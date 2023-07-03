@@ -10,6 +10,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 type MyGrapeLetterProps = {
     grape_day: GrapeDay;
 };
+// TODO modulate and clean up
 
 const GRAPE_DAY = {
     "g": 'Gentle with Self',
