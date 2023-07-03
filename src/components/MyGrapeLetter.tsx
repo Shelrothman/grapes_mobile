@@ -3,10 +3,12 @@
  * a row of a grape letter
  */
 import { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet, SafeAreaView } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { Grape, GrapeDay } from '../types';
 import { Link } from 'expo-router';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { DismissKeyboardView } from '../utils/DismissKeyboardView';
+
 type MyGrapeLetterProps = {
     grape_day: GrapeDay;
 };
@@ -42,34 +44,39 @@ export function MyGrapeLetter({ grape_day }: MyGrapeLetterProps) {
                     </Link>
                 </View>
             </View>
-            <View style={styles.row}>
+            <View style={styles.letter_row}>
                 <View style={styles.letterColumn}>
                     <Text style={styles.letterColText}>{grape_day.letter.toUpperCase()}</Text>
                 </View>
-                <View style={styles.letterValue}>
+
+                {/* <View style={styles.letterValue}> */}
+                <DismissKeyboardView style={styles.letterValue}>
                     <TextInput style={styles.letterValueText}
                         multiline={true}
                         numberOfLines={4}
                         value={inputValue}
                         onChangeText={(text) => setInputValue(text)}
                         keyboardType='default'
+                        // onFocus={() => setInputValue('')}
+                        onBlur={() => setInputValue(grape_day.value)}
                     />
-                </View>
+                </DismissKeyboardView>
+                {/* </View> */}
             </View>
-            <Text><br /></Text>
+            <Text>
+                {'\n'}
+            </Text>
         </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     title_row: {
-        // flex: 1,
         flexDirection: 'row',
         marginStart: 10,
         marginEnd: 10,
     },
-    row: {
-        // flex: 1,
+    letter_row: {
         flexDirection: 'row',
         backgroundColor: '#8ABD91',
         marginStart: 10,
@@ -93,7 +100,8 @@ const styles = StyleSheet.create({
     buttonWrapper: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        // flex: 1,
+        flex: 1,
+        // ! this is the key to make the buttons align to the right
     },
     letterColText: {
         color: '#4E1E66',
@@ -102,7 +110,6 @@ const styles = StyleSheet.create({
     },
     letterValue: {
         display: 'flex',
-        // flex: 1,
         padding: 10,
     },
     letterValueText: {

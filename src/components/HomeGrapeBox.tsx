@@ -10,7 +10,6 @@ export function HomeGrapeBox({ grape }: HomeGrapeLetterRowProps) {
     return (
         <>
             {grape.day.map((day: GrapeDay, x: number) => (
-                // <View style={x % 2 == 0 ? styles.row : styles.alt_row} key={day.letter}>
                 <View style={x % 2 == 0 ? styles.row : styles.alt_row} key={day.letter}>
                     <View style={styles.letterColumn}>
                         <Text style={styles.letterColText}>{day.letter.toUpperCase()}</Text>

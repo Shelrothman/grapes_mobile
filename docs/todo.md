@@ -2,7 +2,7 @@
 
 
 <!-- !NEXT: continue making all the ui stuff and make all the screens nice and just do everything yo can basically with dummy data get that allll set up and THEN then use superbase and use that starter expo from there for auth.. so do auth and then the dn in supabase and then refactor code to query from there and yea.  -->
-
+[https://github.com/codingki/react-native-expo-template/tree/master/template-typescript-bottom-tabs-supabase-auth-flow]
 
 
 

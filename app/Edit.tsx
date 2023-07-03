@@ -17,7 +17,7 @@ export default function Edit() {
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
+        flex: 1,
         backgroundColor: '#889CAF',
         alignItems: 'center',
         paddingTop: 50,
