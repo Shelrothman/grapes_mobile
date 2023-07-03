@@ -10,6 +10,7 @@ export function HomeGrapeBox({ grape }: HomeGrapeLetterRowProps) {
     return (
         <>
             {grape.day.map((day: GrapeDay, x: number) => (
+                // <View style={x % 2 == 0 ? styles.row : styles.alt_row} key={day.letter}>
                 <View style={x % 2 == 0 ? styles.row : styles.alt_row} key={day.letter}>
                     <View style={styles.letterColumn}>
                         <Text style={styles.letterColText}>{day.letter.toUpperCase()}</Text>
@@ -27,13 +28,14 @@ export function HomeGrapeBox({ grape }: HomeGrapeLetterRowProps) {
 
 const styles = StyleSheet.create({
     row: {
-        flex: 1,
+        // flex: 1,
         flexDirection: 'row',
         backgroundColor: '#8ABD91',
         borderBottomColor: '#4E1E66',
         borderBottomWidth: 0.5,
     },
     alt_row: {
+        // flex: 1,
         flexDirection: 'row',
         backgroundColor: '#8ABDAA',
         borderBottomColor: '#4E1E66',
@@ -56,7 +58,7 @@ const styles = StyleSheet.create({
     },
     letterValue: {
         display: 'flex',
-        flex: 1,
+        // flex: 1,
         padding: 10,
     },
     letterValue_alt: {

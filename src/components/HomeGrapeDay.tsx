@@ -34,11 +34,12 @@ export function HomeGrapeDay({ grape }: HomeGrapeItemProps) {
 
 const styles = StyleSheet.create({
     container: {
-        marginBottom: 10, // btwn each card
+        // marginBottom: 10, // btwn each card
     },
     emojiRow: {
         marginTop: 10,
-        width: '100%', // idk if this even works
+        marginBottom: 10,
+        // width: '100%', // idk if this even works
     },
     title: {
         color: '#4E1E66',

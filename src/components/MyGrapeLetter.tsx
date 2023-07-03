@@ -23,7 +23,7 @@ const GRAPE_DAY = {
 
 export function MyGrapeLetter({ grape_day }: MyGrapeLetterProps) {
 
-    const [inputValue, setInputValue] = useState<string>(grape_day.value);
+    const [ inputValue, setInputValue ] = useState<string>(grape_day.value);
 
     return (
         <SafeAreaView>
@@ -56,20 +56,20 @@ export function MyGrapeLetter({ grape_day }: MyGrapeLetterProps) {
                     />
                 </View>
             </View>
-            <br />
+            <Text><br /></Text>
         </SafeAreaView>
     )
 }
 
 const styles = StyleSheet.create({
     title_row: {
-        flex: 1,
+        // flex: 1,
         flexDirection: 'row',
         marginStart: 10,
         marginEnd: 10,
     },
     row: {
-        flex: 1,
+        // flex: 1,
         flexDirection: 'row',
         backgroundColor: '#8ABD91',
         marginStart: 10,
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     buttonWrapper: {
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        flex: 1,
+        // flex: 1,
     },
     letterColText: {
         color: '#4E1E66',
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     },
     letterValue: {
         display: 'flex',
-        flex: 1,
+        // flex: 1,
         padding: 10,
     },
     letterValueText: {

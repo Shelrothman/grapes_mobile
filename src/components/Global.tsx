@@ -12,7 +12,7 @@ export function Global() {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
         backgroundColor: '#889CAF',
         alignItems: 'center',
         // justifyContent: 'center',
