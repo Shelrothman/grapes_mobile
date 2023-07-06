@@ -10,14 +10,15 @@ export function Home() {
 
     return (
         <SafeAreaView style={styles_home.container}>
-                <Text style={styles_home.title}>G.R.A.P.E.S</Text>
-            {/* <FlatList
+            <Text style={styles_home.title}>G.R.A.P.E.S</Text>
+            <FlatList
                 data={grapes.items}
-                // renderItem={({ item }) => <HomeGrapeDay grape={item} />}
-                renderItem={({ item }) => <Text>ItemItem</Text>}
+                renderItem={({ item }) => <HomeGrapeDay grape={item} />}
+                // renderItem={({ item }) => <Text>ItemItem</Text>}
                 showsVerticalScrollIndicator={false}
-            /> */}
-            <HomeGrapeDay grape={grapes.items[0]} />
+                // style={{ marginLeft: 10, marginRight: 10 }}
+            />
+            {/* <HomeGrapeDay grape={grapes.items[0]} /> */}
         </SafeAreaView>
     );
 }
@@ -28,6 +29,9 @@ const styles_home = StyleSheet.create({
     container: {
         backgroundColor: '#2E3944',
         alignItems: 'center',
+        // justifyContent: 'center',
+        // alignContent: 'center',
+        // padding: 20,
         height: '100%',
         width: '100%',
     },

@@ -51,10 +51,14 @@ const styles = StyleSheet.create({
     },
     letterValue: {
         padding: 10,
+        width: '85%',
+        // ! important that if ya wanna change this width, ya gotta change the width of the letterValue_alt too AND the parent components
+        wordWrap: 'break-word',
     },
     letterValue_alt: {
-        color: '#f3f0f5',
-        // backgroundColor: '#9CAF88',
+        wordWrap: 'break-word',
+        width: '85%',
+        padding: 10,
     },
     letterValueText: {
         fontStyle: 'italic',
