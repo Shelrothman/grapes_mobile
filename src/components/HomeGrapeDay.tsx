@@ -3,6 +3,7 @@
  * this is a reusable item that displays a chart-like card of each letter of the day
 */
 
+import { useState } from 'react';
 import { View, Text, StyleSheet, Button, SafeAreaView, Pressable } from 'react-native';
 import { Grape, GrapeDayLetter } from '../types';
 import { useNavigation, useRouter } from 'expo-router';
@@ -20,32 +21,20 @@ type HomeGrapeItemProps = {
 
 export function HomeGrapeDay({ grape }: HomeGrapeItemProps) {
 
-    const navigation = useNavigation();
+    const [ isPressed, setIsPressed ] = useState<boolean>(false);
     const router = useRouter();
-    const handleOnPress = () => {
-        // console.log('handleOnPress', grape);
-        // navigation.navigate(`/${grape.item_id}`);
-        // navigation.
-        router.push(`/${grape.item_id}`);
-    }
+    const handlePressIn = () => setIsPressed(true);
+    
+
+    const handlePressOut = () => setIsPressed(false);
 
     return (
         <View style={styles.whole_container}>
-            <Pressable onPress={handleOnPress} 
-            // hitSlop={15}
-            style={({ pressed }) => [
-                // {
-                //     backgroundColor: pressed
-                //         ? 'pink'
-                //         : 'none'
-                // },
-                {   
-                    // marginLeft: 10,
-                    // marginRight: 10,
-                }
-                // styles.box_container
-            ]}
-                //TODO onPressIn=function to change the style of the box to be darker or something while its being pressed
+            <Pressable
+                onPress={() => router.push(`/${grape.item_id}`)}
+                onPressIn={handlePressIn}
+                onPressOut={handlePressOut}
+                style={isPressed ? styles.pressed : {}}
             >
                 <View style={styles.title_container}>
                     <Text style={styles.title}>
@@ -63,6 +52,11 @@ export function HomeGrapeDay({ grape }: HomeGrapeItemProps) {
 
 
 const styles = StyleSheet.create({
+    pressed: {
+        backgroundColor: '#4E1E66',
+        borderRadius: 10,
+        padding: 7,
+    },
     box_container: {
         borderRadius: 10,
         borderColor: '#4E1E66',
@@ -71,13 +65,15 @@ const styles = StyleSheet.create({
         borderWidth: 2.5,
         minWidth: '85%',
         maxWidth: '85%',
+        // ! important that if ya wanna change these widths, have to change in HomeGrapeBox.tsx too
     },
     whole_container: {
         alignItems: 'center',
+        marginBottom: 20,
     },
     title_container: {
-        alignItems: 'center',  
-        marginBottom: 5, 
+        alignItems: 'center',
+        marginBottom: 10,
     },
     title: {
         color: '#aa54ff',

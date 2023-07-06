@@ -29,9 +29,6 @@ const styles_home = StyleSheet.create({
     container: {
         backgroundColor: '#2E3944',
         alignItems: 'center',
-        // justifyContent: 'center',
-        // alignContent: 'center',
-        // padding: 20,
         height: '100%',
         width: '100%',
     },
