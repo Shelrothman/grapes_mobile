@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native';
-import { Grape, GrapeDay } from '../types';
+import { Grape, GrapeDayLetter } from '../types';
 
 type HomeGrapeLetterRowProps = {
     grape: Grape;
@@ -9,7 +9,7 @@ type HomeGrapeLetterRowProps = {
 export function HomeGrapeBox({ grape }: HomeGrapeLetterRowProps) {
     return (
         <>
-            {grape.day.map((day: GrapeDay, x: number) => (
+            {grape.day.map((day: GrapeDayLetter, x: number) => (
                 <View style={x % 2 == 0 ? styles.row : styles.alt_row} key={day.letter}>
                     <View style={styles.letterColumn}>
                         <Text style={styles.letterColText}>{day.letter.toUpperCase()}</Text>
@@ -27,28 +27,22 @@ export function HomeGrapeBox({ grape }: HomeGrapeLetterRowProps) {
 
 const styles = StyleSheet.create({
     row: {
-        // flex: 1,
         flexDirection: 'row',
-        backgroundColor: '#8ABD91',
-        borderBottomColor: '#4E1E66',
+        borderColor: '#4E1E66',
         borderBottomWidth: 0.5,
     },
     alt_row: {
-        // flex: 1,
         flexDirection: 'row',
-        backgroundColor: '#8ABDAA',
-        borderBottomColor: '#4E1E66',
+        borderColor: '#4E1E66',
         borderBottomWidth: 0.5,
     },
     letterColumn: {
         width: 50,
         borderRightWidth: 0.5,
         borderColor: '#4E1E66',
-        alignItems: 'center',
         justifyContent: 'center',
-        // alignItems: 'flex-start',
-        padding: 3,
-        display: 'flex',
+        padding: 10,
+        alignItems: 'center',
     },
     letterColText: {
         color: '#4E1E66',
@@ -56,16 +50,15 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     letterValue: {
-        display: 'flex',
-        // flex: 1,
         padding: 10,
     },
     letterValue_alt: {
         color: '#f3f0f5',
+        // backgroundColor: '#9CAF88',
     },
     letterValueText: {
         fontStyle: 'italic',
         fontWeight: 'bold',
-        color: '#003B1B',
+        color: '#4E1E66',
     }
 });

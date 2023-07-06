@@ -4,7 +4,7 @@
  *
  */
 
-import { Grape, GrapeDay } from '../types';
+import { Grape, GrapeDayLetter } from '../types';
 import * as grapes from '../data/dummyGrapes.json';
 
 

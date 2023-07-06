@@ -5,6 +5,10 @@ import { TouchableWithoutFeedback, Keyboard, View } from 'react-native';
 
 // *the accessible={false} is required to make the input form continue to be accessible through VoiceOver. Visually impaired people will thank you!
 
+// KeyboardAvoidingView.props = {
+//     ...KeyboardAvoidingView.defaultProps,
+//     behavior: 'padding',
+// };
 
 const DismissKeyboardHOC = (Comp: any) => {
     return ({ children, ...props }: any) => (

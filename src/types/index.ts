@@ -1,10 +1,10 @@
 export type Grape = {
     item_id: number;
     creation_date: number;
-    day: GrapeDay[];
+    day: GrapeDayLetter[];
 }
 
-export type GrapeDay = {
+export type GrapeDayLetter = {
     letter: string;
     value: string;
 }

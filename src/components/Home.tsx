@@ -10,28 +10,30 @@ export function Home() {
 
     return (
         <SafeAreaView style={styles_home.container}>
-            <Text style={styles_home.title}>G.R.A.P.E.S</Text>
-            {/* <Text>G:{GD.g} R:{GD.r} A:{GD.a} P:{GD.p} E:{GD.e} S:{GD.s} </Text> */}
-                <FlatList
-                    data={grapes.items}
-                    renderItem={({ item }) => <HomeGrapeDay grape={item} />}
-                    showsVerticalScrollIndicator={false}
-                />
+                <Text style={styles_home.title}>G.R.A.P.E.S</Text>
+            {/* <FlatList
+                data={grapes.items}
+                // renderItem={({ item }) => <HomeGrapeDay grape={item} />}
+                renderItem={({ item }) => <Text>ItemItem</Text>}
+                showsVerticalScrollIndicator={false}
+            /> */}
+            <HomeGrapeDay grape={grapes.items[0]} />
         </SafeAreaView>
     );
 }
 
+// looks fine here without the HomeGrapeDay so we know its in that or it s children.. the issue
 
 const styles_home = StyleSheet.create({
     container: {
-        // flex: 1,
-        backgroundColor: '#889CAF',
+        backgroundColor: '#2E3944',
         alignItems: 'center',
-        // justifyContent: 'center',
+        height: '100%',
+        width: '100%',
     },
     title: {
-        // fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
-        color: '#4E1E66',
+        color: '#89af88',
     },
 });
