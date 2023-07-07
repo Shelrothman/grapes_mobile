@@ -13,6 +13,7 @@
 - timeZone should be set in settings per user? ...option to be and by default use the device time zone
 [expo]https://docs.expo.dev/versions/latest/sdk/date-time-picker/
 
+// const currentTimeStampInMilliseconds = (new Date()).getTime();
 
 - a customizavle widget for their homescreen that displays their current days agenda or displays urge to go mke ojne for today if they havent yet
 

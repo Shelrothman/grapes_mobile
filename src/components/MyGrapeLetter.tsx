@@ -2,41 +2,45 @@
 /**
  * a row of a grape letter
  */
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
-    View, Text, TextInput, Pressable, FlatList,
-    Button, StyleSheet, SafeAreaView, ScrollView, Keyboard, KeyboardAvoidingView, Platform, TouchableWithoutFeedback
+    View, Text, TextInput, Pressable, FlatList, StyleSheet, SafeAreaView,
+    Keyboard, KeyboardAvoidingView, Platform, TouchableWithoutFeedback
 } from 'react-native';
 import { Grape, GrapeDayLetter } from '../types';
-import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { usePressAnimation } from "../hooks/usePressAnimation";
 
-interface Map {
+
+
+/**
+ * @interface MyMap is a type that is a map of strings to strings
+ * used to allow the key string to be used as a variable to find the value string
+ */
+interface MyMap {
     [ key: string ]: string | undefined
 }
 
 type MyGrapeLetterProps = {
     grape_day: GrapeDayLetter;
-    // scrollViewRef: React.RefObject<ScrollView>;
     /** selects active editable input so that it only displays that. */
     setSelectedLetter: React.Dispatch<React.SetStateAction<GrapeDayLetter | null>>;
     selectedLetter: GrapeDayLetter | null;
 };
 
-type MyGrapeProps = {
-    grape: Grape;
-};
+type MyGrapeProps = { grape: Grape; };
 
 // TODO a photo/icon for each letter
 
 // TODO modulate and clean up
 
-// ! PU in here... trying to get the damn thing to do the right thing for Jeyboard avoiding view
-// ! just tried in here but its still shit: https://medium.com/@nickopops/keyboardavoidingview-not-working-properly-c413c0a200d4
+// TODO make the keyboard show up automatically when you press on the letter
 
-const GRAPE_DAY: Map = {
+
+
+const GRAPE_DAY: MyMap = {
     g: 'entle with self',
     r: 'elaxation',
     a: 'ccomplishment',
@@ -46,7 +50,7 @@ const GRAPE_DAY: Map = {
 }
 
 // ? should this function be inside of MyGrapeLetter
-const GRAPE_DAY_TITLE = (letter: string): JSX.Element => {
+export const GRAPE_DAY_TITLE = (letter: string): JSX.Element => {
     let phrase: JSX.Element = <Text style={{
         textShadowColor: '#cb9de2',
         textShadowRadius: 20
@@ -66,12 +70,28 @@ const GRAPE_DAY_TITLE = (letter: string): JSX.Element => {
 function MyGrapeLetter({ grape_day, setSelectedLetter, selectedLetter }: MyGrapeLetterProps) {
 
     const [ inputValue, setInputValue ] = useState<string>(grape_day.value);
-    // const [ isFocused, setIsFocused ] = useState<boolean>(false);
-    const [ isPressed, setIsPressed ] = useState<boolean>(false);
 
-    // const inputRef = useRef<TextInput>(null);
-    const handlePressIn = () => setIsPressed(true);
-    const handlePressOut = () => setIsPressed(false);
+    const inputRef = useRef<TextInput>(null);
+
+    const {
+        handlePressIn,
+        handlePressOut,
+        pressStyle
+    } = usePressAnimation();
+
+
+    useEffect(() => {
+        if (selectedLetter && selectedLetter.letter === grape_day.letter) {
+            if (inputRef.current) {
+                inputRef.current.focus();
+            }
+        }
+        return () => {
+            if (inputRef.current) {
+                inputRef.current.blur();
+            }
+        }
+    }, [ selectedLetter ]);
 
     return (
         <>
@@ -84,9 +104,10 @@ function MyGrapeLetter({ grape_day, setSelectedLetter, selectedLetter }: MyGrape
             </View>
             {!selectedLetter ? <Pressable
                 onPress={() => setSelectedLetter(grape_day)}
+                // onPress={handleOnPress}
                 onPressIn={handlePressIn}
                 onPressOut={handlePressOut}
-                style={isPressed ? styles.pressed : {}}
+                style={pressStyle}
             >
                 <View style={styles.inputContainer}>
                     <Text style={styles.input}>
@@ -97,14 +118,13 @@ function MyGrapeLetter({ grape_day, setSelectedLetter, selectedLetter }: MyGrape
                 <TextInput
                     key={grape_day.letter}
                     style={styles.inputContainer}
-                    // ref={inputRef}
                     multiline={true}
                     numberOfLines={8}
                     value={inputValue}
                     keyboardType='default'
+                    ref={inputRef}
                 />
                 <View style={styles.row}>
-                    {/* <AntDesign.Button name="checkcircle" size={30} color="black" key="Save" /> */}
                     <MaterialCommunityIcons.Button name="content-save-check-outline" size={30}
                         color="#cb9de2" key="Save"
                         backgroundColor="transparent"

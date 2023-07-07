@@ -3,28 +3,25 @@
  * this is a reusable item that displays a chart-like card of each letter of the day
 */
 
-import { useState } from 'react';
-import { View, Text, StyleSheet, Button, SafeAreaView, Pressable } from 'react-native';
-import { Grape, GrapeDayLetter } from '../types';
-import { useNavigation, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { usePressAnimation } from '../hooks/usePressAnimation';
+import { Grape } from '../types';
 import { HomeGrapeBox } from './HomeGrapeBox';
-
-// import FontAwesome from 'react-native-vector-icons/FontAwesome';
 type HomeGrapeItemProps = {
     grape: Grape;
 };
 
 
-// const currentTimeStampInMilliseconds = (new Date()).getTime();
-
-
 export function HomeGrapeDay({ grape }: HomeGrapeItemProps) {
 
-    const [ isPressed, setIsPressed ] = useState<boolean>(false);
     const router = useRouter();
-
-    const handlePressIn = () => setIsPressed(true);
-    const handlePressOut = () => setIsPressed(false);
+    const {
+        isPressed,
+        handlePressIn,
+        handlePressOut,
+        pressStyle
+    } = usePressAnimation();
 
     return (
         <View style={styles.whole_container}>
@@ -32,7 +29,7 @@ export function HomeGrapeDay({ grape }: HomeGrapeItemProps) {
                 onPress={() => router.push(`/${grape.item_id}`)}
                 onPressIn={handlePressIn}
                 onPressOut={handlePressOut}
-                style={isPressed ? styles.pressed : {}}
+                style={pressStyle}
             >
                 <View style={styles.title_container}>
                     <Text style={styles.title}>
@@ -43,18 +40,12 @@ export function HomeGrapeDay({ grape }: HomeGrapeItemProps) {
                     <HomeGrapeBox grape={grape} />
                 </View>
             </Pressable>
-
         </View>
     )
 }
 
 
 const styles = StyleSheet.create({
-    pressed: {
-        backgroundColor: '#4E1E66',
-        borderRadius: 10,
-        padding: 7,
-    },
     box_container: {
         borderRadius: 10,
         borderColor: '#4E1E66',
