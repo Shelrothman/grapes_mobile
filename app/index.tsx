@@ -2,7 +2,7 @@
 // import QuestionListItem from '../src/components/QuestionListItem';
 import { useNavigation } from 'expo-router';
 import { useState, useLayoutEffect, SetStateAction } from 'react';
-import { Home } from '../src/components/Home';
+import { Home } from '../src/components/home/Home';
 // import { useQuery } from 'urql';
 
 
@@ -21,9 +21,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
-import { Global } from '../src/components/Global';
+import { Global } from '../src/components/global/Global';
 // import { Global } from './Global';
-import { SettingsStackScreen } from '../src/components/SettingsStackScreen';
+import { SettingsStackScreen } from '../src/components/settings/SettingsStackScreen';
 
 
 const Tab = createMaterialTopTabNavigator();

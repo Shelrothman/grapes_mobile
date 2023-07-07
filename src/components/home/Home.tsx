@@ -1,5 +1,5 @@
 import { StyleSheet, Text, SafeAreaView, FlatList, View } from "react-native";
-import * as grapes from '../data/dummyGrapes.json';
+import * as grapes from '../../data/dummyGrapes.json';
 import { HomeGrapeDay } from './HomeGrapeDay';
 
 

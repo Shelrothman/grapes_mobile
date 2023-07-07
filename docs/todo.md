@@ -9,6 +9,8 @@
 * its really hot user friendlyto have so many inputs on one page ;liek event ho i got got it and have it avoiding the keuyboard thing it sis not a good experience and it be better to have edit button trigger taking to the letter
 
 <!-- TODO [future]: in top right header of this page, have a button to save the day and it can export somewhere or better yet, Have it become a widget on their os... somehting... -->
+<!-- * like an addToHomeScreen fucntion -->
+
 
 - timeZone should be set in settings per user? ...option to be and by default use the device time zone
 [expo]https://docs.expo.dev/versions/latest/sdk/date-time-picker/

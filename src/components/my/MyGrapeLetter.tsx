@@ -1,19 +1,14 @@
-
 /**
- * a row of a grape letter
+ * MyGrapeLetter.tsx
+ * individual letter of the grape
  */
 import { useState, useRef, useEffect } from "react";
-import {
-    View, Text, TextInput, Pressable, FlatList, StyleSheet, SafeAreaView,
-    Keyboard, KeyboardAvoidingView, Platform, TouchableWithoutFeedback
-} from 'react-native';
-import { Grape, GrapeDayLetter } from '../types';
+import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
+import { Grape, GrapeDayLetter } from '../../types';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { usePressAnimation } from "../hooks/usePressAnimation";
-
-
+import { usePressAnimation } from "../../hooks/usePressAnimation";
 
 /**
  * @interface MyMap is a type that is a map of strings to strings
@@ -24,21 +19,14 @@ interface MyMap {
 }
 
 type MyGrapeLetterProps = {
-    grape_day: GrapeDayLetter;
-    /** selects active editable input so that it only displays that. */
+    grape_day_letter: GrapeDayLetter;
+    /** setSelectedLetter selects active editable input so that it displays */
     setSelectedLetter: React.Dispatch<React.SetStateAction<GrapeDayLetter | null>>;
     selectedLetter: GrapeDayLetter | null;
 };
 
-type MyGrapeProps = { grape: Grape; };
-
 // TODO a photo/icon for each letter
-
 // TODO modulate and clean up
-
-// TODO make the keyboard show up automatically when you press on the letter
-
-
 
 const GRAPE_DAY: MyMap = {
     g: 'entle with self',
@@ -49,78 +37,56 @@ const GRAPE_DAY: MyMap = {
     s: 'ocial Activity',
 }
 
-// ? should this function be inside of MyGrapeLetter
-export const GRAPE_DAY_TITLE = (letter: string): JSX.Element => {
-    let phrase: JSX.Element = <Text style={{
-        textShadowColor: '#cb9de2',
-        textShadowRadius: 20
-    }}>
-        <Text style={styles.titleLetterText}>
-            {letter.toUpperCase()}
-        </Text>
-        <Text style={styles.titleText}>{GRAPE_DAY[ letter ]}</Text>
-    </Text>;
-    return phrase;
-};
 
+export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLetter }: MyGrapeLetterProps) {
 
-
-
-
-function MyGrapeLetter({ grape_day, setSelectedLetter, selectedLetter }: MyGrapeLetterProps) {
-
-    const [ inputValue, setInputValue ] = useState<string>(grape_day.value);
-
+    const [ inputValue, setInputValue ] = useState<string>(grape_day_letter.value);
     const inputRef = useRef<TextInput>(null);
 
-    const {
-        handlePressIn,
-        handlePressOut,
-        pressStyle
-    } = usePressAnimation();
+    const { handlePressIn, handlePressOut, pressStyle } = usePressAnimation();
 
+    const GRAPE_DAY_TITLE = (letter: string): JSX.Element => {
+        return <Text style={{ textShadowColor: '#cb9de2', textShadowRadius: 20 }}>
+            <Text style={styles.titleLetterText}>
+                {letter.toUpperCase()}
+            </Text>
+            <Text style={styles.titleText}>{GRAPE_DAY[ letter ]}</Text>
+        </Text>;
+    };
 
     useEffect(() => {
-        if (selectedLetter && selectedLetter.letter === grape_day.letter) {
-            if (inputRef.current) {
-                inputRef.current.focus();
-            }
+        if (selectedLetter && selectedLetter.letter === grape_day_letter.letter) {
+            if (inputRef.current) inputRef.current.focus();
         }
         return () => {
-            if (inputRef.current) {
-                inputRef.current.blur();
-            }
+            if (inputRef.current) inputRef.current.blur();
         }
     }, [ selectedLetter ]);
 
     return (
         <>
             <View style={styles.titleContainer}>
-                {GRAPE_DAY_TITLE(grape_day.letter)}
+                {GRAPE_DAY_TITLE(grape_day_letter.letter)}
                 <Ionicons.Button name="md-share" size={25} color="#cb9de2"
                     backgroundColor='transparent'
                     onPress={() => console.log('share')}
                 />
             </View>
-            {!selectedLetter ? <Pressable
-                onPress={() => setSelectedLetter(grape_day)}
-                // onPress={handleOnPress}
+            {!selectedLetter ? <Pressable style={pressStyle}
+                onPress={() => setSelectedLetter(grape_day_letter)}
                 onPressIn={handlePressIn}
-                onPressOut={handlePressOut}
-                style={pressStyle}
-            >
+                onPressOut={handlePressOut}>
                 <View style={styles.inputContainer}>
-                    <Text style={styles.input}>
-                        {inputValue}
-                    </Text>
+                    <Text style={styles.input}>{inputValue}</Text>
                 </View>
             </Pressable> : <View style={{ justifyContent: 'flex-end' }}>
                 <TextInput
-                    key={grape_day.letter}
+                    key={grape_day_letter.letter}
                     style={styles.inputContainer}
                     multiline={true}
                     numberOfLines={8}
-                    value={inputValue}
+                    value={grape_day_letter.value}
+                    //? value={selectedLetter.value}
                     keyboardType='default'
                     ref={inputRef}
                 />
@@ -184,32 +150,3 @@ const styles = StyleSheet.create({
         color: '#f3f0f5'
     }
 });
-
-
-export function MyGrape({ grape }: MyGrapeProps) {
-
-    const [ selectedLetter, setSelectedLetter ] = useState<GrapeDayLetter | null>(null);
-
-
-    return (
-        <View style={{ flex: 1, margin: 10 }}>
-            {!selectedLetter && <FlatList
-                data={grape.day}
-                renderItem={({ item }) => <MyGrapeLetter grape_day={item}
-                    setSelectedLetter={setSelectedLetter} selectedLetter={selectedLetter} />}
-                keyExtractor={(item, index) => index.toString()}
-                showsVerticalScrollIndicator={false}
-            />}
-            {selectedLetter && (<KeyboardAvoidingView
-                behavior={Platform.OS == "ios" ? "padding" : "height"}
-                style={{ flex: 1 }}
-            >
-                <SafeAreaView style={{ flex: 1 }}>
-                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                        <MyGrapeLetter grape_day={selectedLetter} selectedLetter={selectedLetter} setSelectedLetter={setSelectedLetter} />
-                    </TouchableWithoutFeedback>
-                </SafeAreaView>
-            </KeyboardAvoidingView>)}
-        </View>
-    );
-};

@@ -1,7 +1,7 @@
 import { usePathname } from "expo-router";
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { Link } from 'expo-router';
-import { MyGrape } from '../src/components/MyGrapeLetter';
+import { MyGrape } from '../src/components/my/MyGrape';
 import { getGrapeById } from "../src/utils";
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';

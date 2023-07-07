@@ -5,8 +5,8 @@
 
 import { useRouter } from 'expo-router';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
-import { usePressAnimation } from '../hooks/usePressAnimation';
-import { Grape } from '../types';
+import { usePressAnimation } from '../../hooks/usePressAnimation';
+import { Grape } from '../../types';
 import { HomeGrapeBox } from './HomeGrapeBox';
 type HomeGrapeItemProps = {
     grape: Grape;
