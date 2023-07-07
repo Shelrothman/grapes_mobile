@@ -9,6 +9,8 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { usePressAnimation } from "../../hooks/usePressAnimation";
+import { useMyGrapeContext } from "../../contexts/MyGrapeContext";
+
 
 /**
  * @interface MyMap is a type that is a map of strings to strings
@@ -40,10 +42,12 @@ const GRAPE_DAY: MyMap = {
 
 export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLetter }: MyGrapeLetterProps) {
 
-    const [ inputValue, setInputValue ] = useState<string>(grape_day_letter.value);
+    // const [ inputValue, setInputValue ] = useState<string>(grape_day_letter.value);
     const inputRef = useRef<TextInput>(null);
 
     const { handlePressIn, handlePressOut, pressStyle } = usePressAnimation();
+
+    const { setMyGrapeLetter } = useMyGrapeContext();
 
     const GRAPE_DAY_TITLE = (letter: string): JSX.Element => {
         return <Text style={{ textShadowColor: '#cb9de2', textShadowRadius: 20 }}>
@@ -58,9 +62,7 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
         if (selectedLetter && selectedLetter.letter === grape_day_letter.letter) {
             if (inputRef.current) inputRef.current.focus();
         }
-        return () => {
-            if (inputRef.current) inputRef.current.blur();
-        }
+        return () => { if (inputRef.current) inputRef.current.blur(); }
     }, [ selectedLetter ]);
 
     return (
@@ -77,7 +79,7 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                 onPressIn={handlePressIn}
                 onPressOut={handlePressOut}>
                 <View style={styles.inputContainer}>
-                    <Text style={styles.input}>{inputValue}</Text>
+                    <Text style={styles.input}>{grape_day_letter.value}</Text>
                 </View>
             </Pressable> : <View style={{ justifyContent: 'flex-end' }}>
                 <TextInput
@@ -85,10 +87,14 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                     style={styles.inputContainer}
                     multiline={true}
                     numberOfLines={8}
-                    value={grape_day_letter.value}
+                    // value={grape_day_letter.value}
+                    defaultValue={grape_day_letter.value}
                     //? value={selectedLetter.value}
                     keyboardType='default'
                     ref={inputRef}
+                    onChangeText={(text) => {
+                        setMyGrapeLetter({ letter: grape_day_letter.letter, value: text });
+                    }}
                 />
                 <View style={styles.row}>
                     <MaterialCommunityIcons.Button name="content-save-check-outline" size={30}

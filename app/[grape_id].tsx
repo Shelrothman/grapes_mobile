@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { usePathname } from "expo-router";
 import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { Link } from 'expo-router';
@@ -5,6 +6,7 @@ import { MyGrape } from '../src/components/my/MyGrape';
 import { getGrapeById } from "../src/utils";
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { useMyGrapeContext } from "../src/contexts/MyGrapeContext";
 
 
 const GrapeLetterPage = () => {
@@ -12,12 +14,25 @@ const GrapeLetterPage = () => {
     const grape_letter_id = usePathname().replace('/', '');
     const grape = getGrapeById(+grape_letter_id);
 
-    if (!grape) return (
-        <SafeAreaView style={styles.container}>
-            <Text>404</Text>
-            <Link href="../">Go Back</Link>
-        </SafeAreaView>
-    );
+    if (!grape) return <SafeAreaView style={styles.container}>
+        <Text>404</Text>
+        <Link href="../">Go Back</Link>
+    </SafeAreaView>;
+
+    const { setMyGrapeLetter, setCurrentGrape_id } = useMyGrapeContext();
+
+// TODO come back here and use context to get this all set up.. focusing on u8i now
+
+
+    useEffect(() => {
+        // grape.day.forEach(letter => {
+        //     setMyGrape(letter);
+        // });
+        // setMyGrape(grape.day[ 0 ]);
+        setCurrentGrape_id(grape.item_id);
+        // ? may not really need this bc the context is already set up to listen to the grape_id
+    }, []); // this will run once on mount
+
 
 
     // ! may need to re-asses herein flatList bc the list is throwing virtualized list warning

@@ -1,35 +1,5 @@
 import { Stack } from 'expo-router';
-import { StyleSheet, View } from 'react-native';
-
-/*
-okay.. link on one,, one of the grapes to just that grape day
-
-then the user goes through the editig
-
-form ttheir u can share or edit etc...
-
-but this way the home page is for viewing whihc  is good for it to be a vuisual reminder for peeple throughout the day and to use for a widget in furture
-
-and the Grape page is for editing and sharing
-only can edit the current day
-
-if an older one, you can still share a letter
-
-and the global feed is still of all the letters shared from all the users
-
-* screens with links: share, edit, grape id
-    ?  grape_id -> share | edit + grape id as params
-
-    ? home -> grape_id + grape id as params
-
-* screens without links: global, home, Settings+
-
-* tabs -> top 3 Home, Global, Settings+
-    ? Settings -> 2 bottom tabs: About, Account
-
-
-
-*/
+import { MyGrapeProvider } from '../src/contexts/MyGrapeContext';
 
 
 
@@ -56,13 +26,16 @@ and the global feed is still of all the letters shared from all the users
 const RootLayout = () => {
     return (
         // <Provider value={client}>
-        <Stack>
-            <Stack.Screen name="index" options={{ headerShown: false }} />
-            <Stack.Screen name="Share" options={{ headerShown: false }} />
-            <Stack.Screen name="Edit" options={{ headerShown: false }} />
-            {/* i dont think we need one for the grape_id... */}
-            <Stack.Screen name="[grape_id]" options={{ headerShown: false }} />
-        </Stack>
+        // TODO may need to only wrape the grape_id screen in the provider...
+        <MyGrapeProvider>
+            <Stack>
+                <Stack.Screen name="index" options={{ headerShown: false }} />
+                <Stack.Screen name="Share" options={{ headerShown: false }} />
+                <Stack.Screen name="Edit" options={{ headerShown: false }} />
+                {/* i dont think we need one for the grape_id... */}
+                <Stack.Screen name="[grape_id]" options={{ headerShown: false }} />
+            </Stack >
+        </MyGrapeProvider>
         // </Provider>
     );
 };

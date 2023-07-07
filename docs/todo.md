@@ -1,6 +1,5 @@
 
 <!-- ** ive got the singular id greape item done and now ui just want to make the style of it all look way more modeern -->
-<!-- !! NEED TO fix the thing when jkeyboard shows make the screen show the input..  -->
 
 <!-- !NEXT: continue making all the ui stuff and make all the screens nice and just do everything yo can basically with dummy data get that allll set up and THEN then use superbase and use that starter expo from there for auth.. so do auth and then the dn in supabase and then refactor code to query from there and yea.  -->
 [https://github.com/codingki/react-native-expo-template/tree/master/template-typescript-bottom-tabs-supabase-auth-flow]
@@ -8,7 +7,7 @@
 
 * its really hot user friendlyto have so many inputs on one page ;liek event ho i got got it and have it avoiding the keuyboard thing it sis not a good experience and it be better to have edit button trigger taking to the letter
 
-<!-- TODO [future]: in top right header of this page, have a button to save the day and it can export somewhere or better yet, Have it become a widget on their os... somehting... -->
+<!-- TODO [future]: in top right header of grape_id page, have a button to save the day and it can export somewhere or better yet, Have it become a widget on their os... somehting... -->
 <!-- * like an addToHomeScreen fucntion -->
 
 
