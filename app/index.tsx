@@ -15,6 +15,8 @@ import { StatusBar } from 'expo-status-bar';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
+
+//  TODO change theser tioyse the ones from @expo and then uninstall this package
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 

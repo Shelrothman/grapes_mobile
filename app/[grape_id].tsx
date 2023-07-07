@@ -3,16 +3,9 @@ import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { Link } from 'expo-router';
 import { MyGrape } from '../src/components/MyGrapeLetter';
 import { getGrapeById } from "../src/utils";
-// import { DismissKeyboardView } from "../src/utils/DismissKeyboardView";
-
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
-// * not sure if need above bc te keyboard avoiding view is working fine but its not doing the thing that shriniks the view when the keyboard is up why not???
-// bc i think i need to wrap the whole thing in the dismiss keyboard view
-
-import { FontAwesome } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
 
 const GrapeLetterPage = () => {
     const router = useRouter();
@@ -68,7 +61,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: '#4E1E66',
         borderBottomWidth: 1,
-        // alignContent: 'center',
         alignItems: 'center',
         justifyContent: 'center',
     },

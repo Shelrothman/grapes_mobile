@@ -4,18 +4,14 @@
  */
 import { useState, useRef } from "react";
 import {
-    View, Text, TextInput,
-    FlatList, Platform, TouchableWithoutFeedback, TouchableHighlight,
-    Button, StyleSheet, SafeAreaView, ScrollView, Keyboard, KeyboardAvoidingView
+    View, Text, TextInput, Pressable, FlatList,
+    Button, StyleSheet, SafeAreaView, ScrollView, Keyboard, KeyboardAvoidingView, Platform, TouchableWithoutFeedback
 } from 'react-native';
 import { Grape, GrapeDayLetter } from '../types';
-// import { Link } from 'expo-router';
-// import FontAwesome from 'react-native-vector-icons/FontAwesome';
-// import { DismissKeyboardView } from '../utils/DismissKeyboardView';
-// import { FontAwesome } from '@expo/vector-icons';
-// import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
+import { AntDesign } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 interface Map {
     [ key: string ]: string | undefined
@@ -24,6 +20,9 @@ interface Map {
 type MyGrapeLetterProps = {
     grape_day: GrapeDayLetter;
     // scrollViewRef: React.RefObject<ScrollView>;
+    /** selects active editable input so that it only displays that. */
+    setSelectedLetter: React.Dispatch<React.SetStateAction<GrapeDayLetter | null>>;
+    selectedLetter: GrapeDayLetter | null;
 };
 
 type MyGrapeProps = {
@@ -46,23 +45,16 @@ const GRAPE_DAY: Map = {
     s: 'ocial Activity',
 }
 
-const GRAPE_DAY_ICON = (letter: string): JSX.Element => {
+// ? should this function be inside of MyGrapeLetter
+const GRAPE_DAY_TITLE = (letter: string): JSX.Element => {
     let phrase: JSX.Element = <Text style={{
         textShadowColor: '#cb9de2',
         textShadowRadius: 20
     }}>
-        <Text style={{
-            fontSize: 26,
-            borderRadius: 10,
-            color: '#4E1E66',
-            fontStyle: 'italic',
-            fontWeight: 'bold',
-            textShadowColor: '#cb9de2',
-            textShadowRadius: 20,
-        }}>
+        <Text style={styles.titleLetterText}>
             {letter.toUpperCase()}
         </Text>
-        <Text style={styles.title}>{GRAPE_DAY[ letter ]}</Text>
+        <Text style={styles.titleText}>{GRAPE_DAY[ letter ]}</Text>
     </Text>;
     return phrase;
 };
@@ -71,130 +63,133 @@ const GRAPE_DAY_ICON = (letter: string): JSX.Element => {
 
 
 
-function MyGrapeLetter({ grape_day }: MyGrapeLetterProps) {
+function MyGrapeLetter({ grape_day, setSelectedLetter, selectedLetter }: MyGrapeLetterProps) {
 
     const [ inputValue, setInputValue ] = useState<string>(grape_day.value);
-    const [ isFocused, setIsFocused ] = useState<boolean>(false);
+    // const [ isFocused, setIsFocused ] = useState<boolean>(false);
+    const [ isPressed, setIsPressed ] = useState<boolean>(false);
 
-    const inputRef = useRef<TextInput>(null);
-    const handleBlur = () => {
-        setIsFocused(false);
-        inputRef.current?.blur();
-        setInputValue(grape_day.value);
-    }
-
-    const handlePress = (e: any) => {
-        console.log('handlePress', e.nativeEvent.pageY);
-    }
+    // const inputRef = useRef<TextInput>(null);
+    const handlePressIn = () => setIsPressed(true);
+    const handlePressOut = () => setIsPressed(false);
 
     return (
         <>
-            {/* <TouchableWithoutFeedback onPress={Keyboard.dismiss} key={grape_day.letter}>
-                <ScrollView
-                    // style={{ justifyContent: 'flex-end', flex: 1 }}
-                    contentContainerStyle={{ justifyContent: 'flex-end', flex: 1 }}
-                > */}
-                    <View style={{ flex: 1, alignItems: 'flex-start' }}>
-                        {GRAPE_DAY_ICON(grape_day.letter)}
-                    </View>
-                    <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                        <Ionicons.Button name="md-share" size={25} color="#cb9de2" backgroundColor='transparent'
-                            onPress={() => console.log('share')}
-                        />
-                    </View>
-                    <View style={styles.inner_view}>
-                        <TextInput
-                            key={grape_day.letter}
-                            style={styles.letter_input}
-                            ref={inputRef}
-                            multiline={true}
-                            numberOfLines={4}
-                            value={inputValue}
-                            onSubmitEditing={Keyboard.dismiss}
-                            onChangeText={(text) => setInputValue(text)}
-                            keyboardType='default'
-                            // onFocus={handleFocus}
-                            onBlur={handleBlur}
-                            onPressIn={(e) => handlePress(e)}
-                        />
-                        <View><Text>{'\n'}</Text></View>
-                    </View>
-                {/* </ScrollView>
-            </TouchableWithoutFeedback> */}
+            <View style={styles.titleContainer}>
+                {GRAPE_DAY_TITLE(grape_day.letter)}
+                <Ionicons.Button name="md-share" size={25} color="#cb9de2"
+                    backgroundColor='transparent'
+                    onPress={() => console.log('share')}
+                />
+            </View>
+            {!selectedLetter ? <Pressable
+                onPress={() => setSelectedLetter(grape_day)}
+                onPressIn={handlePressIn}
+                onPressOut={handlePressOut}
+                style={isPressed ? styles.pressed : {}}
+            >
+                <View style={styles.inputContainer}>
+                    <Text style={styles.input}>
+                        {inputValue}
+                    </Text>
+                </View>
+            </Pressable> : <View style={{ justifyContent: 'flex-end' }}>
+                <TextInput
+                    key={grape_day.letter}
+                    style={styles.inputContainer}
+                    // ref={inputRef}
+                    multiline={true}
+                    numberOfLines={8}
+                    value={inputValue}
+                    keyboardType='default'
+                />
+                <View style={styles.row}>
+                    {/* <AntDesign.Button name="checkcircle" size={30} color="black" key="Save" /> */}
+                    <MaterialCommunityIcons.Button name="content-save-check-outline" size={30}
+                        color="#cb9de2" key="Save"
+                        backgroundColor="transparent"
+                        style={styles.buttons}
+                    />
+                    <MaterialIcons.Button name="cancel" size={30} key="Cancel"
+                        color="#cb9de2" backgroundColor="transparent"
+                        style={styles.buttons}
+                        onPress={() => setSelectedLetter(null)}
+                    />
+                </View>
+            </View>}
         </>
     )
 }
 
 const styles = StyleSheet.create({
-    title_row: {
-        flexDirection: 'row',
-        marginStart: 10,
-        marginEnd: 10,
+    pressed: {
+        backgroundColor: '#4E1E66',
         borderRadius: 10,
+        padding: 7,
     },
-    title: {
+    buttons: {
+        borderWidth: 1, borderColor: '#cb9de2', paddingLeft: 15
+    },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    titleLetterText: {
+        fontSize: 26,
+        borderRadius: 10,
+        color: '#4E1E66',
+        fontStyle: 'italic',
+        fontWeight: 'bold',
+        textShadowColor: '#cb9de2',
+        textShadowRadius: 20,
+    },
+    titleText: {
         fontWeight: 'bold',
         fontStyle: 'italic',
         color: '#cb9de2',
     },
-    letterColText: {
-        color: '#cb9de2',
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    inner_view: {
-        flex: 1,
-        padding: 10,
-        backgroundColor: '#8ABD91',
-        marginStart: 10,
-        marginEnd: 10,
-        borderColor: '#4E1E66',
-        borderWidth: 1,
-        borderRadius: 10,
-        height: 100,
-    },
-
-    active_input: {
-        padding: 10,
-        display: 'flex',
-        height: 100,
-    },
-    letter_input: {
-        // fontStyle: 'italic',
-        // fontWeight: 'bold',
-        color: '#003B1B',
+    titleContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     input: {
+        color: '#f3f0f5',
+    },
+    inputContainer: {
         height: 40,
-        borderColor: "#000000",
+        marginTop: 10,
+        borderColor: '#cb9de2',
         borderBottomWidth: 1,
         marginBottom: 36,
-    },
+        color: '#f3f0f5'
+    }
 });
 
 
 export function MyGrape({ grape }: MyGrapeProps) {
-    return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS == "ios" ? "padding" : "height"}
-            style={{ flex: 1 }}
-        >
-            <SafeAreaView style={{ flex: 1 }}>
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                    <ScrollView
-                        // style={{ justifyContent: 'flex-end', flex: 1 }}
-                        contentContainerStyle={{ justifyContent: 'flex-end', flex: 1 }}
-                    >
-                        <MyGrapeLetter grape_day={grape.day[ 0 ]} />
-                        <MyGrapeLetter grape_day={grape.day[ 1 ]} />
-                        <MyGrapeLetter grape_day={grape.day[ 2 ]} />
-                        <MyGrapeLetter grape_day={grape.day[ 3 ]} />
-                        <MyGrapeLetter grape_day={grape.day[ 4 ]} />
-                        <MyGrapeLetter grape_day={grape.day[ 5 ]} />
-                    </ScrollView>
-                </TouchableWithoutFeedback>
-            </SafeAreaView>
-        </KeyboardAvoidingView>
 
+    const [ selectedLetter, setSelectedLetter ] = useState<GrapeDayLetter | null>(null);
+
+
+    return (
+        <View style={{ flex: 1, margin: 10 }}>
+            {!selectedLetter && <FlatList
+                data={grape.day}
+                renderItem={({ item }) => <MyGrapeLetter grape_day={item}
+                    setSelectedLetter={setSelectedLetter} selectedLetter={selectedLetter} />}
+                keyExtractor={(item, index) => index.toString()}
+                showsVerticalScrollIndicator={false}
+            />}
+            {selectedLetter && (<KeyboardAvoidingView
+                behavior={Platform.OS == "ios" ? "padding" : "height"}
+                style={{ flex: 1 }}
+            >
+                <SafeAreaView style={{ flex: 1 }}>
+                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                        <MyGrapeLetter grape_day={selectedLetter} selectedLetter={selectedLetter} setSelectedLetter={setSelectedLetter} />
+                    </TouchableWithoutFeedback>
+                </SafeAreaView>
+            </KeyboardAvoidingView>)}
+        </View>
     );
 };
