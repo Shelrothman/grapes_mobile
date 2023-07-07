@@ -1,40 +1,54 @@
 import { usePathname } from "expo-router";
-import { View, Text, StyleSheet, SafeAreaView, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
 import { Link } from 'expo-router';
 import { MyGrape } from '../src/components/MyGrapeLetter';
 import { getGrapeById } from "../src/utils";
-// import 'react-native-get-random-values';
-// import { v4 as uuidv4 } from 'uuid';
-// import { Icon } from 'react-native-elements'
-// import MaterialComm
+// import { DismissKeyboardView } from "../src/utils/DismissKeyboardView";
+
+import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
+
+// * not sure if need above bc te keyboard avoiding view is working fine but its not doing the thing that shriniks the view when the keyboard is up why not???
+// bc i think i need to wrap the whole thing in the dismiss keyboard view
+
+import { FontAwesome } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 
 const GrapeLetterPage = () => {
-
+    const router = useRouter();
     const grape_letter_id = usePathname().replace('/', '');
     const grape = getGrapeById(+grape_letter_id);
 
-    if (!grape) return <SafeAreaView style={styles.container}>
-        <Text>404</Text>
-        <Link href="../">Go Back</Link>
-    </SafeAreaView>;
+    if (!grape) return (
+        <SafeAreaView style={styles.container}>
+            <Text>404</Text>
+            <Link href="../">Go Back</Link>
+        </SafeAreaView>
+    );
 
 
     // ! may need to re-asses herein flatList bc the list is throwing virtualized list warning
 
     return (
-        <SafeAreaView style={styles.container}>
-            <View style={styles.back_container}>
-                <Link href="../">{`<`}Back</Link>
-            </View>
-            <View style={styles.title_container}>
-                <Text style={styles.title}>Grape: {new Date(grape.creation_date * 1000).toDateString()}</Text>
-            </View>
-            <KeyboardAvoidingView style={styles.grape_container}>
-                {/* <Text>{'\n'}</Text> */}
-
-                <MyGrape grape={grape} />
-            </KeyboardAvoidingView>
-        </SafeAreaView>
+        <View style={styles.container}>
+            <SafeAreaView style={styles.title_container}>
+                <View style={styles.back_container}>
+                    <Ionicons.Button
+                        name="arrow-back-circle-outline"
+                        size={35}
+                        backgroundColor="#4E1E66"
+                        onPress={() => { router.back(); }}
+                    />
+                    {/* <FontAwesome name="home" size={24} color="black" /> */}
+                </View>
+                <View style={styles.mainTitle_container}>
+                    <Text style={styles.title}>
+                        Grape: {new Date(grape.creation_date * 1000).toDateString()}
+                    </Text>
+                </View>
+            </SafeAreaView>
+            <MyGrape grape={grape} />
+        </View>
     );
 }
 
@@ -43,27 +57,31 @@ const GrapeLetterPage = () => {
 const styles = StyleSheet.create({
     container: {
         height: '100%',
-        backgroundColor: '#889CAF',
+        backgroundColor: '#2E3944',
     },
     title: {
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
-        color: '#4E1E66',
+        color: '#f3f0f5',
     },
     title_container: {
-        alignItems: 'center',
-        // marginBottom: 10,
-        borderBottomColor: '#4E1E66',
+        flexDirection: 'row',
+        backgroundColor: '#4E1E66',
         borderBottomWidth: 1,
-        padding: 5,
-        paddingBottom: 20,
+        // alignContent: 'center',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    mainTitle_container: {
+        flex: 4,
     },
     back_container: {
-        justifyContent: 'flex-start',
+        flex: 1,
+        flexDirection: 'row',
     },
-    grape_container: {
-        // paddingTop: 10,
-        // marginTop: 10,
+    back_pressed: {
+        width: '25%',
+
     },
 });
 

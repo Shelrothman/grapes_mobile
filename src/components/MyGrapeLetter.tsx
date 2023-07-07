@@ -5,19 +5,25 @@
 import { useState, useRef } from "react";
 import {
     View, Text, TextInput,
-    FlatList,
-    Button, StyleSheet, SafeAreaView, ScrollView, Keyboard
+    FlatList, Platform, TouchableWithoutFeedback, TouchableHighlight,
+    Button, StyleSheet, SafeAreaView, ScrollView, Keyboard, KeyboardAvoidingView
 } from 'react-native';
 import { Grape, GrapeDayLetter } from '../types';
-import { Link } from 'expo-router';
+// import { Link } from 'expo-router';
 // import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { DismissKeyboardView } from '../utils/DismissKeyboardView';
-import { FontAwesome } from '@expo/vector-icons';
+// import { DismissKeyboardView } from '../utils/DismissKeyboardView';
+// import { FontAwesome } from '@expo/vector-icons';
 // import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
+import { Ionicons } from '@expo/vector-icons';
+
+interface Map {
+    [ key: string ]: string | undefined
+}
 
 type MyGrapeLetterProps = {
     grape_day: GrapeDayLetter;
-    scrollViewRef: React.RefObject<ScrollView>;
+    // scrollViewRef: React.RefObject<ScrollView>;
 };
 
 type MyGrapeProps = {
@@ -28,22 +34,44 @@ type MyGrapeProps = {
 
 // TODO modulate and clean up
 
-const GRAPE_DAY = {
-    "g": 'my self-care',
-    "r": 'my relaxing activity',
-    "a": 'big or small accomplishment',
-    "p": 'my pleasant activity',
-    "e": 'exercise',
-    "s": 'my social activity',
+// ! PU in here... trying to get the damn thing to do the right thing for Jeyboard avoiding view
+// ! just tried in here but its still shit: https://medium.com/@nickopops/keyboardavoidingview-not-working-properly-c413c0a200d4
+
+const GRAPE_DAY: Map = {
+    g: 'entle with self',
+    r: 'elaxation',
+    a: 'ccomplishment',
+    p: 'leasure',
+    e: 'xercise',
+    s: 'ocial Activity',
 }
 
+const GRAPE_DAY_ICON = (letter: string): JSX.Element => {
+    let phrase: JSX.Element = <Text style={{
+        textShadowColor: '#cb9de2',
+        textShadowRadius: 20
+    }}>
+        <Text style={{
+            fontSize: 26,
+            borderRadius: 10,
+            color: '#4E1E66',
+            fontStyle: 'italic',
+            fontWeight: 'bold',
+            textShadowColor: '#cb9de2',
+            textShadowRadius: 20,
+        }}>
+            {letter.toUpperCase()}
+        </Text>
+        <Text style={styles.title}>{GRAPE_DAY[ letter ]}</Text>
+    </Text>;
+    return phrase;
+};
 
-// TODO when keyboard appears, scroll so the input is at the top... or the screen could change height...
-
-// Or skip scrolling all together and on press of the texTInput it routes to the edit page or the edit modal... and then when you're done editing it routes back to the grape page or something.
 
 
-function MyGrapeLetter({ grape_day, scrollViewRef }: MyGrapeLetterProps) {
+
+
+function MyGrapeLetter({ grape_day }: MyGrapeLetterProps) {
 
     const [ inputValue, setInputValue ] = useState<string>(grape_day.value);
     const [ isFocused, setIsFocused ] = useState<boolean>(false);
@@ -57,55 +85,43 @@ function MyGrapeLetter({ grape_day, scrollViewRef }: MyGrapeLetterProps) {
 
     const handlePress = (e: any) => {
         console.log('handlePress', e.nativeEvent.pageY);
-        // scrollViewRef.current?.scrollTo({ y: e.nativeEvent.pageY - 100, animated: true });
     }
 
-
-    // <ScrollView ref={scrollViewRef}>
-
     return (
-        <ScrollView>
-
-            <View style={styles.title_row}>
-                <View style={styles.letterColumn}>
-                    <Text style={styles.letterColText}>{grape_day.letter.toUpperCase()}</Text>
-                </View>
-                <View style={styles.titleColumn}>
-                    {/* @ts-ignore */}
-                    <Text style={styles.title}>{GRAPE_DAY[ grape_day.letter ]}</Text>
-                </View>
-                <View style={styles.buttonColumn}>
-                    {/* <Link href="/Edit" style={{ marginRight: 10 }}>
-                        <FontAwesome name="edit" size={22} color="#4E1E66" />
-                    </Link> */}
-                    {/* <FontAwesome.Button name="edit" size={22}
-                        color="#4E1E66"
-                        backgroundColor="#8ABD91"
-                        onPress={() => setIsFocused(true)}
-                    /> */}
-                    <Link href="/share">
-                        <FontAwesome name="share-square" size={22} color="#4E1E66" />
-                    </Link>
-                </View>
-            </View>
-            <View style={styles.letter_row}>
-                <DismissKeyboardView style={styles.letter_input_wrap} >
-                    <TextInput style={styles.letter_input}
-                        ref={inputRef}
-                        multiline={true}
-                        numberOfLines={4}
-                        value={inputValue}
-                        onSubmitEditing={Keyboard.dismiss}
-                        onChangeText={(text) => setInputValue(text)}
-                        keyboardType='default'
-                        // onFocus={handleFocus}
-                        onBlur={handleBlur}
-                        onPressIn={(e) => handlePress(e)}
-                    />
-                </DismissKeyboardView>
-            </View>
-            <Text>{'\n'}</Text>
-        </ScrollView>
+        <>
+            {/* <TouchableWithoutFeedback onPress={Keyboard.dismiss} key={grape_day.letter}>
+                <ScrollView
+                    // style={{ justifyContent: 'flex-end', flex: 1 }}
+                    contentContainerStyle={{ justifyContent: 'flex-end', flex: 1 }}
+                > */}
+                    <View style={{ flex: 1, alignItems: 'flex-start' }}>
+                        {GRAPE_DAY_ICON(grape_day.letter)}
+                    </View>
+                    <View style={{ flex: 1, alignItems: 'flex-end' }}>
+                        <Ionicons.Button name="md-share" size={25} color="#cb9de2" backgroundColor='transparent'
+                            onPress={() => console.log('share')}
+                        />
+                    </View>
+                    <View style={styles.inner_view}>
+                        <TextInput
+                            key={grape_day.letter}
+                            style={styles.letter_input}
+                            ref={inputRef}
+                            multiline={true}
+                            numberOfLines={4}
+                            value={inputValue}
+                            onSubmitEditing={Keyboard.dismiss}
+                            onChangeText={(text) => setInputValue(text)}
+                            keyboardType='default'
+                            // onFocus={handleFocus}
+                            onBlur={handleBlur}
+                            onPressIn={(e) => handlePress(e)}
+                        />
+                        <View><Text>{'\n'}</Text></View>
+                    </View>
+                {/* </ScrollView>
+            </TouchableWithoutFeedback> */}
+        </>
     )
 }
 
@@ -114,60 +130,30 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         marginStart: 10,
         marginEnd: 10,
-        flex: 1,
-        paddingTop: 10,
+        borderRadius: 10,
     },
     title: {
         fontWeight: 'bold',
         fontStyle: 'italic',
-        color: '#4E1E66',
-    },
-    titleColumn: {
-        flex: 7, // the higher the number the more space it takes up
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-
-    letterColumn: {
-        borderRightWidth: 1,
-        borderColor: '#4E1E66',
-        justifyContent: 'center',
-        // alignItems: 'flex-start',
-        alignItems: 'center',
-        flex: 1,
-        display: 'flex',
-        // backgroundColor: 'blue',
-    },
-    buttonColumn: {
-        flexDirection: 'row',
-        // justifyContent: 'flex-end',
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        // backgroundColor: 'red',
+        color: '#cb9de2',
     },
     letterColText: {
-        color: '#4E1E66',
+        color: '#cb9de2',
         fontSize: 20,
         fontWeight: 'bold',
     },
-    letter_row: {
-        flexDirection: 'row',
-    },
-    letter_input_wrap: {
-        display: 'flex',
+    inner_view: {
+        flex: 1,
         padding: 10,
         backgroundColor: '#8ABD91',
-        flex: 1,
         marginStart: 10,
         marginEnd: 10,
         borderColor: '#4E1E66',
         borderWidth: 1,
         borderRadius: 10,
-
         height: 100,
-
     },
+
     active_input: {
         padding: 10,
         display: 'flex',
@@ -177,23 +163,38 @@ const styles = StyleSheet.create({
         // fontStyle: 'italic',
         // fontWeight: 'bold',
         color: '#003B1B',
-        // backgroundColor: 'pink',
-    }
+    },
+    input: {
+        height: 40,
+        borderColor: "#000000",
+        borderBottomWidth: 1,
+        marginBottom: 36,
+    },
 });
 
 
 export function MyGrape({ grape }: MyGrapeProps) {
-    const scrollViewRef = useRef<ScrollView>(null);
     return (
-        <View>
-            <FlatList
-                data={grape.day}
-                renderItem={({ item }) => <MyGrapeLetter
-                    grape_day={item}
-                    scrollViewRef={scrollViewRef}
-                />}
-                showsVerticalScrollIndicator={false}
-            />
-        </View>
+        <KeyboardAvoidingView
+            behavior={Platform.OS == "ios" ? "padding" : "height"}
+            style={{ flex: 1 }}
+        >
+            <SafeAreaView style={{ flex: 1 }}>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                    <ScrollView
+                        // style={{ justifyContent: 'flex-end', flex: 1 }}
+                        contentContainerStyle={{ justifyContent: 'flex-end', flex: 1 }}
+                    >
+                        <MyGrapeLetter grape_day={grape.day[ 0 ]} />
+                        <MyGrapeLetter grape_day={grape.day[ 1 ]} />
+                        <MyGrapeLetter grape_day={grape.day[ 2 ]} />
+                        <MyGrapeLetter grape_day={grape.day[ 3 ]} />
+                        <MyGrapeLetter grape_day={grape.day[ 4 ]} />
+                        <MyGrapeLetter grape_day={grape.day[ 5 ]} />
+                    </ScrollView>
+                </TouchableWithoutFeedback>
+            </SafeAreaView>
+        </KeyboardAvoidingView>
+
     );
 };

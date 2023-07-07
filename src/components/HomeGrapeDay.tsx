@@ -15,7 +15,6 @@ type HomeGrapeItemProps = {
 };
 
 
-// ! PU here something weird happened to the widths of all my boxes.. it was just fune
 // const currentTimeStampInMilliseconds = (new Date()).getTime();
 
 
@@ -23,9 +22,8 @@ export function HomeGrapeDay({ grape }: HomeGrapeItemProps) {
 
     const [ isPressed, setIsPressed ] = useState<boolean>(false);
     const router = useRouter();
-    const handlePressIn = () => setIsPressed(true);
-    
 
+    const handlePressIn = () => setIsPressed(true);
     const handlePressOut = () => setIsPressed(false);
 
     return (
