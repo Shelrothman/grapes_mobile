@@ -1,25 +1,30 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
+
+
+// TODO here fetch the shared letters from the database and display them here
+
 
 export function Global() {
     return (
-        <View>
+        <SafeAreaView style={styles_global.container}>
+            <Text style={styles_global.title}>Global Feed</Text>
             <Text>Global Feed of shared letter blocks</Text>
-        </View>
+        </SafeAreaView>
     )
 }
 
 
 
-const styles = StyleSheet.create({
+const styles_global = StyleSheet.create({
     container: {
-        // flex: 1,
-        backgroundColor: '#889CAF',
+        backgroundColor: '#2E3944',
         alignItems: 'center',
-        // justifyContent: 'center',
+        height: '100%',
+        width: '100%',
     },
     title: {
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: 'bold',
-        color: '#4E1E66',
+        color: '#89af88',
     },
 });

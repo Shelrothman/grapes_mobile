@@ -14,13 +14,10 @@ type MyGrapeProviderProps = {
 type MyGrapeContextType = {
     /** set the provided letter to the provided value */
     setMyGrapeLetter: ({ letter, value }: GrapeDayLetter) => void;
-
     /** currentGrapeDate is the date of the grape that is currently being viewed/edited  as a number*/
     currentGrape_id: number;
     /** setCurrentGrapeDate sets the date of the grape that is currently being viewed/edited */
     setCurrentGrape_id: React.Dispatch<React.SetStateAction<number>>;
-    // ? idk.. maybe i dont need these but maybe like an id>>>> no bc its sent in route params
-
     /** grape_g is the value of the gentle with self letter */
     grape_g: string;
     setGrape_g: React.Dispatch<React.SetStateAction<string>>;

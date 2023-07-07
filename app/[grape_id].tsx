@@ -7,6 +7,7 @@ import { getGrapeById } from "../src/utils";
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useMyGrapeContext } from "../src/contexts/MyGrapeContext";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 const GrapeLetterPage = () => {
@@ -21,7 +22,7 @@ const GrapeLetterPage = () => {
 
     const { setMyGrapeLetter, setCurrentGrape_id } = useMyGrapeContext();
 
-// TODO come back here and use context to get this all set up.. focusing on u8i now
+    // TODO come back here and use context to get this all set up.. focusing on u8i now
 
 
     useEffect(() => {
@@ -39,17 +40,17 @@ const GrapeLetterPage = () => {
 
     return (
         <View style={styles.container}>
-            <SafeAreaView style={styles.title_container}>
+            <SafeAreaView style={styles.header_container}>
                 <View style={styles.back_container}>
-                    <Ionicons.Button
-                        name="arrow-back-circle-outline"
+                    <MaterialCommunityIcons.Button
+                        name="home-export-outline"
                         size={35}
+                        style={styles.buttons}
                         backgroundColor="#4E1E66"
                         onPress={() => { router.back(); }}
                     />
-                    {/* <FontAwesome name="home" size={24} color="black" /> */}
                 </View>
-                <View style={styles.mainTitle_container}>
+                <View>
                     <Text style={styles.title}>
                         Grape: {new Date(grape.creation_date * 1000).toDateString()}
                     </Text>
@@ -67,29 +68,29 @@ const styles = StyleSheet.create({
         height: '100%',
         backgroundColor: '#2E3944',
     },
+    buttons: {
+        borderWidth: 1,
+        borderColor: '#cb9de2',
+        paddingLeft: 20,
+        borderRadius: 5,
+        transform: [ { rotateY: '180deg' } ],
+    },
     title: {
         fontSize: 18,
         fontWeight: 'bold',
         color: '#f3f0f5',
     },
-    title_container: {
+    header_container: {
         flexDirection: 'row',
         backgroundColor: '#4E1E66',
         borderBottomWidth: 1,
         alignItems: 'center',
-        justifyContent: 'center',
-    },
-    mainTitle_container: {
-        flex: 4,
+        justifyContent: 'space-around',
     },
     back_container: {
-        flex: 1,
-        flexDirection: 'row',
-    },
-    back_pressed: {
-        width: '25%',
-
-    },
+        marginBottom: 5,
+        borderColor: '#f3f0f5',
+    }
 });
 
 
