@@ -28,7 +28,7 @@ type MyGrapeLetterProps = {
 };
 
 // TODO a photo/icon for each letter
-// TODO modulate and clean up
+// TODO return to here and get the context working to save/persist etc the grapes data///
 
 const GRAPE_DAY: MyMap = {
     g: 'entle with self',
@@ -70,8 +70,7 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
             <View style={styles.titleContainer}>
                 {GRAPE_DAY_TITLE(grape_day_letter.letter)}
                 <Ionicons.Button name="md-share" size={25} color="#cb9de2"
-                    backgroundColor='transparent'
-                    onPress={() => console.log('share')}
+                    backgroundColor='transparent' onPress={() => console.log('share')}
                 />
             </View>
             {!selectedLetter ? <Pressable style={pressStyle}
@@ -83,24 +82,25 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                 </View>
             </Pressable> : <View style={{ justifyContent: 'flex-end' }}>
                 <TextInput
-                    key={grape_day_letter.letter}
-                    style={styles.inputContainer}
                     multiline={true}
                     numberOfLines={8}
-                    // value={grape_day_letter.value}
+                    key={grape_day_letter.letter}
+                    style={styles.inputContainer}
                     defaultValue={grape_day_letter.value}
                     //? value={selectedLetter.value}
-                    keyboardType='default'
                     ref={inputRef}
-                    onChangeText={(text) => {
-                        setMyGrapeLetter({ letter: grape_day_letter.letter, value: text });
-                    }}
+                    // onChangeText={(text) => {
+                        // acually we should do this on click of the save
+                        // setMyGrapeLetter({ letter: grape_day_letter.letter, value: text });
+                    // }}
                 />
                 <View style={styles.row}>
                     <MaterialCommunityIcons.Button name="content-save-check-outline" size={30}
                         color="#cb9de2" key="Save"
                         backgroundColor="transparent"
                         style={styles.buttons}
+                        onPress={() => console.log('save')}
+                        // onPress={() => setMyGrapeLetter({ letter: grape_day_letter.letter, value: inputRef.current?.value || '' })}
                     />
                     <MaterialIcons.Button name="cancel" size={30} key="Cancel"
                         color="#cb9de2" backgroundColor="transparent"
