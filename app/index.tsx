@@ -97,7 +97,7 @@ export default function HomePage() {
                     tabBarActiveTintColor: '#8ABD91',
                     tabBarInactiveTintColor: '#f3f0f5', // text color for words that are not selected
                     tabBarStyle: { backgroundColor: '#4E1E66', paddingTop: 30 },
-                    tabBarIndicatorStyle: { backgroundColor: '#8ABD91', height: 5 },
+                    tabBarIndicatorStyle: { backgroundColor: '#cb9de2', height: 5 },
                 })}>
                 <Tab.Screen name="Home" component={Home} options={{ title: 'Home' }} />
                 <Tab.Screen name="Global" component={Global} options={{ title: 'Feed' }} />

@@ -1,6 +1,8 @@
 
-<!-- ** NOW: i already set up the global page so next work on the settingStack then start working on the db/auth -->
 
+*****
+<!-- ** NOW: i already set up the global page and the settingStack, so next do the About and Account set up AND THEN start working on the db/auth -->
+*****
 
 // make it all look more modern
 <!-- !NEXT: continue making all the ui stuff and make all the screens nice and just do everything yo can basically with dummy data get that allll set up and THEN then use superbase and use that starter expo from there for auth.. so do auth and then the dn in supabase and then refactor code to query from there and yea.  -->
