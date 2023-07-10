@@ -1,6 +1,6 @@
 ## colors
 Sage : #9CAF88
-light variation: #89af88
+light variation: #a8e4a0
 bluish: #889CAF
 dark: #2E3944
 light grape: #8031A7

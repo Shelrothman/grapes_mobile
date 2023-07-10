@@ -24,6 +24,7 @@ type MyGrapeLetterProps = {
 // TODO return to here and get the context working to save/persist etc the grapes data///
 
 
+// TODO clean up the part GRAPEDAY_TITLE.. do it more simply like in SharedLetter.tsx
 
 
 export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLetter }: MyGrapeLetterProps) {

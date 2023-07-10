@@ -35,6 +35,6 @@ const styles_home = StyleSheet.create({
     title: {
         fontSize: 18,
         fontWeight: 'bold',
-        color: '#89af88',
+        color: '#a8e4a0',
     },
 });

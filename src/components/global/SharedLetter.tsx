@@ -7,10 +7,12 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { GlobalGrape } from '../../types';
 import { GrapeIcons } from '../../utils/Icons';
-
+import { GRAPE_DAY } from '../../utils/constants';
 
 
 export function SharedLetter({ userName, letter, value }: GlobalGrape) {
+
+
     return (
         <View style={styles.card}>
             {/* HEADER */}
@@ -19,7 +21,9 @@ export function SharedLetter({ userName, letter, value }: GlobalGrape) {
                     <Text style={styles.letter}>{letter.toUpperCase()}</Text>
                 </View>
                 <View style={styles.title_container}>
-                    <Text style={styles.title}>Function for that like in grape_id</Text>
+                    <Text style={styles.title}>
+                        {GRAPE_DAY[ letter.toLowerCase() ]}
+                    </Text>
                 </View>
             </View>
             {/* BODY */}
@@ -43,30 +47,57 @@ export function SharedLetter({ userName, letter, value }: GlobalGrape) {
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: '#8ABDAA',
+        backgroundColor: '#a8e4a0',
+        // opacity: 0.8,
         borderRadius: 10,
-        borderColor: '#4E1E66',
+        borderColor: '#cb9De2',
         borderWidth: 2.5,
-        marginBottom: 10,
+        marginBottom: 20,
+        marginRight: 10,
+        marginLeft: 10,
     },
     card_header: {
+        backgroundColor: '#4E1E66',
+        borderRadius: 8,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
     },
-    card_body: {},
+    card_body: {
+        borderBottomColor: '#cb9De2',
+        borderBottomWidth: 0.5,
+        padding: 10,
+    },
     card_footer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-
+        padding: 5,
     },
     title_container: {
-        // justifyContent: 'flex-start',
+        // backgroundColor: '#cb9De2',
+        justifyContent: 'flex-end',
+        // alignItems: 'center',
+        marginBottom: 5,
     },
-    title: {},
-    letter_container: {},
-    letter: {},
-    value: {},
+    title: {
+        color: '#cb9De2',
+    },
+    letter_container: {
+        // backgroundColor: '#4E1E66',
+        paddingBottom: 0,
+        marginBottom: 0,
+
+    },
+    letter: {
+        fontSize: 30,
+        color: '#cb9De2',
+    },
+    value: {
+        // fontSize: 10,
+        // fontWeight: 'bold',
+    },
     icon_container: {},
     shared_by_container: {},
-    shared_by: {},
+    shared_by: {
+        fontStyle: 'italic',
+    },
 })

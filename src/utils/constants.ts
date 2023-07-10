@@ -18,4 +18,3 @@ export const GRAPE_DAY: MyMap = {
     e: 'xercise',
     s: 'ocial Activity',
 }
-

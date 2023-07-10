@@ -10,6 +10,7 @@ type IconsProps = {
     color: string;
 };
 
+
 export function GrapeIcons({ letter, color }: IconsProps) {
 
     switch (letter) {
@@ -20,7 +21,7 @@ export function GrapeIcons({ letter, color }: IconsProps) {
         case 'A':
             return <MaterialIcons name="emoji-events" size={24} color={color} />;
         case 'P':
-            return <Ionicons name="happy-outline" size={24} color={color} />;
+            return <Ionicons name="md-happy-sharp" size={24} color={color} />;
         case 'E':
             return <MaterialCommunityIcons name="weight-lifter" size={24} color={color} />
         case 'S':
