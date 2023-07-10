@@ -5,10 +5,10 @@ import { Link } from 'expo-router';
 import { MyGrape } from '../src/components/my/MyGrape';
 import { getGrapeById } from "../src/utils";
 import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
+// import { Ionicons } from '@expo/vector-icons';
 import { useMyGrapeContext } from "../src/contexts/MyGrapeContext";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+import { GrapeIcons } from "../src/utils/Icons";
 
 const GrapeLetterPage = () => {
     const router = useRouter();
@@ -20,7 +20,7 @@ const GrapeLetterPage = () => {
         <Link href="../">Go Back</Link>
     </SafeAreaView>;
 
-    const { setMyGrapeLetter, setCurrentGrape_id } = useMyGrapeContext();
+    const { currentLetter_edit, setCurrentGrape_id } = useMyGrapeContext();
 
     // TODO come back here and use context to get this all set up.. focusing on u8i now
 
@@ -33,8 +33,6 @@ const GrapeLetterPage = () => {
         setCurrentGrape_id(grape.item_id);
         // ? may not really need this bc the context is already set up to listen to the grape_id
     }, []); // this will run once on mount
-
-
 
     // ! may need to re-asses herein flatList bc the list is throwing virtualized list warning
 
@@ -51,9 +49,19 @@ const GrapeLetterPage = () => {
                     />
                 </View>
                 <View>
-                    <Text style={styles.title}>
-                        Grape: {new Date(grape.creation_date * 1000).toDateString()}
-                    </Text>
+                    {currentLetter_edit.length > 0 ? (
+                        <Text style={styles.title}>
+                            <GrapeIcons letter={currentLetter_edit.toUpperCase()} color="#f3f0f5" size={35} />
+                            {' '}{' '}
+                            <GrapeIcons letter={currentLetter_edit.toUpperCase()} color="#f3f0f5" size={35} />
+                            {' '}{' '}
+                            <GrapeIcons letter={currentLetter_edit.toUpperCase()} color="#f3f0f5" size={35} />
+                        </Text>
+                    ) : (
+                        <Text style={styles.title}>
+                            Grape: {new Date(grape.creation_date * 1000).toDateString()}
+                        </Text>
+                    )}
                 </View>
             </SafeAreaView>
             <MyGrape grape={grape} />
@@ -74,11 +82,13 @@ const styles = StyleSheet.create({
         paddingLeft: 20,
         borderRadius: 5,
         transform: [ { rotateY: '180deg' } ],
+        marginLeft: 5,
     },
     title: {
         fontSize: 18,
         fontWeight: 'bold',
         color: '#f3f0f5',
+        marginRight: 5,
     },
     header_container: {
         flexDirection: 'row',

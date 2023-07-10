@@ -1,5 +1,5 @@
 
-<!-- ** NOW: i already set up the global page so next work on the letterBoxes that are shared and THEN do the settingStack then start working on the db/auth -->
+<!-- ** NOW: i already set up the global page so next work on the settingStack then start working on the db/auth -->
 
 
 // make it all look more modern

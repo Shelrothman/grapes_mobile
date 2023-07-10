@@ -18,6 +18,12 @@ type MyGrapeContextType = {
     currentGrape_id: number;
     /** setCurrentGrapeDate sets the date of the grape that is currently being viewed/edited */
     setCurrentGrape_id: React.Dispatch<React.SetStateAction<number>>;
+    
+    /** current letter that is being edited */
+    currentLetter_edit: string;
+    /** setCurrentLetter_edit sets the current letter that is being edited */
+    setCurrentLetter_edit: React.Dispatch<React.SetStateAction<string>>;
+    
     /** grape_g is the value of the gentle with self letter */
     grape_g: string;
     setGrape_g: React.Dispatch<React.SetStateAction<string>>;
@@ -50,6 +56,8 @@ export function MyGrapeProvider({ children }: MyGrapeProviderProps) {
     // const [ currentGrapeDate, setCurrentGrapeDate ] = useState<number>(0);
 
     const [ currentGrape_id, setCurrentGrape_id ] = useState<number>(0);
+    const [ currentLetter_edit, setCurrentLetter_edit ] = useState<string>('');
+
 
     const [ grape_g, setGrape_g ] = useState<string>('new self-care');
     const [ grape_r, setGrape_r ] = useState<string>('default relaxation');
@@ -76,6 +84,8 @@ export function MyGrapeProvider({ children }: MyGrapeProviderProps) {
         <MyGrapeContext.Provider value={{
             // currentGrapeDate,
             // setCurrentGrapeDate,
+            currentLetter_edit,
+            setCurrentLetter_edit,
             currentGrape_id,
             setCurrentGrape_id,
             setMyGrapeLetter,

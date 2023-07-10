@@ -9,7 +9,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { usePressAnimation } from "../../hooks/usePressAnimation";
-// import { useMyGrapeContext } from "../../contexts/MyGrapeContext";
+import { useMyGrapeContext } from "../../contexts/MyGrapeContext";
 import { GRAPE_DAY } from "../../utils/constants";
 
 
@@ -24,8 +24,6 @@ type MyGrapeLetterProps = {
 // TODO return to here and get the context working to save/persist etc the grapes data///
 
 
-// TODO clean up the part GRAPEDAY_TITLE.. do it more simply like in SharedLetter.tsx
-
 
 export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLetter }: MyGrapeLetterProps) {
 
@@ -34,7 +32,7 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
 
     const { handlePressIn, handlePressOut, pressStyle } = usePressAnimation();
 
-    // const { setMyGrapeLetter } = useMyGrapeContext();
+    const { setCurrentLetter_edit } = useMyGrapeContext();
 
     const GRAPE_DAY_TITLE = (letter: string): JSX.Element => {
         return <Text style={{ textShadowColor: '#cb9de2', textShadowRadius: 20 }}>
@@ -52,6 +50,9 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
         return () => { if (inputRef.current) inputRef.current.blur(); }
     }, [ selectedLetter ]);
 
+    // useEffect(() => {
+    //     if (selectedLetter && selectedLetter.letter === grape_day_letter.letter) {
+
     return (
         <>
             <View style={styles.titleContainer}>
@@ -61,7 +62,10 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                 />
             </View>
             {!selectedLetter ? <Pressable style={pressStyle}
-                onPress={() => setSelectedLetter(grape_day_letter)}
+                onPress={() => {
+                    setSelectedLetter(grape_day_letter);
+                    setCurrentLetter_edit(grape_day_letter.letter);
+                }}
                 onPressIn={handlePressIn}
                 onPressOut={handlePressOut}>
                 <View style={styles.inputContainer}>
@@ -89,10 +93,15 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                         onPress={() => console.log('save')}
                         // onPress={() => setMyGrapeLetter({ letter: grape_day_letter.letter, value: inputRef.current?.value || '' })}
                     />
+                    {/* <Text>hdsjdhsjka</Text> */}
+                    
                     <MaterialIcons.Button name="cancel" size={30} key="Cancel"
                         color="#cb9de2" backgroundColor="transparent"
                         style={styles.buttons}
-                        onPress={() => setSelectedLetter(null)}
+                        onPress={() => {
+                            setSelectedLetter(null)
+                            setCurrentLetter_edit('');
+                        }}
                     />
                 </View>
             </View>}
