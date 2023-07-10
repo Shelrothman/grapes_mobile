@@ -13,3 +13,9 @@ export type GrapeDayLetter = {
 //     letter: string;
 //     value: string;
 // }
+
+export type GlobalGrape = {
+    userName: string;
+    letter: string;
+    value: string;
+}

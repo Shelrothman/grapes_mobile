@@ -1,0 +1,45 @@
+{
+    "global_items": [
+        {
+            "userName": "admin",
+            "letter": "A",
+            "value": "Call the friend back that I'd been avoiding for weeks."
+        },
+        {
+            "userName": "Georgioio",
+            "letter": "R",
+            "value": "Sit by the pool and splash my feet"
+        },
+        {
+            "userName": "Panos5634",
+            "letter": "P",
+            "value": "dance around my apartment"
+        },
+        {
+            "userName": "carol",
+            "letter": "E",
+            "value": "Walk to my errands instead of driving"
+        },
+        {
+            "userName": "Lil22",
+            "letter": "A",
+            "value": "Make my dentist appointment for next year."
+        },
+        {
+            "userName": "Lopside48",
+            "letter": "S",
+            "value": "Talk to the cashier at the grocery store."
+        },
+        {
+            "userName": "CutiePie4u",
+            "letter": "E",
+            "value": "Go to pilates class."
+        },
+        {
+            "userName": "Billy2432",
+            "letter": "G",
+            "value": "have pie for dessert at lunch."
+        }
+
+    ]
+}

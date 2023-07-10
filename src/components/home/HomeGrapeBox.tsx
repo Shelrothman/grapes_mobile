@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from 'react-native';
-import { Grape, GrapeDayLetter } from '../types';
+import { Grape, GrapeDayLetter } from '../../types';
 
 type HomeGrapeLetterRowProps = {
     grape: Grape;
