@@ -48,7 +48,6 @@ export function SharedLetter({ userName, letter, value }: GlobalGrape) {
 const styles = StyleSheet.create({
     card: {
         backgroundColor: '#a8e4a0',
-        // opacity: 0.8,
         borderRadius: 10,
         borderColor: '#cb9De2',
         borderWidth: 2.5,
@@ -73,31 +72,26 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     title_container: {
-        // backgroundColor: '#cb9De2',
         justifyContent: 'flex-end',
-        // alignItems: 'center',
         marginBottom: 5,
     },
     title: {
         color: '#cb9De2',
     },
-    letter_container: {
-        // backgroundColor: '#4E1E66',
-        paddingBottom: 0,
-        marginBottom: 0,
-
-    },
+    letter_container: {},
     letter: {
         fontSize: 30,
         color: '#cb9De2',
     },
     value: {
-        // fontSize: 10,
-        // fontWeight: 'bold',
+        fontSize: 15,
     },
     icon_container: {},
-    shared_by_container: {},
+    shared_by_container: {
+        justifyContent: 'flex-end',
+    },
     shared_by: {
+        fontSize: 10,
         fontStyle: 'italic',
     },
 })
