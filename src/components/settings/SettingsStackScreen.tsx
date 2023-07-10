@@ -1,4 +1,4 @@
-import { View, Text, Button } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { About } from './About';
@@ -13,7 +13,7 @@ import { Account } from './Account';
 const Tab = createBottomTabNavigator();
 export function SettingsStackScreen() {
     return (
-        <Tab.Navigator
+        <Tab.Navigator sceneContainerStyle={styles.container}
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color }) => {
                     let iconName: string = 'ios-information-circle-outline';
@@ -24,12 +24,14 @@ export function SettingsStackScreen() {
                             iconName = focused ? 'information' : 'information-outline';
                         }
                     }
-                    return <MaterialCommunityIcons name={iconName} size={20} color={color} />;
+                    return <MaterialCommunityIcons name={iconName} size={25} color={color} />;
                 },
-                tabBarActiveTintColor: 'green',
+                tabBarActiveTintColor: 'darkgreen',
                 tabBarInactiveTintColor: 'gray',
-                tabBarStyle: { backgroundColor: 'lightgreen', paddingBottom: 20 },
-                tabBarIndicatorStyle: { backgroundColor: 'darkgreen', height: 5 },
+                tabBarStyle: { backgroundColor: '#a8e4a0', height: '15%', padding: 5 },
+                tabBarItemStyle: { padding: 5 },
+                // tabBarIconStyle: { padding: 5 },
+                tabBarIndicatorStyle: { backgroundColor: 'blue' },
             })}>
             {/* <SettingsStack.Screen name="More" options={{title: "Settings and Information" }} component={SettingsScreen} /> */}
             <Tab.Screen name="About" component={About} options={{ title: 'About GRAPES™', headerShown: false }} />
@@ -38,3 +40,15 @@ export function SettingsStackScreen() {
         </Tab.Navigator>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: '#2E3944',
+        // height: '100%',
+        paddingBottom: 20,
+        // marginBottom: 20,
+    },
+    // tabBarStyle: {
+    //     backgroundColor: '#a8e4a0',
+    // }
+});

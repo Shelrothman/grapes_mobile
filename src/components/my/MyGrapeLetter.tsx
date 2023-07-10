@@ -93,8 +93,6 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                         onPress={() => console.log('save')}
                         // onPress={() => setMyGrapeLetter({ letter: grape_day_letter.letter, value: inputRef.current?.value || '' })}
                     />
-                    {/* <Text>hdsjdhsjka</Text> */}
-                    
                     <MaterialIcons.Button name="cancel" size={30} key="Cancel"
                         color="#cb9de2" backgroundColor="transparent"
                         style={styles.buttons}
@@ -116,7 +114,9 @@ const styles = StyleSheet.create({
         padding: 7,
     },
     buttons: {
-        borderWidth: 1, borderColor: '#cb9de2', paddingLeft: 15
+        borderWidth: 1, 
+        borderColor: '#cb9de2', 
+        paddingLeft: 15
     },
     row: {
         flexDirection: 'row',
