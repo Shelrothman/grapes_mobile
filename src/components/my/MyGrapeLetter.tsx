@@ -9,16 +9,9 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { usePressAnimation } from "../../hooks/usePressAnimation";
-import { useMyGrapeContext } from "../../contexts/MyGrapeContext";
+// import { useMyGrapeContext } from "../../contexts/MyGrapeContext";
+import { GRAPE_DAY } from "../../utils/constants";
 
-
-/**
- * @interface MyMap is a type that is a map of strings to strings
- * used to allow the key string to be used as a variable to find the value string
- */
-interface MyMap {
-    [ key: string ]: string | undefined
-}
 
 type MyGrapeLetterProps = {
     grape_day_letter: GrapeDayLetter;
@@ -30,14 +23,7 @@ type MyGrapeLetterProps = {
 // TODO a photo/icon for each letter
 // TODO return to here and get the context working to save/persist etc the grapes data///
 
-const GRAPE_DAY: MyMap = {
-    g: 'entle with self',
-    r: 'elaxation',
-    a: 'ccomplishment',
-    p: 'leasure',
-    e: 'xercise',
-    s: 'ocial Activity',
-}
+
 
 
 export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLetter }: MyGrapeLetterProps) {
@@ -47,7 +33,7 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
 
     const { handlePressIn, handlePressOut, pressStyle } = usePressAnimation();
 
-    const { setMyGrapeLetter } = useMyGrapeContext();
+    // const { setMyGrapeLetter } = useMyGrapeContext();
 
     const GRAPE_DAY_TITLE = (letter: string): JSX.Element => {
         return <Text style={{ textShadowColor: '#cb9de2', textShadowRadius: 20 }}>

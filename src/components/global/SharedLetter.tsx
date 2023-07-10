@@ -28,13 +28,13 @@ export function SharedLetter({ userName, letter, value }: GlobalGrape) {
             </View>
             {/* FOOTER */}
             <View style={styles.card_footer}>
-                <View style={styles.shared_by_container}>
-                    <Text style={styles.shared_by}>Shared By: {userName}</Text>
-                </View>
                 <View style={styles.icon_container}>
                     {/* <Icons letter="A" /> */}
                     <GrapeIcons letter={letter} color="#4E1E66" />
                     {/* icon for the letter with {`<`}Icons{`>`} component */}
+                </View>
+                <View style={styles.shared_by_container}>
+                    <Text style={styles.shared_by}>Shared By: {userName}</Text>
                 </View>
             </View>
         </View>
@@ -54,7 +54,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     card_body: {},
-    card_footer: {},
+    card_footer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+
+    },
     title_container: {
         // justifyContent: 'flex-start',
     },
