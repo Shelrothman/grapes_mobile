@@ -4,13 +4,14 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { About } from './About';
 import { Account } from './Account';
 
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
+
+// * dang this should really be a top nav and not bottom so THat  it like flows with the rest of the app
 
 
 
-
-
-
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialTopTabNavigator();
 export function SettingsStackScreen() {
     return (
         <Tab.Navigator sceneContainerStyle={styles.container}
@@ -28,14 +29,13 @@ export function SettingsStackScreen() {
                 },
                 tabBarActiveTintColor: 'darkgreen',
                 tabBarInactiveTintColor: 'gray',
-                tabBarStyle: { backgroundColor: '#a8e4a0', height: '15%', padding: 5 },
+                tabBarStyle: { backgroundColor: '#a8e4a0', height: '13%', padding: 5 },
                 tabBarItemStyle: { padding: 5 },
-                // tabBarIconStyle: { padding: 5 },
-                tabBarIndicatorStyle: { backgroundColor: 'blue' },
+                tabBarIndicatorStyle: { backgroundColor: 'darkgreen', height: 5 },
             })}>
             {/* <SettingsStack.Screen name="More" options={{title: "Settings and Information" }} component={SettingsScreen} /> */}
-            <Tab.Screen name="About" component={About} options={{ title: 'About GRAPES™', headerShown: false }} />
-            <Tab.Screen name="Account" component={Account} options={{ title: 'My Account', headerShown: false }} />
+            <Tab.Screen name="About" component={About} options={{ title: 'About GRAPES™', }} />
+            <Tab.Screen name="Account" component={Account} options={{ title: 'My Account', }} />
             {/* </SettingsStack.Navigator> */}
         </Tab.Navigator>
     );
