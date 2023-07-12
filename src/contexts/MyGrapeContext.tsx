@@ -3,7 +3,7 @@
  * Context for the individual grape at hand for the user to edit/view/share
  * in grape_id route
  */
-import { useContext, createContext, ReactNode, useState } from 'react';
+import { useContext, createContext, ReactNode, useState, useEffect } from 'react';
 import { Grape, GrapeDayLetter } from "../types";
 
 
@@ -20,9 +20,9 @@ type MyGrapeContextType = {
     setCurrentGrape_id: React.Dispatch<React.SetStateAction<number>>;
     
     /** current letter that is being edited */
-    currentLetter_edit: string;
+    currentLetter_edit: string|null;
     /** setCurrentLetter_edit sets the current letter that is being edited */
-    setCurrentLetter_edit: React.Dispatch<React.SetStateAction<string>>;
+    setCurrentLetter_edit: React.Dispatch<React.SetStateAction<string|null>>;
     
     /** grape_g is the value of the gentle with self letter */
     grape_g: string;
@@ -56,7 +56,7 @@ export function MyGrapeProvider({ children }: MyGrapeProviderProps) {
     // const [ currentGrapeDate, setCurrentGrapeDate ] = useState<number>(0);
 
     const [ currentGrape_id, setCurrentGrape_id ] = useState<number>(0);
-    const [ currentLetter_edit, setCurrentLetter_edit ] = useState<string>('');
+    const [ currentLetter_edit, setCurrentLetter_edit ] = useState<string|null>(null);
 
 
     const [ grape_g, setGrape_g ] = useState<string>('new self-care');
@@ -65,6 +65,11 @@ export function MyGrapeProvider({ children }: MyGrapeProviderProps) {
     const [ grape_p, setGrape_p ] = useState<string>('default pleasure');
     const [ grape_e, setGrape_e ] = useState<string>('default exercise');
     const [ grape_s, setGrape_s ] = useState<string>('default social activity');
+
+
+    useEffect(() => {
+        console.log('currentLetter_edit', currentLetter_edit);
+    }, [ currentLetter_edit ]);
 
 
     function setMyGrapeLetter({ letter, value }: GrapeDayLetter) {

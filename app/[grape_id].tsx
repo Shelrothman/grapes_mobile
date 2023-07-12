@@ -5,7 +5,6 @@ import { Link } from 'expo-router';
 import { MyGrape } from '../src/components/my/MyGrape';
 import { getGrapeById } from "../src/utils";
 import { useRouter } from 'expo-router';
-// import { Ionicons } from '@expo/vector-icons';
 import { useMyGrapeContext } from "../src/contexts/MyGrapeContext";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { GrapeIcons } from "../src/utils/Icons";
@@ -20,16 +19,12 @@ const GrapeLetterPage = () => {
         <Link href="../">Go Back</Link>
     </SafeAreaView>;
 
-    const { currentLetter_edit, setCurrentGrape_id } = useMyGrapeContext();
+    const { currentLetter_edit, setCurrentGrape_id, setCurrentLetter_edit } = useMyGrapeContext();
 
     // TODO come back here and use context to get this all set up.. focusing on u8i now
 
 
     useEffect(() => {
-        // grape.day.forEach(letter => {
-        //     setMyGrape(letter);
-        // });
-        // setMyGrape(grape.day[ 0 ]);
         setCurrentGrape_id(grape.item_id);
         // ? may not really need this bc the context is already set up to listen to the grape_id
     }, []); // this will run once on mount
@@ -45,17 +40,20 @@ const GrapeLetterPage = () => {
                         size={35}
                         style={styles.buttons}
                         backgroundColor="#4E1E66"
-                        onPress={() => { router.back(); }}
+                        onPress={() => { 
+                            setCurrentLetter_edit(null);
+                            router.back(); 
+                        }}
                     />
                 </View>
                 <View>
-                    {currentLetter_edit.length > 0 ? (
+                    {currentLetter_edit ? (
                         <Text style={styles.title}>
-                            <GrapeIcons letter={currentLetter_edit.toUpperCase()} color="#f3f0f5" size={35} />
+                            <GrapeIcons letter={currentLetter_edit} color="#f3f0f5" size={35} />
                             {' '}{' '}
-                            <GrapeIcons letter={currentLetter_edit.toUpperCase()} color="#f3f0f5" size={35} />
+                            <GrapeIcons letter={currentLetter_edit} color="#f3f0f5" size={35} />
                             {' '}{' '}
-                            <GrapeIcons letter={currentLetter_edit.toUpperCase()} color="#f3f0f5" size={35} />
+                            <GrapeIcons letter={currentLetter_edit} color="#f3f0f5" size={35} />
                         </Text>
                     ) : (
                         <Text style={styles.title}>

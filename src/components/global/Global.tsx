@@ -1,4 +1,4 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { StyleSheet, View, Text, SafeAreaView, FlatList } from 'react-native';
 import { SharedLetter } from './SharedLetter';
 import * as globalLetters from '../../data/dummyGlobal.json';
@@ -13,9 +13,6 @@ import Toast from 'react-native-toast-message';
 
 export function Global() {
 
-
-    const [ copiedText, setCopiedText ] = useState('');
-
     const copyToClipboard = async (text: string) => {
         await Clipboard.setStringAsync(text);
         Toast.show({
@@ -25,12 +22,6 @@ export function Global() {
             visibilityTime: 2000,
         });
     };
-
-    // const fetchCopiedText = async () => {
-    //     const text = await Clipboard.getStringAsync();
-    //     setCopiedText(text);
-    // };
-
 
 
     return (
