@@ -56,7 +56,7 @@ export default function HomePage() {
     // }
     const buildTabBarIcon = (routeName: string, focused: boolean, color: string) => {
         let iconName: any = '';
-        const iconProps = { size: 20, color: color };
+        const iconProps = { size: 25, color: color };
         if (routeName === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
         } else if (routeName === 'Global') {
@@ -82,12 +82,12 @@ export default function HomePage() {
                     // headerShown: route.name === 'Home' ? false : true,
                     tabBarActiveTintColor: '#8ABD91',
                     tabBarInactiveTintColor: '#f3f0f5', // text color for words that are not selected
-                    tabBarStyle: { backgroundColor: '#4E1E66', paddingTop: 30 },
+                    tabBarStyle: { backgroundColor: '#4E1E66', paddingTop: 30, paddingBottom: 10 },
                     tabBarIndicatorStyle: { backgroundColor: '#cb9de2', height: 5 },
                 })}>
-                <Tab.Screen name="Home" component={Home} options={{ title: 'Home' }} />
-                <Tab.Screen name="Global" component={Global} options={{ title: 'Feed' }} />
-                <Tab.Screen name="More" component={SettingsStackScreen} options={{ title: 'M🍇re' }} />
+                <Tab.Screen name="Home" component={Home} options={{ tabBarShowLabel: false }} />
+                <Tab.Screen name="Global" component={Global} options={{ tabBarShowLabel: false }} />
+                <Tab.Screen name="More" component={SettingsStackScreen} options={{ tabBarShowLabel: false }} />
             </Tab.Navigator>
             <StatusBar hidden={true} />
             <Toast config={ToastConfig} />

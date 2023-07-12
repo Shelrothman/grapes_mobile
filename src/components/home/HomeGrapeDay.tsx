@@ -52,8 +52,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#8ABDAA',
         alignContent: 'center',
         borderWidth: 2.5,
-        minWidth: '85%',
-        maxWidth: '85%',
+        minWidth: '90%',
+        maxWidth: '90%',
         // ! important that if ya wanna change these widths, have to change in HomeGrapeBox.tsx too
     },
     whole_container: {

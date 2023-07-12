@@ -21,7 +21,7 @@ export function Global() {
         Toast.show({
             type: 'success',
             position: 'top',
-            text1: 'Copied to Clipboard!',
+            text1: 'Copied Text to Clipboard!',
             visibilityTime: 2000,
         });
     };
