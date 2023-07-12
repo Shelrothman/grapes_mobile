@@ -23,7 +23,6 @@ type MyGrapeContextType = {
     currentLetter_edit: string|null;
     /** setCurrentLetter_edit sets the current letter that is being edited */
     setCurrentLetter_edit: React.Dispatch<React.SetStateAction<string|null>>;
-    
     /** grape_g is the value of the gentle with self letter */
     grape_g: string;
     setGrape_g: React.Dispatch<React.SetStateAction<string>>;
@@ -67,13 +66,14 @@ export function MyGrapeProvider({ children }: MyGrapeProviderProps) {
     const [ grape_s, setGrape_s ] = useState<string>('default social activity');
 
 
-    useEffect(() => {
-        console.log('currentLetter_edit', currentLetter_edit);
-    }, [ currentLetter_edit ]);
+    // useEffect(() => {
+    //     console.log('currentLetter_edit', currentLetter_edit);
+    // }, [ currentLetter_edit ]);
 
 
     function setMyGrapeLetter({ letter, value }: GrapeDayLetter) {
-        switch (letter) {
+        const _letter = letter.toLowerCase();
+        switch (_letter) {
             case 'g': setGrape_g(value); break;
             case 'r': setGrape_r(value); break;
             case 'a': setGrape_a(value); break;

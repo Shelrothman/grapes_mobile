@@ -1,8 +1,6 @@
 /** 
  * @description this component is a utility to produce icons for display based on different letters/input
  */
-
-// import { Text } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -33,10 +31,6 @@ export function GrapeIcons({ letter, color, size }: IconsProps) {
             return <MaterialCommunityIcons name="weight-lifter" size={iconSize} color={color} />
         case 'S':
             return <FontAwesome5 name="people-arrows" size={iconSize} color={color} />
-        // case 'COPY':
-        //     return <MaterialIcons.Button name="file-copy" size={iconSize} color={color}
-        //         backgroundColor="transparent"
-        //     />
         default:
             // just in case, but should never happen
             // this is a good fallback bc it makes sensse in any place in a pinch
