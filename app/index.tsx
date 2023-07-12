@@ -4,7 +4,7 @@ import { useNavigation } from 'expo-router';
 import { useState, useLayoutEffect, SetStateAction } from 'react';
 import { Home } from '../src/components/home/Home';
 // import { useQuery } from 'urql';
-
+import Toast from 'react-native-toast-message';
 
 // ** right now it works goes to a dummy page but okay cool then just gotta do it for the sharing share by id and booya ya i can add ?params or somethuing.
 // ** youre a derp its because i didnt DEFAULt export the page so it wasnt working.
@@ -107,6 +107,7 @@ export default function HomePage() {
             // style='auto'
             hidden={true} 
             />
+            <Toast />
         </>
     )
 }

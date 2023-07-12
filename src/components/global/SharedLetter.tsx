@@ -3,15 +3,19 @@
  * @description A card-like component that displays shared cards from users
  * showing their value for the letter and their username pluys an icon depending on the letter
  */
-
 import { StyleSheet, Text, View } from 'react-native';
 import { GlobalGrape } from '../../types';
 import { GrapeIcons } from '../../utils/Icons';
 import { GRAPE_DAY } from '../../utils/constants';
-import { MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
+
+type SharedLetterProps = GlobalGrape & {
+    // setCopiedText: (text: string) => void;
+    onCopyClick: (text: string) => void;
+};
 
 
-export function SharedLetter({ userName, letter, value }: GlobalGrape) {
+export function SharedLetter({ userName, letter, value, onCopyClick }: SharedLetterProps) {
 
 
     return (
@@ -40,11 +44,16 @@ export function SharedLetter({ userName, letter, value }: GlobalGrape) {
             {/* FOOTER */}
             <View style={styles.card_footer}>
                 <View style={styles.share_container}>
-                    <MaterialIcons.Button name="file-copy" size={25} color="#4E1E66" backgroundColor="transparent"
-                        onPress={() => { console.log('copy'); }}
+                    <FontAwesome5.Button name="copy" 
+                        size={25} color="#cb9De2" backgroundColor='#4E1E66'
+                        onPress={() => { 
+                            onCopyClick(value); 
+                        }}
+                        // onPress={() => { setCopiedText(value); }}
                         style={styles.button}
                     />
                 </View>
+                    {/* <Text>copied to clipboard</Text> */}
                 <View style={styles.shared_by_container}>
                     <Text style={styles.shared_by}>Shared By: {userName}</Text>
                 </View>
@@ -56,8 +65,8 @@ export function SharedLetter({ userName, letter, value }: GlobalGrape) {
 const styles = StyleSheet.create({
     // ! this should be used for any icon.button we use
     button: {
-        borderWidth: 1,
-        borderColor: '#4E1E66',
+        // borderWidth: 1,
+        // borderColor: '#4E1E66',
         paddingRight: 0,
         marginRight: 0,
     },
@@ -72,7 +81,6 @@ const styles = StyleSheet.create({
     },
     card_header: {
         backgroundColor: '#4E1E66',
-        // borderRadius: 8,
         borderTopEndRadius: 8,
         borderTopStartRadius: 8,
         flexDirection: 'row',
