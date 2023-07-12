@@ -8,6 +8,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { GlobalGrape } from '../../types';
 import { GrapeIcons } from '../../utils/Icons';
 import { GRAPE_DAY } from '../../utils/constants';
+import { MaterialIcons } from '@expo/vector-icons';
 
 
 export function SharedLetter({ userName, letter, value }: GlobalGrape) {
@@ -17,13 +18,19 @@ export function SharedLetter({ userName, letter, value }: GlobalGrape) {
         <View style={styles.card}>
             {/* HEADER */}
             <View style={styles.card_header}>
-                <View style={styles.letter_container}>
-                    <Text style={styles.letter}>{letter.toUpperCase()}</Text>
+                <View style={styles.iconOne_container}>
+                    <GrapeIcons letter={letter} color="#cb9De2" />
                 </View>
-                <View style={styles.title_container}>
-                    <Text style={styles.title}>
-                        {GRAPE_DAY[ letter.toLowerCase() ]}
-                    </Text>
+                <View style={styles.fullTitle_container}>
+                    <Text style={styles.letter}>{letter.toUpperCase()}</Text>
+                    <View style={styles.suffix_container}>
+                        <Text style={styles.title}>
+                            {GRAPE_DAY[ letter.toLowerCase() ]}
+                        </Text>
+                    </View>
+                </View>
+                <View style={styles.iconTwo_container}>
+                    <GrapeIcons letter={letter} color="#cb9De2" />
                 </View>
             </View>
             {/* BODY */}
@@ -32,10 +39,11 @@ export function SharedLetter({ userName, letter, value }: GlobalGrape) {
             </View>
             {/* FOOTER */}
             <View style={styles.card_footer}>
-                <View style={styles.icon_container}>
-                    {/* <Icons letter="A" /> */}
-                    <GrapeIcons letter={letter} color="#4E1E66" />
-                    {/* icon for the letter with {`<`}Icons{`>`} component */}
+                <View style={styles.share_container}>
+                    <MaterialIcons.Button name="file-copy" size={25} color="#4E1E66" backgroundColor="transparent"
+                        onPress={() => { console.log('copy'); }}
+                        style={styles.button}
+                    />
                 </View>
                 <View style={styles.shared_by_container}>
                     <Text style={styles.shared_by}>Shared By: {userName}</Text>
@@ -46,6 +54,13 @@ export function SharedLetter({ userName, letter, value }: GlobalGrape) {
 }
 
 const styles = StyleSheet.create({
+    // ! this should be used for any icon.button we use
+    button: {
+        borderWidth: 1,
+        borderColor: '#4E1E66',
+        paddingRight: 0,
+        marginRight: 0,
+    },
     card: {
         backgroundColor: '#a8e4a0',
         borderRadius: 10,
@@ -57,41 +72,60 @@ const styles = StyleSheet.create({
     },
     card_header: {
         backgroundColor: '#4E1E66',
-        borderRadius: 8,
+        // borderRadius: 8,
+        borderTopEndRadius: 8,
+        borderTopStartRadius: 8,
         flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    iconOne_container: {
         justifyContent: 'center',
+        marginLeft: 5,
+    },
+    iconTwo_container: {
+        justifyContent: 'center',
+        marginRight: 5,
     },
     card_body: {
         borderBottomColor: '#cb9De2',
         borderBottomWidth: 0.5,
         padding: 10,
+        backgroundColor: '#3d4b59',
+        alignItems: 'center',
     },
     card_footer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         padding: 5,
     },
-    title_container: {
+    suffix_container: {
         justifyContent: 'flex-end',
         marginBottom: 5,
     },
     title: {
         color: '#cb9De2',
     },
-    letter_container: {},
+    fullTitle_container: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+    },
     letter: {
         fontSize: 30,
         color: '#cb9De2',
     },
     value: {
         fontSize: 15,
+        color: '#f3f0f5',
     },
-    icon_container: {},
+    share_container: {
+        justifyContent: 'center',
+        marginLeft: 5,
+    },
     shared_by_container: {
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
+        marginRight: 5,
     },
     shared_by: {
-        fontSize: 10,
         fontStyle: 'italic',
     },
 })
