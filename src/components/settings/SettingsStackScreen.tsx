@@ -1,13 +1,9 @@
 import { View, Text, StyleSheet } from 'react-native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { About } from './About';
 import { Account } from './Account';
-
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
-
-// * dang this should really be a top nav and not bottom so THat  it like flows with the rest of the app
+import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 
 
 
@@ -17,15 +13,16 @@ export function SettingsStackScreen() {
         <Tab.Navigator sceneContainerStyle={styles.container}
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color }) => {
-                    let iconName: string = 'ios-information-circle-outline';
+                    let iconName: any = 'information-circle-outline';
                     if (route.name) {
                         if (route.name === 'Account') {
                             iconName = focused ? 'account-settings' : 'account-settings-outline';
+                            return <MaterialCommunityIcons name={iconName} size={25} color={color} />;
                         } else if (route.name === 'About') {
-                            iconName = focused ? 'information' : 'information-outline';
+                            iconName = focused ? 'information-circle' : 'information-circle-outline';
                         }
                     }
-                    return <MaterialCommunityIcons name={iconName} size={25} color={color} />;
+                    return <Ionicons name={iconName} size={25} color={color} />;
                 },
                 tabBarActiveTintColor: 'darkgreen',
                 tabBarInactiveTintColor: 'gray',

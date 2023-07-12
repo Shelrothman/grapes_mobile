@@ -1,30 +1,16 @@
-// import { StyleSheet, Text, View, FlatList, SafeAreaView, ActivityIndicator } from 'react-native';
-// import QuestionListItem from '../src/components/QuestionListItem';
 import { useNavigation } from 'expo-router';
 import { useState, useLayoutEffect, SetStateAction } from 'react';
 import { Home } from '../src/components/home/Home';
 // import { useQuery } from 'urql';
 import Toast from 'react-native-toast-message';
-
-// ** right now it works goes to a dummy page but okay cool then just gotta do it for the sharing share by id and booya ya i can add ?params or somethuing.
-// ** youre a derp its because i didnt DEFAULt export the page so it wasnt working.
-
-
+import { ToastConfig } from '../src/utils/ToastConfig';
 import { StatusBar } from 'expo-status-bar';
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-
-//  TODO change theser tioyse the ones from @expo and then uninstall this package
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-
-
+import { Ionicons } from '@expo/vector-icons';
 import { Global } from '../src/components/global/Global';
-// import { Global } from './Global';
 import { SettingsStackScreen } from '../src/components/settings/SettingsStackScreen';
-
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -69,7 +55,7 @@ export default function HomePage() {
     //     );
     // }
     const buildTabBarIcon = (routeName: string, focused: boolean, color: string) => {
-        let iconName: string = 'ios-information-circle-outline';
+        let iconName: any = '';
         const iconProps = { size: 20, color: color };
         if (routeName === 'Home') {
             iconName = focused ? 'home' : 'home-outline';
@@ -103,11 +89,8 @@ export default function HomePage() {
                 <Tab.Screen name="Global" component={Global} options={{ title: 'Feed' }} />
                 <Tab.Screen name="More" component={SettingsStackScreen} options={{ title: 'M🍇re' }} />
             </Tab.Navigator>
-            <StatusBar 
-            // style='auto'
-            hidden={true} 
-            />
-            <Toast />
+            <StatusBar hidden={true} />
+            <Toast config={ToastConfig} />
         </>
     )
 }

@@ -32,7 +32,6 @@
     "react-native-screens": "~3.20.0",
     "react-native-scroll-into-view": "^2.0.2",
     "react-native-toast-message": "^2.1.6",
-    "react-native-vector-icons": "^9.2.0",
     "react-native-web": "~0.18.7",
     "typescript": "^4.9.4",
     "urql": "^4.0.4",
@@ -41,7 +40,6 @@
   "devDependencies": {
     "@babel/core": "^7.19.3",
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
-    "@types/react-native-vector-icons": "^6.4.13",
     "@types/uuid": "^9.0.2",
     "typescript": "^4.9.4"
   },
