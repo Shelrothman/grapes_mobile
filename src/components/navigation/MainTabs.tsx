@@ -1,60 +1,26 @@
-import { useNavigation } from 'expo-router';
-import { useState, useLayoutEffect, SetStateAction } from 'react';
-import Home from '../src/components/home/Home';
-// import { useQuery } from 'urql';
-import Toast from 'react-native-toast-message';
-import { ToastConfig } from '../src/utils/ToastConfig';
-import { StatusBar } from 'expo-status-bar';
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import { Ionicons } from '@expo/vector-icons';
-import { Global } from '../src/components/global/Global';
-import { SettingsStackScreen } from '../src/components/settings/SettingsStackScreen';
+import { themeColor, useTheme } from "react-native-rapi-ui";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+// import TabBarIcon from "../components/utils/TabBarIcon";
+// import TabBarIcon from "../../utils/TabBarIcon";
+// import TabBarText from "../components/utils/TabBarText";
+// import TabBarText from "../../utils/TabBarText";
+import { Ionicons } from '@expo/vector-icons';
+import Toast from 'react-native-toast-message';
+import { ToastConfig } from '../../utils/ToastConfig';
+import Home from "../home/Home";
+// import About from "../screens/About";
+// import Profile from "../screens/Profile";
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import { SettingsStackScreen } from "../settings/SettingsStackScreen";
+import { Global } from "../global/Global";
 
 const Tab = createMaterialTopTabNavigator();
 
+const MainTabs = () => {
+    const { isDarkmode } = useTheme();
 
-
-
-
-export default function HomePage() {
-
-    const [ searchTerm, setSearchTerm ] = useState('');
-
-    const navigation = useNavigation();
-
-    // const [ response ] = useQuery({
-    //     query: questionsQuery,
-    //     variables: { sort: 'votes' },
-    // });
-
-
-    // ? do we even want this capability?... i think not.
-    // useLayoutEffect(() => {
-    //     navigation.setOptions({
-    //         headerSearchBarOptions: {
-    //             onChangeText: (event: { nativeEvent: { text: SetStateAction<string>; }; }) => setSearchTerm(event.nativeEvent.text),
-    //             // onBlur: search,
-    //             onblur: () => console.log('blur'), 
-    //         },
-    //     });
-    // }, [ navigation, searchTerm, setSearchTerm ]);
-
-    // if (response.fetching) {
-    //     return (
-    //         <SafeAreaView>
-    //             <ActivityIndicator />
-    //         </SafeAreaView>
-    //     );
-    // }
-    // if (response.error) {
-    //     return (
-    //         <SafeAreaView>
-    //             <Text>Error: {response.error.message}</Text>
-    //         </SafeAreaView>
-    //     );
-    // }
     const buildTabBarIcon = (routeName: string, focused: boolean, color: string) => {
         let iconName: any = '';
         const iconProps = { size: 25, color: color };
@@ -69,10 +35,6 @@ export default function HomePage() {
         return <Ionicons name={iconName} {...iconProps} />;
     };
 
-
-
-
-
     return (
         <>
             <Tab.Navigator
@@ -86,15 +48,16 @@ export default function HomePage() {
                     tabBarStyle: { backgroundColor: '#4E1E66', paddingTop: 30, paddingBottom: 10 },
                     tabBarIndicatorStyle: { backgroundColor: '#cb9de2', height: 5 },
                 })}>
+
+                    {/* @ts-ignore */}
                 <Tab.Screen name="Home" component={Home} options={{ tabBarShowLabel: false }} />
                 <Tab.Screen name="Global" component={Global} options={{ tabBarShowLabel: false }} />
                 <Tab.Screen name="More" component={SettingsStackScreen} options={{ tabBarShowLabel: false }} />
             </Tab.Navigator>
-            <StatusBar hidden={true} />
+            {/* <StatusBar hidden={true} /> */}
             <Toast config={ToastConfig} />
         </>
-    )
-}
+    );
+};
 
-
-
+export default MainTabs;

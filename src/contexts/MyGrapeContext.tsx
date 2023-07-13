@@ -14,10 +14,10 @@ type MyGrapeProviderProps = {
 type MyGrapeContextType = {
     /** set the provided letter to the provided value */
     setMyGrapeLetter: ({ letter, value }: GrapeDayLetter) => void;
-    /** currentGrapeDate is the date of the grape that is currently being viewed/edited  as a number*/
-    currentGrape_id: number;
+    /** currentGrape that is being viewed/edited */
+    currentGrape_id: number|null;
     /** setCurrentGrapeDate sets the date of the grape that is currently being viewed/edited */
-    setCurrentGrape_id: React.Dispatch<React.SetStateAction<number>>;
+    setCurrentGrape_id: React.Dispatch<React.SetStateAction<number|null>>;
     
     /** current letter that is being edited */
     currentLetter_edit: string|null;
@@ -54,7 +54,7 @@ export function useMyGrapeContext() {
 export function MyGrapeProvider({ children }: MyGrapeProviderProps) {
     // const [ currentGrapeDate, setCurrentGrapeDate ] = useState<number>(0);
 
-    const [ currentGrape_id, setCurrentGrape_id ] = useState<number>(0);
+    const [ currentGrape_id, setCurrentGrape_id ] = useState<number|null>(null);
     const [ currentLetter_edit, setCurrentLetter_edit ] = useState<string|null>(null);
 
 

@@ -1,12 +1,13 @@
 import { StyleSheet, Text, SafeAreaView, FlatList, View } from "react-native";
 import * as grapes from '../../data/dummyGrapes.json';
 import { HomeGrapeDay } from './HomeGrapeDay';
+// import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 
 
 // TODO only render the last few days and then option to load more
 
-export function Home() {
+export default function Home() {
 
     return (
         <SafeAreaView style={styles_home.container}>
@@ -16,7 +17,7 @@ export function Home() {
                 renderItem={({ item }) => <HomeGrapeDay grape={item} />}
                 // renderItem={({ item }) => <Text>ItemItem</Text>}
                 showsVerticalScrollIndicator={false}
-                // style={{ marginLeft: 10, marginRight: 10 }}
+            // style={{ marginLeft: 10, marginRight: 10 }}
             />
             {/* <HomeGrapeDay grape={grapes.items[0]} /> */}
         </SafeAreaView>

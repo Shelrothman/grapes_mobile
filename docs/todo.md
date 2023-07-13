@@ -1,7 +1,7 @@
 
-
+.. wait a tick.. why do i even need routing if i can just use context??/state...
 *****
-<!-- ** NOW: i already set up the global page and the settingStack, so next do the About and Account set up AND THEN start working on the db/auth -->
+<!-- ** NOW: START THE AUTH-FLOW CREATE THE TEMPLATE EXAMPLE from githu! i already set up the global page and the settingStack, so next do the About and Account set up AND THEN start working on the db/auth ... actually..... jUst start on the supabase stufffnow  bc the account stuff will prob mneed changing anyway and yea.-->
 *****
 
 // make it all look more modern
@@ -10,6 +10,14 @@
 <!-- * ive begun setting up the context but not quite in use -->
 
 * its really hot user friendlyto have so many inputs on one page ;liek event ho i got got it and have it avoiding the keuyboard thing it sis not a good experience and it be better to have edit button trigger taking to the letter
+
+<!-- TODO: go back in to grapes superbase and chage back the auth config that requiresd new users to confirm their email address before first login...
+for  now i turned that off for testing -->
+
+<!-- TODO to set up the subscribing to new posts... use https://supabase.com/docs/reference/javascript/subscribe -->
+
+<!-- TODO: add a username field for during signup -->
+
 
 <!-- TODO [future]: in top right header of grape_id page, have a button to save the day and it can export somewhere or better yet, Have it become a widget on their os... somehting... -->
 <!-- * like an addToHomeScreen fucntion -->

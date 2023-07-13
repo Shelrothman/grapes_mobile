@@ -1,6 +1,11 @@
 import { Stack } from 'expo-router';
-import { MyGrapeProvider } from '../src/contexts/MyGrapeContext';
+// TODO may need to only wrape the grape_id screen in the provider...
 
+import { MyGrapeProvider } from '../src/contexts/MyGrapeContext';
+import { StatusBar } from "expo-status-bar";
+import { ThemeProvider } from "react-native-rapi-ui";
+import Navigation from "../src/components/navigation";
+import { AuthProvider } from "../src/contexts/AuthProvider";
 
 
 // TODO set up new Client here for urql to connect to supabase db of users and their grapes.
@@ -24,19 +29,31 @@ import { MyGrapeProvider } from '../src/contexts/MyGrapeContext';
 
 
 const RootLayout = () => {
+
+    const images = [
+        require("../assets/images/login.png"),
+        require("../assets/images/register.png"),
+        require("../assets/images/forget.png"),
+    ];
+
+    // return (
+    //     <MyGrapeProvider>
+    //         <Stack>
+    //             <Stack.Screen name="index" options={{ headerShown: false }} />
+    //             <Stack.Screen name="Share" options={{ headerShown: false }} />
+    //             <Stack.Screen name="Edit" options={{ headerShown: false }} />
+    //             {/* i dont think we need one for the grape_id... */}
+    //             <Stack.Screen name="[grape_id]" options={{ headerShown: false }} />
+    //         </Stack >
+    //     </MyGrapeProvider>
+    // );
     return (
-        // <Provider value={client}>
-        // TODO may need to only wrape the grape_id screen in the provider...
-        <MyGrapeProvider>
-            <Stack>
-                <Stack.Screen name="index" options={{ headerShown: false }} />
-                <Stack.Screen name="Share" options={{ headerShown: false }} />
-                <Stack.Screen name="Edit" options={{ headerShown: false }} />
-                {/* i dont think we need one for the grape_id... */}
-                <Stack.Screen name="[grape_id]" options={{ headerShown: false }} />
-            </Stack >
-        </MyGrapeProvider>
-        // </Provider>
+        <ThemeProvider images={images}>
+            <AuthProvider>
+                <Navigation />
+            </AuthProvider>
+            <StatusBar hidden={true} />
+        </ThemeProvider>
     );
 };
 

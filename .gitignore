@@ -17,3 +17,6 @@ web-build/
 .metro-health-check*
 
 .vscode/
+
+# config files
+*config.ts
