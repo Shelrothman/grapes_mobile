@@ -3,11 +3,12 @@
  * this is a reusable item that displays a chart-like card of each letter of the day
 */
 // * using context dont need routere...
-// import { useRouter } from 'expo-router';
+
+
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { usePressAnimation } from '../../hooks/usePressAnimation';
 import { Grape } from '../../types';
-import { HomeGrapeBox } from './HomeGrapeBox';
+import { HomeGrapeBox } from './GrapeBox';
 type HomeGrapeItemProps = {
     grape: Grape;
 };
@@ -28,31 +29,26 @@ export function HomeGrapeDay({ grape }: HomeGrapeItemProps) {
     } = usePressAnimation();
 
     return (
-        <>
-            {!currentGrape_id ? (<View style={styles.whole_container}>
-                <Pressable
-                    // onPress={() => router.push(`/${grape.item_id}`)}
-                    // ** well what about rethinking this... maybe just a state is set on press and listen for that state to change. and then render the grape component
-                    // onPress={() => navigation.navigate('Grape', { grape_id: grape.item_id })}
-                    onPress={() => setCurrentGrape_id(grape.item_id)}
-                    onPressIn={handlePressIn}
-                    onPressOut={handlePressOut}
-                    style={pressStyle}
-                >
-                    <View style={styles.title_container}>
-                        <Text style={styles.title}>
-                            {new Date(grape.creation_date * 1000).toDateString()}
-                        </Text>
-                    </View>
-                    <View style={styles.box_container}>
-                        <HomeGrapeBox grape={grape} />
-                    </View>
-                </Pressable>
-            </View>
-            ) : (
-                <GrapeLetterPage grape_letter_id={currentGrape_id} />
-            )}
-        </>
+        <View style={styles.whole_container}>
+            <Pressable
+                // onPress={() => router.push(`/${grape.item_id}`)}
+                // ** well what about rethinking this... maybe just a state is set on press and listen for that state to change. and then render the grape component
+                // onPress={() => navigation.navigate('Grape', { grape_id: grape.item_id })}
+                onPress={() => setCurrentGrape_id(grape.item_id)}
+                onPressIn={handlePressIn}
+                onPressOut={handlePressOut}
+                style={pressStyle}
+            >
+                <View style={styles.title_container}>
+                    <Text style={styles.title}>
+                        {new Date(grape.creation_date * 1000).toDateString()}
+                    </Text>
+                </View>
+                <View style={styles.box_container}>
+                    <HomeGrapeBox grape={grape} />
+                </View>
+            </Pressable>
+        </View>
     )
 }
 

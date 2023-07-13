@@ -5,15 +5,20 @@ import { MyGrapeLetter } from "./MyGrapeLetter";
 
 type MyGrapeProps = {
     grape: Grape;
+    /** shows the selected letter to be edited */
+    selectedLetter: GrapeDayLetter | null;
+    setSelectedLetter: React.Dispatch<React.SetStateAction<GrapeDayLetter | null>>;
 };
 
+// TODO make these look more liek the list in GLobal feed style wise
 
-export function MyGrape({ grape }: MyGrapeProps) {
 
-    const [ selectedLetter, setSelectedLetter ] = useState<GrapeDayLetter | null>(null);
+export function MyGrape({ grape, selectedLetter, setSelectedLetter }: MyGrapeProps) {
+
+    // const [ selectedLetter, setSelectedLetter ] = useState<GrapeDayLetter | null>(null);
 
     return (
-        <View style={{ flex: 1, margin: 10 }}>
+        <View style={{ flex: 1 }}>
             {!selectedLetter ? (
                 <FlatList
                     data={grape.day}
