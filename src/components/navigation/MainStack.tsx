@@ -14,7 +14,6 @@ const MainStack = createNativeStackNavigator();
 const Main = () => {
 
     return (
-
         <MyGrapeProvider>
             <MainStack.Navigator screenOptions={{ headerShown: false, }} >
                 <MainStack.Screen name="MainTabs" component={MainTabs} />

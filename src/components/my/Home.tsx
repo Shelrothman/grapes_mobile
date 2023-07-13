@@ -1,9 +1,9 @@
 import { StyleSheet, Text, SafeAreaView, FlatList, View } from "react-native";
-import * as grapes from '../../data/dummyGrapes.json';
-// import { HomeGrapeDay } from './HomeGrapeDay';
-// import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-import GrapeLetterPage from "../my/Grape";
+
+
+
+import GrapeLetterPage from "./Grape";
 
 
 // TODO only render the last few days and then option to load more

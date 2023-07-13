@@ -1,5 +1,4 @@
 // import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
 import { themeColor, useTheme } from "react-native-rapi-ui";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 // import TabBarIcon from "../components/utils/TabBarIcon";
@@ -9,7 +8,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import Toast from 'react-native-toast-message';
 import { ToastConfig } from '../../utils/ToastConfig';
-import Home from "../home/Home";
+import Home from "../my/Home";
 import History from "../history/History";
 // import About from "../screens/About";
 // import Profile from "../screens/Profile";
@@ -28,17 +27,13 @@ const MainTabs = () => {
     // const { isDarkmode } = useTheme();
 
     const buildTabBarIcon = (routeName: string, focused: boolean, color: string) => {
-        let iconName: any = '';
         const iconProps = { size: 25, color: color };
         if (routeName === 'Home') {
-            iconName = focused ? 'home' : 'home-outline';
-            return <Ionicons name={iconName} {...iconProps} />;
+            return <Ionicons name={`${focused ? 'home' : 'home-outline'}`} {...iconProps} />;
         } else if (routeName === 'Global') {
-            iconName = focused ? 'earth' : 'earth-outline';
-            return <Ionicons name={iconName} {...iconProps} />;
+            return <Ionicons name={`${focused ? 'earth' : 'earth-outline'}`} {...iconProps} />;
         } else if (routeName === 'More') {
-            iconName = focused ? 'fruit-grapes' : 'fruit-grapes-outline';
-            return <MaterialCommunityIcons name={iconName} {...iconProps} />;
+            return <MaterialCommunityIcons name={`${focused ? 'fruit-grapes' : 'fruit-grapes-outline'}`} {...iconProps} />;
         } else if (routeName === 'History') {
             if (focused) return <FontAwesome name="history" {...iconProps} />;
             return <MaterialIcons name="history" {...iconProps} />;
@@ -60,8 +55,6 @@ const MainTabs = () => {
                     tabBarStyle: { backgroundColor: '#4E1E66', paddingTop: 30, paddingBottom: 10 },
                     tabBarIndicatorStyle: { backgroundColor: '#cb9de2', height: 5 },
                 })}>
-
-                {/* @ts-ignore */}
                 <Tab.Screen name="Home" component={Home} options={tabBarOptions} />
                 <Tab.Screen name="History" component={History} options={tabBarOptions}  />
                 <Tab.Screen name="Global" component={Global} options={tabBarOptions} />

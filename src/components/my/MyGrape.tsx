@@ -10,7 +10,7 @@ type MyGrapeProps = {
     setSelectedLetter: React.Dispatch<React.SetStateAction<GrapeDayLetter | null>>;
 };
 
-// TODO make these look more liek the list in GLobal feed style wise
+// TODO make each of these letter divs look more liek the list in GLobal feed style wise.. yes
 
 
 export function MyGrape({ grape, selectedLetter, setSelectedLetter }: MyGrapeProps) {
