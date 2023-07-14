@@ -26,7 +26,7 @@ export function Global() {
 
     return (
         <SafeAreaView style={styles_global.container}>
-            <Text style={styles_global.title}>Global Feed</Text>
+            <Text style={styles_global.title}>Global Feed (inspiration)</Text>
             {/* <Text>Global Feed of shared letter blocks</Text> */}
             <FlatList
                 data={globalLetters.global_items}

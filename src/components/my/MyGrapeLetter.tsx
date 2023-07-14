@@ -11,6 +11,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { usePressAnimation } from "../../hooks/usePressAnimation";
 import { useMyGrapeContext } from "../../contexts/MyGrapeContext";
 import { GRAPE_DAY } from "../../utils/constants";
+import { GrapeIcons } from "../../utils/Icons";
 
 
 type MyGrapeLetterProps = {
@@ -35,7 +36,8 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
     const { setCurrentLetter_edit } = useMyGrapeContext();
 
     const GRAPE_DAY_TITLE = (letter: string): JSX.Element => {
-        return <Text style={{ textShadowColor: '#cb9de2', textShadowRadius: 20 }}>
+        // return <Text style={{ textShadowColor: '#cb9de2', textShadowRadius: 20 }}>
+        return <Text>
             <Text style={styles.titleLetterText}>
                 {letter.toUpperCase()}
             </Text>
@@ -54,14 +56,17 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
     //     if (selectedLetter && selectedLetter.letter === grape_day_letter.letter) {
 
     return (
-        <>
+        <View style={styles.card}>
             <View style={styles.titleContainer}>
+                <View style={styles.iconOne_container}>
+                    <GrapeIcons letter={grape_day_letter.letter} color="#cb9De2" size={30} />
+                </View>
                 {GRAPE_DAY_TITLE(grape_day_letter.letter)}
-                <Ionicons.Button name="md-share" size={25} color="#cb9de2"
-                    backgroundColor='transparent' onPress={() => console.log('share')}
-                />
+                <View style={styles.iconTwo_container}>
+                    <GrapeIcons letter={grape_day_letter.letter} color="#cb9De2" size={30} />
+                </View>
             </View>
-            {!selectedLetter ? <Pressable style={pressStyle}
+            {!selectedLetter ? <Pressable style={{ ...pressStyle, ...styles.pressable }}
                 onPress={() => {
                     setSelectedLetter(grape_day_letter);
                     setCurrentLetter_edit(grape_day_letter.letter);
@@ -69,7 +74,13 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                 onPressIn={handlePressIn}
                 onPressOut={handlePressOut}>
                 <View style={styles.inputContainer}>
-                    <Text style={styles.input}>{grape_day_letter.value}</Text>
+                    <Text style={styles.input_text}>{grape_day_letter.value}</Text>
+                    <View style={styles.share_container}>
+                        <Ionicons.Button name="md-share" size={30} color="#a8e4a0"
+                            backgroundColor='transparent' onPress={() => console.log('share')}
+                            style={{padding: 0}}
+                            />
+                    </View>
                 </View>
             </Pressable> : <View style={{ justifyContent: 'flex-end' }}>
                 <TextInput
@@ -80,10 +91,10 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                     defaultValue={grape_day_letter.value}
                     //? value={selectedLetter.value}
                     ref={inputRef}
-                    // onChangeText={(text) => {
-                        // acually we should do this on click of the save
-                        // setMyGrapeLetter({ letter: grape_day_letter.letter, value: text });
-                    // }}
+                // onChangeText={(text) => {
+                // acually we should do this on click of the save
+                // setMyGrapeLetter({ letter: grape_day_letter.letter, value: text });
+                // }}
                 />
                 <View style={styles.row}>
                     <MaterialCommunityIcons.Button name="content-save-check-outline" size={30}
@@ -91,7 +102,7 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                         backgroundColor="transparent"
                         style={styles.buttons}
                         onPress={() => console.log('save')}
-                        // onPress={() => setMyGrapeLetter({ letter: grape_day_letter.letter, value: inputRef.current?.value || '' })}
+                    // onPress={() => setMyGrapeLetter({ letter: grape_day_letter.letter, value: inputRef.current?.value || '' })}
                     />
                     <MaterialIcons.Button name="cancel" size={30} key="Cancel"
                         color="#cb9de2" backgroundColor="transparent"
@@ -103,19 +114,40 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                     />
                 </View>
             </View>}
-        </>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
+    share_container: {
+        flexDirection: 'row',
+        borderBottomEndRadius: 10,
+        borderBottomStartRadius: 10,
+    },
+    card: {
+        borderWidth: 1,
+        borderRadius: 10,
+        marginBottom: 20,
+        borderColor: '#cb9de2',
+        backgroundColor: '#3d4b59',
+        flexDirection: 'column',
+    },
+    iconOne_container: {
+        justifyContent: 'center',
+        marginLeft: 5,
+    },
+    iconTwo_container: {
+        justifyContent: 'center',
+        marginRight: 5,
+    },
+    pressable: {
+        height: 40,
+    },
     pressed: {
         backgroundColor: '#4E1E66',
-        borderRadius: 10,
         padding: 7,
     },
     buttons: {
-        borderWidth: 1, 
-        borderColor: '#cb9de2', 
         paddingLeft: 15
     },
     row: {
@@ -124,12 +156,9 @@ const styles = StyleSheet.create({
     },
     titleLetterText: {
         fontSize: 26,
-        borderRadius: 10,
-        color: '#4E1E66',
+        color: '#cb9de2',
         fontStyle: 'italic',
         fontWeight: 'bold',
-        textShadowColor: '#cb9de2',
-        textShadowRadius: 20,
     },
     titleText: {
         fontWeight: 'bold',
@@ -139,16 +168,22 @@ const styles = StyleSheet.create({
     titleContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        backgroundColor: '#4E1E66',
+        borderTopStartRadius: 10,
+        borderTopEndRadius: 10,
+        flex: 1,
     },
-    input: {
+    input_text: {
+        marginLeft: 10,
         color: '#f3f0f5',
     },
     inputContainer: {
-        height: 40,
-        marginTop: 10,
-        borderColor: '#cb9de2',
-        borderBottomWidth: 1,
-        marginBottom: 36,
-        color: '#f3f0f5'
+        flexDirection: 'row',
+        flex: 1,
+        borderBottomEndRadius: 10,
+        borderBottomStartRadius: 10,
+        color: '#f3f0f5',
+        justifyContent: 'space-between',
+        alignItems: 'center',
     }
 });

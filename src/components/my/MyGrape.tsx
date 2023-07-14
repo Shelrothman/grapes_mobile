@@ -10,6 +10,7 @@ type MyGrapeProps = {
     setSelectedLetter: React.Dispatch<React.SetStateAction<GrapeDayLetter | null>>;
 };
 
+// ! PU HERE and do:
 // TODO make each of these letter divs look more liek the list in GLobal feed style wise.. yes
 
 

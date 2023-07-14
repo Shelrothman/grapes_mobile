@@ -12,12 +12,14 @@ import { HomeGrapeDay as HistoryGrapeDay } from './GrapeDay';
 
 
 // TODO only render the last few days and then option to load more
+// * ensure it only starts fetching if this tab is pulled up and not anywhere else in the app
+
 
 export default function History() {
 
     return (
         <SafeAreaView style={styles_home.container}>
-            <Text style={styles_home.title}>Past G.R.A.P.E.S</Text>
+            <Text style={styles_home.title}>My Past G.R.A.P.E.S</Text>
             <FlatList
                 data={grapes.items}
                 renderItem={({ item }) => <HistoryGrapeDay grape={item} />}

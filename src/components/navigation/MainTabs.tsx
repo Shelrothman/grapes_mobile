@@ -56,9 +56,9 @@ const MainTabs = () => {
                     tabBarIndicatorStyle: { backgroundColor: '#cb9de2', height: 5 },
                 })}>
                 <Tab.Screen name="Home" component={Home} options={tabBarOptions} />
-                <Tab.Screen name="History" component={History} options={tabBarOptions}  />
                 <Tab.Screen name="Global" component={Global} options={tabBarOptions} />
                 <Tab.Screen name="More" component={SettingsStackScreen} options={tabBarOptions} />
+                <Tab.Screen name="History" component={History} options={tabBarOptions}  />
             </Tab.Navigator>
             {/* <StatusBar hidden={true} /> */}
             <Toast config={ToastConfig} />

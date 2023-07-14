@@ -30,6 +30,7 @@ export function About() {
 
             <Text>
                 a bunch of information about grapes and broken into cateogires for any user of any age to understand
+                how to use this app like using the global feed for inspo when stuck and things and i think its for cbt or dbt??
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem maiores animi amet iure voluptatum nesciunt ex reiciendis magnam iusto voluptatibus accusamus, fugiat, nulla quasi quam aliquam cumque? Voluptas, quo tenetur.
             </Text>
 
