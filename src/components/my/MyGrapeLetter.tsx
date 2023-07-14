@@ -66,54 +66,59 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                     <GrapeIcons letter={grape_day_letter.letter} color="#cb9De2" size={30} />
                 </View>
             </View>
-            {!selectedLetter ? <Pressable style={{ ...pressStyle, ...styles.pressable }}
-                onPress={() => {
-                    setSelectedLetter(grape_day_letter);
-                    setCurrentLetter_edit(grape_day_letter.letter);
-                }}
-                onPressIn={handlePressIn}
-                onPressOut={handlePressOut}>
-                <View style={styles.inputContainer}>
-                    <Text style={styles.input_text}>{grape_day_letter.value}</Text>
+            {!selectedLetter ? <View style={styles.bottomRowContainer}>
+                    <Pressable style={{ ...pressStyle, ...styles.pressable }}
+                        onPress={() => {
+                            setSelectedLetter(grape_day_letter);
+                            setCurrentLetter_edit(grape_day_letter.letter);
+                        }}
+                        onPressIn={handlePressIn}
+                        onPressOut={handlePressOut}>
+                        <View style={{ maxWidth: '90%', minWidth: '90%' }}>
+                            <Text style={styles.input_text}>{grape_day_letter.value}</Text>
+                        </View>
+                    </Pressable>
+
                     <View style={styles.share_container}>
                         <Ionicons.Button name="md-share" size={30} color="#a8e4a0"
                             backgroundColor='transparent' onPress={() => console.log('share')}
-                            style={{padding: 0}}
-                            />
+                            style={{ padding: 0 }}
+                        />
                     </View>
-                </View>
-            </Pressable> : <View style={{ justifyContent: 'flex-end' }}>
-                <TextInput
-                    multiline={true}
-                    numberOfLines={8}
-                    key={grape_day_letter.letter}
-                    style={styles.inputContainer}
-                    defaultValue={grape_day_letter.value}
-                    //? value={selectedLetter.value}
-                    ref={inputRef}
-                // onChangeText={(text) => {
-                // acually we should do this on click of the save
-                // setMyGrapeLetter({ letter: grape_day_letter.letter, value: text });
-                // }}
-                />
-                <View style={styles.row}>
-                    <MaterialCommunityIcons.Button name="content-save-check-outline" size={30}
-                        color="#cb9de2" key="Save"
-                        backgroundColor="transparent"
-                        style={styles.buttons}
-                        onPress={() => console.log('save')}
-                    // onPress={() => setMyGrapeLetter({ letter: grape_day_letter.letter, value: inputRef.current?.value || '' })}
+                </View> : (
+                <View style={styles.pressable}>
+                    <TextInput
+                        multiline={true}
+                        numberOfLines={8}
+                        key={grape_day_letter.letter}
+                        style={styles.input_text}
+                        // style={styles.inputContainer}
+                        defaultValue={grape_day_letter.value}
+                        //? value={selectedLetter.value}
+                        ref={inputRef}
+                    // onChangeText={(text) => {
+                    // acually we should do this on click of the save
+                    // setMyGrapeLetter({ letter: grape_day_letter.letter, value: text });
+                    // }}
                     />
-                    <MaterialIcons.Button name="cancel" size={30} key="Cancel"
-                        color="#cb9de2" backgroundColor="transparent"
-                        style={styles.buttons}
-                        onPress={() => {
-                            setSelectedLetter(null)
-                            setCurrentLetter_edit('');
-                        }}
-                    />
-                </View>
-            </View>}
+                    <View style={styles.row}>
+                        <MaterialCommunityIcons.Button name="content-save-check-outline" size={30}
+                            color="#cb9de2" key="Save"
+                            backgroundColor="transparent"
+                            style={styles.buttons}
+                            onPress={() => console.log('save')}
+                        // onPress={() => setMyGrapeLetter({ letter: grape_day_letter.letter, value: inputRef.current?.value || '' })}
+                        />
+                        <MaterialIcons.Button name="cancel" size={30} key="Cancel"
+                            color="#cb9de2" backgroundColor="transparent"
+                            style={styles.buttons}
+                            onPress={() => {
+                                setSelectedLetter(null)
+                                setCurrentLetter_edit('');
+                            }}
+                        />
+                    </View>
+                </View>)}
         </View>
     )
 }
@@ -123,33 +128,27 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderBottomEndRadius: 10,
         borderBottomStartRadius: 10,
+        paddingBottom: 10,
     },
     card: {
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 10,
         marginBottom: 20,
         borderColor: '#cb9de2',
         backgroundColor: '#3d4b59',
         flexDirection: 'column',
     },
-    iconOne_container: {
-        justifyContent: 'center',
-        marginLeft: 5,
-    },
-    iconTwo_container: {
-        justifyContent: 'center',
-        marginRight: 5,
-    },
+    iconOne_container: { justifyContent: 'center', marginLeft: 5, },
+    iconTwo_container: { justifyContent: 'center', marginRight: 5, },
     pressable: {
-        height: 40,
+        borderTopEndRadius: 0,
+        borderTopStartRadius: 0,
+        height: "100%",
+        justifyContent: 'center',
+        // marginTop: 5,
     },
-    pressed: {
-        backgroundColor: '#4E1E66',
-        padding: 7,
-    },
-    buttons: {
-        paddingLeft: 15
-    },
+    pressed: { backgroundColor: '#4E1E66', padding: 7, },
+    buttons: { paddingLeft: 15 },
     row: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -172,12 +171,10 @@ const styles = StyleSheet.create({
         borderTopStartRadius: 10,
         borderTopEndRadius: 10,
         flex: 1,
+        // marginBottom: 5,
     },
-    input_text: {
-        marginLeft: 10,
-        color: '#f3f0f5',
-    },
-    inputContainer: {
+    input_text: { marginLeft: 10, color: '#f3f0f5', },
+    bottomRowContainer: {
         flexDirection: 'row',
         flex: 1,
         borderBottomEndRadius: 10,
@@ -185,5 +182,6 @@ const styles = StyleSheet.create({
         color: '#f3f0f5',
         justifyContent: 'space-between',
         alignItems: 'center',
+        // paddingTop: 5,
     }
 });
