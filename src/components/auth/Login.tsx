@@ -121,6 +121,7 @@ export default function ({
                             <Text size="md">Don't have an account?</Text>
                             <TouchableOpacity
                                 onPress={() => {
+                                    console.log("Register");
                                     navigation.navigate("Register");
                                 }}
                             >

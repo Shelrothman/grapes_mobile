@@ -1,9 +1,32 @@
-import { View, Text } from 'react-native';
+import { View, Text, SafeAreaView, Button } from 'react-native';
+import { supabase } from '../../initSupabase';
+// import {  } from 'react-native-safe-area-context';
 
 export function Account() {
     return (
-        <View>
-            <Text>Account</Text>
-        </View>
+        <SafeAreaView>
+
+            <View>
+                <Text>Account</Text>
+            </View>
+
+
+            <Button
+                title="Logout"
+                // this works 
+                onPress={async () => {
+                    const { error } = await supabase.auth.signOut();
+                    if (!error) {
+                        alert("Signed out!");
+                    }
+                    if (error) {
+                        alert(error.message);
+                    }
+                }}
+                // style={{
+                    // marginTop: 10,
+                // }}
+            />
+        </SafeAreaView>
     )
 }

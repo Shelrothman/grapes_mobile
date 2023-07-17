@@ -50,14 +50,15 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     letterValue: {
-        padding: 10,
-        width: '90%',
-        // ! important that if ya wanna change this width, ya gotta change the width of the letterValue_alt too AND the parent components
-        wordWrap: 'break-word',
+        // padding: 10,
+        marginLeft: 10,
+        // make it so the inner words wrap: https://stackoverflow.com/questions/42284429/how-to-make-text-wrap-inside-a-view-in-react-native
+        wordWrap: 'break-all',
+        wordBreak: 'break-all',
+        flex: 1,
     },
     letterValue_alt: {
         wordWrap: 'break-word',
-        width: '90%',
         padding: 10,
     },
     letterValueText: {

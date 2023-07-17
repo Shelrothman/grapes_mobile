@@ -1,3 +1,5 @@
+import { ParamListBase, RouteProp } from "@react-navigation/native";
+
 export type MainStackParamList = {
     MainTabs: undefined;
     SecondScreen: undefined;
@@ -14,3 +16,10 @@ export type MainTabsParamList = {
     Profile: undefined;
     About: undefined;
 };
+
+export type ScreenComponentType<ParamList extends ParamListBase, RouteName extends keyof ParamList> = React.ComponentType<{
+    route: RouteProp<ParamList, RouteName>;
+    navigation: any;
+}> | React.ComponentType<{}>;
+
+// ScreenComponentType<ParamListBase, "Login">

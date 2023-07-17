@@ -19,7 +19,9 @@ export default function History() {
 
     return (
         <SafeAreaView style={styles_home.container}>
-            <Text style={styles_home.title}>My Past G.R.A.P.E.S</Text>
+            <View style={styles_home.title_container}>
+                <Text style={styles_home.title}>My Past G.R.A.P.E.S</Text>
+            </View>
             <FlatList
                 data={grapes.items}
                 renderItem={({ item }) => <HistoryGrapeDay grape={item} />}
@@ -45,5 +47,12 @@ const styles_home = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         color: '#a8e4a0',
+    },
+    title_container: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        marginTop: 10,
     },
 });

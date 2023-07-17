@@ -1,5 +1,5 @@
-import { useState } from "react";
-// import { StatusBar } from "expo-status-bar";
+import React, { useState } from "react";
+import { StatusBar } from "expo-status-bar";
 import {
     ScrollView,
     TouchableOpacity,
@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { supabase } from "../../initSupabase";
 import { AuthStackParamList } from "../../types/navigation";
+
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import {
     Layout,
@@ -19,19 +20,23 @@ import {
     themeColor,
 } from "react-native-rapi-ui";
 
-export default function Register({ navigation }: NativeStackScreenProps<AuthStackParamList, "ForgetPassword">) {
+export default function ({
+    navigation,
+}: NativeStackScreenProps<AuthStackParamList, "Register">) {
     const { isDarkmode, setTheme } = useTheme();
     const [ email, setEmail ] = useState<string>("");
+    const [ password, setPassword ] = useState<string>("");
     const [ loading, setLoading ] = useState<boolean>(false);
 
-    async function forget() {
+    async function register() {
         setLoading(true);
-        const { data, error } = await supabase.auth.api.resetPasswordForEmail(
-            email
-        );
-        if (!error) {
+        const { user, error } = await supabase.auth.signUp({
+            email: email,
+            password: password,
+        });
+        if (!error && !user) {
             setLoading(false);
-            alert("Check your email to reset your password!");
+            alert("Check your email for the login link!");
         }
         if (error) {
             setLoading(false);
@@ -60,7 +65,7 @@ export default function Register({ navigation }: NativeStackScreenProps<AuthStac
                                 height: 220,
                                 width: 220,
                             }}
-                            source={require("../../../assets/images/forget.png")}
+                            source={require("../../../assets/images/register.png")}
                         />
                     </View>
                     <View
@@ -72,14 +77,14 @@ export default function Register({ navigation }: NativeStackScreenProps<AuthStac
                         }}
                     >
                         <Text
-                            size="h3"
                             fontWeight="bold"
+                            size="h3"
                             style={{
                                 alignSelf: "center",
                                 padding: 30,
                             }}
                         >
-                            Forget Password
+                            Register
                         </Text>
                         <Text>Email</Text>
                         <TextInput
@@ -87,16 +92,27 @@ export default function Register({ navigation }: NativeStackScreenProps<AuthStac
                             placeholder="Enter your email"
                             value={email}
                             autoCapitalize="none"
-                            // autoCompleteType="off"
                             autoComplete="off"
                             autoCorrect={false}
                             keyboardType="email-address"
                             onChangeText={(text) => setEmail(text)}
                         />
+
+                        <Text style={{ marginTop: 15 }}>Password</Text>
+                        <TextInput
+                            containerStyle={{ marginTop: 15 }}
+                            placeholder="Enter your password"
+                            value={password}
+                            autoCapitalize="none"
+                            autoComplete="off"
+                            autoCorrect={false}
+                            secureTextEntry={true}
+                            onChangeText={(text) => setPassword(text)}
+                        />
                         <Button
-                            text={loading ? "Loading" : "Send email"}
+                            text={loading ? "Loading" : "Create an account"}
                             onPress={() => {
-                                forget();
+                                register();
                             }}
                             style={{
                                 marginTop: 20,
