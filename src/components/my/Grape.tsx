@@ -45,7 +45,7 @@ const GrapeLetterPage = () => {
             <SafeAreaView style={styles.header_container}>
                 <View>
                     {selectedLetter ? (
-                        <Text style={styles.title}>
+                        <Text style={styles.icon_title}>
                             <GrapeIcons {...iconProps} />
                             {' '}{' '}
                             <GrapeIcons {...iconProps} />
@@ -81,6 +81,12 @@ const styles = StyleSheet.create({
         marginLeft: 5,
     },
     title: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#a8e4a0',
+    },
+    icon_title: {
+        marginBottom: 10,
         fontSize: 18,
         fontWeight: 'bold',
         color: '#a8e4a0',

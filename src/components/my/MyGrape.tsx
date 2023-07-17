@@ -1,7 +1,8 @@
-import { useState } from "react";
 import { View, FlatList, KeyboardAvoidingView, Platform, SafeAreaView, TouchableWithoutFeedback, Keyboard } from "react-native";
 import { Grape, GrapeDayLetter } from "../../types";
 import { MyGrapeLetter } from "./MyGrapeLetter";
+import { Ionicons } from '@expo/vector-icons';
+
 
 type MyGrapeProps = {
     grape: Grape;
@@ -16,7 +17,6 @@ type MyGrapeProps = {
 
 export function MyGrape({ grape, selectedLetter, setSelectedLetter }: MyGrapeProps) {
 
-    // const [ selectedLetter, setSelectedLetter ] = useState<GrapeDayLetter | null>(null);
 
     return (
         <View style={{ flex: 1 }}>
@@ -37,7 +37,14 @@ export function MyGrape({ grape, selectedLetter, setSelectedLetter }: MyGrapePro
                                 selectedLetter={selectedLetter}
                                 setSelectedLetter={setSelectedLetter}
                             />
+                            {/* <View style={styles.share_container}> */}
                         </TouchableWithoutFeedback>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center'}}>
+                            <Ionicons.Button name="md-share" size={60} color="#a8e4a0"
+                                backgroundColor='transparent' onPress={() => console.log('share')}
+                                style={{ padding: 0 }}
+                            />
+                        </View>
                     </SafeAreaView>
                 </KeyboardAvoidingView>
             )}

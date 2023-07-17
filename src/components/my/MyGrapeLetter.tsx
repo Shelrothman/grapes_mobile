@@ -55,10 +55,16 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
     //     if (selectedLetter && selectedLetter.letter === grape_day_letter.letter) {
 
     return (
-        <View style={styles.card}>
+        <View style={grape_day_letter.letter !== "g" ? styles.card : {
+            ...styles.card,
+            marginTop: 20,
+        }}>
             <View style={!selectedLetter ? styles.titleContainer : {
+                backgroundColor: '#4E1E66',
                 flexDirection: 'row',
                 justifyContent: 'space-between',
+                borderTopStartRadius: 10,
+                borderTopEndRadius: 10,
             }}>
                 <View style={styles.iconOne_container}>
                     <GrapeIcons letter={grape_day_letter.letter} color="#cb9De2" size={30} />
@@ -84,14 +90,13 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                         style={{ padding: 0 }}
                     />
                 </View>
-            </View> : (
+            </View> : (<>
                 <View style={styles.bottomInEditContainer}>
                     <TextInput
                         multiline={true}
                         numberOfLines={8}
                         key={grape_day_letter.letter}
                         style={styles.input_text}
-                        // style={styles.inputContainer}
                         defaultValue={grape_day_letter.value}
                         //? value={selectedLetter.value}
                         ref={inputRef}
@@ -101,7 +106,7 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                     // }}
                     />
                     <View style={styles.row}>
-                    <MaterialIcons.Button name="cancel" size={30} key="Cancel"
+                        <MaterialIcons.Button name="cancel" size={30} key="Cancel"
                             color="#cb9de2" backgroundColor="transparent"
                             style={styles.buttons}
                             onPress={() => {
@@ -119,7 +124,8 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                         />
 
                     </View>
-                </View>)}
+                </View>
+            </>)}
         </View>
     )
 }
