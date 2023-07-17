@@ -27,13 +27,8 @@ type MyGrapeLetterProps = {
 
 
 export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLetter }: MyGrapeLetterProps) {
-
-    // const [ inputValue, setInputValue ] = useState<string>(grape_day_letter.value);
     const inputRef = useRef<TextInput>(null);
-
     const { handlePressIn, handlePressOut, pressStyle } = usePressAnimation();
-
-    // const { setCurrentLetter_edit } = useMyGrapeContext();
 
     const GRAPE_DAY_TITLE = (letter: string): JSX.Element => {
         return <Text>
@@ -55,10 +50,11 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
     //     if (selectedLetter && selectedLetter.letter === grape_day_letter.letter) {
 
     return (
-        <View style={grape_day_letter.letter !== "g" ? styles.card : {
-            ...styles.card,
-            marginTop: 20,
-        }}>
+        <View style={styles.card}>
+        {/* // <View style={grape_day_letter.letter !== "g" ? styles.card : {
+        //     ...styles.card,
+        //     marginTop: 20,
+        // }}> */}
             <View style={!selectedLetter ? styles.titleContainer : {
                 backgroundColor: '#4E1E66',
                 flexDirection: 'row',
@@ -140,7 +136,8 @@ const styles = StyleSheet.create({
     card: {
         borderWidth: 2,
         borderRadius: 10,
-        marginBottom: 20,
+        marginTop: 20,
+        // marginBottom: 10,
         borderColor: '#cb9de2',
         backgroundColor: '#3d4b59',
         flexDirection: 'column',

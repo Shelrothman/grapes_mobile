@@ -26,7 +26,9 @@ export function Global() {
 
     return (
         <SafeAreaView style={styles_global.container}>
+            <View style={styles_global.title_container}>
             <Text style={styles_global.title}>Global Feed (inspiration)</Text>
+            </View>
             {/* <Text>Global Feed of shared letter blocks</Text> */}
             <FlatList
                 data={globalLetters.global_items}
@@ -54,5 +56,12 @@ const styles_global = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         color: '#a8e4a0',
+    },
+    title_container: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        marginTop: 10,
     },
 });
