@@ -1,4 +1,6 @@
 
+<!-- ** cleanoing ip the auth login.reg route stuff to ensure its all good and looks all good.,.. -->
+
 .. wait a tick.. why do i even need routing if i can just use context??/state...
 *****
 <!-- ** NOW: START THE AUTH-FLOW CREATE THE TEMPLATE EXAMPLE from githu! i already set up the global page and the settingStack, so next do the About and Account set up AND THEN start working on the db/auth ... actually..... jUst start on the supabase stufffnow  bc the account stuff will prob mneed changing anyway and yea.-->

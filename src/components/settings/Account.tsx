@@ -2,6 +2,8 @@ import { View, Text, SafeAreaView, Button } from 'react-native';
 import { supabase } from '../../initSupabase';
 // import {  } from 'react-native-safe-area-context';
 
+// Display name defaults to their email and then they have optuon in here to customize it
+
 export function Account() {
     return (
         <SafeAreaView>
@@ -16,16 +18,9 @@ export function Account() {
                 // this works 
                 onPress={async () => {
                     const { error } = await supabase.auth.signOut();
-                    if (!error) {
-                        alert("Signed out!");
-                    }
-                    if (error) {
-                        alert(error.message);
-                    }
+                    if (!error) alert("Signed out!");
+                    if (error) alert(error.message);
                 }}
-                // style={{
-                    // marginTop: 10,
-                // }}
             />
         </SafeAreaView>
     )

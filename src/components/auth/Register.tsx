@@ -6,6 +6,7 @@ import {
     View,
     KeyboardAvoidingView,
     Image,
+    Platform,
 } from "react-native";
 import { supabase } from "../../initSupabase";
 import { AuthStackParamList } from "../../types/navigation";
@@ -44,7 +45,7 @@ export default function ({
         }
     }
     return (
-        <KeyboardAvoidingView behavior="height" enabled style={{ flex: 1 }}>
+        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled style={{ flex: 1 }}>
             <Layout>
                 <ScrollView
                     contentContainerStyle={{
@@ -62,8 +63,8 @@ export default function ({
                         <Image
                             resizeMode="contain"
                             style={{
-                                height: 220,
-                                width: 220,
+                                height: 300,
+                                width: 300,
                             }}
                             source={require("../../../assets/images/register.png")}
                         />

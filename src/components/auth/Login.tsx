@@ -5,20 +5,12 @@ import {
     View,
     KeyboardAvoidingView,
     Image,
+    Platform,
 } from "react-native";
 import { supabase } from "../../initSupabase";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AuthStackParamList } from "../../types/navigation";
-
-
-import {
-    Layout,
-    Text,
-    TextInput,
-    Button,
-    useTheme,
-    themeColor,
-} from "react-native-rapi-ui";
+import { Layout, Text, TextInput,Button, useTheme, themeColor, } from "react-native-rapi-ui";
 
 export default function ({
     navigation,
@@ -44,7 +36,7 @@ export default function ({
         }
     }
     return (
-        <KeyboardAvoidingView behavior="height" enabled style={{ flex: 1 }}>
+        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled style={{ flex: 1 }}>
             <Layout>
                 <ScrollView contentContainerStyle={{ flexGrow: 1, }}>
                     <View
@@ -57,7 +49,7 @@ export default function ({
                     >
                         <Image
                             resizeMode="contain"
-                            style={{ height: 220, width: 220 }}
+                            style={{ height: 300, width: 300 }}
                             source={require("../../../assets/images/login.png")}
                         />
                     </View>
@@ -70,9 +62,8 @@ export default function ({
                         }}
                     >
                         <Text
-                            fontWeight="bold"
+                            fontWeight="bold" size="h3"
                             style={{ alignSelf: "center", padding: 30, }}
-                            size="h3"
                         >
                             Login
                         </Text>
