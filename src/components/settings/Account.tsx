@@ -7,12 +7,9 @@ import { supabase } from '../../initSupabase';
 export function Account() {
     return (
         <SafeAreaView>
-
             <View>
                 <Text>Account</Text>
             </View>
-
-
             <Button
                 title="Logout"
                 // this works 

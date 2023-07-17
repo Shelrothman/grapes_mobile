@@ -1,17 +1,13 @@
 
-<!-- ** cleanoing ip the auth login.reg route stuff to ensure its all good and looks all good.,.. -->
-
-.. wait a tick.. why do i even need routing if i can just use context??/state...
 *****
-<!-- ** NOW: START THE AUTH-FLOW CREATE THE TEMPLATE EXAMPLE from githu! i already set up the global page and the settingStack, so next do the About and Account set up AND THEN start working on the db/auth ... actually..... jUst start on the supabase stufffnow  bc the account stuff will prob mneed changing anyway and yea.-->
+<!-- *** WE ARE NOW READY TO START IMPLEMENTING REAL DATA -->
+<!-- ** and SET up the two settings pages -->
 *****
 
-// make it all look more modern
-<!-- !NEXT: continue making all the ui stuff and make all the screens nice and just do everything yo can basically with dummy data get that allll set up and THEN then use superbase and use that starter expo from there for auth.. so do auth and then the dn in supabase and then refactor code to query from there and yea.  -->
-[https://github.com/codingki/react-native-expo-template/tree/master/template-typescript-bottom-tabs-supabase-auth-flow]
+
 <!-- * ive begun setting up the context but not quite in use -->
 
-* its really hot user friendlyto have so many inputs on one page ;liek event ho i got got it and have it avoiding the keuyboard thing it sis not a good experience and it be better to have edit button trigger taking to the letter
+
 
 <!-- TODO: go back in to grapes superbase and chage back the auth config that requiresd new users to confirm their email address before first login...
 for  now i turned that off for testing -->

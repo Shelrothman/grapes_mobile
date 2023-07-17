@@ -29,9 +29,7 @@ export default function ({
 
     async function forget() {
         setLoading(true);
-        const { data, error } = await supabase.auth.api.resetPasswordForEmail(
-            email
-        );
+        const { data, error } = await supabase.auth.api.resetPasswordForEmail(email);
         if (!error) {
             setLoading(false);
             alert("Check your email to reset your password!");
@@ -44,43 +42,29 @@ export default function ({
     return (
         <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled style={{ flex: 1 }}>
             <Layout>
-                <ScrollView
-                    contentContainerStyle={{
-                        flexGrow: 1,
-                    }}
-                >
-                    <View
-                        style={{
-                            flex: 1,
-                            justifyContent: "center",
-                            alignItems: "center",
-                            backgroundColor: isDarkmode ? "#17171E" : themeColor.white100,
-                        }}
-                    >
+                <ScrollView contentContainerStyle={{ flexGrow: 1, }} >
+                    <View style={{
+                        flex: 1,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        backgroundColor: isDarkmode ? "#17171E" : themeColor.white100,
+                    }} >
                         <Image
                             resizeMode="contain"
-                            style={{
-                                height: 250,
-                                width: 250,
-                            }}
+                            style={{ height: 250, width: 250, }}
                             source={require("../../../assets/images/forget.png")}
                         />
                     </View>
-                    <View
-                        style={{
-                            flex: 3,
-                            paddingHorizontal: 20,
-                            paddingBottom: 20,
-                            backgroundColor: isDarkmode ? themeColor.dark : themeColor.white,
-                        }}
-                    >
+                    <View style={{
+                        flex: 3,
+                        paddingHorizontal: 20,
+                        paddingBottom: 20,
+                        backgroundColor: isDarkmode ? themeColor.dark : themeColor.white,
+                    }} >
                         <Text
                             size="h3"
                             fontWeight="bold"
-                            style={{
-                                alignSelf: "center",
-                                padding: 30,
-                            }}
+                            style={{ alignSelf: "center", padding: 30, }}
                         >
                             Forget Password
                         </Text>
@@ -97,60 +81,31 @@ export default function ({
                         />
                         <Button
                             text={loading ? "Loading" : "Send email"}
-                            onPress={() => {
-                                forget();
-                            }}
-                            style={{
-                                marginTop: 20,
-                            }}
+                            onPress={() => { forget(); }}
+                            style={{ marginTop: 20, }}
                             disabled={loading}
                         />
-
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                marginTop: 15,
-                                justifyContent: "center",
-                            }}
-                        >
+                        <View style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            marginTop: 15,
+                            justifyContent: "center",
+                        }}>
                             <Text size="md">Already have an account?</Text>
-                            <TouchableOpacity
-                                onPress={() => {
-                                    navigation.navigate("Login");
-                                }}
-                            >
-                                <Text
-                                    size="md"
-                                    fontWeight="bold"
-                                    style={{
-                                        marginLeft: 5,
-                                    }}
-                                >
+                            <TouchableOpacity onPress={() => { navigation.navigate("Login"); }} >
+                                <Text size="md" fontWeight="bold" style={{ marginLeft: 5, }} >
                                     Login here
                                 </Text>
                             </TouchableOpacity>
                         </View>
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                marginTop: 30,
-                                justifyContent: "center",
-                            }}
-                        >
-                            <TouchableOpacity
-                                onPress={() => {
-                                    isDarkmode ? setTheme("light") : setTheme("dark");
-                                }}
-                            >
-                                <Text
-                                    size="md"
-                                    fontWeight="bold"
-                                    style={{
-                                        marginLeft: 5,
-                                    }}
-                                >
+                        <View style={{
+                            flexDirection: "row",
+                            alignItems: "center",
+                            marginTop: 30,
+                            justifyContent: "center",
+                        }}>
+                            <TouchableOpacity onPress={() => { isDarkmode ? setTheme("light") : setTheme("dark"); }} >
+                                <Text size="md" fontWeight="bold" style={{ marginLeft: 5, }} >
                                     {isDarkmode ? "☀️ light theme" : "🌑 dark theme"}
                                 </Text>
                             </TouchableOpacity>
