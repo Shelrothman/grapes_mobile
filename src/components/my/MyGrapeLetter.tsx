@@ -9,7 +9,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { usePressAnimation } from "../../hooks/usePressAnimation";
-import { useMyGrapeContext } from "../../contexts/MyGrapeContext";
+// import { useMyGrapeContext } from "../../contexts/MyGrapeContext";
 import { GRAPE_DAY } from "../../utils/constants";
 import { GrapeIcons } from "../../utils/Icons";
 
@@ -33,10 +33,9 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
 
     const { handlePressIn, handlePressOut, pressStyle } = usePressAnimation();
 
-    const { setCurrentLetter_edit } = useMyGrapeContext();
+    // const { setCurrentLetter_edit } = useMyGrapeContext();
 
     const GRAPE_DAY_TITLE = (letter: string): JSX.Element => {
-        // return <Text style={{ textShadowColor: '#cb9de2', textShadowRadius: 20 }}>
         return <Text>
             <Text style={styles.titleLetterText}>
                 {letter.toUpperCase()}
@@ -57,7 +56,10 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
 
     return (
         <View style={styles.card}>
-            <View style={styles.titleContainer}>
+            <View style={!selectedLetter ? styles.titleContainer : {
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+            }}>
                 <View style={styles.iconOne_container}>
                     <GrapeIcons letter={grape_day_letter.letter} color="#cb9De2" size={30} />
                 </View>
@@ -67,26 +69,23 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                 </View>
             </View>
             {!selectedLetter ? <View style={styles.bottomRowContainer}>
-                    <Pressable style={{ ...pressStyle, ...styles.pressable }}
-                        onPress={() => {
-                            setSelectedLetter(grape_day_letter);
-                            setCurrentLetter_edit(grape_day_letter.letter);
-                        }}
-                        onPressIn={handlePressIn}
-                        onPressOut={handlePressOut}>
-                        <View style={{ maxWidth: '90%', minWidth: '90%' }}>
-                            <Text style={styles.input_text}>{grape_day_letter.value}</Text>
-                        </View>
-                    </Pressable>
-
-                    <View style={styles.share_container}>
-                        <Ionicons.Button name="md-share" size={30} color="#a8e4a0"
-                            backgroundColor='transparent' onPress={() => console.log('share')}
-                            style={{ padding: 0 }}
-                        />
+                <Pressable style={{ ...pressStyle, ...styles.pressable }}
+                    onPress={() => setSelectedLetter(grape_day_letter)}
+                    onPressIn={handlePressIn}
+                    onPressOut={handlePressOut}>
+                    <View style={{ maxWidth: '90%', minWidth: '90%' }}>
+                        <Text style={styles.input_text}>{grape_day_letter.value}</Text>
                     </View>
-                </View> : (
-                <View style={styles.pressable}>
+                </Pressable>
+
+                <View style={styles.share_container}>
+                    <Ionicons.Button name="md-share" size={30} color="#a8e4a0"
+                        backgroundColor='transparent' onPress={() => console.log('share')}
+                        style={{ padding: 0 }}
+                    />
+                </View>
+            </View> : (
+                <View style={styles.bottomInEditContainer}>
                     <TextInput
                         multiline={true}
                         numberOfLines={8}
@@ -102,6 +101,15 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                     // }}
                     />
                     <View style={styles.row}>
+                    <MaterialIcons.Button name="cancel" size={30} key="Cancel"
+                            color="#cb9de2" backgroundColor="transparent"
+                            style={styles.buttons}
+                            onPress={() => {
+                                setSelectedLetter(null)
+                                // setCurrentLetter_edit(null);
+                            }}
+                        />
+                        {/* //TODO add a confirmation button on cancle click */}
                         <MaterialCommunityIcons.Button name="content-save-check-outline" size={30}
                             color="#cb9de2" key="Save"
                             backgroundColor="transparent"
@@ -109,14 +117,7 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                             onPress={() => console.log('save')}
                         // onPress={() => setMyGrapeLetter({ letter: grape_day_letter.letter, value: inputRef.current?.value || '' })}
                         />
-                        <MaterialIcons.Button name="cancel" size={30} key="Cancel"
-                            color="#cb9de2" backgroundColor="transparent"
-                            style={styles.buttons}
-                            onPress={() => {
-                                setSelectedLetter(null)
-                                setCurrentLetter_edit('');
-                            }}
-                        />
+
                     </View>
                 </View>)}
         </View>
@@ -183,5 +184,11 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         // paddingTop: 5,
-    }
+    },
+    bottomInEditContainer: {
+        flexDirection: 'column',
+        borderBottomEndRadius: 10,
+        borderBottomStartRadius: 10,
+        color: '#f3f0f5',
+    },
 });

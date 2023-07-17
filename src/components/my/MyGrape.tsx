@@ -11,8 +11,8 @@ type MyGrapeProps = {
 };
 
 // ! PU HERE and do:
-// TODO make each of these letter divs look more liek the list in GLobal feed style wise.. yes
-
+// TODO.. now work on that one off letter edit Letter transition thang.
+// have it look more in sync like in hre and then the share button icon gets big
 
 export function MyGrape({ grape, selectedLetter, setSelectedLetter }: MyGrapeProps) {
 

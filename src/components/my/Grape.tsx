@@ -4,11 +4,15 @@ import { MyGrape } from "./MyGrape";
 import { getGrapeById } from "../../utils";
 import { GrapeIcons } from "../../utils/Icons";
 import { GrapeDayLetter } from "../../types";
+import { useMyGrapeContext } from "../../contexts/MyGrapeContext";
+
 
 // type GrapeLetterPageProps = {
 //     grape_letter_id: number;
 // };
-
+// const {  currentLetter_edit: selectedLetter, 
+//     setCurrentLetter_edit: setSelectedLetter
+// } = useMyGrapeContext();
 const GrapeLetterPage = () => {
     // const router = useRouter();
     // const grape_letter_id = usePathname().replace('/', '');
@@ -22,6 +26,10 @@ const GrapeLetterPage = () => {
         <Text>404 Not Found</Text>
         {/* <Link href="../">Go Back</Link> */}
     </SafeAreaView>;
+
+
+
+
 
 
     const [ selectedLetter, setSelectedLetter ] = useState<GrapeDayLetter | null>(null);
@@ -62,7 +70,7 @@ const styles = StyleSheet.create({
     container: {
         height: '100%',
         backgroundColor: '#2E3944',
-        width: '95%',
+        width: '85%',
     },
     buttons: {
         borderWidth: 1,
