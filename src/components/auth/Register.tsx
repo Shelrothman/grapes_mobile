@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+// import { StatusBar } from "expo-status-bar";
 import {
     ScrollView,
     TouchableOpacity,
@@ -49,7 +49,7 @@ export default function ({
 // TODO: modulate the repetitive parts
 
 
-    return (
+    return ( 
         <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled style={{ flex: 1 }}>
             <Layout>
                 <ScrollView contentContainerStyle={{ flexGrow: 1, }} >
