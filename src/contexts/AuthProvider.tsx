@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { useContext, createContext, useState, useEffect } from 'react';
 import { supabase } from '../initSupabase';
 import { Session } from '@supabase/supabase-js';
 
@@ -11,6 +11,10 @@ const AuthContext = createContext<Partial<ContextProps>>({});
 
 interface Props {
     children: React.ReactNode;
+}
+
+export function useAuthContext() {
+    return useContext(AuthContext);
 }
 
 const AuthProvider = (props: Props) => {
