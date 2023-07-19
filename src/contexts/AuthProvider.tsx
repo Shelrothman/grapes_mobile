@@ -18,9 +18,9 @@ type ContextProps = {
     user: null | boolean;
     session: Session | null;
     sessionUser: AuthUser | null;
-    changeEmail: (emailVal: string) => Promise<null | User>;
-    changePassword: (passwordVal: string) => Promise<null | User>;
-    changeDisplayName: (displayVal: string) => Promise<null | User>;
+    // changeEmail: (emailVal: string) => Promise<null | User>;
+    // changePassword: (passwordVal: string) => Promise<null | User>;
+    // changeDisplayName: (displayVal: string) => Promise<null | User>;
 };
 
 const AuthContext = createContext<Partial<ContextProps>>({});
@@ -41,7 +41,7 @@ const AuthProvider = (props: Props) => {
     useEffect(() => {
         const session = supabase.auth.session();
         setSession(session);
-        console.log("metadata: ", session?.user?.user_metadata);
+        // console.log("metadata: ", session?.user?.user_metadata);
         setUser(session ? true : false);
         const { data: authListener } = supabase.auth.onAuthStateChange(
             async (event, session) => {
@@ -86,32 +86,8 @@ const AuthProvider = (props: Props) => {
     //     return user;
     // };
 
-    const changeEmail = async (emailVal: string) => {
-        const { user, error } = await supabase.auth.update({
-            email: emailVal,
-        });
-        if (error) console.log(error);
-        // console.log(user);
-        return user;
-    };
+    // TODO move these three functions to the file their used in.
 
-    const changePassword = async (passwordVal: string) => {
-        const { user, error } = await supabase.auth.update({
-            password: passwordVal, // will just keep the old one if unchanged
-        });
-        if (error) console.log(error);
-        // console.log(user);
-        return user;
-    };
-
-    const changeDisplayName = async (displayVal: string) => {
-        const { user, error } = await supabase.auth.update({
-            data: { display_name: displayVal },
-        });
-        if (error) console.log(error);
-        // console.log(user);
-        return user;
-    };
 
 
 
@@ -121,9 +97,6 @@ const AuthProvider = (props: Props) => {
                 user,
                 session,
                 sessionUser: sessionToUser(session), // ? do we really need this? we cant do it locally in the component instead?.. would that be better?... would it be more efficient?
-                changeEmail,
-                changePassword,
-                changeDisplayName,
             }}
         >
             {props.children}

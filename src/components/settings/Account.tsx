@@ -1,12 +1,19 @@
-import { useState } from "react";
-import { ScrollView, View, KeyboardAvoidingView, Platform, StyleSheet, TextInput, TextInputProps } from "react-native";
+import { useState, useCallback } from "react";
+import {
+    ScrollView, View, KeyboardAvoidingView, Platform, StyleSheet, TextInput, TextInputProps,
+    Alert
+} from "react-native";
 import { supabase } from '../../initSupabase';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Layout, Text, Button, useTheme, themeColor, } from "react-native-rapi-ui";
+import { Layout, Text, Button } from "react-native-rapi-ui";
 // i think text from rapi-ui auto word wraps
 
 import { useAuthContext } from "../../contexts/AuthProvider";
+import { useSupabase } from "../../hooks/useSupabase";
 
+
+// TODO convert the site/redirect URLs to hold what im hosted on for when a password is changed -->
+//! Consider setting up a custom SMTP server for better email deliverability on your project "grapes-backend" (vvjtgmzgmrunbhvshgxy). Check our Production Readiness guide: https://supabase.com/docs/guides/platform/going-into-prod
 
 
 //* Display name defaults to their email and then they have optuon in here to customize it
@@ -19,29 +26,78 @@ import { useAuthContext } from "../../contexts/AuthProvider";
 
 // TODO confirmation messages
 
-// TODO lots of modularization
+// TODO lots of modularization, services file, modulate allll thes parts out before moving on to new things
 export function Account() {
-    const { sessionUser, changeEmail, changePassword, changeDisplayName } = useAuthContext();
-    console.log("sessionUser: ", sessionUser);
+    const { sessionUser } = useAuthContext();
+    // console.log("sessionUser: ", sessionUser);
+    const { changeEmail, changePassword, changeDisplayName } = useSupabase();
+
+    // const [ confirmChange, setConfirmChange ] = useState<boolean>(false);
 
     const [ formState, setFormState ] = useState({
-        displayName: sessionUser?.display_name || sessionUser?.email,
-        email: sessionUser?.email,
-        // password: "",
-        // password: "",
+        displayName: sessionUser?.display_name || sessionUser?.email || "",
+        email: sessionUser?.email || "",
+        password: "********",
     });
 
-
-    // ! PU HERere and get the cruding.....
-
-    const textInputProps: TextInputProps | Readonly<TextInputProps> = {
-        autoCapitalize: "none",
-        autoComplete: "off",
-        autoCorrect: false,
-        style: styles.textInput,
-        selectionColor: '#cb9de2',
-        placeholderTextColor: '#cb9de2',
+    const showConfirmDialog = (key: string) => {
+        return Alert.alert("Are you sure?", `Are you sure you want to permanetly change your ${key}?`, [
+            {
+                text: "Cancel",
+                // onPress: () => setFormState({ ...formState, [ key ]: sessionUser?.[key] || "" }),
+                // onPress: () => setConfirmChange(false), // dont need since its already false
+                style: "cancel",
+                onPress: () => handleCancelClick(key),
+            },
+            // TODO show loading spinner inbeterrn confirming and updating
+            { text: "OK", onPress: () => handleConfirmChange(key), },
+        ]);
     };
+
+    function handleCancelClick(key: string) {
+        switch (key) {
+            case 'email':
+                setFormState({ ...formState, email: sessionUser?.email || "" });
+                break;
+            case 'password':
+                setFormState({ ...formState, password: "********" });
+                break;
+            case 'display name':
+                setFormState({ ...formState, displayName: sessionUser?.display_name || sessionUser?.email || "" });
+                break;
+        };
+    };
+
+
+
+    function handleConfirmChange(key: string) {
+        switch (key) {
+            case 'email':
+                changeEmail(formState.email).then((user) => {
+                    if (user) alert("Email updated!")
+                    else alert("Error updating  email.");
+                });
+                break;
+            case 'password':
+                changePassword(formState.password).then((user) => {
+                    if (user) alert("Password updated!")
+                    else alert("Error updating password.");
+                });
+                break;
+            case 'display name':
+                changeDisplayName(formState.displayName).then((user) => {
+                    if (user) alert("Display name updated!")
+                    else alert("Error updating display name.");
+                });
+                break;
+        };
+    };
+
+    // const handleSave = useCallback(async (key: string) => {
+
+
+
+
 
 
     return (
@@ -49,13 +105,10 @@ export function Account() {
             <Layout backgroundColor="#2E3944" >
                 <ScrollView contentContainerStyle={{ flexGrow: 1, }} >
                     <View style={{ flex: 3, paddingHorizontal: 20, paddingBottom: 30 }}>
-                        <Button
-                            color="#3d4b59"
-                            text='Logout' size="md" style={{ marginBottom: 20}} 
-                            textStyle={{ color: 'white' }}
+                        <Button color="#3d4b59" text='Logout' size="md" style={{ marginBottom: 20 }} textStyle={{ color: 'white' }}
                             leftContent={<MaterialCommunityIcons name="logout" size={24} color="white" />}
                             onPress={async () => {
-                                // const confirm = window.confirm("Are you sure you want to sign out?");
+                                //? confirm here?
                                 const { error } = await supabase.auth.signOut();
                                 if (!error) alert("Signed out!");
                                 if (error) alert(error.message);
@@ -69,43 +122,33 @@ export function Account() {
                         />
                         <Text size="sm" italic={true} style={{ color: '#cb9de2', marginTop: 5 }}>How your name appears in the global feed.</Text>
                         <Button
-                            color='#a8e4a0'
-                            text='Save Display Name' size="sm" 
-                            textStyle={{ color: '#2E3944' }}
-                            style={styles.saveButton}
-                            leftContent={<MaterialCommunityIcons name="content-save-check-outline" size={25} color="#2E3944" />}
-                            onPress={() => console.log('save')}
-                            key="display"
+                            {...saveButtonProps}
+                            text='Save Display Name' key="display"
+                            onPress={() => showConfirmDialog('display name')}
                         />
+
                         <Text style={{ marginTop: 15, ...styles.formLabel }}>Email</Text>
                         <TextInput placeholder="Enter your Email" keyboardType="email-address"
                             {...textInputProps}
                             value={formState.email}
-                        //TODO value, onChangeText,
+                            onChangeText={(text) => setFormState({ ...formState, email: text })}
                         />
                         <Text size="sm" italic={true} style={{ color: '#cb9de2', marginTop: 5 }}>Requires email confirmation.</Text>
                         <Button
-                            color='#a8e4a0'
-                            text='Save Email' size="sm" 
-                            textStyle={{ color: '#2E3944' }}
-                            style={styles.saveButton} 
-                            leftContent={<MaterialCommunityIcons name="content-save-check-outline" size={25} color="#2E3944" />}
-                            onPress={() => console.log('save')}
-                            key="email"
+                            {...saveButtonProps}
+                            text='Save Email' key="email"
+                            onPress={() => showConfirmDialog('email')}
                         />
                         <Text style={{ marginTop: 15, ...styles.formLabel }}>Password</Text>
-                        <TextInput secureTextEntry={true} defaultValue="********" {...textInputProps}
-                        //TODO value, onChangeText, onChangeText={(text) => setPassword(text)}
+                        <TextInput secureTextEntry={true} placeholder="********"
+                            {...textInputProps}
+                            value={formState.password}
+                            onChangeText={(text) => setFormState({ ...formState, password: text })}
                         />
-                        {/* <Text style={{ color: '#cb9de2' }}>{'\n'}More settings coming soon...</Text> */}
                         <Button
-                            color='#a8e4a0'
-                            text='Save Password' size="sm" 
-                            textStyle={{ color: '#2E3944' }}
-                            style={styles.saveButton} 
-                            leftContent={<MaterialCommunityIcons name="content-save-check-outline" size={25} color="#2E3944" />}
-                            onPress={() => console.log('save')}
-                            key="password"
+                            {...saveButtonProps}
+                            text='Save Password' key="password"
+                            onPress={() => showConfirmDialog('password')}
                         />
                     </View>
                 </ScrollView>
@@ -137,3 +180,20 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
     }
 });
+
+const textInputProps: TextInputProps | Readonly<TextInputProps> = {
+    autoCapitalize: "none",
+    autoComplete: "off",
+    autoCorrect: false,
+    style: styles.textInput,
+    selectionColor: '#cb9de2',
+    placeholderTextColor: '#cb9de2',
+};
+
+const saveButtonProps: any = {
+    color: '#a8e4a0',
+    size: "sm",
+    textStyle: { color: '#2E3944' },
+    style: styles.saveButton,
+    leftContent: <MaterialCommunityIcons name="content-save-check-outline" size={25} color="#2E3944" />,
+};

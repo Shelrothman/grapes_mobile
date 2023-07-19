@@ -9,7 +9,7 @@
 
 
 
-<!-- TODO: go back in to grapes superbase and chage back the auth config that requiresd new users to confirm their email address before first login...
+<!-- TODO: go back in to grapes superbase and chage back the auth config that requiresd new users to confirm their email address before first login... AND THE CHANGE-EMAIL confirmation to be changed in Providers settings.
 for  now i turned that off for testing -->
 
 <!-- TODO to set up the subscribing to new posts... use https://supabase.com/docs/reference/javascript/subscribe -->
@@ -20,6 +20,14 @@ for  now i turned that off for testing -->
 <!-- TODO [future]: in top right header of grape_id page, have a button to save the day and it can export somewhere or better yet, Have it become a widget on their os... somehting... -->
 <!-- * like an addToHomeScreen fucntion -->
 
+
+<!-- TODO convert the site/redirect URLs to hold what im hosted on for when a password is changed -->
+<!-- ! Consider setting up a custom SMTP server for better email deliverability on your project "grapes-backend" (vvjtgmzgmrunbhvshgxy). Check our Production Readiness guide: https://supabase.com/docs/guides/platform/going-into-prod -->
+
+
+
+
+<!-- TODO: convert the supabase sdk from v1 -> v2 -->
 
 - timeZone should be set in settings per user? ...option to be and by default use the device time zone
 [expo]https://docs.expo.dev/versions/latest/sdk/date-time-picker/
