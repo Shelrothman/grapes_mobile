@@ -4,7 +4,7 @@
  * @interface MyMap is a type that is a map of strings to strings
  * used to allow the key string to be used as a variable to find the value string
  */
-interface MyMap {
+export interface MyMap {
     [ key: string ]: string | undefined
 }
 

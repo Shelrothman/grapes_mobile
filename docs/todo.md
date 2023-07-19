@@ -3,11 +3,11 @@
 <!-- *** WE ARE NOW READY TO START IMPLEMENTING REAL DATA -->
 <!-- ** and SET up the two settings pages -->
 *****
-
+<!-- !!! All tHE "TODO"s throughout the src -->
 
 <!-- * ive begun setting up the context but not quite in use -->
 
-
+<!-- remove crufdt and unused files -->
 
 <!-- TODO: go back in to grapes superbase and chage back the auth config that requiresd new users to confirm their email address before first login... AND THE CHANGE-EMAIL confirmation to be changed in Providers settings.
 for  now i turned that off for testing -->
@@ -21,7 +21,7 @@ for  now i turned that off for testing -->
 <!-- * like an addToHomeScreen fucntion -->
 
 
-<!-- TODO convert the site/redirect URLs to hold what im hosted on for when a password is changed -->
+<!-- TODO convert the site/redirect URLs to hold what im hosted on for when a password is changed .. or maybe not bc it still needs a confirm for ONLY the new one which is kind of nice if personno longer can access tehri old one..-->
 <!-- ! Consider setting up a custom SMTP server for better email deliverability on your project "grapes-backend" (vvjtgmzgmrunbhvshgxy). Check our Production Readiness guide: https://supabase.com/docs/guides/platform/going-into-prod -->
 
 

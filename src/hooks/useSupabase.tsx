@@ -40,4 +40,4 @@ export function useSupabase() {
         changeDisplayName,
     } as const;
 }
-
+    

@@ -118,7 +118,6 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                             onPress={() => console.log('save')}
                         // onPress={() => setMyGrapeLetter({ letter: grape_day_letter.letter, value: inputRef.current?.value || '' })}
                         />
-
                     </View>
                 </View>
             </>)}
