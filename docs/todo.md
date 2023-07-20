@@ -21,6 +21,7 @@ for  now i turned that off for testing -->
 
 <!-- TODO: add a username field for during signup -->
 
+<!-- TODO: will need to add approp RLS to supabase tables -->
 
 <!-- TODO [future]: in top right header of grape_id page, have a button to save the day and it can export somewhere or better yet, Have it become a widget on their os... somehting... -->
 <!-- * like an addToHomeScreen fucntion -->

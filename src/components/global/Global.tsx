@@ -22,8 +22,8 @@ export function Global() {
     useRefreshOnFocus(fetchData);
 
     useEffect(() => {
-            // Initial fetch when the component mounts
-    fetchData();
+        // Initial fetch when the component mounts
+        fetchData();
     }, []); // shouldnt need this bc the useFocusEffect should handle this
 
     const copyToClipboard = async (text: string) => {
@@ -37,12 +37,13 @@ export function Global() {
     };
     // TODO: pagination and limit the amount returning.
 
-// TODO handle getting it into the form.
+    // TODO handle getting it into the form.
 
     // data fetching logic
     async function fetchData() {
         try {
             const response = await globaLService.getAllRows();
+            console.log('response from global fetch:', response);
             setGlobalData(response);
             setIsLoading(false);
         } catch (error) {
@@ -57,16 +58,17 @@ export function Global() {
             <View style={styles_global.title_container}>
                 <Text style={styles_global.title}>Global Feed (inspiration)</Text>
             </View>
-            {isLoading ? <Text>Loading...</Text> : (
-                <FlatList
-                    // data={globalLetters.global_items}
-                    data={globalData ? globalData : []}
-                    renderItem={({ item }) => <SharedLetter {...item} userName='global-test-deleteME'
-                        onCopyClick={copyToClipboard}
-                    />}
-                    showsVerticalScrollIndicator={false}
-                />
-            )}
+            <View style={{ marginBottom: 30 }} >
+                {isLoading ? <Text>Loading...</Text> : (
+                    <FlatList
+                        data={globalData ? globalData : []}
+                        renderItem={({ item }) => <SharedLetter {...item} userName='global-test-deleteME'
+                            onCopyClick={copyToClipboard}
+                        />}
+                        showsVerticalScrollIndicator={false}
+                    />
+                )}
+            </View>
         </SafeAreaView>
     )
 }
@@ -80,11 +82,7 @@ const styles_global = StyleSheet.create({
         height: '100%',
         width: '100%',
     },
-    title: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: '#a8e4a0',
-    },
+    title: { fontSize: 18, fontWeight: 'bold', color: '#a8e4a0', },
     title_container: {
         flexDirection: 'row',
         alignItems: 'center',

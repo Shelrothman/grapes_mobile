@@ -11,6 +11,7 @@ light graoe bg: #cb9de2
 
 
 <!-- TODO reasses the colors being used -->
+     <!-- ! maxWidth when you want text to wrap duh smarty pants! -->
 
 
 

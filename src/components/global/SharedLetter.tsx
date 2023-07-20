@@ -8,9 +8,8 @@ import { GlobalGrape } from '../../types';
 import { GrapeIcons } from '../../utils/Icons';
 import { GRAPE_DAY } from '../../utils/constants';
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
-// import { FontAwesome } from '@expo/vector-icons'; 
+
 type SharedLetterProps = GlobalGrape & {
-    // setCopiedText: (text: string) => void;
     onCopyClick: (text: string) => void;
 };
 
@@ -44,14 +43,15 @@ export function SharedLetter({ userName, letter, value, onCopyClick }: SharedLet
             {/* FOOTER */}
             <View style={styles.card_footer}>
                 <View style={styles.share_container}>
-                    <FontAwesome5.Button name="copy"
-                        size={25} color="#cb9De2" backgroundColor='#4E1E66'
-                        onPress={() => onCopyClick(value)}
-                        style={styles.button}
+                    <FontAwesome5.Button name="copy" size={25} color="#cb9De2" backgroundColor='#4E1E66'
+                        onPress={() => onCopyClick(value)} style={styles.button}
                     />
                 </View>
                 <View style={styles.shared_by_container}>
-                    <Text style={styles.shared_by}><FontAwesome name="user-circle" size={14} color="black" />: {userName}</Text>
+                    <Text style={styles.shared_by}>
+                        <FontAwesome name="user" size={18} color="#4E1E66" backgroundColor='transparent' />
+                        {` `}{userName}
+                    </Text>
                 </View>
             </View>
         </View>
@@ -60,6 +60,7 @@ export function SharedLetter({ userName, letter, value, onCopyClick }: SharedLet
 
 const styles = StyleSheet.create({
     button: { paddingRight: 0, marginRight: 0, },
+    userBtn: { borderRadius: 10, padding: 10, },
     card: {
         backgroundColor: '#a8e4a0',
         borderRadius: 10,
@@ -86,18 +87,13 @@ const styles = StyleSheet.create({
         backgroundColor: '#3d4b59',
         alignItems: 'center',
     },
-    card_footer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: 5,
-    },
+    card_footer: { flexDirection: 'row', justifyContent: 'space-between', padding: 5, },
     suffix_container: { justifyContent: 'flex-end', marginBottom: 5, },
     title: { color: '#cb9De2', },
     fullTitle_container: { flexDirection: 'row', justifyContent: 'center', },
     letter: { fontSize: 30, color: '#cb9De2', },
     value: { fontSize: 15, color: '#f3f0f5', },
     share_container: { justifyContent: 'center', marginLeft: 5, },
-    // ! maxWidth when you want text to wrap duh smarty pants!
     shared_by_container: { justifyContent: 'center', marginRight: 5, maxWidth: '50%', },
-    shared_by: { fontStyle: 'italic', fontSize: 12, color: '#2E3944', },
+    shared_by: { fontSize: 12, color: '#2E3944', },
 })
