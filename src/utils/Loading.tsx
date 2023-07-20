@@ -3,15 +3,9 @@ import { Layout, themeColor } from "react-native-rapi-ui";
 
 export default function () {
     return (
-        <Layout>
-            <View
-                style={{
-                    flex: 1,
-                    alignItems: "center",
-                    justifyContent: "center",
-                }}
-            >
-                <ActivityIndicator size="large" color={themeColor.primary} />
+        <Layout backgroundColor="#2E3944">
+            <View style={{ flex: 1, alignItems: "center", justifyContent: "center", }} >
+                <ActivityIndicator size="large" color='#8031A7' />
             </View>
         </Layout>
     );

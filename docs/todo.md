@@ -9,6 +9,9 @@
 
 <!-- remove crufdt and unused files -->
 
+
+<!-- Maybe eventually for placeholder while wiating history to load: https://www.npmjs.com/package/react-native-easy-content-loader -->
+
 <!-- TODO: go back in to grapes superbase and chage back the auth config that requiresd new users to confirm their email address before first login... AND THE CHANGE-EMAIL confirmation to be changed in Providers settings.
 for  now i turned that off for testing -->
 

@@ -33,6 +33,7 @@ export class AccountService {
     changeConfig = async (configVal: string = "", configKey: string): Promise<User | null | ApiError> => {
         // TODO: more reasons that the value is no good.. maybe not unique or too short.. etc
         if (configVal.length === 0) throw new Error("Cannot send an empty value"); 
+        if (configVal === '********' && configKey === 'password') throw new Error("Password value not changed!");
         switch (configKey) {
             case "email":
                 return await this.changeEmail(configVal);
