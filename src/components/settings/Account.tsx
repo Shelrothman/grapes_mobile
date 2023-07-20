@@ -21,15 +21,17 @@ type FormState = MyMap & {
 
 // TODO deactive the save buttons if therye not changed? 
 // TODO maybe use a toast for when the change is successful. like did in Global
+// TODO ! change the password vlue of ******* bc it could send it *as* a password... but we check for that in the service... so may be okay
 
 export function Account() {
     const { sessionUser } = useAuthContext();
     const [ loading, setLoading ] = useState<boolean>(false);
     const height = useHeaderHeight();
+    
     const [ formState, setFormState ] = useState<FormState>({
         display: sessionUser?.display_name || sessionUser?.email || "",
         email: sessionUser?.email || "",
-        password: "********", // TODO ! change this bc it could send this *as* a password...
+        password: "********", 
     });
 
     const showConfirmDialog = (key: string) => Alert.alert("Are you sure?",

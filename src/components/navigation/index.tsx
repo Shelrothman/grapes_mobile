@@ -8,6 +8,9 @@ import Main from './MainStack';
 import Auth from './AuthStack';
 import Loading from '../../utils/Loading';
 
+//* ..  i think we may not need like the Client/provider stff bc we are using the AuthContext from the AuthProvider and initSubabase from the SubabaseProvider
+
+
 export default () => {
     const auth = useContext(AuthContext);
     const user = auth.user;

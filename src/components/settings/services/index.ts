@@ -2,7 +2,10 @@ import { ApiError } from "@supabase/supabase-js";
 import { supabase, User } from "../../../initSupabase";
 
 
-
+/**
+ * @class AccountService
+ * services cruding the authenticated user's account configuration
+ */
 export class AccountService {
 
     private changeEmail = async (emailVal: string) => {

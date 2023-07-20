@@ -1,7 +1,9 @@
 
 *****
 <!-- *** WE ARE NOW READY TO START IMPLEMENTING REAL DATA -->
-<!-- ** and SET up the last setting pages- "about Grapes" -->
+    starting with: lets start with the global feed i think itll be the simplest.
+        starting with the R of crud
+<!-- ** and SET up the last setting pages- "about Grapes" --> <= ill do rhia lAST/later
 *****
 <!-- !!! All tHE "TODO"s throughout the src -->
 

@@ -18,9 +18,6 @@ type ContextProps = {
     user: null | boolean;
     session: Session | null;
     sessionUser: AuthUser | null;
-    // changeEmail: (emailVal: string) => Promise<null | User>;
-    // changePassword: (passwordVal: string) => Promise<null | User>;
-    // changeDisplayName: (displayVal: string) => Promise<null | User>;
 };
 
 const AuthContext = createContext<Partial<ContextProps>>({});
@@ -63,31 +60,6 @@ const AuthProvider = (props: Props) => {
             email: session.user!.email as string,
         }
     };
-
-    // const changeConfig = async (key: string, value: string) => {
-    //     const { user, error } = await supabase.auth.update({
-    //         ...key === 'display_name' && { data: { display_name: value } },
-    //         ...key !== 'display_name' && { [ key ]: value },
-    //     });
-    //     if (error) console.log(error);
-    //     // console.log(user);
-    //     return user;
-    // };
-
-    // /**  change all three configs */
-    // const changeConfigs = async (displayVal: string, emailVal: string, passwordVal: string ) => {
-    //     const { user, error } = await supabase.auth.update({
-    //         data: { display_name: displayVal },
-    //         email: emailVal,
-    //         password: passwordVal, // will just keep the old one if unchanged
-    //     });
-    //     if (error) console.log(error);
-    //     // console.log(user);
-    //     return user;
-    // };
-
-    // TODO move these three functions to the file their used in.
-
 
 
 
