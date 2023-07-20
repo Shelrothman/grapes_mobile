@@ -7,8 +7,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { GlobalGrape } from '../../types';
 import { GrapeIcons } from '../../utils/Icons';
 import { GRAPE_DAY } from '../../utils/constants';
-import { FontAwesome5 } from '@expo/vector-icons';
-
+import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
+// import { FontAwesome } from '@expo/vector-icons'; 
 type SharedLetterProps = GlobalGrape & {
     // setCopiedText: (text: string) => void;
     onCopyClick: (text: string) => void;
@@ -44,18 +44,14 @@ export function SharedLetter({ userName, letter, value, onCopyClick }: SharedLet
             {/* FOOTER */}
             <View style={styles.card_footer}>
                 <View style={styles.share_container}>
-                    <FontAwesome5.Button name="copy" 
+                    <FontAwesome5.Button name="copy"
                         size={25} color="#cb9De2" backgroundColor='#4E1E66'
-                        onPress={() => { 
-                            onCopyClick(value); 
-                        }}
-                        // onPress={() => { setCopiedText(value); }}
+                        onPress={() => onCopyClick(value)}
                         style={styles.button}
                     />
                 </View>
-                    {/* <Text>copied to clipboard</Text> */}
                 <View style={styles.shared_by_container}>
-                    <Text style={styles.shared_by}>Shared By: {userName}</Text>
+                    <Text style={styles.shared_by}><FontAwesome name="user-circle" size={14} color="black" />: {userName}</Text>
                 </View>
             </View>
         </View>
@@ -63,23 +59,16 @@ export function SharedLetter({ userName, letter, value, onCopyClick }: SharedLet
 }
 
 const styles = StyleSheet.create({
-    // ! this should be used for any icon.button we use
-    button: {
-        // borderWidth: 1,
-        // borderColor: '#4E1E66',
-        paddingRight: 0,
-        marginRight: 0,
-    },
+    button: { paddingRight: 0, marginRight: 0, },
     card: {
         backgroundColor: '#a8e4a0',
         borderRadius: 10,
         borderColor: '#cb9De2',
-        borderWidth: 2.5,
-        // marginBottom: 30,
+        borderWidth: 2,
         marginTop: 20,
         marginBottom: 10,
-        marginRight: 25,
-        marginLeft: 25,
+        width: '85%',
+        alignSelf: 'center',
     },
     card_header: {
         backgroundColor: '#4E1E66',
@@ -88,14 +77,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
-    iconOne_container: {
-        justifyContent: 'center',
-        marginLeft: 5,
-    },
-    iconTwo_container: {
-        justifyContent: 'center',
-        marginRight: 5,
-    },
+    iconOne_container: { justifyContent: 'center', marginLeft: 5, },
+    iconTwo_container: { justifyContent: 'center', marginRight: 5, },
     card_body: {
         borderBottomColor: '#cb9De2',
         borderBottomWidth: 0.5,
@@ -108,34 +91,13 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         padding: 5,
     },
-    suffix_container: {
-        justifyContent: 'flex-end',
-        marginBottom: 5,
-    },
-    title: {
-        color: '#cb9De2',
-    },
-    fullTitle_container: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-    },
-    letter: {
-        fontSize: 30,
-        color: '#cb9De2',
-    },
-    value: {
-        fontSize: 15,
-        color: '#f3f0f5',
-    },
-    share_container: {
-        justifyContent: 'center',
-        marginLeft: 5,
-    },
-    shared_by_container: {
-        justifyContent: 'center',
-        marginRight: 5,
-    },
-    shared_by: {
-        fontStyle: 'italic',
-    },
+    suffix_container: { justifyContent: 'flex-end', marginBottom: 5, },
+    title: { color: '#cb9De2', },
+    fullTitle_container: { flexDirection: 'row', justifyContent: 'center', },
+    letter: { fontSize: 30, color: '#cb9De2', },
+    value: { fontSize: 15, color: '#f3f0f5', },
+    share_container: { justifyContent: 'center', marginLeft: 5, },
+    // ! maxWidth when you want text to wrap duh smarty pants!
+    shared_by_container: { justifyContent: 'center', marginRight: 5, maxWidth: '50%', },
+    shared_by: { fontStyle: 'italic', fontSize: 12, color: '#2E3944', },
 })

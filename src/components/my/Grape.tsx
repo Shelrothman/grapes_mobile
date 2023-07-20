@@ -28,13 +28,7 @@ const GrapeLetterPage = () => {
     </SafeAreaView>;
 
 
-
-
-
-
     const [ selectedLetter, setSelectedLetter ] = useState<GrapeDayLetter | null>(null);
-
-
 
 
     const iconProps = { letter: selectedLetter?.letter || '', color: "#a8e4a0", size: 35 };
@@ -65,7 +59,8 @@ const GrapeLetterPage = () => {
 }
 
 
-
+// * blerg i am not sure what makes these cards look wider than the sharedLetter cards
+// TODO figure that out and make them the same width
 const styles = StyleSheet.create({
     container: {
         height: '100%',

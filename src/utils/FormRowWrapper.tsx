@@ -23,6 +23,10 @@ const HELP_TEXT: MyMap = {
     'Password': ''
 };
 
+// // TODO: put a limit on the amount of characters that can be entered into the input fields 
+
+
+
 export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue, }: FormRowWrapperProps) {
 
     const saveButtonProps: any = {
@@ -53,6 +57,7 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
                 onChangeText={onChangeText} key={`${label}-input`}
                 secureTextEntry={label !== 'Password' ? false : true}
                 keyboardType={label === 'Email' ? 'email-address' : 'default'}
+                maxLength={label !== 'Display Name' ? undefined : 8}
             />
             <Text size="sm" italic={true} style={{ color: '#cb9de2', marginTop: 5 }}>{HELP_TEXT[label]}</Text>
             <Button {...saveButtonProps} text={`Save ${label}`} key={`${label}-save`} onPress={onButtonPress} />

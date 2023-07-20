@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, SafeAreaView, FlatList } from 'react-native';
 import { SharedLetter } from './SharedLetter';
 import Toast from 'react-native-toast-message';
@@ -7,7 +7,7 @@ import * as globalLetters from '../../data/dummyGlobal.json';
 import * as Clipboard from 'expo-clipboard';
 import { RawSharedLetter, SharedLetter as SharedLetterType } from '../../types';
 
-
+import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus';
 
 // TODO here fetch the shared letters from the database and display them here
 
@@ -15,9 +15,16 @@ import { RawSharedLetter, SharedLetter as SharedLetterType } from '../../types';
 export function Global() {
     const globaLService = new GlobalService();
 
-    const [sharedLetters, setSharedLetters] = useState<RawSharedLetter[]|null>(null);
-    // loading when its null..
+    const [ globalData, setGlobalData ] = useState<RawSharedLetter[] | null>(null);
 
+    const [ isLoading, setIsLoading ] = useState(true);
+    // Use the useRefreshOnFocus hook to refetch data when the component gains focus.
+    useRefreshOnFocus(fetchData);
+
+    useEffect(() => {
+            // Initial fetch when the component mounts
+    fetchData();
+    }, []); // shouldnt need this bc the useFocusEffect should handle this
 
     const copyToClipboard = async (text: string) => {
         await Clipboard.setStringAsync(text);
@@ -28,22 +35,38 @@ export function Global() {
             visibilityTime: 2000,
         });
     };
+    // TODO: pagination and limit the amount returning.
+
+// TODO handle getting it into the form.
+
+    // data fetching logic
+    async function fetchData() {
+        try {
+            const response = await globaLService.getAllRows();
+            setGlobalData(response);
+            setIsLoading(false);
+        } catch (error) {
+            setIsLoading(false);
+            console.error('Error fetching data:', error);
+        }
+    };
 
 
     return (
         <SafeAreaView style={styles_global.container}>
             <View style={styles_global.title_container}>
-            <Text style={styles_global.title}>Global Feed (inspiration)</Text>
+                <Text style={styles_global.title}>Global Feed (inspiration)</Text>
             </View>
-            {/* <Text>Global Feed of shared letter blocks</Text> */}
-            <FlatList
-                data={globalLetters.global_items}
-                renderItem={({ item }) => <SharedLetter {...item}
-                    onCopyClick={copyToClipboard}
-                />}
-                showsVerticalScrollIndicator={false}
-            />
-
+            {isLoading ? <Text>Loading...</Text> : (
+                <FlatList
+                    // data={globalLetters.global_items}
+                    data={globalData ? globalData : []}
+                    renderItem={({ item }) => <SharedLetter {...item} userName='global-test-deleteME'
+                        onCopyClick={copyToClipboard}
+                    />}
+                    showsVerticalScrollIndicator={false}
+                />
+            )}
         </SafeAreaView>
     )
 }
