@@ -56,11 +56,11 @@ export function FormRowWrapper({
         selectionColor: '#cb9de2', placeholderTextColor: '#cb9de2',
     };
 
-    const KEY_TYPE: MyMap = {
-        'Display Name': 'default',
-        'Email': 'email-address',
-        'Password': 'default',
-    };
+    // const KEY_TYPE: MyMap = {
+    //     'Display Name': 'default',
+    //     'Email': 'email-address',
+    //     'Password': 'default',
+    // };
 
     // * ive confirmed all the changes to work from the backend
 

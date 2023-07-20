@@ -1,7 +1,7 @@
 
 *****
 <!-- *** WE ARE NOW READY TO START IMPLEMENTING REAL DATA -->
-<!-- ** and SET up the two settings pages -->
+<!-- ** and SET up the last setting pages- "about Grapes" -->
 *****
 <!-- !!! All tHE "TODO"s throughout the src -->
 

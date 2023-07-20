@@ -5,7 +5,9 @@ import { supabase } from '../../initSupabase';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button } from "react-native-rapi-ui";
 import { useAuthContext } from "../../contexts/AuthProvider";
-import { useSupabase } from "../../hooks/useSupabase";
+// import { useSupabase } from "../../hooks/useSupabase";
+import { AccountService } from "./services";
+
 import { FormRowWrapper } from "../../utils/FormRowWrapper";
 import { MyMap } from "../../utils/constants";
 // TODO convert the site/redirect URLs to hold what im hosted on for when a password is changed -->
@@ -13,23 +15,25 @@ import { MyMap } from "../../utils/constants";
 
 
 type FormState = MyMap & {
-    displayName: string;
+    /** the displayName for the user, defaults to their email */
+    display: string;
     email: string;
     password: string;
 };
 
+
+// TODO deactive the save buttons if therye not changed
+
 export function Account() {
     const { sessionUser } = useAuthContext();
-    const { changeEmail, changePassword, changeDisplayName } = useSupabase();
-
+    const height = useHeaderHeight();
     const [ formState, setFormState ] = useState<FormState>({
-        //* Display name defaults to their email and then they have optuon in here to customize it
-        displayName: sessionUser?.display_name || sessionUser?.email || "",
+        display: sessionUser?.display_name || sessionUser?.email || "",
         email: sessionUser?.email || "",
         password: "********", // TODO ! change this bc it could send this *as* a password...
     });
 
-    const showConfirmDialog = (key: string) => Alert.alert("Are you sure?", `Are you sure you want to permanetly change your ${key}?`, [
+    const showConfirmDialog = (key: string) => Alert.alert("Are you sure?", `Are you sure you want to permanetly change your ${key === 'display'? 'display name' : key}?`, [
         { text: "Cancel", style: "cancel", onPress: () => handleCancelClick(key), },
         // TODO show loading spinner inbeterrn confirming and updating
         { text: "OK", onPress: () => handleConfirmChange(key), },
@@ -38,30 +42,22 @@ export function Account() {
     function handleCancelClick(key: string) {
         if (key === 'email') return setFormState({ ...formState, email: sessionUser?.email || "" });
         if (key === 'password') return setFormState({ ...formState, password: "********" });
-        if (key === 'display name') return setFormState({ ...formState, displayName: sessionUser?.display_name || sessionUser?.email || "" });
+        if (key === 'display') return setFormState({ ...formState, display: sessionUser?.display_name || sessionUser?.email || "" });
     };
-    function handleConfirmChange(key: string) {
-        if (key === 'email') {
-            return changeEmail(formState.email).then((user) => {
-                if (user) alert("Email updated!")
-                else alert("Error updating  email.");
-            });
-        }
-        if (key === 'password') {
-            return changePassword(formState.password).then((user) => {
-                if (user) alert("Password updated!")
-                else alert("Error updating password.");
-            });
-        }
-        if (key === 'display name') {
-            return changeDisplayName(formState.displayName).then((user) => {
-                if (user) alert("Display name updated!")
-                else alert("Error updating display name.");
-            });
+
+    async function handleConfirmChange(key: string) {
+        try {
+            const accountService = new AccountService();
+            const user = await accountService.changeConfig(formState[ key ], key);
+            if (user) return alert(`${key} updated!`);
+            else if (user == null) return alert(`Error updating ${key}.`);
+        } catch (error: any) {
+            // console.log("error", error)
+            alert(error.message);
+            return handleCancelClick(key); // reset the value back
         }
     };
 
-    const height = useHeaderHeight();
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled
@@ -78,9 +74,9 @@ export function Account() {
                     }}
                 />
                 {/* //TODO: maybe this could be modulated but not really going to mak a diff */}
-                <FormRowWrapper label="Display Name" inputValue={formState.displayName}
-                    onChangeText={(text) => setFormState({ ...formState, displayName: text })}
-                    onButtonPress={() => showConfirmDialog('display name')}
+                <FormRowWrapper label="Display Name" inputValue={formState.display}
+                    onChangeText={(text) => setFormState({ ...formState, display: text })}
+                    onButtonPress={() => showConfirmDialog('display')}
                 />
                 <FormRowWrapper label="Email" inputValue={formState.email}
                     onChangeText={(text) => setFormState({ ...formState, email: text })}

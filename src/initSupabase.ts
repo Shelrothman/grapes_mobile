@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { SupabaseClient, createClient } from "@supabase/supabase-js";
+import { User as userType, createClient } from "@supabase/supabase-js";
 import { config } from "./config";
 
 
@@ -14,3 +14,5 @@ export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
     // below Prevents Supabase from evaluating window.location.href, breaking mobile
     detectSessionInUrl: false 
 });
+
+export type User = userType;
