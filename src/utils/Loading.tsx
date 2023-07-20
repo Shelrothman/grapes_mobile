@@ -1,5 +1,5 @@
 import { View, ActivityIndicator } from "react-native";
-import { Layout, themeColor } from "react-native-rapi-ui";
+import { Layout } from "react-native-rapi-ui";
 
 export default function () {
     return (

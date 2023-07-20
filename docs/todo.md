@@ -23,7 +23,7 @@ for  now i turned that off for testing -->
 <!-- TODO [future]: in top right header of grape_id page, have a button to save the day and it can export somewhere or better yet, Have it become a widget on their os... somehting... -->
 <!-- * like an addToHomeScreen fucntion -->
 
-
+<!-- !!!!!*************************** -->
 <!-- TODO convert the site/redirect URLs to hold what im hosted on for when a password is changed .. or maybe not bc it still needs a confirm for ONLY the new one which is kind of nice if personno longer can access tehri old one..-->
 <!-- ! Consider setting up a custom SMTP server for better email deliverability on your project "grapes-backend" (vvjtgmzgmrunbhvshgxy). Check our Production Readiness guide: https://supabase.com/docs/guides/platform/going-into-prod -->
 
