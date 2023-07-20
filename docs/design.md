@@ -17,7 +17,9 @@ light graoe bg: #cb9de2
 icons:
 https://icons.expo.fyi/
 
-
+<!--? I'd say using react native as a very light facade with an api backend is what I would lean towards due to the nature of what it is. but i dont think react-query itself would be a problem -->
+... so KEEP all the stuff for UI as light as possible and do all the heavy lifting on the backend which is hosted in supabase
+<!-- !! like maybe I could FETCH the images from the edge functions instead of having them here in my assets. --> !!!!!!!!!!!!!!!
 
 
 /*

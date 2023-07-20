@@ -1,10 +1,11 @@
-// import { useState } from 'react';
+import { useState } from 'react';
 import { StyleSheet, View, Text, SafeAreaView, FlatList } from 'react-native';
 import { SharedLetter } from './SharedLetter';
+import Toast from 'react-native-toast-message';
+import { GlobalService } from './services';
 import * as globalLetters from '../../data/dummyGlobal.json';
 import * as Clipboard from 'expo-clipboard';
-import Toast from 'react-native-toast-message';
-
+import { RawSharedLetter, SharedLetter as SharedLetterType } from '../../types';
 
 
 
@@ -12,6 +13,11 @@ import Toast from 'react-native-toast-message';
 
 
 export function Global() {
+    const globaLService = new GlobalService();
+
+    const [sharedLetters, setSharedLetters] = useState<RawSharedLetter[]|null>(null);
+    // loading when its null..
+
 
     const copyToClipboard = async (text: string) => {
         await Clipboard.setStringAsync(text);
@@ -33,7 +39,6 @@ export function Global() {
             <FlatList
                 data={globalLetters.global_items}
                 renderItem={({ item }) => <SharedLetter {...item}
-                    // setCopiedText={setCopiedText}
                     onCopyClick={copyToClipboard}
                 />}
                 showsVerticalScrollIndicator={false}

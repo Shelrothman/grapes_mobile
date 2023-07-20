@@ -1,20 +1,10 @@
 import { PostgrestError } from "@supabase/supabase-js";
 import { supabase } from "../../../initSupabase";
+import { RawSharedLetter, SharedLetter } from "../../../types";
 
 
-/** resource type for inserting , id and created_at are system generated */
-export type RawSharedLetter = {
-    letter: string;
-    /** user_id comes from auth user */
-    user_id: string;
-    value: string;
-};
 
-/** resource type on response */
-export type SharedLetter = RawSharedLetter & {
-    created_at: string | null;
-    id: string;
-};
+
 
 
 // * to handle any errors in here, just throw an Error if there is one and then in the calling function, catch it and handle it there
@@ -59,7 +49,6 @@ export class GlobalService {
         return shared_letter;
     }
 
-    /** returns boolean indicating successful add or not */
     addRow = async (letterToShare: RawSharedLetter): Promise<SharedLetter|null> => {
         const { data: shared_letter, error } = await supabase
             .from('shared_letters')
@@ -70,7 +59,6 @@ export class GlobalService {
         return null;
     };
 
-    /** returns boolean indicating successful update or not */
     updateRow = async (letterToUpdate: SharedLetter): Promise<SharedLetter|null> => {
         const { data: shared_letter, error } = await supabase
             .from('shared_letters')

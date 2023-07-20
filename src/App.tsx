@@ -3,6 +3,20 @@ import { ThemeProvider } from "react-native-rapi-ui";
 import Navigation from "./components/navigation";
 import { AuthProvider } from "./contexts/AuthProvider";
 
+
+
+
+/*
+import NetInfo from '@react-native-community/netinfo'
+import { onlineManager } from '@tanstack/react-query'
+
+onlineManager.setEventListener(setOnline => {
+  return NetInfo.addEventListener(state => {
+    setOnline(!!state.isConnected)
+  })
+})
+*/
+
 // TODO come back and re-asses whats really needed here
 
 export default function App() {
