@@ -27,14 +27,12 @@ export function Account() {
     const { sessionUser } = useAuthContext();
     const [ loading, setLoading ] = useState<boolean>(false);
     const height = useHeaderHeight();
-    console.log("sessionUser", sessionUser)
+    // console.log("sessionUser", sessionUser)
     const [ formState, setFormState ] = useState<FormState>({
         display: sessionUser?.display_name || sessionUser?.email || "",
         email: sessionUser?.email || "",
         password: "********", 
     });
-
-    console.log("formState", formState)
 
     const showConfirmDialog = (key: string) => Alert.alert("Are you sure?",
         `Are you sure you want to permanetly change your ${key === 'display' ? 'display name' : key}?`, [
@@ -46,10 +44,6 @@ export function Account() {
             }
         },
     ]);
-
-
-    // just checked in browser and yea it is like doing right and getting a 200 so wtf
-    // const showConfirmDialog = (key: string) => handleConfirmChange(key);
 
     const showConfirmLogout = () => Alert.alert("Are you sure?",
         "Are you sure you want to sign out of your account?", [
