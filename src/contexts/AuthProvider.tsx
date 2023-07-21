@@ -1,7 +1,6 @@
 import { useContext, createContext, useState, useEffect } from 'react';
 import { supabase } from '../initSupabase';
 import { Session, User } from '@supabase/supabase-js';
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
 
 // !! Dont forget u are using the supabase js SDK **V1**
 
@@ -35,7 +34,6 @@ const getDisplayName = async (user_id: string): Promise<string | null> => {
     const { data, error } = await supabase
         .from('user_names').select('user_name')
         .eq('id', user_id).single();
-    // console.log("data", data)
     //* okay to use single bc each col is unique
     if (error) return null;
     return data?.user_name || null;
@@ -43,7 +41,6 @@ const getDisplayName = async (user_id: string): Promise<string | null> => {
 const sessionToUser = (session: Session | null): any => {
     if (session == null) return null;
     return getDisplayName(session.user!.id).then((displayName) => {
-        // console.log("displayName", displayName)
         return {
             user_uid: session.user!.id,
             //* if userName is null, use email 

@@ -19,7 +19,6 @@ export function GrapeIcons({ letter, color, size }: IconsProps) {
     const _letter = letter.toUpperCase();
     switch (_letter) {
         case 'G':
-            // return <MaterialIcons name="self-improvement" size={iconSize} color={color} />;
             return <MaterialCommunityIcons name="head-heart" size={iconSize} color={color} />
         case 'R':
             return <FontAwesome5 name="spa" size={iconSize} color={color} />

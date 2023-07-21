@@ -46,15 +46,10 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
         return () => { if (inputRef.current) inputRef.current.blur(); }
     }, [ selectedLetter ]);
 
-    // useEffect(() => {
-    //     if (selectedLetter && selectedLetter.letter === grape_day_letter.letter) {
+
 
     return (
         <View style={styles.card}>
-        {/* // <View style={grape_day_letter.letter !== "g" ? styles.card : {
-        //     ...styles.card,
-        //     marginTop: 20,
-        // }}> */}
             <View style={!selectedLetter ? styles.titleContainer : {
                 backgroundColor: '#4E1E66',
                 flexDirection: 'row',

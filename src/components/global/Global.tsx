@@ -3,13 +3,10 @@ import { StyleSheet, View, Text, SafeAreaView, FlatList } from 'react-native';
 import { SharedLetter } from './SharedLetter';
 import Toast from 'react-native-toast-message';
 import { GlobalService } from './services';
-import * as globalLetters from '../../data/dummyGlobal.json';
 import * as Clipboard from 'expo-clipboard';
-import { RawSharedLetter, SharedLetter as SharedLetterType } from '../../types';
-
+import { RawSharedLetter } from '../../types';
 import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus';
 
-// TODO here fetch the shared letters from the database and display them here
 
 
 export function Global() {
