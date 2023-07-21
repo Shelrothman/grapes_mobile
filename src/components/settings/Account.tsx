@@ -45,6 +45,10 @@ export function Account() {
         },
     ]);
 
+
+    // just checked in browser and yea it is like doing right and getting a 200 so wtf
+    // const showConfirmDialog = (key: string) => handleConfirmChange(key);
+
     const showConfirmLogout = () => Alert.alert("Are you sure?",
         "Are you sure you want to sign out of your account?", [
         { text: "Cancel", style: "cancel" },
@@ -63,17 +67,17 @@ export function Account() {
         if (key === 'display') return setFormState({ ...formState, display: sessionUser?.display_name || sessionUser?.email || "" });
     };
 
+
     async function handleConfirmChange(key: string) {
         // console.log("formState", formState)
+        const displayKey: string = key === 'display' ? 'display name' : key;
         try {
             const accountService = new AccountService();
             const user = await accountService.changeConfig(formState[ key ], key);
-            const displayKey: string = key === 'display' ? 'display name' : key;
             if (user) return alert(`${displayKey} updated!`);
             else if (user == null) return alert(`Error updating ${displayKey}.`);
         } catch (error: any) {
-            // console.log("error", error)
-            alert(error.message);
+            alert(`Error updating ${displayKey}: ${error.message}`);
             return handleCancelClick(key); // reset the value back
         }
     };

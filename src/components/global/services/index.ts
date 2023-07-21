@@ -7,17 +7,27 @@ import { RawSharedLetter, SharedLetter } from "../../../types";
 
 
 
-// * to handle any errors in here, just throw an Error if there is one and then in the calling function, catch it and handle it there
 
 /**
  * @class GlobalService
  * services for cruding the global shared_letters table
+ * to handle any errors in here, just throw an Error if there is one and then 
+ * in the calling function, catch it and handle it there
  */
 export class GlobalService {
 
     private handleError(error: PostgrestError) {
         console.log(error);
         throw new Error(error.message);
+    }
+
+    // ! PU here
+    private getUserNameFromId = async (user_id: string): Promise<string> => {
+        // const { data: users, error } = await supabase.auth.u
+        
+        // if (error) this.handleError(error);
+        // if (user) return user[0].username;
+        return '';
     }
 
     getAllRows = async (): Promise<SharedLetter[] | null> => {
@@ -49,23 +59,23 @@ export class GlobalService {
         return shared_letter;
     }
 
-    addRow = async (letterToShare: RawSharedLetter): Promise<SharedLetter|null> => {
+    addRow = async (letterToShare: RawSharedLetter): Promise<SharedLetter | null> => {
         const { data: shared_letter, error } = await supabase
             .from('shared_letters')
             .insert(letterToShare) // by default in v1 the new record is returned
         if (error) this.handleError(error);
         // if (shared_letter) return shared_letter[0];
-        if (shared_letter) return shared_letter[0];
+        if (shared_letter) return shared_letter[ 0 ];
         return null;
     };
 
-    updateRow = async (letterToUpdate: SharedLetter): Promise<SharedLetter|null> => {
+    updateRow = async (letterToUpdate: SharedLetter): Promise<SharedLetter | null> => {
         const { data: shared_letter, error } = await supabase
             .from('shared_letters')
             .upsert(letterToUpdate); // by default in v1 the updated record is returned
-            // .select() <= need v2 to do this. and it would return it
+        // .select() <= need v2 to do this. and it would return it
         if (error) this.handleError(error);
-        if (shared_letter) return shared_letter[0];
+        if (shared_letter) return shared_letter[ 0 ];
         return null;
     }
 

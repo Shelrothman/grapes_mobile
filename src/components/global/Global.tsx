@@ -43,7 +43,7 @@ export function Global() {
     async function fetchData() {
         try {
             const response = await globaLService.getAllRows();
-            console.log('response from global fetch:', response);
+            // console.log('response from global fetch:', response);
             setGlobalData(response);
             setIsLoading(false);
         } catch (error) {
