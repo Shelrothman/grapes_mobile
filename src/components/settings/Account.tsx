@@ -34,6 +34,8 @@ export function Account() {
         password: "********", 
     });
 
+    console.log("formState", formState)
+
     const showConfirmDialog = (key: string) => Alert.alert("Are you sure?",
         `Are you sure you want to permanetly change your ${key === 'display' ? 'display name' : key}?`, [
         { text: "Cancel", style: "cancel", onPress: () => handleCancelClick(key) },

@@ -23,33 +23,51 @@ type ContextProps = {
 
 const AuthContext = createContext<Partial<ContextProps>>({});
 
-interface Props {
-    children: React.ReactNode;
-}
+interface Props { children: React.ReactNode; }
 
 export function useAuthContext() {
     return useContext(AuthContext);
 }
 
+
+/** helpers */
 const getDisplayName = async (user_id: string): Promise<string | null> => {
     const { data, error } = await supabase
         .from('user_names').select('user_name')
         .eq('id', user_id).single();
+    // console.log("data", data)
     //* okay to use single bc each col is unique
     if (error) return null;
     return data?.user_name || null;
 };
+const sessionToUser = (session: Session | null): any => {
+    if (session == null) return null;
+    return getDisplayName(session.user!.id).then((displayName) => {
+        console.log("displayName", displayName)
+        return {
+            user_uid: session.user!.id,
+            //* if userName is null, use email 
+            display_name: displayName || session.user!.email || '',
+            email: session.user!.email as string,
+        };
+    });
+};
+
 
 const AuthProvider = (props: Props) => {
     // user null = loading
     const [ user, setUser ] = useState<null | boolean>(null);
     const [ session, setSession ] = useState<Session | null>(null);
+    const [ sessionUser, setSessionUser ] = useState<AuthUser | null>(null);
+
 
     useEffect(() => {
         const session = supabase.auth.session();
         setSession(session);
-        // console.log("metadata: ", session?.user?.user_metadata);
         setUser(session ? true : false);
+        sessionToUser(session).then((user: AuthUser) => {
+            setSessionUser(user)
+        });
         const { data: authListener } = supabase.auth.onAuthStateChange(
             async (event, session) => {
                 console.log(`Supabase auth event: ${event}`);
@@ -57,35 +75,12 @@ const AuthProvider = (props: Props) => {
                 setUser(session ? true : false);
             }
         );
-        return () => {
-            authListener!.unsubscribe();
-        };
+        return () => { authListener!.unsubscribe(); };
     }, [ user ]);
 
 
-    const sessionToUser = (session: Session | null): any => {
-        if (session == null) return null;
-        // let sessionUser;
-        return getDisplayName(session.user!.id).then((displayName) => {
-            return {
-                user_uid: session.user!.id,
-                //* if userName is null, use email 
-                display_name: displayName || session.user!.email || '',
-                email: session.user!.email as string,
-            };
-        });
-    };
-
-
     return (
-        <AuthContext.Provider
-            value={{
-                user,
-                session,
-                // ? do we really need this? we cant do it locally in the component instead?.. would that be better?... would it be more efficient?
-                sessionUser: sessionToUser(session),
-            }}
-        >
+        <AuthContext.Provider value={{ user, session, sessionUser }} >
             {props.children}
         </AuthContext.Provider>
     );
