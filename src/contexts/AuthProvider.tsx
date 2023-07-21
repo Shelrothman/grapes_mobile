@@ -1,6 +1,7 @@
 import { useContext, createContext, useState, useEffect } from 'react';
 import { supabase } from '../initSupabase';
 import { Session, User } from '@supabase/supabase-js';
+import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
 
 // !! Dont forget u are using the supabase js SDK **V1**
 
@@ -30,6 +31,15 @@ export function useAuthContext() {
     return useContext(AuthContext);
 }
 
+const getDisplayName = async (user_id: string): Promise<string | null> => {
+    const { data, error } = await supabase
+        .from('user_names').select('user_name')
+        .eq('id', user_id).single();
+    //* okay to use single bc each col is unique
+    if (error) return null;
+    return data?.user_name || null;
+};
+
 const AuthProvider = (props: Props) => {
     // user null = loading
     const [ user, setUser ] = useState<null | boolean>(null);
@@ -52,15 +62,19 @@ const AuthProvider = (props: Props) => {
         };
     }, [ user ]);
 
-    const sessionToUser = (session: Session | null): AuthUser | null => {
-        if (session == null) return null;
-        return {
-            user_uid: session.user!.id,
-            display_name: session.user!.user_metadata.display_name,
-            email: session.user!.email as string,
-        }
-    };
 
+    const sessionToUser = (session: Session | null): any => {
+        if (session == null) return null;
+        // let sessionUser;
+        return getDisplayName(session.user!.id).then((displayName) => {
+            return {
+                user_uid: session.user!.id,
+                //* if userName is null, use email 
+                display_name: displayName || session.user!.email || '',
+                email: session.user!.email as string,
+            };
+        });
+    };
 
 
     return (
@@ -68,7 +82,8 @@ const AuthProvider = (props: Props) => {
             value={{
                 user,
                 session,
-                sessionUser: sessionToUser(session), // ? do we really need this? we cant do it locally in the component instead?.. would that be better?... would it be more efficient?
+                // ? do we really need this? we cant do it locally in the component instead?.. would that be better?... would it be more efficient?
+                sessionUser: sessionToUser(session),
             }}
         >
             {props.children}

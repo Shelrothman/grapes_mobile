@@ -31,13 +31,11 @@ export class AccountService {
         return user;
     };
 
-    private changeDisplayName = async (displayVal: string) => {
-        // const { user, error } = await supabase.auth.update({
-        //     data: { display_name: displayVal },
-        // });
-        // if (error) console.log(error);
-        const user_id = supabase.auth.session()?.user?.id;
+    // !! PU here!! okay finally got this working for this particular update and yayyyy had to rls the table and then it worked. 
+    // * so now i can change all throughtout the app how the reading and stuff of the displayNames happen
 
+    private changeDisplayName = async (displayVal: string) => {
+        const user_id = supabase.auth.session()?.user?.id;
         if (user_id) {
             const { data, error } = await supabase
                 .from('user_names')
@@ -46,7 +44,7 @@ export class AccountService {
             console.log('data: ', data);
             // if (error) console.log(error);
             if (error) return error;
-            return data[0];
+            return data[ 0 ];
         }
         return null;
     };

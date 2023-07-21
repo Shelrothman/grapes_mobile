@@ -27,7 +27,7 @@ export function Account() {
     const { sessionUser } = useAuthContext();
     const [ loading, setLoading ] = useState<boolean>(false);
     const height = useHeaderHeight();
-    
+    console.log("sessionUser", sessionUser)
     const [ formState, setFormState ] = useState<FormState>({
         display: sessionUser?.display_name || sessionUser?.email || "",
         email: sessionUser?.email || "",
