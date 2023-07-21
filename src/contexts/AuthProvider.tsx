@@ -43,7 +43,7 @@ const getDisplayName = async (user_id: string): Promise<string | null> => {
 const sessionToUser = (session: Session | null): any => {
     if (session == null) return null;
     return getDisplayName(session.user!.id).then((displayName) => {
-        console.log("displayName", displayName)
+        // console.log("displayName", displayName)
         return {
             user_uid: session.user!.id,
             //* if userName is null, use email 

@@ -14,7 +14,7 @@ type SharedLetterProps = GlobalGrape & {
 };
 
 
-export function SharedLetter({ userName, letter, value, onCopyClick }: SharedLetterProps) {
+export function SharedLetter({ user_name, letter, value, onCopyClick }: SharedLetterProps) {
 
 
     return (
@@ -50,7 +50,7 @@ export function SharedLetter({ userName, letter, value, onCopyClick }: SharedLet
                 <View style={styles.shared_by_container}>
                     <Text style={styles.shared_by}>
                         <FontAwesome name="user" size={18} color="#4E1E66" backgroundColor='transparent' />
-                        {` `}{userName}
+                        {` `}{user_name}
                     </Text>
                 </View>
             </View>

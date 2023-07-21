@@ -10,7 +10,8 @@ export type GrapeDayLetter = {
 }
 
 export type GlobalGrape = {
-    userName: string;
+    // userName: string;
+    user_name: string;
     letter: string;
     value: string;
 }
@@ -20,7 +21,8 @@ export type GlobalGrape = {
 export type RawSharedLetter = {
     letter: string;
     /** user_id comes from auth user */
-    user_id: string;
+    // user_id: string;
+    user_name: string;
     value: string;
 };
 

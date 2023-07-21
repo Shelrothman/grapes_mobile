@@ -35,6 +35,9 @@ for  now i turned that off for testing -->
 
 <!-- TODO: convert the supabase sdk from v1 -> v2 -->
 
+<!--  TODO handle a user trying to ppick a userName that already exists -->
+
+
 - timeZone should be set in settings per user? ...option to be and by default use the device time zone
 [expo]https://docs.expo.dev/versions/latest/sdk/date-time-picker/
 

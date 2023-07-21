@@ -62,7 +62,7 @@ export function Global() {
                 {isLoading ? <Text>Loading...</Text> : (
                     <FlatList
                         data={globalData ? globalData : []}
-                        renderItem={({ item }) => <SharedLetter {...item} userName='global-test-deleteME'
+                        renderItem={({ item }) => <SharedLetter {...item} 
                             onCopyClick={copyToClipboard}
                         />}
                         showsVerticalScrollIndicator={false}

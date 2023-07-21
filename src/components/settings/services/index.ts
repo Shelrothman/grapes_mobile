@@ -41,7 +41,7 @@ export class AccountService {
                 .from('user_names')
                 .update({ user_name: displayVal })
                 .match({ id: user_id })
-            console.log('data: ', data);
+            // console.log('data: ', data);
             // if (error) console.log(error);
             if (error) return error;
             return data[ 0 ];
