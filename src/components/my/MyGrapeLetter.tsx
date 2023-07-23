@@ -9,7 +9,6 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { usePressAnimation } from "../../hooks/usePressAnimation";
-// import { useMyGrapeContext } from "../../contexts/MyGrapeContext";
 import { GRAPE_DAY } from "../../utils/constants";
 import { GrapeIcons } from "../../utils/Icons";
 
@@ -21,7 +20,6 @@ type MyGrapeLetterProps = {
     selectedLetter: GrapeDayLetter | null;
 };
 
-// TODO a photo/icon for each letter
 // TODO return to here and get the context working to save/persist etc the grapes data///
 
 

@@ -2,15 +2,16 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, SafeAreaView, FlatList } from 'react-native';
 import { SharedLetter } from './SharedLetter';
 import Toast from 'react-native-toast-message';
-import { GlobalService } from './services';
+// import { GlobalService } from './services';
+import { GlobalService } from '../../services/GlobalService';
 import * as Clipboard from 'expo-clipboard';
 import { RawSharedLetter } from '../../types';
 import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus';
 
-
+// TODO display the date for each one?
 
 export function Global() {
-    const globaLService = new GlobalService();
+    const globalService = new GlobalService();
 
     const [ globalData, setGlobalData ] = useState<RawSharedLetter[] | null>(null);
 
@@ -21,7 +22,7 @@ export function Global() {
     useEffect(() => {
         // Initial fetch when the component mounts
         fetchData();
-    }, []); // shouldnt need this bc the useFocusEffect should handle this
+    }, []); //? shouldnt need this bc the useFocusEffect should handle this
 
     const copyToClipboard = async (text: string) => {
         await Clipboard.setStringAsync(text);
@@ -39,7 +40,7 @@ export function Global() {
     // data fetching logic
     async function fetchData() {
         try {
-            const response = await globaLService.getAllRows();
+            const response = await globalService.getAllRows();
             // console.log('response from global fetch:', response);
             setGlobalData(response);
             setIsLoading(false);

@@ -1,11 +1,6 @@
 import { PostgrestError } from "@supabase/supabase-js";
-import { supabase } from "../../../initSupabase";
-import { RawSharedLetter, SharedLetter } from "../../../types";
-
-
-
-
-
+import { supabase } from "../initSupabase";
+import { RawSharedLetter, SharedLetter } from "../types";
 
 
 /**
@@ -34,6 +29,7 @@ export class GlobalService {
         let { data: shared_letters, error } = await supabase
             .from('shared_letters')
             .select('*')
+            .order('created_at', { ascending: false })
         if (error) this.handleError(error);
         return shared_letters;
     };

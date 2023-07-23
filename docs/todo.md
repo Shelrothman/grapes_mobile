@@ -2,7 +2,9 @@
 *****
 <!-- *** WE ARE NOW READY TO START IMPLEMENTING REAL DATA -->
     starting with: lets start with the global feed i think itll be the simplest.
-        starting with the R of crud
+        <!--  // starting with the R of crud <--- did that and display_name -->
+    next: share to the global
+        the c of crud for to the global letters
 <!-- ** and SET up the last setting pages- "about Grapes" --> <= ill do rhia lAST/later
 *****
 <!-- !!! All tHE "TODO"s throughout the src -->

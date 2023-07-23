@@ -1,11 +1,6 @@
 import { ApiError, PostgrestError } from "@supabase/supabase-js";
-import { supabase, User } from "../../../initSupabase";
+import { supabase, User } from "../initSupabase";
 
-// !!!!!!!PU HERE https://supabase.com/docs/reference/javascript/v1/auth-update
-// * we need to use my newly created table for the userNames so youll need to change this and other things around to accomodate and then also for the GLobalService and for the GLobal screen and ya. still use auth for email and pw tho
-// so youll need to change in here, in the global service, and in the global screen, and in the Account screen.
-//! User metadata: It's generally better to store user data in a table within your public schema (i.e., public.users).
-//! Use the update() method if you have data which rarely changes or is specific only to the logged in user.
 
 /**
  * @class AccountService
