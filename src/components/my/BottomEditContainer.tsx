@@ -2,8 +2,11 @@ import { View, TextInput, Alert } from "react-native";
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { my_styles } from "../../styles/my";
 import { GrapeDayLetter } from "../../types";
+import Toast, { ToastShowParams } from 'react-native-toast-message';
+
 import { HomeService } from "../../services/HomeService";
 import { useHomeGrapeContext } from "../../contexts/HomeGrapeContext";
+import { useAuthContext } from "../../contexts/AuthProvider";
 
 type BottomEditContainerProps = {
     grape_day_letter: GrapeDayLetter;
@@ -14,6 +17,9 @@ type BottomEditContainerProps = {
 };
 
 // TODO need to add limit to amount of characters in the input
+
+// TODO this could be a constant
+const toastProps: ToastShowParams = { position: 'top', visibilityTime: 4000, };
 
 /**
  * @component BottomEditContainer
@@ -26,15 +32,13 @@ export function BottomEditContainer({
     inputRef,
     setLoading,
 }: BottomEditContainerProps) {
+    const { sessionUser } = useAuthContext();
 
     const { setHomeSwipeEnabled } = useHomeGrapeContext();
     // TODO in here we do the inserting/updating tp the db
-    // * when do we safve it on edit/// or on save click.. or.. on cancle click we need confirms for each and yea yea 
+ 
 
-    const exit = () => {
-        setHomeSwipeEnabled!(true);
-        setSelectedLetter(null);
-    };
+    const exit = () => { setHomeSwipeEnabled!(true); setSelectedLetter(null); };
 
     // TODO: this could be a custom hook or global service
     const showCancelConfirmDialog = () => Alert.alert("Are you sure you want to cancel?",
@@ -43,12 +47,42 @@ export function BottomEditContainer({
         { text: "Leave without saving", onPress: () => exit() },
     ]);
 
-    // function handleCancelClick() {
-    //     setSelectedLetter(null);
-    // }
+    // const showSaveConfirmDialog = () => Alert.alert("Are you sure you want to save?",
 
     function handleSaveClick() {
+        setLoading(true);
+        // maybe no confirm here just show the Toast... and then exit/
+        // so first it Posts the data
+        const homeService = new HomeService();
+        // homeService.updateRow(grape_day_letter).then((res) => {
+        // check it exists yet first bc depending on the letter it may already be there
+        const toSend = {
+            letter: grape_day_letter.letter.toUpperCase(),
+            // @ts-ignore
+            value: inputRef?.current?.value || '',
+        }
 
+        homeService.updateLetter({...grape_day_letter, user_id: sessionUser!.user_uid  }).then((res) => {
+            // console.log('res from addRow', res);
+            return Toast.show({
+                type: 'success',
+                text1: `Saved your letter: ${grape_day_letter.letter}!`,
+                // text2: 'Check it out ->',
+                ...toastProps,
+            });
+        }).catch((err: any) => {
+            console.error(err);
+            setLoading(false);
+            return Toast.show({
+                type: 'error',
+                text1: 'Error saving letter!',
+                text2: 'Try again later',
+                ...toastProps,
+            });
+        }).finally(() => { setLoading(false); exit(); });
+
+        // then the toast/
+        // then exit and setLoading(false)
         console.log('save clicked');
     }
 
@@ -72,8 +106,6 @@ export function BottomEditContainer({
                     color="#cb9de2" backgroundColor="transparent"
                     style={my_styles.buttons}
                     onPress={showCancelConfirmDialog}
-
-                // onPress={() => { setSelectedLetter(null) }}
                 />
                 {/* //TODO add a confirmation button on cancle click */}
                 <MaterialCommunityIcons.Button name="content-save-check-outline" size={30}

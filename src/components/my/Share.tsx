@@ -50,6 +50,7 @@ export function ShareComponent({ btnSize, grape_day_letter, setLoading, editMode
             });
         }).catch((err: any) => {
             console.error(err);
+            setLoading(false);
             return Toast.show({
                 type: 'error',
                 text1: 'Error sharing to the Global feed!',

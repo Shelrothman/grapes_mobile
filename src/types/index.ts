@@ -35,6 +35,7 @@ export type RawGlobalGrape = {
 /** resource type on response for grape */
 export type GrapeResponse = RawGlobalGrape & {
     created_at: string;
+    grape_id: string;
 };
 
 

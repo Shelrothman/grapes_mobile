@@ -1,11 +1,18 @@
-/**
- * mostly temporary utility functions
- * for development with dummy data
- *
- */
+
 
 import { Grape, GrapeDayLetter } from '../types';
 import * as grapes from '../data/dummyGrapes.json';
+
+
+
+export function getUTCDate() {
+    const now = new Date();
+    const year = now.getUTCFullYear();
+    const month = String(now.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(now.getUTCDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+}
 
 
 

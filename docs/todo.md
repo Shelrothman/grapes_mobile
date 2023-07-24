@@ -77,3 +77,9 @@ https://github.com/codingki/react-native-expo-template/tree/master/template-type
 
 
 */}
+
+
+
+
+
+may consider using blobl storage as thuiis starts to get bigger but not yet
