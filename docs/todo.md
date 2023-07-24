@@ -9,7 +9,7 @@
 <!-- ** and SET up the last setting pages- "about Grapes" --> <= ill do rhia lAST/later
 *****
 <!-- !!! All tHE "TODO"s throughout the src -->
-
+<!-- ! go through and findf and remove ALL the stuff thats unused like files and parts and also uninstall any unused packages -->
 
 UTC UTC UTC everywhere!
 on insert on read on every SINGLE thing

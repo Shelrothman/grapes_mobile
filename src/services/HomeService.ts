@@ -87,7 +87,9 @@ export class HomeService {
     private upsertRow = async (partialGrape: Partial<RawGlobalGrape>): Promise<GrapeResponse | null> => {
         if (!partialGrape.user_id) this.handleError({ message: 'user_id is required' });
         const existence = await this.doesRowExist(partialGrape.user_id!, getUTCDate());
-        if (!existence) { }
+        if (!existence) {
+            return await this.addRow({ ...partialGrape, created_at: getUTCDate() });
+        }
         const { data, error } = await supabase
             .from('user_grapes')
             .update(partialGrape)
