@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { MyMap } from '../utils/constants';
+
 /**
  * @description styles for all the components in the home/my screens
  * and their children
@@ -11,10 +11,7 @@ export const my_styles = StyleSheet.create({
         borderBottomStartRadius: 10,
         paddingBottom: 10,
     },
-    share_container_edit: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-    },
+    share_container_edit: { flexDirection: 'row', justifyContent: 'center', },
     card: {
         borderWidth: 2,
         borderRadius: 10,
@@ -60,4 +57,18 @@ export const my_styles = StyleSheet.create({
         borderBottomStartRadius: 10,
         color: '#f3f0f5',
     },
+    main_container: { height: '100%', backgroundColor: '#2E3944', width: '85%', },
+    date_title: { fontSize: 18, fontWeight: 'bold', color: '#a8e4a0', },
+    icon_title: {
+        marginBottom: 10, fontSize: 18,
+        fontWeight: 'bold', color: '#a8e4a0',
+    },
+    header_container: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        marginTop: 10,
+    },
+    home_container: { backgroundColor: '#2E3944', alignItems: 'center', height: '100%', width: '100%' }
 });

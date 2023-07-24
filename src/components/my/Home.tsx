@@ -1,28 +1,41 @@
-import { StyleSheet, Text, SafeAreaView, FlatList, View } from "react-native";
-
-
-
-
-import GrapeLetterPage from "./Grape";
+import { useState } from "react";
+import { View, Text, SafeAreaView } from 'react-native';
+import { MyGrape } from "./MyGrape";
+import { getGrapeById } from "../../utils";
+import { GrapeIcons } from "../../utils/Icons";
+import { GrapeDayLetter } from "../../types";
+import { my_styles } from "../../styles/my";
 
 
 export default function Home() {
 
+    const [ selectedLetter, setSelectedLetter ] = useState<GrapeDayLetter | null>(null);
+
+
+    // TODO come back and implement this being TODAYS grape.. hard coding for nowq
+    const grape = getGrapeById(0);
+    // * maybe need somehting like new Grape() here and it has the default values ready to go.
+
+    if (!grape) return <SafeAreaView style={my_styles.main_container}>
+        <Text>404 Not Found</Text>
+    </SafeAreaView>;
+
+    const iconProps = { letter: selectedLetter?.letter || '', color: "#a8e4a0", size: 35 };
+
+    const selectedLetterTitle = new Array(3).fill(0).map((_, i) => <>{' '}<GrapeIcons key={i} {...iconProps} />{' '}</>);
+
     return (
-        <SafeAreaView style={styles_home.container}>
-            {/* <Text style={styles_home.title}>Today: {new Date().toDateString()}</Text> */}
-            <GrapeLetterPage />
+        <SafeAreaView style={my_styles.home_container}>
+            <View style={my_styles.main_container}>
+                <SafeAreaView style={my_styles.header_container}>
+                    {selectedLetter ? (
+                        <Text style={my_styles.icon_title}>
+                            {selectedLetterTitle}
+                        </Text>
+                    ) : <Text style={my_styles.date_title}> Today: {new Date().toDateString()} </Text>}
+                </SafeAreaView>
+                <MyGrape grape={grape} selectedLetter={selectedLetter} setSelectedLetter={setSelectedLetter} />
+            </View>
         </SafeAreaView>
     );
 }
-
-// looks fine here without the HomeGrapeDay so we know its in that or it s children.. the issue
-
-const styles_home = StyleSheet.create({
-    container: {
-        backgroundColor: '#2E3944',
-        alignItems: 'center',
-        height: '100%',
-        width: '100%',
-    },
-});

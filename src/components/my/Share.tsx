@@ -7,20 +7,15 @@ import { useAuthContext } from "../../contexts/AuthProvider";
 import { GlobalService } from "../../services/GlobalService";
 
 
-
 type ShareComponentProps = {
     /** indicates if in edit mode */
-    editMode: boolean; 
+    editMode: boolean;
     btnSize: number;
     grape_day_letter: GrapeDayLetter;
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-
-const toastProps: ToastShowParams = {
-    position: 'top',
-    visibilityTime: 4000,
-};
+const toastProps: ToastShowParams = { position: 'top', visibilityTime: 4000, };
 
 
 /** 
@@ -42,7 +37,6 @@ export function ShareComponent({ btnSize, grape_day_letter, setLoading, editMode
         },
     ]);
 
-    // TODO loading display in between 
     function handleSharePress() {
         const globalService = new GlobalService();
         const toShare = { ...grape_day_letter, user_name: sessionUser!.display_name };
