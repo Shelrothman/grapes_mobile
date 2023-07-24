@@ -16,6 +16,22 @@ export type GlobalGrape = {
     value: string;
 }
 
+/** resource type for inserting new Grape */
+export type RawGlobalGrape = {
+    user_id: string;
+    g: string;
+    r: string;
+    a: string;
+    p: string;
+    e: string;
+    s: string;
+}
+
+/** resource type on response for grape */
+export type GrapeResponse = RawGlobalGrape & {
+    created_at: string;
+};
+
 
 /** resource type for inserting , id and created_at are system generated */
 export type RawSharedLetter = {

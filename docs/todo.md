@@ -3,8 +3,9 @@
 <!-- *** WE ARE NOW READY TO START IMPLEMENTING REAL DATA -->
     starting with: lets start with the global feed i think itll be the simplest.
         <!--  // starting with the R of crud <--- did that and display_name -->
-    next: share to the global
-        the c of crud for to the global letters
+    <!-- // next: share to the global./.. the c of crud for to the global letters -->
+    NEXT :  well the Users grapes... do this in one table
+        -- so working on this, the service file first then implement it in
 <!-- ** and SET up the last setting pages- "about Grapes" --> <= ill do rhia lAST/later
 *****
 <!-- !!! All tHE "TODO"s throughout the src -->
@@ -13,6 +14,7 @@
 
 <!-- remove crufdt and unused files -->
 
+<!-- TODO maybe add CHECK contrainst to the grapes tables and stuff to not let it be too long and also contraints inside the TextINputs inhere -->
 
 <!-- Maybe eventually for placeholder while wiating history to load: https://www.npmjs.com/package/react-native-easy-content-loader -->
 

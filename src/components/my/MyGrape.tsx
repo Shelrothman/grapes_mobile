@@ -13,7 +13,7 @@ type MyGrapeProps = {
 };
 
 export function MyGrape({ grape, selectedLetter, setSelectedLetter }: MyGrapeProps) {
-    const [ loading, setLoading ] = useState<boolean>(false);
+    const [ loading, setLoading ] = useState<boolean>(false); // look at u how far youve come smartie pants
 
 
     return (
