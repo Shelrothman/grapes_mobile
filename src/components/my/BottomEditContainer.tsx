@@ -3,6 +3,7 @@ import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { my_styles } from "../../styles/my";
 import { GrapeDayLetter } from "../../types";
 import { HomeService } from "../../services/HomeService";
+import { useHomeGrapeContext } from "../../contexts/HomeGrapeContext";
 
 type BottomEditContainerProps = {
     grape_day_letter: GrapeDayLetter;
@@ -26,15 +27,20 @@ export function BottomEditContainer({
     setLoading,
 }: BottomEditContainerProps) {
 
+    const { setHomeSwipeEnabled } = useHomeGrapeContext();
     // TODO in here we do the inserting/updating tp the db
     // * when do we safve it on edit/// or on save click.. or.. on cancle click we need confirms for each and yea yea 
 
+    const exit = () => {
+        setHomeSwipeEnabled!(true);
+        setSelectedLetter(null);
+    };
 
     // TODO: this could be a custom hook or global service
     const showCancelConfirmDialog = () => Alert.alert("Are you sure you want to cancel?",
         `If you go back, your words won't be saved.`, [
         { text: "Keep editing", style: "cancel", onPress: () => { return; } },
-        { text: "Leave without saving", onPress: () => setSelectedLetter(null) },
+        { text: "Leave without saving", onPress: () => exit() },
     ]);
 
     // function handleCancelClick() {
@@ -42,7 +48,7 @@ export function BottomEditContainer({
     // }
 
     function handleSaveClick() {
-    
+
         console.log('save clicked');
     }
 

@@ -11,7 +11,7 @@ import { GRAPE_DAY } from "../../utils/constants";
 import { GrapeIcons } from "../../utils/Icons";
 import { my_styles } from "../../styles/my";
 import { ShareComponent } from "./Share";
-
+import { useHomeGrapeContext } from "../../contexts/HomeGrapeContext";
 
 type MyGrapeLetterProps = {
     grape_day_letter: GrapeDayLetter;
@@ -26,7 +26,8 @@ type MyGrapeLetterProps = {
 export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLetter, setLoading }: MyGrapeLetterProps) {
     const inputRef = useRef<TextInput>(null);
     const { handlePressIn, handlePressOut, pressStyle } = usePressAnimation();
-    
+    const { setHomeSwipeEnabled } = useHomeGrapeContext();
+
     useEffect(() => {
         if (selectedLetter && selectedLetter.letter === grape_day_letter.letter) {
             if (inputRef.current) inputRef.current.focus();
@@ -60,7 +61,10 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
             </View>
             {!selectedLetter ? <View style={my_styles.bottomRowContainer}>
                 <Pressable style={{ ...pressStyle, ...my_styles.pressable }}
-                    onPress={() => setSelectedLetter(grape_day_letter)}
+                    onPress={() => {
+                        setSelectedLetter(grape_day_letter);
+                        setHomeSwipeEnabled!(false);
+                    }}
                     onPressIn={handlePressIn}
                     onPressOut={handlePressOut}>
                     <View style={{ maxWidth: '90%', minWidth: '90%' }}>
