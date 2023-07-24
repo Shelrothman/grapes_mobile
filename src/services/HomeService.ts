@@ -1,12 +1,11 @@
 import { PostgrestError } from "@supabase/supabase-js";
 import { supabase } from "../initSupabase";
-import { GlobalGrape, RawGlobalGrape, GrapeResponse, RawGrapeDayLetter } from "../types";
+import { RawGlobalGrape, GrapeResponse, RawGrapeDayLetter } from "../types";
 import { getUTCDate } from "../utils";
-import { TouchableNativeFeedbackBase } from "react-native";
+
 
 // * i cuuuud just useGlobalService and like make it agnostic to the table name
 // * but i think i like the idea of having a service for each table
-// it wouldnt slow anything down bc import statements are cached and just need one service at a time
 
 // ? I do wonder.. should i get all my logic and helpers like this into a grpahql server? and just hit those endpoints in the lightwight client?...
 
@@ -31,7 +30,6 @@ export class HomeService {
         if (data) return data.length > 0 ? true : false;
         return false;
     }
-
 
     private getRow = async (user_id: string, created_at: string): Promise<GrapeResponse | null> => {
         const { data, error } = await supabase
@@ -59,14 +57,14 @@ export class HomeService {
         return data ? data[ 0 ] : null;
     };
 
-    private updateRow = async (grape: RawGlobalGrape): Promise<GrapeResponse | null> => {
-        const { data, error } = await supabase
-            .from('user_grapes')
-            .update(grape)
-            .match({ user_id: grape.user_id })
-        if (error) this.handleError(error);
-        return data ? data[ 0 ] : null;
-    };
+    // private updateRow = async (grape: RawGlobalGrape): Promise<GrapeResponse | null> => {
+    //     const { data, error } = await supabase
+    //         .from('user_grapes')
+    //         .update(grape)
+    //         .match({ user_id: grape.user_id })
+    //     if (error) this.handleError(error);
+    //     return data ? data[ 0 ] : null;
+    // };
 
     updateLetter = async ({ letter, value, user_id }: RawGrapeDayLetter): Promise<GrapeResponse | null> => {
         const data = await this.upsertRow({ [ letter ]: value, user_id });
@@ -92,7 +90,6 @@ export class HomeService {
         if (!existence) { }
         const { data, error } = await supabase
             .from('user_grapes')
-            // .upsert(partialGrape)
             .update(partialGrape)
             .match({ user_id: partialGrape.user_id, created_at: getUTCDate() })
         if (error) this.handleError(error);
@@ -105,7 +102,6 @@ export class HomeService {
         try {
             const homeService = new HomeService();
             const today = getUTCDate();
-            console.log('today', today)
             const existence = await homeService.doesRowExist(user_id, today);
             console.log('existence of todays grape', existence);
             if (existence) {
@@ -115,9 +111,6 @@ export class HomeService {
             }
         } catch (error) {
             // this should really only catch if duplcation is attempted but we catch to be sure
-            // console.log('in ze catch')
-            // console.log(error);
-            // console.log(error.message);
         }
         return resVal;
     }

@@ -38,9 +38,7 @@ export default function Home() {
             console.error('Error fetching data:', error);
         }
     }
-    // if (!grape) return <SafeAreaView style={my_styles.main_container}>
-    //     <Text>404 Not Found</Text>
-    // </SafeAreaView>;
+
 
     const iconProps = { letter: selectedLetter?.letter || '', color: "#a8e4a0", size: 35 };
 

@@ -1,4 +1,3 @@
-// import { themeColor, useTheme } from "react-native-rapi-ui";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import Toast from 'react-native-toast-message';
@@ -10,16 +9,14 @@ import { SettingsStackScreen } from "../settings/SettingsStackScreen";
 import { Global } from "../global/Global";
 import { MaterialIcons } from '@expo/vector-icons'; // not filled
 import { FontAwesome } from '@expo/vector-icons'; // filled
-// import { useEffect } from 'react';
-import { useHomeGrapeContext, HomeGrapeProvider } from '../../contexts/HomeGrapeContext';
+import { useHomeGrapeContext } from '../../contexts/HomeGrapeContext';
 
 
 const Tab = createMaterialTopTabNavigator();
+const tabBarOptions = { tabBarShowLabel: false, };
 
 const MainTabs = () => {
     const { homeSwipeEnabled } = useHomeGrapeContext();
-
-
     const buildTabBarIcon = (routeName: string, focused: boolean, color: string) => {
         const iconProps = { size: 25, color: color };
         if (routeName === 'Home') {
@@ -33,11 +30,6 @@ const MainTabs = () => {
             return <MaterialIcons name="history" {...iconProps} />;
         }
     };
-
-    const tabBarOptions = { tabBarShowLabel: false, };
-
-    // ? how would i pass props to one of the Components in the Tab.Screen?
-    // like this: <Tab.Screen name="Home" component={Home} options={{ ...tabBarOptions, swipeEnabled: homeSwipeEnabled }} />
 
 
     return (
