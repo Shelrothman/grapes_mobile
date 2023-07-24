@@ -33,7 +33,7 @@ export function Global() {
             visibilityTime: 2000,
         });
     };
-    // TODO: pagination and limit the amount returning.
+    // TODO: pagination and limit the amount returning. so only return 10 or so at a time. uyntil they scroll down.
 
     // TODO handle getting it into the form.
 

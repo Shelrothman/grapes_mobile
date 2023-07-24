@@ -1,7 +1,8 @@
 import { StyleSheet } from 'react-native';
-
+import { MyMap } from '../utils/constants';
 /**
  * @description styles for all the components in the home/my screens
+ * and their children
  */
 export const my_styles = StyleSheet.create({
     share_container: {
@@ -9,6 +10,10 @@ export const my_styles = StyleSheet.create({
         borderBottomEndRadius: 10,
         borderBottomStartRadius: 10,
         paddingBottom: 10,
+    },
+    share_container_edit: {
+        flexDirection: 'row',
+        justifyContent: 'center',
     },
     card: {
         borderWidth: 2,
@@ -29,12 +34,7 @@ export const my_styles = StyleSheet.create({
     pressed: { backgroundColor: '#4E1E66', padding: 7, },
     buttons: { paddingLeft: 15 },
     row: { flexDirection: 'row', justifyContent: 'space-between', },
-    titleLetterText: {
-        fontSize: 26,
-        color: '#cb9de2',
-        fontStyle: 'italic',
-        fontWeight: 'bold',
-    },
+    titleLetterText: { fontSize: 26, color: '#cb9de2', fontStyle: 'italic', fontWeight: 'bold', },
     titleText: { fontWeight: 'bold', fontStyle: 'italic', color: '#cb9de2', },
     titleContainer: {
         flexDirection: 'row',

@@ -20,10 +20,8 @@ export type GlobalGrape = {
 /** resource type for inserting , id and created_at are system generated */
 export type RawSharedLetter = {
     letter: string;
-    /** user_id comes from auth user */
-    // user_id: string;
-    user_name: string;
     value: string;
+    user_name: string;
 };
 
 

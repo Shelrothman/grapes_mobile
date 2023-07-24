@@ -4,16 +4,26 @@
  */
 
 import { View, TextInput } from "react-native";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { my_styles } from "../../styles/my";
+import { GrapeDayLetter } from "../../types";
 
-export function BottomEditContainer() {
+type BottomEditContainerProps = {
+    grape_day_letter: GrapeDayLetter;
+    setSelectedLetter: React.Dispatch<React.SetStateAction<GrapeDayLetter | null>>;
+    selectedLetter: GrapeDayLetter | null;
+    inputRef: React.MutableRefObject<TextInput | null>;
+};
+
+
+export function BottomEditContainer({ grape_day_letter, setSelectedLetter, selectedLetter, inputRef }: BottomEditContainerProps) {
     return (
-        <View style={styles.bottomInEditContainer}>
+        <View style={my_styles.bottomInEditContainer}>
             <TextInput
                 multiline={true}
                 numberOfLines={8}
                 key={grape_day_letter.letter}
-                style={styles.input_text}
+                style={my_styles.input_text}
                 defaultValue={grape_day_letter.value}
                 //? value={selectedLetter.value}
                 ref={inputRef}
@@ -22,10 +32,10 @@ export function BottomEditContainer() {
             // setMyGrapeLetter({ letter: grape_day_letter.letter, value: text });
             // }}
             />
-            <View style={styles.row}>
+            <View style={my_styles.row}>
                 <MaterialIcons.Button name="cancel" size={30} key="Cancel"
                     color="#cb9de2" backgroundColor="transparent"
-                    style={styles.buttons}
+                    style={my_styles.buttons}
                     onPress={() => {
                         setSelectedLetter(null)
                         // setCurrentLetter_edit(null);
@@ -35,7 +45,7 @@ export function BottomEditContainer() {
                 <MaterialCommunityIcons.Button name="content-save-check-outline" size={30}
                     color="#cb9de2" key="Save"
                     backgroundColor="transparent"
-                    style={styles.buttons}
+                    style={my_styles.buttons}
                     onPress={() => console.log('save')}
                 // onPress={() => setMyGrapeLetter({ letter: grape_day_letter.letter, value: inputRef.current?.value || '' })}
                 />

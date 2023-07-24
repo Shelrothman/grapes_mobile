@@ -6,13 +6,10 @@ import { StyleSheet, Text, SafeAreaView, FlatList, View } from "react-native";
 import GrapeLetterPage from "./Grape";
 
 
-// TODO only render the last few days and then option to load more
-
 export default function Home() {
 
     return (
         <SafeAreaView style={styles_home.container}>
-
             {/* <Text style={styles_home.title}>Today: {new Date().toDateString()}</Text> */}
             <GrapeLetterPage />
         </SafeAreaView>

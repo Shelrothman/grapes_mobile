@@ -21,8 +21,8 @@ type FormState = MyMap & {
 
 
 // TODO deactive the save buttons if therye not changed? 
-// TODO maybe use a toast for when the change is successful. like did in Global
-// TODO ! change the password vlue of ******* bc it could send it *as* a password... but we check for that in the service... so may be okay
+// TODO  use a toast for when the change is successful. like did in Global
+// // TODO ! change the password vlue of ******* bc it could send it *as* a password... but we check for that in the service... so may be okay
 
 export function Account() {
     const { sessionUser } = useAuthContext();

@@ -5,7 +5,7 @@ import { getGrapeById } from "../../utils";
 import { GrapeIcons } from "../../utils/Icons";
 import { GrapeDayLetter } from "../../types";
 import { useMyGrapeContext } from "../../contexts/MyGrapeContext";
-
+// TODO maybe put this whole file into Home.tsx
 
 // type GrapeLetterPageProps = {
 //     grape_letter_id: number;

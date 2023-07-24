@@ -16,14 +16,13 @@ export class GlobalService {
         throw new Error(error.message);
     }
 
-    // ! PU here
-    private getUserNameFromId = async (user_id: string): Promise<string> => {
-        // const { data: users, error } = await supabase.auth.u
+    // private getUserNameFromId = async (user_id: string): Promise<string> => {
+    //     // const { data: users, error } = await supabase.auth.u
         
-        // if (error) this.handleError(error);
-        // if (user) return user[0].username;
-        return '';
-    }
+    //     // if (error) this.handleError(error);
+    //     // if (user) return user[0].username;
+    //     return '';
+    // }
 
     getAllRows = async (): Promise<SharedLetter[] | null> => {
         let { data: shared_letters, error } = await supabase
@@ -74,6 +73,8 @@ export class GlobalService {
         if (shared_letter) return shared_letter[ 0 ];
         return null;
     }
+
+    
 
     // TODO bulk updates?
 
