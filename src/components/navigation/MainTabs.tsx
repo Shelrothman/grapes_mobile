@@ -1,30 +1,28 @@
-// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { themeColor, useTheme } from "react-native-rapi-ui";
+// import { themeColor, useTheme } from "react-native-rapi-ui";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-// import TabBarIcon from "../components/utils/TabBarIcon";
-// import TabBarIcon from "../../utils/TabBarIcon";
-// import TabBarText from "../components/utils/TabBarText";
-// import TabBarText from "../../utils/TabBarText";
 import { Ionicons } from '@expo/vector-icons';
 import Toast from 'react-native-toast-message';
 import { ToastConfig } from '../../utils/ToastConfig';
 import Home from "../my/Home";
 import History from "../history/History";
-// import About from "../screens/About";
-// import Profile from "../screens/Profile";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { SettingsStackScreen } from "../settings/SettingsStackScreen";
 import { Global } from "../global/Global";
 import { MaterialIcons } from '@expo/vector-icons'; // not filled
-// <MaterialIcons name="history" size={24} color="black" />
-
 import { FontAwesome } from '@expo/vector-icons'; // filled
-{/* <FontAwesome name="history" size={24} color="black" /> */ }
+import { useEffect } from 'react';
+
 
 const Tab = createMaterialTopTabNavigator();
 
 const MainTabs = () => {
     // const { isDarkmode } = useTheme();
+    
+    
+    // TODO havce the swipeEnabled be controlled by context or something
+    const homeSwipeEnabled = true;
+    // const { swipeEnabled } = useTheme();
+
 
     const buildTabBarIcon = (routeName: string, focused: boolean, color: string) => {
         const iconProps = { size: 25, color: color };
@@ -40,7 +38,7 @@ const MainTabs = () => {
         }
     };
 
-    const tabBarOptions = { tabBarShowLabel: false };
+    const tabBarOptions = { tabBarShowLabel: false, };
 
     return (
         <>
@@ -52,10 +50,13 @@ const MainTabs = () => {
                     // headerShown: route.name === 'Home' ? false : true,
                     tabBarActiveTintColor: '#8ABD91',
                     tabBarInactiveTintColor: '#f3f0f5', // text color for words that are not selected
-                    tabBarStyle: { backgroundColor: '#4E1E66', paddingTop: 30, paddingBottom: 10 },
+                    tabBarStyle: { backgroundColor: '#4E1E66', paddingTop: 30, paddingBottom: 10, 
+                    display: `${homeSwipeEnabled ? 'flex' : 'none'}` 
+                },
                     tabBarIndicatorStyle: { backgroundColor: '#cb9de2', height: 5 },
+                    // swipeEnabled: homeSwipeEnabled,
                 })}>
-                <Tab.Screen name="Home" component={Home} options={tabBarOptions} />
+                <Tab.Screen name="Home" component={Home} options={{...tabBarOptions, swipeEnabled: homeSwipeEnabled}}  />
                 <Tab.Screen name="Global" component={Global} options={tabBarOptions} />
                 <Tab.Screen name="More" component={SettingsStackScreen} options={tabBarOptions} />
                 <Tab.Screen name="History" component={History} options={tabBarOptions}  />

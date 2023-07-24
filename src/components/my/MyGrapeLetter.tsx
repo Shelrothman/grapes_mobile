@@ -76,6 +76,7 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                 setSelectedLetter={setSelectedLetter}
                 // selectedLetter={selectedLetter}
                 inputRef={inputRef}
+                setLoading={setLoading}
             />}
         </View>
     )

@@ -1,6 +1,6 @@
 import { PostgrestError } from "@supabase/supabase-js";
 import { supabase } from "../initSupabase";
-import { GlobalGrape, RawGlobalGrape, GrapeResponse } from "../types";
+import { GlobalGrape, RawGlobalGrape, GrapeResponse, RawGrapeDayLetter } from "../types";
 
 
 // * i cuuuud just useGlobalService and like make it agnostic to the table name
@@ -20,6 +20,9 @@ export class HomeService {
     }
 
 
+    // ! PU in heree.. bring in to BottomEditContainer and stuff and get it working
+
+
     addRow = async (grape: RawGlobalGrape): Promise<GrapeResponse | null> => {
         const { data, error } = await supabase
             .from('user_grapes')
@@ -33,6 +36,24 @@ export class HomeService {
             .from('user_grapes')
             .update(grape)
             .match({ user_id: grape.user_id })
+        if (error) this.handleError(error);
+        return data ? data[ 0 ] : null;
+    };
+
+    updateLetter = async ({ letter, value, user_id }: RawGrapeDayLetter): Promise<GrapeResponse | null> => {
+        const { data, error } = await supabase
+            .from('user_grapes')
+            .update({ [ letter ]: value })
+            .match({ user_id })
+        if (error) this.handleError(error);
+        return data ? data[ 0 ] : null;
+    }
+
+    deleteRow = async (user_id: string, created_at: string): Promise<GrapeResponse | null> => {
+        const { data, error } = await supabase
+            .from('user_grapes')
+            .delete()
+            .match({ user_id, created_at })
         if (error) this.handleError(error);
         return data ? data[ 0 ] : null;
     }

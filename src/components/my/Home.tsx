@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import { View, Text, SafeAreaView } from 'react-native';
 import { MyGrape } from "./MyGrape";
 import { getGrapeById } from "../../utils";
@@ -22,7 +22,7 @@ export default function Home() {
 
     const iconProps = { letter: selectedLetter?.letter || '', color: "#a8e4a0", size: 35 };
 
-    const selectedLetterTitle = new Array(3).fill(0).map((_, i) => <>{' '}<GrapeIcons key={i} {...iconProps} />{' '}</>);
+    const selectedLetterTitle = new Array(3).fill(0).map((_, i) => <Fragment key={i}>{' '}<GrapeIcons {...iconProps} />{' '}</Fragment>);
 
     return (
         <SafeAreaView style={my_styles.home_container}>

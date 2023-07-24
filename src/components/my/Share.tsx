@@ -27,7 +27,7 @@ export function ShareComponent({ btnSize, grape_day_letter, setLoading, editMode
     const { sessionUser } = useAuthContext();
 
     const showConfirmDialog = () => Alert.alert("Ready to Submit?",
-        `Confirm you ready to share this letter.`, [
+        `Confirm you are ready to share this letter to the global feed.`, [
         { text: "Cancel", style: "cancel", onPress: () => { return } },
         {
             text: "OK", onPress: () => {

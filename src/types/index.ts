@@ -9,6 +9,11 @@ export type GrapeDayLetter = {
     value: string;
 }
 
+/** resource type for updating a user grape's Letter */
+export type RawGrapeDayLetter = {
+    user_id: string;
+} & GrapeDayLetter;
+
 export type GlobalGrape = {
     // userName: string;
     user_name: string;
