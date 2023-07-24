@@ -4,27 +4,17 @@ import { MyGrape } from "./MyGrape";
 import { getGrapeById } from "../../utils";
 import { GrapeIcons } from "../../utils/Icons";
 import { GrapeDayLetter } from "../../types";
-import { useMyGrapeContext } from "../../contexts/MyGrapeContext";
 // TODO maybe put this whole file into Home.tsx
 
-// type GrapeLetterPageProps = {
-//     grape_letter_id: number;
-// };
-// const {  currentLetter_edit: selectedLetter, 
-//     setCurrentLetter_edit: setSelectedLetter
-// } = useMyGrapeContext();
-const GrapeLetterPage = () => {
-    // const router = useRouter();
-    // const grape_letter_id = usePathname().replace('/', '');
 
+const GrapeLetterPage = () => {
 
     // TODO come back and implement this being TODAYS grape.. hard coding for nowq
     const grape = getGrapeById(0);
-
+    // * maybe need somehting like new Grape() here and it has the default values ready to go.
 
     if (!grape) return <SafeAreaView style={styles.container}>
         <Text>404 Not Found</Text>
-        {/* <Link href="../">Go Back</Link> */}
     </SafeAreaView>;
 
 
@@ -33,24 +23,15 @@ const GrapeLetterPage = () => {
 
     const iconProps = { letter: selectedLetter?.letter || '', color: "#a8e4a0", size: 35 };
 
+    const selectedLetterTitle = new Array(3).fill(0).map((_, i) => <>{' '}<GrapeIcons key={i} {...iconProps} />{' '}</>);
 
     return (
         <View style={styles.container}>
             <SafeAreaView style={styles.header_container}>
                 <View>
-                    {selectedLetter ? (
-                        <Text style={styles.icon_title}>
-                            <GrapeIcons {...iconProps} />
-                            {' '}{' '}
-                            <GrapeIcons {...iconProps} />
-                            {' '}{' '}
-                            <GrapeIcons {...iconProps} />
-                        </Text>
-                    ) : (
-                        <Text style={styles.title}>
-                            Today: {new Date().toDateString()}
-                        </Text>
-                    )}
+                    {selectedLetter ? <Text style={styles.icon_title}>
+                        {selectedLetterTitle}
+                    </Text> : <Text style={styles.title}> Today: {new Date().toDateString()} </Text>}
                 </View>
             </SafeAreaView>
             <MyGrape grape={grape} selectedLetter={selectedLetter} setSelectedLetter={setSelectedLetter} />

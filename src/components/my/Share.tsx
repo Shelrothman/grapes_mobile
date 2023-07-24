@@ -47,7 +47,7 @@ export function ShareComponent({ btnSize, grape_day_letter, setLoading, editMode
         const globalService = new GlobalService();
         const toShare = { ...grape_day_letter, user_name: sessionUser!.display_name };
         globalService.addRow(toShare).then((res) => {
-            console.log('res from addRow', res);
+            // console.log('res from addRow', res);
             return Toast.show({
                 type: 'success',
                 text1: 'Shared to the Global feed!',

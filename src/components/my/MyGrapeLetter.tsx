@@ -2,11 +2,9 @@
  * MyGrapeLetter.tsx
  * individual letter of the grape
  */
-import { useState, useRef, useEffect } from "react";
-import { View, Text, TextInput, Pressable, Alert } from 'react-native';
+import { useRef, useEffect } from "react";
+import { View, Text, TextInput, Pressable } from 'react-native';
 import { GrapeDayLetter } from '../../types';
-// import { Ionicons } from '@expo/vector-icons';
-// import Toast, { ToastShowParams } from 'react-native-toast-message';
 import { usePressAnimation } from "../../hooks/usePressAnimation";
 import { BottomEditContainer } from "./BottomEditContainer";
 import { GRAPE_DAY } from "../../utils/constants";
@@ -25,13 +23,10 @@ type MyGrapeLetterProps = {
 
 
 
-
 export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLetter, setLoading }: MyGrapeLetterProps) {
     const inputRef = useRef<TextInput>(null);
-    // const [ loading, setLoading ] = useState<boolean>(false);
     const { handlePressIn, handlePressOut, pressStyle } = usePressAnimation();
-    // const { sessionUser } = useAuthContext();
-
+    
     useEffect(() => {
         if (selectedLetter && selectedLetter.letter === grape_day_letter.letter) {
             if (inputRef.current) inputRef.current.focus();
@@ -73,10 +68,8 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                     </View>
                 </Pressable>
                 <ShareComponent
-                    btnSize={30}
-                    grape_day_letter={grape_day_letter}
-                    setLoading={setLoading}
-                    editMode={true}
+                    btnSize={30} editMode={true}
+                    grape_day_letter={grape_day_letter} setLoading={setLoading}
                 />
             </View> : <BottomEditContainer
                 grape_day_letter={grape_day_letter}
