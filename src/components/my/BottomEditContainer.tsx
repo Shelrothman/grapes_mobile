@@ -9,7 +9,6 @@ import { useHomeGrapeContext } from "../../contexts/HomeGrapeContext";
 import { useAuthContext } from "../../contexts/AuthProvider";
 import { showCancelConfirmDialog } from "../../utils/GrapeAlerts";
 
-// ? is there a way in supabase to like two columns values the co,mbination of them has to be unique
 
 type BottomEditContainerProps = {
     grape_day_letter: GrapeDayLetter;

@@ -9,8 +9,12 @@ import { useFocusEffect } from '@react-navigation/native'
  *  refetch is skipped the first time because 
  *  useFocusEffect calls our callback on mount in addition to screen focus.
  */
-export function useRefreshOnFocus<T>(refetch: () => Promise<T>) {
+export function useRefreshOnFocus<T>(
+    refetch: () => Promise<T>,
+    setLoading?: React.Dispatch<React.SetStateAction<boolean>>
+) {
     const firstTimeRef = useRef(true)
+    // if (setLoading) setLoading(true);
 
     useFocusEffect(
         useCallback(() => {

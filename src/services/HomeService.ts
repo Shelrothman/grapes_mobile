@@ -42,6 +42,15 @@ export class HomeService {
         return data ? data[ 0 ] : null;
     };
 
+    getRowByGrapeId = async (grape_id: string): Promise<GrapeResponse | null> => {
+        const { data, error } = await supabase
+            .from('user_grapes')
+            .select('*')
+            .match({ grape_id })
+        if (error) this.handleError(error);
+        return data ? data[ 0 ] : null;
+    };
+
     private addRow = async (grape: Partial<GrapeResponse>): Promise<GrapeResponse | null> => {
         const { data, error } = await supabase
             .from('user_grapes')

@@ -43,9 +43,9 @@ export const HomeGrapeProvider = (props: Props) => {
         // return () => { // console.log('useEffect in HomeGrapeProvider onUnmount'); // }
     }, [ sessionUser ]);
 
-    useEffect(() => {
-        console.log('change to today_grape', today_grape)
-    }, [ today_grape ]);
+    // useEffect(() => {
+    //     console.log('change to today_grape', today_grape)
+    // }, [ today_grape ]);
 
 
     return (
