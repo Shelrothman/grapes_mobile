@@ -1,28 +1,25 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, SafeAreaView, FlatList } from 'react-native';
+import { View, Text, SafeAreaView, FlatList } from 'react-native';
 import { SharedLetter } from './SharedLetter';
 import Toast from 'react-native-toast-message';
-// import { GlobalService } from './services';
 import { GlobalService } from '../../services/GlobalService';
 import * as Clipboard from 'expo-clipboard';
 import { RawSharedLetter } from '../../types';
 import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus';
+import { global_styles } from '../../styles/global';
 
-// TODO display the date for each one?
+
+// TODO: pagination and limit the amount returning. so only return 10 or so at a time. uyntil they scroll down.
+
 
 export function Global() {
     const globalService = new GlobalService();
-
     const [ globalData, setGlobalData ] = useState<RawSharedLetter[] | null>(null);
-
     const [ isLoading, setIsLoading ] = useState(true);
     // Use the useRefreshOnFocus hook to refetch data when the component gains focus.
     useRefreshOnFocus(fetchData);
-
-    useEffect(() => {
-        // Initial fetch when the component mounts
-        fetchData();
-    }, []); //? shouldnt need this bc the useFocusEffect should handle this
+    // Initial fetch when the component mounts
+    useEffect(() => { fetchData(); }, []);
 
     const copyToClipboard = async (text: string) => {
         await Clipboard.setStringAsync(text);
@@ -33,11 +30,7 @@ export function Global() {
             visibilityTime: 2000,
         });
     };
-    // TODO: pagination and limit the amount returning. so only return 10 or so at a time. uyntil they scroll down.
 
-    // TODO handle getting it into the form.
-
-    // data fetching logic
     async function fetchData() {
         try {
             const response = await globalService.getAllRows();
@@ -52,15 +45,15 @@ export function Global() {
 
 
     return (
-        <SafeAreaView style={styles_global.container}>
-            <View style={styles_global.title_container}>
-                <Text style={styles_global.title}>Global Feed (inspiration)</Text>
+        <SafeAreaView style={global_styles.global_container}>
+            <View style={global_styles.title_container}>
+                <Text style={global_styles.title}>Global Feed (inspiration)</Text>
             </View>
             <View style={{ marginBottom: 30 }} >
                 {isLoading ? <Text>Loading...</Text> : (
                     <FlatList
                         data={globalData ? globalData : []}
-                        renderItem={({ item }) => <SharedLetter {...item} 
+                        renderItem={({ item }) => <SharedLetter {...item}
                             onCopyClick={copyToClipboard}
                         />}
                         showsVerticalScrollIndicator={false}
@@ -70,22 +63,3 @@ export function Global() {
         </SafeAreaView>
     )
 }
-
-
-
-const styles_global = StyleSheet.create({
-    container: {
-        backgroundColor: '#2E3944',
-        alignItems: 'center',
-        height: '100%',
-        width: '100%',
-    },
-    title: { fontSize: 18, fontWeight: 'bold', color: '#a8e4a0', },
-    title_container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        marginTop: 10,
-    },
-});

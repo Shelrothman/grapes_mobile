@@ -4,8 +4,10 @@
     starting with: lets start with the global feed i think itll be the simplest.
         <!--  // starting with the R of crud <--- did that and display_name -->
     <!-- // next: share to the global./.. the c of crud for to the global letters -->
-    NEXT :  well the Users grapes... do this in one table
-        -- so working on this, the service file first then implement it in
+    <!--// NEXT :  well the Users grapes... do this in one table -->
+        <!-- // so working on this, the service file first then implement it in -->
+    NEXT: just the cruding for the History page
+        !!! do that next HISTORY and yep
 <!-- ** and SET up the last setting pages- "about Grapes" --> <= ill do rhia lAST/later
 *****
 <!-- !!! All tHE "TODO"s throughout the src -->

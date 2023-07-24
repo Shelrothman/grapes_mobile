@@ -5,9 +5,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AuthStackParamList } from "../../types/navigation";
 import { Layout, Text, TextInput, Button, useTheme, themeColor, } from "react-native-rapi-ui";
 
-export default function ({
-    navigation,
-}: NativeStackScreenProps<AuthStackParamList, "Login">) {
+export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamList, "Login">) {
     const { isDarkmode, setTheme } = useTheme();
     const [ email, setEmail ] = useState<string>("");
     const [ password, setPassword ] = useState<string>("");

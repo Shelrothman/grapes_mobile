@@ -4,12 +4,10 @@
 
 import { StyleSheet, Text, SafeAreaView, FlatList, View } from "react-native";
 import * as grapes from '../../data/dummyGrapes.json';
-
-// TODO restructure folders
 import { HomeGrapeDay as HistoryGrapeDay } from './GrapeDay';
 // import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-
+// TODO only display the date of the grape and then on press of that, they can see the full grape day
 
 // TODO only render the last few days and then option to load more
 // * ensure it only starts fetching if this tab is pulled up and not anywhere else in the app
