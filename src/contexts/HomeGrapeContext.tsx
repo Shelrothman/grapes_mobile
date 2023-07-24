@@ -14,8 +14,8 @@ type ContextProps = {
     /** unique identifier for todays grape */
     // todaysGrape_id: string;
 
-    today_grape: GrapeResponse;
-    setToday_grape: React.Dispatch<React.SetStateAction<GrapeResponse>>;
+    today_grape: Partial<GrapeResponse>;
+    setToday_grape: React.Dispatch<React.SetStateAction<Partial<GrapeResponse>>>;
 };
 
 
@@ -29,21 +29,9 @@ export function useHomeGrapeContext() {
 
 
 export const HomeGrapeProvider = (props: Props) => {
-    // const homeService = new HomeService();
-    const { sessionUser, session } = useAuthContext();
+    const { sessionUser } = useAuthContext();
     const [ homeSwipeEnabled, setHomeSwipeEnabled ] = useState<boolean>(true);
-
     const [ today_grape, setToday_grape ] = useState<Partial<GrapeResponse>>(defaultGrape);
-
-    // new grape at the start of the app... the app needs to either grab the existing one or create a new one... 
-    // const [ todaysGrape_id, setTodaysGrape_id ] = useState<string>('');
-
-
-    // todays date in the format of 2021-08-01
-    // bc supabase uses UTC
-    // so lets make it UTC also bc uts is the same everywhere so if checking for it here or there to compare to sb it will all be the same bc its UTC
-    // const todaysDate = new Date().toISOString().split('T')[0];
-
 
     useEffect(() => {
         console.log('useEffect in HomeGrapeProvider onMount');
@@ -65,7 +53,7 @@ export const HomeGrapeProvider = (props: Props) => {
 
 
     return (
-        <HomeGrapeContext.Provider value={{ homeSwipeEnabled, setHomeSwipeEnabled }}>
+        <HomeGrapeContext.Provider value={{ homeSwipeEnabled, setHomeSwipeEnabled, today_grape }}>
             {props.children}
         </HomeGrapeContext.Provider>
     )

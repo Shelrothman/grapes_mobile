@@ -3,7 +3,6 @@ import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { my_styles } from "../../styles/my";
 import { GrapeDayLetter } from "../../types";
 import Toast, { ToastShowParams } from 'react-native-toast-message';
-
 import { HomeService } from "../../services/HomeService";
 import { useHomeGrapeContext } from "../../contexts/HomeGrapeContext";
 import { useAuthContext } from "../../contexts/AuthProvider";
@@ -34,7 +33,7 @@ export function BottomEditContainer({
 }: BottomEditContainerProps) {
     const { sessionUser } = useAuthContext();
 
-    const { setHomeSwipeEnabled } = useHomeGrapeContext();
+    const { setHomeSwipeEnabled, today_grape } = useHomeGrapeContext();
     // TODO in here we do the inserting/updating tp the db
  
 

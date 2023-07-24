@@ -1,6 +1,7 @@
+/** this is the type for rendering to the UI */
 export type Grape = {
-    item_id: number;
-    creation_date: number;
+    grape_id: string;
+    creation_date: string;
     day: GrapeDayLetter[];
 }
 

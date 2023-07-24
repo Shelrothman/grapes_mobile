@@ -21,9 +21,9 @@ export function getUTCDate() {
  * @param id {number} 
  * @returns {Grape}
  */
-export function getGrapeById(id: number): Grape | undefined {
-    return grapes.items.find(grape => grape.item_id === id);
-}
+// export function getGrapeById(id: number): Grape | undefined {
+//     return grapes.items.find(grape => grape.item_id === id);
+// }
 // * yea lets just always let them edit bc dealing with time is a pain unnessesarily
 // export function isGrapeToday(grape: Grape): boolean {
 //     const today = new Date();

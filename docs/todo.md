@@ -10,6 +10,11 @@
 *****
 <!-- !!! All tHE "TODO"s throughout the src -->
 
+
+UTC UTC UTC everywhere!
+on insert on read on every SINGLE thing
+only the TITLE string to be the users local. utc everythign else
+
 <!-- * ive begun setting up the context but not quite in use -->
 
 <!-- remove crufdt and unused files -->
