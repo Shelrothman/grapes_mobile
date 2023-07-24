@@ -6,6 +6,8 @@ import Toast, { ToastShowParams } from 'react-native-toast-message';
 import { HomeService } from "../../services/HomeService";
 import { useHomeGrapeContext } from "../../contexts/HomeGrapeContext";
 import { useAuthContext } from "../../contexts/AuthProvider";
+import { showCancelConfirmDialog } from "../../utils/GrapeAlerts";
+
 
 type BottomEditContainerProps = {
     grape_day_letter: GrapeDayLetter;
@@ -32,19 +34,10 @@ export function BottomEditContainer({
     setLoading,
 }: BottomEditContainerProps) {
     const { sessionUser } = useAuthContext();
-
     const { setHomeSwipeEnabled, today_grape } = useHomeGrapeContext();
     // TODO in here we do the inserting/updating tp the db
- 
 
     const exit = () => { setHomeSwipeEnabled!(true); setSelectedLetter(null); };
-
-    // TODO: this could be a custom hook or global service
-    const showCancelConfirmDialog = () => Alert.alert("Are you sure you want to cancel?",
-        `If you go back, your words won't be saved.`, [
-        { text: "Keep editing", style: "cancel", onPress: () => { return; } },
-        { text: "Leave without saving", onPress: () => exit() },
-    ]);
 
     // const showSaveConfirmDialog = () => Alert.alert("Are you sure you want to save?",
 
@@ -56,17 +49,17 @@ export function BottomEditContainer({
         // homeService.updateRow(grape_day_letter).then((res) => {
         // check it exists yet first bc depending on the letter it may already be there
         const toSend = {
-            letter: grape_day_letter.letter.toUpperCase(),
+            letter: grape_day_letter.letter,
             // @ts-ignore
             value: inputRef?.current?.value || '',
+            user_id: sessionUser!.user_uid,
         }
 
-        homeService.updateLetter({...grape_day_letter, user_id: sessionUser!.user_uid  }).then((res) => {
-            // console.log('res from addRow', res);
+        homeService.updateLetter(toSend).then((res) => {
+            console.log('res from updateLetter', res);
             return Toast.show({
                 type: 'success',
                 text1: `Saved your letter: ${grape_day_letter.letter}!`,
-                // text2: 'Check it out ->',
                 ...toastProps,
             });
         }).catch((err: any) => {
@@ -104,7 +97,7 @@ export function BottomEditContainer({
                 <MaterialIcons.Button name="cancel" size={30} key="Cancel"
                     color="#cb9de2" backgroundColor="transparent"
                     style={my_styles.buttons}
-                    onPress={showCancelConfirmDialog}
+                    onPress={() => showCancelConfirmDialog(exit)}
                 />
                 {/* //TODO add a confirmation button on cancle click */}
                 <MaterialCommunityIcons.Button name="content-save-check-outline" size={30}

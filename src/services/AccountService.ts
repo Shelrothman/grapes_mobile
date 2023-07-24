@@ -26,9 +26,6 @@ export class AccountService {
         return user;
     };
 
-    // !! PU here!! okay finally got this working for this particular update and yayyyy had to rls the table and then it worked. 
-    // * so now i can change all throughtout the app how the reading and stuff of the displayNames happen
-
     private changeDisplayName = async (displayVal: string) => {
         const user_id = supabase.auth.session()?.user?.id;
         if (user_id) {

@@ -1,19 +1,14 @@
 import { useContext, createContext, useState, useEffect } from 'react';
 import { HomeService } from '../services/HomeService';
 import { useAuthContext } from './AuthProvider';
-// import { getUTCDate } from '../utils';
 import { defaultGrape } from '../utils/constants';
 import { GrapeResponse } from '../types';
-// import Home from '../components/my/Home';
 
 type ContextProps = {
     /** flag to show when to disable and hide the tab bar */
     homeSwipeEnabled: boolean;
     setHomeSwipeEnabled: React.Dispatch<React.SetStateAction<boolean>>;
-    // setHomeSwipeEnabled: (enabled: boolean) => void;
-    /** unique identifier for todays grape */
-    // todaysGrape_id: string;
-
+    /** the grape for today for the user */
     today_grape: Partial<GrapeResponse>;
     setToday_grape: React.Dispatch<React.SetStateAction<Partial<GrapeResponse>>>;
 };
@@ -44,12 +39,6 @@ export const HomeGrapeProvider = (props: Props) => {
         });
         // return () => { // console.log('useEffect in HomeGrapeProvider onUnmount'); // }
     }, [ sessionUser]);
-
-
-    useEffect(() => {
-        console.log('change to today_grape', today_grape);
-    }, [ today_grape ]);
-
 
 
     return (

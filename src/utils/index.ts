@@ -1,8 +1,8 @@
+/**
+ * @fileoverview miscellanious utility functions
+ */
 
-
-import { Grape, GrapeDayLetter } from '../types';
-import * as grapes from '../data/dummyGrapes.json';
-
+import { Grape, GrapeDayLetter, GrapeResponse } from "../types";
 
 
 export function getUTCDate() {
@@ -14,6 +14,19 @@ export function getUTCDate() {
     return `${year}-${month}-${day}`;
 }
 
+const avoidArray = [ 'grape_id', 'user_id', 'created_at' ];
+
+export const resToGrape = (res: Partial<GrapeResponse>): Grape => {
+    let dayArray: any[] = Object.entries(res).map(([ key, value ]) => {
+        if (avoidArray.includes(key)) return;
+        return { letter: key, value: value as string };
+    }).filter((item) => item !== undefined);
+    return {
+        grape_id: res.grape_id!,
+        day: dayArray as GrapeDayLetter[],
+        creation_date: res.created_at!,
+    }
+};
 
 
 /**
