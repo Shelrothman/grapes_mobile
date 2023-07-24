@@ -1,4 +1,5 @@
-import { View, TextInput, Alert } from "react-native";
+import { useState } from "react";
+import { View, TextInput } from "react-native";
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { my_styles } from "../../styles/my";
 import { GrapeDayLetter } from "../../types";
@@ -8,6 +9,7 @@ import { useHomeGrapeContext } from "../../contexts/HomeGrapeContext";
 import { useAuthContext } from "../../contexts/AuthProvider";
 import { showCancelConfirmDialog } from "../../utils/GrapeAlerts";
 
+// ? is there a way in supabase to like two columns values the co,mbination of them has to be unique
 
 type BottomEditContainerProps = {
     grape_day_letter: GrapeDayLetter;
@@ -34,8 +36,11 @@ export function BottomEditContainer({
     setLoading,
 }: BottomEditContainerProps) {
     const { sessionUser } = useAuthContext();
-    const { setHomeSwipeEnabled, today_grape } = useHomeGrapeContext();
+    const { setHomeSwipeEnabled, today_grape, setToday_grape } = useHomeGrapeContext();
     // TODO in here we do the inserting/updating tp the db
+
+    const [ inputValue, setInputValue ] = useState<string>(grape_day_letter.value);
+
 
     const exit = () => { setHomeSwipeEnabled!(true); setSelectedLetter(null); };
 
@@ -43,25 +48,24 @@ export function BottomEditContainer({
 
     function handleSaveClick() {
         setLoading(true);
-        // maybe no confirm here just show the Toast... and then exit/
-        // so first it Posts the data
         const homeService = new HomeService();
-        // homeService.updateRow(grape_day_letter).then((res) => {
-        // check it exists yet first bc depending on the letter it may already be there
         const toSend = {
             letter: grape_day_letter.letter,
             // @ts-ignore
-            value: inputRef?.current?.value || '',
+            // value: inputRef?.current?.value || '',
+            value: inputValue,
             user_id: sessionUser!.user_uid,
         }
-
         homeService.updateLetter(toSend).then((res) => {
-            console.log('res from updateLetter', res);
-            return Toast.show({
-                type: 'success',
-                text1: `Saved your letter: ${grape_day_letter.letter}!`,
-                ...toastProps,
-            });
+            // console.log('res from updateLetter', res);
+            if (res) {
+                // setToday_grape!(res);
+                return Toast.show({
+                    type: 'success',
+                    text1: `Saved your letter: ${grape_day_letter.letter}!`,
+                    ...toastProps,
+                });
+            }
         }).catch((err: any) => {
             console.error(err);
             setLoading(false);
@@ -85,9 +89,10 @@ export function BottomEditContainer({
                 numberOfLines={8}
                 key={grape_day_letter.letter}
                 style={my_styles.input_text}
-                defaultValue={grape_day_letter.value}
+                defaultValue={inputValue}
                 //? value={selectedLetter.value}
                 ref={inputRef}
+                onChangeText={(text) => setInputValue(text)}
             // onChangeText={(text) => {
             // acually we should do this on click of the save
             // setMyGrapeLetter({ letter: grape_day_letter.letter, value: text });

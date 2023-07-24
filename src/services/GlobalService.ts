@@ -59,7 +59,6 @@ export class GlobalService {
             .from('shared_letters')
             .insert(letterToShare) // by default in v1 the new record is returned
         if (error) this.handleError(error);
-        // if (shared_letter) return shared_letter[0];
         if (shared_letter) return shared_letter[ 0 ];
         return null;
     };

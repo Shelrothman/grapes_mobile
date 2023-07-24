@@ -43,7 +43,7 @@ for  now i turned that off for testing -->
 
 
 <!-- TODO: convert the supabase sdk from v1 -> v2 -->
-
+https://supabase.com/docs/reference/javascript/v1/upgrade-guide
 <!--  TODO handle a user trying to ppick a userName that already exists -->
 
 

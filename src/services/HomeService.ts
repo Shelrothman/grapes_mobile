@@ -2,6 +2,7 @@ import { PostgrestError } from "@supabase/supabase-js";
 import { supabase } from "../initSupabase";
 import { GlobalGrape, RawGlobalGrape, GrapeResponse, RawGrapeDayLetter } from "../types";
 import { getUTCDate } from "../utils";
+import { TouchableNativeFeedbackBase } from "react-native";
 
 // * i cuuuud just useGlobalService and like make it agnostic to the table name
 // * but i think i like the idea of having a service for each table
@@ -16,15 +17,10 @@ import { getUTCDate } from "../utils";
  */
 export class HomeService {
 
-    private handleError(error: PostgrestError) {
+    private handleError(error: Partial<PostgrestError>) {
         console.log(error);
         throw new Error(error.message);
     }
-
-    // private doesRowExist = async (user_id: string, created_at: string): Promise<boolean> => {
-    //     const data = await this.getRow(user_id, created_at);
-    //     return data ? true : false;
-    // }
 
     private doesRowExist = async (user_id: string, utc_today: string): Promise<boolean> => {
         const { data, error } = await supabase
@@ -37,7 +33,7 @@ export class HomeService {
     }
 
 
-    getRow = async (user_id: string, created_at: string): Promise<GrapeResponse | null> => {
+    private getRow = async (user_id: string, created_at: string): Promise<GrapeResponse | null> => {
         const { data, error } = await supabase
             .from('user_grapes')
             .select('*')
@@ -46,7 +42,7 @@ export class HomeService {
         return data ? data[ 0 ] : null;
     };
 
-    addRow = async (grape: Partial<GrapeResponse>): Promise<GrapeResponse | null> => {
+    private addRow = async (grape: Partial<GrapeResponse>): Promise<GrapeResponse | null> => {
         const { data, error } = await supabase
             .from('user_grapes')
             .insert(grape) // by default in v1 the new record is returned
@@ -54,7 +50,7 @@ export class HomeService {
         return data ? data[ 0 ] : null;
     };
 
-    updateRow = async (grape: RawGlobalGrape): Promise<GrapeResponse | null> => {
+    private updateRow = async (grape: RawGlobalGrape): Promise<GrapeResponse | null> => {
         const { data, error } = await supabase
             .from('user_grapes')
             .update(grape)
@@ -81,10 +77,15 @@ export class HomeService {
      * @function upsertRow
      * @description inserts a row if it doesnt exist, updates it if it does
      */
-    upsertRow = async (partialGrape: Partial<RawGlobalGrape>): Promise<GrapeResponse | null> => {
+    private upsertRow = async (partialGrape: Partial<RawGlobalGrape>): Promise<GrapeResponse | null> => {
+        if (!partialGrape.user_id) this.handleError({ message: 'user_id is required' });
+        const existence = await this.doesRowExist(partialGrape.user_id!, getUTCDate());
+        if (!existence) { }
         const { data, error } = await supabase
             .from('user_grapes')
-            .upsert(partialGrape)
+            // .upsert(partialGrape)
+            .update(partialGrape)
+            .match({ user_id: partialGrape.user_id, created_at: getUTCDate() })
         if (error) this.handleError(error);
         return data ? data[ 0 ] : null;
     }
@@ -92,15 +93,22 @@ export class HomeService {
 
     static getOrCreateToday = async (user_id: string): Promise<GrapeResponse | null> => {
         let resVal: GrapeResponse | null = null;
-        const homeService = new HomeService();
-        const today = getUTCDate();
-        console.log('today', today)
-        const existence = await homeService.doesRowExist(user_id, today);
-        console.log('existence of todays grape', existence);
-        if (existence) {
-            resVal = await homeService.getRow(user_id, today);
-        } else {
-            resVal = await homeService.addRow({ user_id, created_at: today });
+        try {
+            const homeService = new HomeService();
+            const today = getUTCDate();
+            console.log('today', today)
+            const existence = await homeService.doesRowExist(user_id, today);
+            console.log('existence of todays grape', existence);
+            if (existence) {
+                resVal = await homeService.getRow(user_id, today);
+            } else {
+                resVal = await homeService.addRow({ user_id, created_at: today });
+            }
+        } catch (error) {
+            // this should really only catch if duplcation is attempted but we catch to be sure
+            // console.log('in ze catch')
+            // console.log(error);
+            // console.log(error.message);
         }
         return resVal;
     }
