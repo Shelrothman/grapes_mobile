@@ -35,7 +35,7 @@ export const HomeGrapeProvider = (props: Props) => {
         // console.log('useEffect in HomeGrapeProvider onMount');
         if (!sessionUser) return;
         HomeService.getOrCreateToday(sessionUser!.user_uid).then((res) => {
-            if (res) setToday_grape(res);
+            if (res !== null) setToday_grape(res);
         }).catch((err) => {
             // console.error(err);
             // catching but not doing anything with it...

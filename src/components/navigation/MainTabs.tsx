@@ -36,6 +36,10 @@ const MainTabs = () => {
 
     const tabBarOptions = { tabBarShowLabel: false, };
 
+    // ? how would i pass props to one of the Components in the Tab.Screen?
+    // like this: <Tab.Screen name="Home" component={Home} options={{ ...tabBarOptions, swipeEnabled: homeSwipeEnabled }} />
+
+
     return (
         <>
             <Tab.Navigator

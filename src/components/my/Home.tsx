@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import { View, Text, SafeAreaView } from 'react-native';
 import { MyGrape } from "./MyGrape";
 import { resToGrape } from "../../utils";
@@ -16,40 +16,31 @@ export default function Home() {
     const homeService = new HomeService();
     const { today_grape } = useHomeGrapeContext();
     const [ selectedLetter, setSelectedLetter ] = useState<GrapeDayLetter | null>(null);
-
+    const [ grape, setGrape ] = useState<Grape | null>(null);
+    const [ isLoading, setIsLoading ] = useState<boolean>(true);
+    useRefreshOnFocus(fetchDataInit);
     // const grape = today_grape ? resToGrape(today_grape) : defaultGrape_UI;
 
-    // useEffect(() => {
-    //     fetchData();
-    // }, []);
-    const [ grape, setGrape ] = useState<Grape>(today_grape ? resToGrape(today_grape) : defaultGrape_UI);
-    const [ loading, setLoading ] = useState<boolean>(false);
-    useRefreshOnFocus(fetchData, setLoading);
-    // useRefreshOnFocus(fetchDataOnRefresh);
+    useEffect(() => {
+        fetchDataInit();
+    }, []);
 
-    // TODO come back and hook up the loading shiz
-    // async function fetchDataOnRefresh()  {
-    //     setLoading(true);
-    //     // fetchData().then(() => setLoading(false));
-    //     await fetchData();
-    // };
+    // const [ grape, setGrape ] = useState<Grape>(today_grape ? resToGrape(today_grape) : defaultGrape_UI);
 
-    async function fetchData() {
-        // setLoading(true);
-        if (!grape || !grape.grape_id) return;
-        const response = await homeService.getRowByGrapeId(grape.grape_id);
-        if (response) {
-            const grape = resToGrape(response as GrapeResponse);
-            setGrape(grape);
-            setLoading(false);
+    async function fetchDataInit() {
+        try {
+            if (!today_grape || !today_grape.grape_id) return;
+            const response = await homeService.getRowByGrapeId(today_grape.grape_id);
+            if (response) setGrape(resToGrape(response));
+            setIsLoading(false);
+        } catch (error) {
+            setIsLoading(false);
+            console.error('Error fetching data:', error);
         }
-        setLoading(false);
     }
-
-
-    if (!grape) return <SafeAreaView style={my_styles.main_container}>
-        <Text>404 Not Found</Text>
-    </SafeAreaView>;
+    // if (!grape) return <SafeAreaView style={my_styles.main_container}>
+    //     <Text>404 Not Found</Text>
+    // </SafeAreaView>;
 
     const iconProps = { letter: selectedLetter?.letter || '', color: "#a8e4a0", size: 35 };
 
@@ -57,7 +48,7 @@ export default function Home() {
 
     return (
         <SafeAreaView style={my_styles.home_container}>
-            {loading ? <Loading /> : (
+            {isLoading ? <Loading /> : grape && (
                 <View style={my_styles.main_container}>
                     <SafeAreaView style={my_styles.header_container}>
                         {selectedLetter ? (
