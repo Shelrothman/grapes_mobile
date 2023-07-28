@@ -1,21 +1,25 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text } from 'react-native';
 import { Grape, GrapeDayLetter } from '../../types';
+import { history_styles } from '../../styles/history';
 
 type HomeGrapeLetterRowProps = {
     grape: Grape;
 };
 
-
+/**
+ * a chart/table-like component that displays one grape day
+ * i.e. each letter
+*/
 export function HomeGrapeBox({ grape }: HomeGrapeLetterRowProps) {
     return (
         <>
             {grape.day.map((day: GrapeDayLetter, x: number) => (
-                <View style={x % 2 == 0 ? styles.row : styles.alt_row} key={day.letter}>
-                    <View style={styles.letterColumn}>
-                        <Text style={styles.letterColText}>{day.letter.toUpperCase()}</Text>
+                <View style={x % 2 == 0 ? history_styles.row : history_styles.alt_row} key={day.letter}>
+                    <View style={history_styles.letterColumn}>
+                        <Text style={history_styles.letterColText}>{day.letter.toUpperCase()}</Text>
                     </View>
-                    <View style={styles.letterValue}>
-                        <Text style={styles.letterValueText}>
+                    <View style={history_styles.letterValue}>
+                        <Text style={history_styles.letterValueText}>
                             {day.value}
                         </Text>
                     </View>
@@ -24,46 +28,3 @@ export function HomeGrapeBox({ grape }: HomeGrapeLetterRowProps) {
         </>
     )
 }
-
-const styles = StyleSheet.create({
-    row: {
-        flexDirection: 'row',
-        borderColor: '#4E1E66',
-        borderBottomWidth: 0.5,
-    },
-    alt_row: {
-        flexDirection: 'row',
-        borderColor: '#4E1E66',
-        borderBottomWidth: 0.5,
-    },
-    letterColumn: {
-        width: 50,
-        borderRightWidth: 0.5,
-        borderColor: '#4E1E66',
-        justifyContent: 'center',
-        padding: 10,
-        alignItems: 'center',
-    },
-    letterColText: {
-        color: '#4E1E66',
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    letterValue: {
-        // padding: 10,
-        marginLeft: 10,
-        // make it so the inner words wrap: https://stackoverflow.com/questions/42284429/how-to-make-text-wrap-inside-a-view-in-react-native
-        wordWrap: 'break-all',
-        wordBreak: 'break-all',
-        flex: 1,
-    },
-    letterValue_alt: {
-        wordWrap: 'break-word',
-        padding: 10,
-    },
-    letterValueText: {
-        fontStyle: 'italic',
-        fontWeight: 'bold',
-        color: '#4E1E66',
-    }
-});
