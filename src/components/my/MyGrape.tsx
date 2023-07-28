@@ -7,12 +7,14 @@ import Loading from "../../utils/Loading";
 
 type MyGrapeProps = {
     grape: Grape;
+    /** setGrape updates the grape in Home */
+    setGrape: React.Dispatch<React.SetStateAction<Grape | null>>;
     /** shows the selected letter to be edited */
     selectedLetter: GrapeDayLetter | null;
     setSelectedLetter: React.Dispatch<React.SetStateAction<GrapeDayLetter | null>>;
 };
 
-export function MyGrape({ grape, selectedLetter, setSelectedLetter }: MyGrapeProps) {
+export function MyGrape({ grape, selectedLetter, setSelectedLetter, setGrape }: MyGrapeProps) {
     const [ loading, setLoading ] = useState<boolean>(false); // look at u how far youve come smartie pants
 
 
@@ -27,6 +29,7 @@ export function MyGrape({ grape, selectedLetter, setSelectedLetter }: MyGrapePro
                             setLoading={setLoading}
                             setSelectedLetter={setSelectedLetter}
                             selectedLetter={selectedLetter}
+                            setGrape={setGrape}
                         />} showsVerticalScrollIndicator={false}
                     />) : (
                     <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} style={{ flex: 1 }}>
@@ -37,6 +40,7 @@ export function MyGrape({ grape, selectedLetter, setSelectedLetter }: MyGrapePro
                                     grape_day_letter={selectedLetter}
                                     selectedLetter={selectedLetter}
                                     setSelectedLetter={setSelectedLetter}
+                                    setGrape={setGrape}
                                 />
                             </TouchableWithoutFeedback>
                             <ShareComponent

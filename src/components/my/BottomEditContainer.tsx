@@ -2,15 +2,18 @@ import { useState } from "react";
 import { View, TextInput } from "react-native";
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { my_styles } from "../../styles/my";
-import { GrapeDayLetter } from "../../types";
+import { Grape, GrapeDayLetter } from "../../types";
 import Toast, { ToastShowParams } from 'react-native-toast-message';
 import { HomeService } from "../../services/HomeService";
 import { useHomeGrapeContext } from "../../contexts/HomeGrapeContext";
 import { useAuthContext } from "../../contexts/AuthProvider";
 import { showCancelConfirmDialog } from "../../utils/GrapeAlerts";
+import { resToGrape } from "../../utils";
 
 
 type BottomEditContainerProps = {
+    /** setGrape updates the grape in Home */
+    setGrape: React.Dispatch<React.SetStateAction<Grape | null>>;
     grape_day_letter: GrapeDayLetter;
     setSelectedLetter: React.Dispatch<React.SetStateAction<GrapeDayLetter | null>>;
     // selectedLetter: GrapeDayLetter | null;
@@ -32,6 +35,7 @@ export function BottomEditContainer({
     setSelectedLetter,
     inputRef,
     setLoading,
+    setGrape,
 }: BottomEditContainerProps) {
     const { sessionUser } = useAuthContext();
     const { setHomeSwipeEnabled } = useHomeGrapeContext();
@@ -61,7 +65,10 @@ export function BottomEditContainer({
             user_id: sessionUser!.user_uid,
         }
         homeService.updateLetter(toSend).then((res) => {
-            if (res !== null) return successToast();
+            if (res !== null) {
+                setGrape(resToGrape(res)) // set the grape in Home so that it updates before the refetch
+                return successToast();
+            }
             else return errorToast();
         }).catch((err: any) => {
             console.error(err);

@@ -4,7 +4,7 @@
  */
 import { useRef, useEffect } from "react";
 import { View, Text, TextInput, Pressable } from 'react-native';
-import { GrapeDayLetter } from '../../types';
+import { Grape, GrapeDayLetter } from '../../types';
 import { usePressAnimation } from "../../hooks/usePressAnimation";
 import { BottomEditContainer } from "./BottomEditContainer";
 import { GRAPE_DAY } from "../../utils/constants";
@@ -14,6 +14,8 @@ import { ShareComponent } from "./Share";
 import { useHomeGrapeContext } from "../../contexts/HomeGrapeContext";
 
 type MyGrapeLetterProps = {
+    /** setGrape updates the grape in Home */
+    setGrape: React.Dispatch<React.SetStateAction<Grape | null>>;
     grape_day_letter: GrapeDayLetter;
     /** setSelectedLetter selects active editable input so that it displays */
     setSelectedLetter: React.Dispatch<React.SetStateAction<GrapeDayLetter | null>>;
@@ -23,7 +25,7 @@ type MyGrapeLetterProps = {
 
 
 
-export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLetter, setLoading }: MyGrapeLetterProps) {
+export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLetter, setLoading, setGrape }: MyGrapeLetterProps) {
     const inputRef = useRef<TextInput>(null);
     const { handlePressIn, handlePressOut, pressStyle } = usePressAnimation();
     const { setHomeSwipeEnabled } = useHomeGrapeContext();
@@ -81,6 +83,7 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
                 // selectedLetter={selectedLetter}
                 inputRef={inputRef}
                 setLoading={setLoading}
+                setGrape={setGrape}
             />}
         </View>
     )

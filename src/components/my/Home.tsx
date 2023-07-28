@@ -10,7 +10,7 @@ import { HomeService } from "../../services/HomeService";
 import Loading from "../../utils/Loading";
 import { useAuthContext } from "../../contexts/AuthProvider";
 
-
+// TODO only problem now is that when u return from an update to a letter, it doesnt auto update.. it only will update when leave and return.... so do soemnthign...
 
 export default function Home() {
     const { sessionUser } = useAuthContext();
@@ -19,7 +19,7 @@ export default function Home() {
     const [ isLoading, setIsLoading ] = useState<boolean>(true);
     const [ isError, setIsError ] = useState<boolean>(false);
 
-    // * memoize the fetchData function so that it only runs when the sessionUser changes or when the screen is focused
+    // * memoize the fetchData function so that it only runs when the sessionUser changes or when the screen is re-focused
     useFocusEffect(
         React.useCallback(() => {
             fetchData().then(() => setIsLoading(false));
@@ -33,7 +33,6 @@ export default function Home() {
         console.info('inside fetchData in Home')
         try {
             if (sessionUser == null || sessionUser == undefined) return;
-            // if (grape !== null) return; // no we dont want this bc it will prevent the user from seeing their updated grape when they come back to the home screen
             const response = await HomeService.getOrCreateToday(sessionUser!.user_uid);
             if (response !== null) setGrape(resToGrape(response));
         } catch (error) {
@@ -63,7 +62,9 @@ export default function Home() {
                             </Text>
                         ) : <Text style={my_styles.date_title}> Today: {new Date().toDateString()} </Text>}
                     </SafeAreaView>
-                    <MyGrape grape={grape} selectedLetter={selectedLetter} setSelectedLetter={setSelectedLetter} />
+                    <MyGrape grape={grape} selectedLetter={selectedLetter} setSelectedLetter={setSelectedLetter}
+                        setGrape={setGrape} 
+                    />
                 </View>
             )}
         </SafeAreaView>

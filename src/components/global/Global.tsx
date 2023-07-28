@@ -17,20 +17,14 @@ export function Global() {
     const globalService = new GlobalService();
     const [ globalData, setGlobalData ] = useState<RawSharedLetter[] | null>(null);
     const [ isLoading, setIsLoading ] = useState(true);
-    // Use the useRefreshOnFocus hook to refetch data when the component gains focus.
-    // useRefreshOnFocus(fetchData); // this is too much for my needs its not a live feed, it refetches if it comes into focus....
-    // Initial fetch when the component mounts
-    // useEffect(() => { fetchData(); }, []);
 
-// * ah now this runs only when the screen is refocused so will work right after a user posts a letter
+
+    // * ah now this runs only when the screen is refocused so will work right after a user posts a letter
     useFocusEffect(
         React.useCallback(() => {
             fetchData().then(() => setIsLoading(false));
-            return () => { 
-                // setSelectedLetter(null);
-                setGlobalData(null);
-            };
-        }, [  ])
+            return () => { setGlobalData(null); };
+        }, [])
     );
 
     const copyToClipboard = async (text: string) => {
@@ -43,18 +37,11 @@ export function Global() {
         });
     };
 
-    // useEffect(() => {
-    //     fetchData();
-    // }, []);
-
     async function fetchData() {
         console.info('inside fetchData in Global')
         try {
-            // if (globalData) return;
             const response = await globalService.getAllRows();
-            // console.log('response from global fetch:', response);
             setGlobalData(response);
-            // setIsLoading(false);
         } catch (error) {
             setIsLoading(false);
             console.error('Error fetching data:', error);
