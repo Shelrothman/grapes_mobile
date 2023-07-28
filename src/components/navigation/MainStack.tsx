@@ -13,7 +13,7 @@ const Main = () => {
 
     return (
         <HomeGrapeProvider>
-            <MainStack.Navigator screenOptions={{ headerShown: false, }} >
+            <MainStack.Navigator screenOptions={{ headerShown: false }} >
                 <MainStack.Screen name="MainTabs" component={MainTabs} />
             </MainStack.Navigator>
         </HomeGrapeProvider>

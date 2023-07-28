@@ -13,7 +13,9 @@ import { useHomeGrapeContext } from '../../contexts/HomeGrapeContext';
 
 
 const Tab = createMaterialTopTabNavigator();
-const tabBarOptions = { tabBarShowLabel: false, };
+// const tabBarOptions = { tabBarShowLabel: false, };
+// ? maybe we disable swiping everywhere so it doesnt confuse people
+const tabBarOptions = { tabBarShowLabel: false, swipeEnabled: false, };
 
 const MainTabs = () => {
     const { homeSwipeEnabled } = useHomeGrapeContext();
@@ -47,7 +49,8 @@ const MainTabs = () => {
                     },
                     tabBarIndicatorStyle: { backgroundColor: '#cb9de2', height: 5 },
                 })}>
-                <Tab.Screen name="Home" component={Home} options={{ ...tabBarOptions, swipeEnabled: homeSwipeEnabled }} />
+                <Tab.Screen name="Home" component={Home} options={{ ...tabBarOptions }} />
+                {/* //! <Tab.Screen name="Home" component={Home} options={{ ...tabBarOptions, swipeEnabled: homeSwipeEnabled }} /> */}
                 <Tab.Screen name="Global" component={Global} options={tabBarOptions} />
                 <Tab.Screen name="More" component={SettingsStackScreen} options={tabBarOptions} />
                 <Tab.Screen name="History" component={History} options={tabBarOptions} />

@@ -1,7 +1,9 @@
 import { useCallback, useRef } from "react";
 import { useFocusEffect } from '@react-navigation/native'
 
+// !!! DO NOT USE THIS
 
+// it keeps reruning and reruniong for every and ever which would be great for somehting like a live feed but not for this dsuuuuuug
 
 /**
  * @description this hook will call the provided refresh function
@@ -11,11 +13,8 @@ import { useFocusEffect } from '@react-navigation/native'
  */
 export function useRefreshOnFocus<T>(
     refetch: () => Promise<T>,
-    setLoading?: React.Dispatch<React.SetStateAction<boolean>>
 ) {
     const firstTimeRef = useRef(true)
-    // if (setLoading) setLoading(true);
-
     useFocusEffect(
         useCallback(() => {
             if (firstTimeRef.current) {

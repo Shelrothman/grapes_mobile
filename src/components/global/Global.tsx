@@ -5,7 +5,7 @@ import Toast from 'react-native-toast-message';
 import { GlobalService } from '../../services/GlobalService';
 import * as Clipboard from 'expo-clipboard';
 import { RawSharedLetter } from '../../types';
-import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus';
+// import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus';
 import { global_styles } from '../../styles/global';
 
 
@@ -17,9 +17,11 @@ export function Global() {
     const [ globalData, setGlobalData ] = useState<RawSharedLetter[] | null>(null);
     const [ isLoading, setIsLoading ] = useState(true);
     // Use the useRefreshOnFocus hook to refetch data when the component gains focus.
-    useRefreshOnFocus(fetchData);
+    // useRefreshOnFocus(fetchData);
     // Initial fetch when the component mounts
-    useEffect(() => { fetchData(); }, []);
+    // useEffect(() => { fetchData(); }, []);
+
+// ! omg this is so not good.. it just runs the request constantly like over and over im watching it in the console... wtf i thiought its just once when the screen is focused
 
     const copyToClipboard = async (text: string) => {
         await Clipboard.setStringAsync(text);
@@ -31,8 +33,13 @@ export function Global() {
         });
     };
 
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     async function fetchData() {
         try {
+            if (globalData) return;
             const response = await globalService.getAllRows();
             // console.log('response from global fetch:', response);
             setGlobalData(response);

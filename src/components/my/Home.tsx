@@ -1,4 +1,4 @@
-import { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment, useEffect } from "react";
 import { View, Text, SafeAreaView } from 'react-native';
 import { MyGrape } from "./MyGrape";
 import { resToGrape } from "../../utils";
@@ -10,34 +10,46 @@ import { defaultGrape_UI } from "../../utils/constants";
 import { useRefreshOnFocus } from "../../hooks/useRefreshOnFocus";
 import { HomeService } from "../../services/HomeService";
 import Loading from "../../utils/Loading";
+import { useAuthContext } from "../../contexts/AuthProvider";
+
+import { useFocusEffect } from "@react-navigation/native";
 
 
 export default function Home() {
-    const homeService = new HomeService();
-    const { today_grape } = useHomeGrapeContext();
+    // const { today_grape } = useHomeGrapeContext();
+    const { sessionUser } = useAuthContext();
     const [ selectedLetter, setSelectedLetter ] = useState<GrapeDayLetter | null>(null);
     const [ grape, setGrape ] = useState<Grape | null>(null);
     const [ isLoading, setIsLoading ] = useState<boolean>(true);
-    useRefreshOnFocus(fetchDataInit);
+    const [ isError, setIsError ] = useState<boolean>(false);
+
     // const grape = today_grape ? resToGrape(today_grape) : defaultGrape_UI;
 
-    useEffect(() => {
-        fetchDataInit();
-    }, []);
+    // * memoize the fetchData function so that it only runs when the sessionUser changes or when the screen is focused
+    useFocusEffect(
+        React.useCallback(() => {
+            // Do something when the screen is focused
+            fetchData().then(() => setIsLoading(false));
+            return () => { setSelectedLetter(null); };
+        }, [ sessionUser ])
+    );
 
-    // const [ grape, setGrape ] = useState<Grape>(today_grape ? resToGrape(today_grape) : defaultGrape_UI);
+    // * okay yay only seeing 4 requests in network which makes sense bc two for in dev mode and each of those has two fetching taking pkace... so i cud look at reducing threer.. in HomeService
 
-    async function fetchDataInit() {
+    async function fetchData() {
+        console.info('inside fetchData in Home')
         try {
-            if (!today_grape || !today_grape.grape_id) return;
-            const response = await homeService.getRowByGrapeId(today_grape.grape_id);
-            if (response) setGrape(resToGrape(response));
-            setIsLoading(false);
+            if (sessionUser == null || sessionUser == undefined) return;
+            // if (grape !== null) return; // no we dont want this bc it will prevent the user from seeing their updated grape when they come back to the home screen
+            const response = await HomeService.getOrCreateToday(sessionUser!.user_uid);
+            if (response !== null) setGrape(resToGrape(response));
         } catch (error) {
             setIsLoading(false);
             console.error('Error fetching data:', error);
+            setIsError(true);
         }
     }
+
 
 
     const iconProps = { letter: selectedLetter?.letter || '', color: "#a8e4a0", size: 35 };
@@ -46,7 +58,10 @@ export default function Home() {
 
     return (
         <SafeAreaView style={my_styles.home_container}>
-            {isLoading ? <Loading /> : grape && (
+            {isLoading ? <Loading /> : isError ? (<View style={my_styles.main_container}>
+                <Text>Internal Server Error</Text>
+                <Text>Please try again later</Text>
+            </View>) : grape && (
                 <View style={my_styles.main_container}>
                     <SafeAreaView style={my_styles.header_container}>
                         {selectedLetter ? (
