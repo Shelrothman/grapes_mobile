@@ -80,7 +80,6 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
             </View> : <BottomEditContainer
                 grape_day_letter={grape_day_letter}
                 setSelectedLetter={setSelectedLetter}
-                // selectedLetter={selectedLetter}
                 inputRef={inputRef}
                 setLoading={setLoading}
                 setGrape={setGrape}

@@ -2,7 +2,7 @@ import { PostgrestError } from "@supabase/supabase-js";
 import { supabase } from "../initSupabase";
 import { RawGlobalGrape, GrapeResponse, RawGrapeDayLetter } from "../types";
 import { getUTCDate } from "../utils";
-import useCachedResources from "react-native-rapi-ui/hooks/useCachedResources";
+// import useCachedResources from "react-native-rapi-ui/hooks/useCachedResources";
 // TODO some caching would be helpful here
 
 

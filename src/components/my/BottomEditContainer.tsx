@@ -45,7 +45,7 @@ export function BottomEditContainer({
 
     const successToast = () => Toast.show({
         type: 'success',
-        text1: `Saved your letter: ${grape_day_letter.letter}!`,
+        text1: `Saved your letter: ${grape_day_letter.letter.toUpperCase()}!`,
         ...toastProps,
     });
 
@@ -73,12 +73,7 @@ export function BottomEditContainer({
         }).catch((err: any) => {
             console.error(err);
             setLoading(false);
-            return Toast.show({
-                type: 'error',
-                text1: 'Error saving letter!',
-                text2: 'Try again later',
-                ...toastProps,
-            });
+            return errorToast();
         }).finally(() => { setLoading(false); exit(); });
     }
 
