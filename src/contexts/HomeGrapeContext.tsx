@@ -30,25 +30,6 @@ export const HomeGrapeProvider = (props: Props) => {
     const [ homeSwipeEnabled, setHomeSwipeEnabled ] = useState<boolean>(true);
     // const [ today_grape, setToday_grape ] = useState<Partial<GrapeResponse>>(defaultGrape);
 
-    // // TODO figure out why this attempts to creates two rows in the db and not one
-    // // * the db now has constraints to prevent this but it still shouldn't be happening
-
-    // useEffect(() => {
-    //     // console.log('useEffect in HomeGrapeProvider onMount');
-    //     if (!sessionUser) return;
-    //     HomeService.getOrCreateToday(sessionUser!.user_uid).then((res) => {
-    //         if (res !== null) setToday_grape(res);
-    //     }).catch((err) => {
-    //         // console.error(err);
-    //         // catching but not doing anything with it...
-    //     });
-    //     // return () => { // console.log('useEffect in HomeGrapeProvider onUnmount'); // }
-    // }, [ sessionUser ]);
-
-    // useEffect(() => {
-    //     console.log('change to today_grape', today_grape)
-    // }, [ today_grape ]);
-
 
     return (
         <HomeGrapeContext.Provider value={{ homeSwipeEnabled, setHomeSwipeEnabled }}>

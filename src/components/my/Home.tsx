@@ -1,34 +1,27 @@
-import React, { useState, Fragment, useEffect } from "react";
+import React, { useState, Fragment } from "react";
 import { View, Text, SafeAreaView } from 'react-native';
+import { useFocusEffect } from "@react-navigation/native";
 import { MyGrape } from "./MyGrape";
 import { resToGrape } from "../../utils";
 import { GrapeIcons } from "../../utils/Icons";
-import { Grape, GrapeDayLetter, GrapeResponse } from "../../types";
+import { Grape, GrapeDayLetter } from "../../types";
 import { my_styles } from "../../styles/my";
-import { useHomeGrapeContext } from "../../contexts/HomeGrapeContext";
-import { defaultGrape_UI } from "../../utils/constants";
-import { useRefreshOnFocus } from "../../hooks/useRefreshOnFocus";
 import { HomeService } from "../../services/HomeService";
 import Loading from "../../utils/Loading";
 import { useAuthContext } from "../../contexts/AuthProvider";
 
-import { useFocusEffect } from "@react-navigation/native";
 
 
 export default function Home() {
-    // const { today_grape } = useHomeGrapeContext();
     const { sessionUser } = useAuthContext();
     const [ selectedLetter, setSelectedLetter ] = useState<GrapeDayLetter | null>(null);
     const [ grape, setGrape ] = useState<Grape | null>(null);
     const [ isLoading, setIsLoading ] = useState<boolean>(true);
     const [ isError, setIsError ] = useState<boolean>(false);
 
-    // const grape = today_grape ? resToGrape(today_grape) : defaultGrape_UI;
-
     // * memoize the fetchData function so that it only runs when the sessionUser changes or when the screen is focused
     useFocusEffect(
         React.useCallback(() => {
-            // Do something when the screen is focused
             fetchData().then(() => setIsLoading(false));
             return () => { setSelectedLetter(null); };
         }, [ sessionUser ])
@@ -59,8 +52,8 @@ export default function Home() {
     return (
         <SafeAreaView style={my_styles.home_container}>
             {isLoading ? <Loading /> : isError ? (<View style={my_styles.main_container}>
-                <Text>Internal Server Error</Text>
-                <Text>Please try again later</Text>
+                <Text style={my_styles.date_title}>Internal Server Error</Text>
+                <Text style={my_styles.date_title}>Please try again later</Text>
             </View>) : grape && (
                 <View style={my_styles.main_container}>
                     <SafeAreaView style={my_styles.header_container}>

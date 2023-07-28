@@ -2,6 +2,8 @@ import { PostgrestError } from "@supabase/supabase-js";
 import { supabase } from "../initSupabase";
 import { RawGlobalGrape, GrapeResponse, RawGrapeDayLetter } from "../types";
 import { getUTCDate } from "../utils";
+import useCachedResources from "react-native-rapi-ui/hooks/useCachedResources";
+// TODO some caching would be helpful here
 
 
 // * i cuuuud just useGlobalService and like make it agnostic to the table name
@@ -40,14 +42,14 @@ export class HomeService {
         return data ? data[ 0 ] : null;
     };
 
-    getRowByGrapeId = async (grape_id: string): Promise<GrapeResponse | null> => {
-        const { data, error } = await supabase
-            .from('user_grapes')
-            .select('*')
-            .match({ grape_id })
-        if (error) this.handleError(error);
-        return data ? data[ 0 ] : null;
-    };
+    // private getRowByGrapeId = async (grape_id: string): Promise<GrapeResponse | null> => {
+    //     const { data, error } = await supabase
+    //         .from('user_grapes')
+    //         .select('*')
+    //         .match({ grape_id })
+    //     if (error) this.handleError(error);
+    //     return data ? data[ 0 ] : null;
+    // };
 
     private addRow = async (grape: Partial<GrapeResponse>): Promise<GrapeResponse | null> => {
         const { data, error } = await supabase
