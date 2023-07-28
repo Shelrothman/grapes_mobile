@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { Pressable, StyleSheet } from 'react-native';
 
 
-export function usePressAnimation() {
+export function usePressAnimation(color?: string) {
 
     const [ isPressed, setIsPressed ] = useState<boolean>(false);
     const handlePressIn = () => setIsPressed(true);
@@ -15,7 +15,7 @@ export function usePressAnimation() {
 
     const pressStyle = StyleSheet.create({
         pressed: {
-            backgroundColor: '#4E1E66',
+            backgroundColor: color ? color : '#4E1E66',
             borderRadius: 10,
             padding: 7,
         },

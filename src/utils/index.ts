@@ -5,8 +5,8 @@
 import { Grape, GrapeDayLetter, GrapeResponse } from "../types";
 
 
-export function getUTCDate() {
-    const now = new Date();
+export function getUTCDate(next?: string) {
+    const now = !next ? new Date() : new Date(next);
     const year = now.getUTCFullYear();
     const month = String(now.getUTCMonth() + 1).padStart(2, '0');
     const day = String(now.getUTCDate()).padStart(2, '0');
@@ -28,20 +28,18 @@ export const resToGrape = (res: Partial<GrapeResponse>): Grape => {
     }
 };
 
-
 /**
- * 
- * @param id {number} 
- * @returns {Grape}
+ * @function buildDateArray
+ * @description builds an array of dates from today to the past 10 days
+ * @returns {string[]} array of dates in the format YYYY-MM-DD
  */
-// export function getGrapeById(id: number): Grape | undefined {
-//     return grapes.items.find(grape => grape.item_id === id);
-// }
-// * yea lets just always let them edit bc dealing with time is a pain unnessesarily
-// export function isGrapeToday(grape: Grape): boolean {
-//     const today = new Date();
-//     const todayString = today.toDateString();
-//     const grapeDate = new Date(grape.creation_date);
-//     const grapeDateString = grapeDate.toDateString();
-//     return todayString === grapeDateString;
-// }
+export function buildDateArray(){
+    let dateArray: string[] = [];
+    let startDay = new Date();
+    for (let i = 0; i < 10; i++) {
+        let date = getUTCDate(startDay.toISOString());
+        dateArray.push(date);
+        startDay.setDate(startDay.getDate() - 1);
+    }
+    return dateArray;
+}

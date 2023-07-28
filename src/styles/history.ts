@@ -20,7 +20,7 @@ export const history_styles = StyleSheet.create({
         borderColor: '#4E1E66',
         backgroundColor: '#8ABDAA',
         alignContent: 'center',
-        borderWidth: 2.5,
+        // borderWidth: 2.5,
         minWidth: '95%',
         maxWidth: '95%',
         // ! important that if ya wanna change these widths, have to change in HomeGrapeBox.tsx too
@@ -65,5 +65,17 @@ export const history_styles = StyleSheet.create({
         fontStyle: 'italic',
         fontWeight: 'bold',
         color: '#4E1E66',
+    },
+    date_text: {
+        color: '#cb9de2', fontWeight: 'bold',
+    },
+    date_container: {
+        alignItems: 'center', marginBottom: 10,
+        backgroundColor: '#4E1E66',
+        width: '95%',
+        padding: 10,
+        borderColor: '#cb9de2',
+        borderWidth: 1,
+        borderRadius: 10,
     }
 });

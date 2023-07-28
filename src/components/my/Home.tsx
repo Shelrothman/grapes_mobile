@@ -35,6 +35,7 @@ export default function Home() {
             if (sessionUser == null || sessionUser == undefined) return;
             const response = await HomeService.getOrCreateToday(sessionUser!.user_uid);
             if (response !== null) setGrape(resToGrape(response));
+            // else setIsError(true); //? do we do this?
         } catch (error) {
             setIsLoading(false);
             console.error('Error fetching data:', error);

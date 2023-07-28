@@ -1,21 +1,24 @@
-/** 
- * @description users history of past grape days
- */
-
+import { useState } from "react";
 import { history_styles } from "../../styles/history";
 import { Text, SafeAreaView, FlatList, View } from "react-native";
 import * as grapes from '../../data/dummyGrapes.json';
 import { HistoryGrapeDay } from './GrapeDay';
-// import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { buildDateArray } from "../../utils";
+import { GrapeDayLetter } from "../../types";
 
-// TODO only display the date of the grape and then on press of that, they can see the full grape day
+// TODO only one opened at a time so when a new one opens, the other closes
 
-// TODO only render the last few days and then option to load more
-// * ensure it only starts fetching if this tab is pulled up and not anywhere else in the app
-// do this in global feed also...
-
-
+/** 
+ * @description users history page of their past grape days
+ */
 export default function History() {
+
+    const [ dates, setDates ] = useState<string[]>([...buildDateArray(), 'Load More Button']);
+    /** the expanded day being viewed */
+    const [ viewLetters, setViewLetters ] = useState<GrapeDayLetter[] | null>(null);
+
+
+
 
     return (
         <SafeAreaView style={history_styles.container}>
@@ -23,10 +26,17 @@ export default function History() {
                 <Text style={history_styles.title}>My Past G.R.A.P.E.S</Text>
             </View>
             <FlatList
-                data={grapes.items}
-                renderItem={({ item }) => <HistoryGrapeDay grape={item} />}
+                // data={grapes.items}
+                data={dates.map(date => ({ creation_date: date, grape_id: "fpp", day: viewLetters }))}
+                renderItem={({ item }) => <HistoryGrapeDay 
+                    date={item.creation_date}
+                    grape_id={item.grape_id}
+                    day={item.day}
+                    setDay={setViewLetters}
+                />}
                 showsVerticalScrollIndicator={false}
             />
+            <Text>Load More Button here</Text>
         </SafeAreaView>
     );
 }

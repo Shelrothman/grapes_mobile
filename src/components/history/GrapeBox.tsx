@@ -2,15 +2,13 @@ import { View, Text } from 'react-native';
 import { Grape, GrapeDayLetter } from '../../types';
 import { history_styles } from '../../styles/history';
 
-type HomeGrapeLetterRowProps = {
-    grape: Grape;
-};
+type HomeGrapeLetterRowProps = { grape: Grape; };
 
 /**
  * a chart/table-like component that displays one grape day
  * i.e. each letter
 */
-export function HomeGrapeBox({ grape }: HomeGrapeLetterRowProps) {
+export function HistoryGrapeBox({ grape }: HomeGrapeLetterRowProps) {
     return (
         <>
             {grape.day.map((day: GrapeDayLetter, x: number) => (
