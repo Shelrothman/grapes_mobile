@@ -21,6 +21,8 @@ type BottomEditContainerProps = {
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+
+
 // TODO need to add limit to amount of characters in the input
 
 // TODO this could be a constant
@@ -36,12 +38,27 @@ export function BottomEditContainer({
     inputRef,
     setLoading,
     setGrape,
+    // inputValue,
+    // setInputValue
 }: BottomEditContainerProps) {
     const { sessionUser } = useAuthContext();
     const { setHomeSwipeEnabled } = useHomeGrapeContext();
     const [ inputValue, setInputValue ] = useState<string>(grape_day_letter.value);
 
-    const exit = () => { setHomeSwipeEnabled!(true); setSelectedLetter(null); };
+    // console.log(inputRef)
+
+
+    // TODO will u need to do this to make ut more user friendly?
+    // * maybe move that x exit button to the top right corner of the screen.
+    // and instead that X can be a "clear" button
+
+    const exit = () => { 
+        setHomeSwipeEnabled!(true); 
+        setSelectedLetter(null);
+        // setInputValue(grape_day_letter.value);
+        // if (inputRef && inputRef.current) setInputValue(inputRef.current.props?.defaultValue!);
+        // else setInputValue(grape_day_letter.value);
+    };
 
     const successToast = () => Toast.show({
         type: 'success',
@@ -87,7 +104,9 @@ export function BottomEditContainer({
             <View style={my_styles.row}>
                 <MaterialIcons.Button name="cancel" size={30} key="Cancel"
                     color="#cb9de2" backgroundColor="transparent"
-                    style={my_styles.buttons} onPress={() => showCancelConfirmDialog(exit)}
+                    style={my_styles.buttons} 
+                    onPress={() => showCancelConfirmDialog(exit)}
+                    // onPress={exit}
                 />
                 <MaterialCommunityIcons.Button name="content-save-check-outline" size={30}
                     color="#cb9de2" key="Save" backgroundColor="transparent"
