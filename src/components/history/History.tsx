@@ -6,6 +6,12 @@ import { HistoryGrapeDay } from './GrapeDay';
 import { buildDateArray } from "../../utils";
 import { GrapeDayLetter } from "../../types";
 
+
+// TODO the logic and display of the load more button
+
+
+
+
 const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }: any) => {
     const paddingToBottom = 20;
     return layoutMeasurement.height + contentOffset.y >=
@@ -13,8 +19,6 @@ const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }: any)
 };
 
 
-
-// TODO only one opened at a time so when a new one opens, the other closes
 
 /** 
  * @description users history page of their past grape days
@@ -37,13 +41,11 @@ export default function History() {
                 <Text style={history_styles.title}>My Past G.R.A.P.E.S</Text>
             </View>
             <FlatList
-                // data={grapes.items}
                 data={dates.map(date => ({ created_at: date, grape_id: "fpp", day: day }))}
                 renderItem={({ item }) => {
                     const _props = {
                         date: item.created_at,
                         setGrape_date: setGrape_date,
-                        grape_date: grape_date,
                         key: item.created_at,
                         setDay: setDay,
                     };

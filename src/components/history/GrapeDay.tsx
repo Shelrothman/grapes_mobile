@@ -25,7 +25,7 @@ type HomeGrapeItemProps = {
     /** the expanded day being viewed */
     day: GrapeDayLetter[] | null;
     setDay: React.Dispatch<React.SetStateAction<GrapeDayLetter[] | null>>;
-    grape_date: string | null;
+    /** the date of the grape day being viewed */
     setGrape_date: React.Dispatch<React.SetStateAction<string | null>>;
 };
 
@@ -38,31 +38,26 @@ const ExpandLeftIcon = () => <MaterialCommunityIcons name="arrow-expand-left" si
  * displays only the date initially
  * the user must press on the date to see the full grape day expanded
  */
-export function HistoryGrapeDay({ date, day, setDay, setGrape_date, grape_date }: HomeGrapeItemProps) {
+export function HistoryGrapeDay({ date, day, setDay, setGrape_date }: HomeGrapeItemProps) {
     const { handlePressIn, handlePressOut, pressStyle } = usePressAnimation('#8ABDAA');
-
-    // const [ altMessage, setAltMessage ] = useState<string | undefined>(undefined);
-
     const [ validGrape, setValidGrape ] = useState<boolean | null>(null);
 
+
+    const setDayAndValidity = (dayValue: GrapeDayLetter[] | null, validValue: boolean | null) => {
+        setDay(dayValue);
+        setValidGrape(validValue);
+    };
+
     const handlePress = async () => {
-        if (day !== null) {
-            setValidGrape(null);
-            return setDay(null);
-        }
+        if (day !== null) return setDayAndValidity(null, null);
         const historyService = new HistoryService();
         setGrape_date(date); // control which one is expanded
         const viewGrape = await historyService.getGrapeByDate(date);
-        if (!viewGrape) {
-            // TODO in here: dropdown a message that says "no grape recorded this day" in ascthetically pleasing way  
-            setDay([]);
-            setValidGrape(false);
-            return;
-        }
-        setValidGrape(true);
-        return setDay(resToGrape(viewGrape).day);
+        if (!viewGrape) return setDayAndValidity([], false);
+        return setDayAndValidity(resToGrape(viewGrape).day, true);
     };
 
+    const dateTitle:string = new Date(date).toDateString();
 
     return (
         <View style={{ alignItems: 'center', marginTop: 30, }}>
@@ -71,16 +66,13 @@ export function HistoryGrapeDay({ date, day, setDay, setGrape_date, grape_date }
                 onPressIn={handlePressIn} onPressOut={handlePressOut}
                 onPress={handlePress} key={date}
             >
-                <Text style={history_styles.date_text} key={date}>
-                    {new Date(date).toDateString()}
-                </Text>
-                {!day ? <ExpandDownIcon /> : <ExpandLeftIcon />}
+                <Text style={history_styles.date_text} key={date}>{dateTitle}</Text>
+                {day == null ? <ExpandDownIcon /> : <ExpandLeftIcon />}
             </Pressable>
             <View style={history_styles.box_container}>
-                {day == null ? <></> : (validGrape === true) ? <HistoryGrapeBox
-                    day={day}
-                    validGrape={false}
-                /> : <HistoryGrapeBox day={day} validGrape={true} />}
+                {day == null ? <></>
+                    : (validGrape === true) ? <HistoryGrapeBox day={day} validGrape={false} />
+                        : <HistoryGrapeBox day={day} validGrape={true} />}
             </View>
         </View>
     )
