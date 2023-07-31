@@ -72,10 +72,19 @@ export const history_styles = StyleSheet.create({
     date_container: {
         alignItems: 'center', marginBottom: 10,
         backgroundColor: '#4E1E66',
-        width: '95%',
+        maxWidth: '95%',
+        minWidth: '95%',
+        // paddingVertical: 10,
         padding: 10,
         borderColor: '#cb9de2',
         borderWidth: 1,
         borderRadius: 10,
-    }
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        // justifyContent: 'center',
+    },
+    expander: {
+        marginHorizontal: 10,
+        // justifyContent: 'flex-end',
+    },
 });

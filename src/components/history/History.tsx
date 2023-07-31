@@ -6,6 +6,14 @@ import { HistoryGrapeDay } from './GrapeDay';
 import { buildDateArray } from "../../utils";
 import { GrapeDayLetter } from "../../types";
 
+const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }: any) => {
+    const paddingToBottom = 20;
+    return layoutMeasurement.height + contentOffset.y >=
+        contentSize.height - paddingToBottom;
+};
+
+
+
 // TODO only one opened at a time so when a new one opens, the other closes
 
 /** 
@@ -13,11 +21,14 @@ import { GrapeDayLetter } from "../../types";
  */
 export default function History() {
 
-    const [ dates, setDates ] = useState<string[]>([...buildDateArray(), 'Load More Button']);
+    const [ dates, setDates ] = useState<string[]>(buildDateArray());
     /** the expanded day being viewed */
-    const [ viewLetters, setViewLetters ] = useState<GrapeDayLetter[] | null>(null);
+    const [ day, setDay ] = useState<GrapeDayLetter[] | null>(null);
+    /** state flagging if the "loadmore" should be visible */
+    const [ loadMoreVisibility, setLoadMoreVisibility ] = useState<boolean>(false);
 
-
+    /** the grape date of the grape day being viewed */
+    const [ grape_date, setGrape_date ] = useState<string | null>(null);
 
 
     return (
@@ -27,16 +38,29 @@ export default function History() {
             </View>
             <FlatList
                 // data={grapes.items}
-                data={dates.map(date => ({ creation_date: date, grape_id: "fpp", day: viewLetters }))}
-                renderItem={({ item }) => <HistoryGrapeDay 
-                    date={item.creation_date}
-                    grape_id={item.grape_id}
-                    day={item.day}
-                    setDay={setViewLetters}
-                />}
+                data={dates.map(date => ({ created_at: date, grape_id: "fpp", day: day }))}
+                renderItem={({ item }) => {
+                    const _props = {
+                        date: item.created_at,
+                        setGrape_date: setGrape_date,
+                        grape_date: grape_date,
+                        key: item.created_at,
+                        setDay: setDay,
+                    };
+                    if (grape_date && item.created_at === grape_date) {
+                        return <HistoryGrapeDay {..._props} day={day} />;
+                    }
+                    return <HistoryGrapeDay {..._props} day={null} />;
+                }}
                 showsVerticalScrollIndicator={false}
+                onScroll={({ nativeEvent }) => {
+                    if (isCloseToBottom(nativeEvent)) setLoadMoreVisibility(true);
+                    else setLoadMoreVisibility(false);
+                }}
             />
-            <Text>Load More Button here</Text>
+            <Text style={{ display: loadMoreVisibility === true ? 'flex' : 'none' }}>
+                Load More Button here
+            </Text>
         </SafeAreaView>
     );
 }
