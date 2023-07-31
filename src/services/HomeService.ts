@@ -17,6 +17,20 @@ import { getUTCDate } from "../utils";
  * handles all the crud for the user_grapes table
  */
 export class HomeService {
+    tableName: string;
+
+    constructor() {
+        this.tableName = 'user_grapes';
+        this.doesRowExist = this.doesRowExist.bind(this);
+        this.getRow = this.getRow.bind(this);
+        // this.getRowByGrapeId = this.getRowByGrapeId.bind(this);
+        this.addRow = this.addRow.bind(this);
+        // this.updateRow = this.updateRow.bind(this);
+        this.deleteRow = this.deleteRow.bind(this);
+        this.updateLetter = this.updateLetter.bind(this);
+        this.upsertRow = this.upsertRow.bind(this);
+    };
+
 
     private handleError(error: Partial<PostgrestError>) {
         console.log(error);
@@ -25,7 +39,7 @@ export class HomeService {
 
     private doesRowExist = async (user_id: string, utc_today: string): Promise<boolean> => {
         const { data, error } = await supabase
-            .from('user_grapes')
+            .from(this.tableName)
             .select('created_at')
             .match({ user_id: user_id, created_at: utc_today })
         if (error) this.handleError(error);
@@ -35,7 +49,7 @@ export class HomeService {
 
     private getRow = async (user_id: string, created_at: string): Promise<GrapeResponse | null> => {
         const { data, error } = await supabase
-            .from('user_grapes')
+            .from(this.tableName)
             .select('*')
             .match({ user_id, created_at })
         if (error) this.handleError(error);
@@ -44,7 +58,7 @@ export class HomeService {
 
     // private getRowByGrapeId = async (grape_id: string): Promise<GrapeResponse | null> => {
     //     const { data, error } = await supabase
-    //         .from('user_grapes')
+    //         .from(this.tableName)
     //         .select('*')
     //         .match({ grape_id })
     //     if (error) this.handleError(error);
@@ -53,7 +67,7 @@ export class HomeService {
 
     private addRow = async (grape: Partial<GrapeResponse>): Promise<GrapeResponse | null> => {
         const { data, error } = await supabase
-            .from('user_grapes')
+            .from(this.tableName)
             .insert(grape) // by default in v1 the new record is returned
         if (error) this.handleError(error);
         return data ? data[ 0 ] : null;
@@ -61,7 +75,7 @@ export class HomeService {
 
     // private updateRow = async (grape: RawGlobalGrape): Promise<GrapeResponse | null> => {
     //     const { data, error } = await supabase
-    //         .from('user_grapes')
+    //         .from(this.tableName)
     //         .update(grape)
     //         .match({ user_id: grape.user_id })
     //     if (error) this.handleError(error);
@@ -75,7 +89,7 @@ export class HomeService {
 
     deleteRow = async (user_id: string, created_at: string): Promise<GrapeResponse | null> => {
         const { data, error } = await supabase
-            .from('user_grapes')
+            .from(this.tableName)
             .delete()
             .match({ user_id, created_at })
         if (error) this.handleError(error);
@@ -93,7 +107,7 @@ export class HomeService {
             return await this.addRow({ ...partialGrape, created_at: getUTCDate() });
         }
         const { data, error } = await supabase
-            .from('user_grapes')
+            .from(this.tableName)
             .update(partialGrape)
             .match({ user_id: partialGrape.user_id, created_at: getUTCDate() })
         if (error) this.handleError(error);

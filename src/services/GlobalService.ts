@@ -2,7 +2,7 @@ import { PostgrestError } from "@supabase/supabase-js";
 import { supabase } from "../initSupabase";
 import { RawSharedLetter, SharedLetter } from "../types";
 
-
+const TABLE_NAME = 'shared_letters';
 /**
  * @class GlobalService
  * services for cruding the global shared_letters table
@@ -10,23 +10,24 @@ import { RawSharedLetter, SharedLetter } from "../types";
  * in the calling function, catch it and handle it there
  */
 export class GlobalService {
+    tableName: string;
+
+    constructor() {
+        this.tableName = TABLE_NAME;
+        this.getAllRows = this.getAllRows.bind(this);
+        this.addRow = this.addRow.bind(this);
+        this.updateRow = this.updateRow.bind(this);
+    };
+
 
     private handleError(error: PostgrestError) {
         console.log(error);
         throw new Error(error.message);
     }
 
-    // private getUserNameFromId = async (user_id: string): Promise<string> => {
-    //     // const { data: users, error } = await supabase.auth.u
-        
-    //     // if (error) this.handleError(error);
-    //     // if (user) return user[0].username;
-    //     return '';
-    // }
-
     getAllRows = async (): Promise<SharedLetter[] | null> => {
         let { data: shared_letters, error } = await supabase
-            .from('shared_letters')
+            .from(this.tableName)
             .select('*')
             .order('created_at', { ascending: false })
         if (error) this.handleError(error);
@@ -37,7 +38,7 @@ export class GlobalService {
     /** could use this for like the infinite scroll */
     getAllRowsWithPagination = async (page: number, perPage: number): Promise<SharedLetter[] | null> => {
         let { data: shared_letters, error } = await supabase
-            .from('shared_letters')
+            .from(this.tableName)
             .select('*')
             .range(page * perPage, (page + 1) * perPage - 1)
         if (error) this.handleError(error);
@@ -47,7 +48,7 @@ export class GlobalService {
 
     getRowByUser = async (user_id: string) => {
         let { data: shared_letter, error } = await supabase
-            .from('shared_letters')
+            .from(this.tableName)
             .select('*')
             .eq('user_id', user_id)
         if (error) this.handleError(error);
@@ -56,7 +57,7 @@ export class GlobalService {
 
     addRow = async (letterToShare: RawSharedLetter): Promise<SharedLetter | null> => {
         const { data: shared_letter, error } = await supabase
-            .from('shared_letters')
+            .from(this.tableName)
             .insert(letterToShare) // by default in v1 the new record is returned
         if (error) this.handleError(error);
         if (shared_letter) return shared_letter[ 0 ];
@@ -65,7 +66,7 @@ export class GlobalService {
 
     updateRow = async (letterToUpdate: SharedLetter): Promise<SharedLetter | null> => {
         const { data: shared_letter, error } = await supabase
-            .from('shared_letters')
+            .from(this.tableName)
             .upsert(letterToUpdate); // by default in v1 the updated record is returned
         // .select() <= need v2 to do this. and it would return it
         if (error) this.handleError(error);
