@@ -1,6 +1,7 @@
 ## colors
 Sage : #9CAF88
 light green grape: #a8e4a0
+analogous to green grape: #A0E4BA
 
 bluish: #889CAF
 dark_bg: #2E3944

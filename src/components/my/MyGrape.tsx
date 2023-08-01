@@ -43,12 +43,13 @@ export function MyGrape({ grape, selectedLetter, setSelectedLetter, setGrape }: 
                                     setGrape={setGrape}
                                 />
                             </TouchableWithoutFeedback>
-                            <ShareComponent
+                            {/* <ShareComponent
                                 btnSize={60}
                                 grape_day_letter={selectedLetter}
                                 setLoading={setLoading}
                                 editMode={true}
-                            />
+                            // ! removing this bc it is confusing to the user.. which one will be sent saved or unsaved... they just will do it from the Home
+                            /> */}
                         </SafeAreaView>
                     </KeyboardAvoidingView>
                 )}

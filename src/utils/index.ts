@@ -36,11 +36,6 @@ export const resToGrape = (res: Partial<GrapeResponse>): Grape => {
 export function buildDateArray(): string[] {
     let dateArray: string[] = [];
     let startDay = new Date();
-    
-    // yo we dont want today bc that is in Home duh
-    
-    // let yesterday = startDay.getDate() - 1;
-
     for (let i = 0; i < 15; i++) {
         let date = getUTCDate(startDay.toISOString());
         if (i !== 0) dateArray.push(date); // skip today

@@ -23,7 +23,7 @@ export class ShareService {
             return Toast.show({
                 type: 'success',
                 text1: 'Shared to the Global feed!',
-                text2: 'Check it out ->',
+                text2: 'Go check it out!',
                 ...toastProps,
             });
         }).catch((err: any) => {

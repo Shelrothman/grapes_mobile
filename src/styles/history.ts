@@ -1,5 +1,17 @@
 import { StyleSheet } from 'react-native';
 
+/** each row has these default */
+const grape_box_styles = StyleSheet.create({
+    row: {
+        flexDirection: 'row',
+        borderColor: '#4E1E66',
+        borderBottomWidth: 0.5,
+        alignItems: 'center',
+        marginRight: 0,
+    },
+});
+
+
 /**
  * @description styles for all the components in the home/my screens
  * and their children
@@ -27,14 +39,21 @@ export const history_styles = StyleSheet.create({
     },
     /** Grape Box styles */
     row: {
-        flexDirection: 'row',
-        borderColor: '#4E1E66',
-        borderBottomWidth: 0.5,
+        ...grape_box_styles.row,
     },
     alt_row: {
-        flexDirection: 'row',
-        borderColor: '#4E1E66',
-        borderBottomWidth: 0.5,
+        ...grape_box_styles.row,
+        backgroundColor: '#A0E4BA'
+    },
+    noop_row: {
+        ...grape_box_styles.row,
+        padding: 10,
+    },
+    last_row: {
+        ...grape_box_styles.row,
+        backgroundColor: '#A0E4BA',
+        borderBottomEndRadius: 10,
+        borderBottomStartRadius: 10,
     },
     letterColumn: {
         width: 50,
@@ -57,14 +76,16 @@ export const history_styles = StyleSheet.create({
         wordBreak: 'break-all',
         flex: 1,
     },
-    letterValue_alt: {
-        wordWrap: 'break-word',
-        padding: 10,
-    },
     letterValueText: {
         fontStyle: 'italic',
         fontWeight: 'bold',
         color: '#4E1E66',
+    },
+    shareCol: {
+        width: 40,
+        alignSelf: 'flex-start',
+        alignItems: 'flex-end',
+        marginRight: 0,
     },
     date_text: {
         color: '#cb9de2', fontWeight: 'bold',
