@@ -54,8 +54,7 @@ export default function History() {
                 }}
                 showsVerticalScrollIndicator={false}
                 onScroll={({ nativeEvent }) => handleOnScroll(nativeEvent)}
-                alwaysBounceVertical={false}
-                bounces={false} // No flickering!
+                alwaysBounceVertical={false} bounces={false} // No flickering!
             />
             <Pressable style={{ display: loadMoreVisibility === true ? 'flex' : 'none', ...history_styles.load_container }}
                 onPress={() => handlePressLoadMore()}>
