@@ -17,7 +17,7 @@ const grape_box_styles = StyleSheet.create({
  * and their children
  */
 export const history_styles = StyleSheet.create({
-    container: { backgroundColor: '#2E3944', alignItems: 'center', height: '100%', width: '100%', },
+    container: { backgroundColor: '#2E3944', alignItems: 'center', height: '100%', width: '100%' },
     title: { fontSize: 18, fontWeight: 'bold', color: '#a8e4a0', },
     title_container: {
         flexDirection: 'row',
@@ -98,6 +98,6 @@ export const history_styles = StyleSheet.create({
         padding: 10,
         margin: 10,
         backgroundColor: '#8ABDAA',
-        // color: '',
+        borderRadius: 10,
     },
 });

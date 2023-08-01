@@ -8,18 +8,6 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { HistoryService } from "../../services/HistoryService";
 import { resToGrape } from '../../utils';
 
-/*
-* at the bottom will be a load more button and if they have more past that day it will render the next ten.. 
-? but if it doesnt, itll say "no more grapes found.." and then this just jkeeps going and going...
-* maybe in THE WELCOME SCREEN will tell users, history only goes back 30 days...
-? and then i need to make that policy happen in my backend
-* yea maybe we dont go back farther than a month
-.. encourage users to save the ones they like as photos on their phone...
-    https://docs.expo.dev/tutorial/screenshot/
-    TODO do this in Global also.. the load just ten and then load more if they want more... 
-*/
-
-
 type HomeGrapeItemProps = {
     date: string;
     /** the expanded day being viewed */

@@ -9,7 +9,7 @@ import { RawSharedLetter } from '../../types';
 import { useRefreshOnFocus } from '../../hooks/useRefreshOnFocus';
 import { global_styles } from '../../styles/global';
 
-
+// TODO this in Global also.. the load just ten and then load more if they want more... 
 // TODO: pagination and limit the amount returning. so only return 10 or so at a time. uyntil they scroll down.
 
 
