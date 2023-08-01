@@ -30,15 +30,17 @@ export const resToGrape = (res: Partial<GrapeResponse>): Grape => {
 
 /**
  * @function buildDateArray
- * @description builds an array of dates from today to the past 10 days
+ * @description builds an array of dates from today to the past 2 weeks
  * @returns {string[]} array of dates in the format YYYY-MM-DD in UTC
  */
-export function buildDateArray(): string[] {
+export function buildDateArray(next?: string): string[] {
     let dateArray: string[] = [];
-    let startDay = new Date();
+    // let startDay = new Date();
+    const startDay = !next ? new Date() : new Date(next);
     for (let i = 0; i < 15; i++) {
         let date = getUTCDate(startDay.toISOString());
-        if (i !== 0) dateArray.push(date); // skip today
+        if (startDay === new Date() && i === 0) continue; // skip today if on today 
+        if (i !== 0) dateArray.push(date); // skip today if on next
         startDay.setDate(startDay.getDate() - 1);
     }
     return dateArray;

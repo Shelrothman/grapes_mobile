@@ -30,6 +30,7 @@ export class HistoryService {
      * @function getGrapeByDate
      * @description get a grape by date and user_id which are unique
      * @param {string} date
+     * @returns {Promise<GrapeResponse|null>}
      **/
     async getGrapeByDate(date: string): Promise<GrapeResponse|null> {
         const { data, error } = await supabase

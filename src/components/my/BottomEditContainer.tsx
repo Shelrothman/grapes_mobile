@@ -106,7 +106,6 @@ export function BottomEditContainer({
                     color="#cb9de2" backgroundColor="transparent"
                     style={my_styles.buttons} 
                     onPress={() => showCancelConfirmDialog(exit)}
-                    // onPress={exit}
                 />
                 <MaterialCommunityIcons.Button name="content-save-check-outline" size={30}
                     color="#cb9de2" key="Save" backgroundColor="transparent"

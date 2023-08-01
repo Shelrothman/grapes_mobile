@@ -16,6 +16,9 @@
 UTC UTC UTC everywhere!
 on insert on read on every SINGLE thing
 only the TITLE string to be the users local. utc everythign else
+<!-- TODO make only THE DISPLAY of the date titles be in local.. keeping everything else utc  -->
+
+<!-- TODO remove all dependencies and imports for rapi-ui stufff.. get it out? -->
 
 <!-- * ive begun setting up the context but not quite in use -->
 

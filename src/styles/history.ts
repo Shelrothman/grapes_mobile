@@ -94,4 +94,10 @@ export const history_styles = StyleSheet.create({
         // justifyContent: 'center',
     },
     expander: { marginHorizontal: 10, },
+    load_container: {
+        padding: 10,
+        margin: 10,
+        backgroundColor: '#8ABDAA',
+        // color: '',
+    },
 });
