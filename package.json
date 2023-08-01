@@ -21,7 +21,7 @@
     "expo-clipboard": "~4.3.0",
     "expo-constants": "^14.4.2",
     "expo-linking": "^5.0.2",
-    "expo-splash-screen": "~0.20.4",
+    "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
     "graphql": "^16.7.1",
     "html-entities": "^2.4.0",

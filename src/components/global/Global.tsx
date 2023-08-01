@@ -12,6 +12,8 @@ import { isCloseToBottom } from '../../utils';
 // TODO this in Global also.. the load just ten and then load more if they want more... 
 // TODO: pagination and limit the amount returning. so only return 10 or so at a time. uyntil they scroll down.
 
+//!! OU uin here it still looks allittle buggy... so maybe rethink design or idlk
+
 
 export function Global() {
     const [ globalData, setGlobalData ] = useState<RawSharedLetter[] | null>(null);
@@ -19,7 +21,8 @@ export function Global() {
     const [ loadMoreVisibility, setLoadMoreVisibility ] = useState<boolean>(false);
     const [ currentPage, setCurrentPage ] = useState<number>(1);
     const [ bottomText, setBottomText ] = useState<string>(' Load More');
-    const [refetchLoading, setRefetchLoading] = useState<boolean>(false);
+    // const [refetchLoading, setRefetchLoading] = useState<boolean>(false);
+    const [ disableLoadMore, setDisableLoadMore ] = useState<boolean>(false);
     const globalService = new GlobalService();
 
 
@@ -36,6 +39,7 @@ export function Global() {
                 setIsLoading(true);
                 setCurrentPage(1);
                 setBottomText(' Load More');
+                setDisableLoadMore(false);
             };
         }, [])
     );
@@ -73,9 +77,11 @@ export function Global() {
     const handlePressLoadMore = () => {
         setIsLoading(true);
         fetchNextSet().then((res) => {
-            // if res is false that means there are no more rows to fetch
-            if (!res) setBottomText('You have reached the end of the list.');
-            else setCurrentPage((prev) => prev + 1);
+            if (!res) { // then there are no more rows to fetch
+                setDisableLoadMore(true);
+            } else {
+                setCurrentPage((prev) => prev + 1);
+            }
         }).finally(() => setIsLoading(false));
     };
 
@@ -96,14 +102,16 @@ export function Global() {
                         alwaysBounceVertical={false} bounces={false}
                     />
                 )}
-                <Pressable style={{ display: loadMoreVisibility === true ? 'flex' : 'none', ...global_styles.load_container }}
-                    onPress={() => handlePressLoadMore()}>
-                    {isLoading ? <Text>Loading...</Text> : (
-                        <Text><Ionicons name="md-cloud-download" size={24} color="#2E3944" />{bottomText}</Text>
-                    )}
-                </Pressable>
+                {!disableLoadMore && (
+                    <Pressable style={{ display: loadMoreVisibility === true ? 'flex' : 'none', ...global_styles.load_container }}
+                        onPress={() => handlePressLoadMore()} disabled={disableLoadMore}
+                    >
+                        {isLoading ? <Text>Loading...</Text> : (
+                            <Text><Ionicons name="md-cloud-download" size={24} color="#2E3944" />{bottomText}</Text>
+                        )}
+                    </Pressable>
+                )}
             </View>
-
         </SafeAreaView>
     )
 }
