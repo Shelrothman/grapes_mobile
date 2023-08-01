@@ -13,6 +13,9 @@ import { AuthStackParamList } from "../../types/navigation";
 
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Layout, Text, TextInput, Button, useTheme, themeColor, } from "react-native-rapi-ui";
+import { useAuthContext } from "../../contexts/AuthProvider";
+
+
 
 export default function ({
     navigation,
@@ -21,6 +24,8 @@ export default function ({
     const [ email, setEmail ] = useState<string>("");
     const [ password, setPassword ] = useState<string>("");
     const [ loading, setLoading ] = useState<boolean>(false);
+
+    const { setFirstTimeLogin } = useAuthContext();
 
     async function register() {
         setLoading(true);
@@ -35,6 +40,9 @@ export default function ({
         if (error) {
             setLoading(false);
             alert(error.message);
+        }
+        if (user) {
+            setFirstTimeLogin && setFirstTimeLogin(true);
         }
     }
 

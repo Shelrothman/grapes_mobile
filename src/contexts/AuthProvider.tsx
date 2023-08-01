@@ -18,6 +18,9 @@ type ContextProps = {
     user: null | boolean;
     session: Session | null;
     sessionUser: AuthUser | null;
+    /** is it user's first time login */
+    firstTimeLogin: boolean;
+    setFirstTimeLogin: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const AuthContext = createContext<Partial<ContextProps>>({});
@@ -41,6 +44,7 @@ const getDisplayName = async (user_id: string): Promise<string | null> => {
 const sessionToUser = (session: Session | null): any => {
     if (session == null) return null;
     return getDisplayName(session.user!.id).then((displayName) => {
+        if (displayName == null) console.log('displayName is null, so first time?')
         return {
             user_uid: session.user!.id,
             //* if userName is null, use email 
@@ -57,9 +61,13 @@ const AuthProvider = (props: Props) => {
     const [ session, setSession ] = useState<Session | null>(null);
     const [ sessionUser, setSessionUser ] = useState<AuthUser | null>(null);
 
+    const [ firstTimeLogin, setFirstTimeLogin ] = useState<boolean>(false);
+
     useEffect(() => {
         const session = supabase.auth.session();
         setSession(session);
+        console.log(`session: ${JSON.stringify(session, null, 2)}`);
+        // console.log(session?.user?.last_sign_in_at);
         setUser(session ? true : false);
         // * set the sessionUser:
         handleSessionUser(session);
@@ -69,8 +77,12 @@ const AuthProvider = (props: Props) => {
                 setSession(session);
                 setUser(session ? true : false);
             }
-        );
-        return () => { authListener!.unsubscribe(); };
+        ); 
+        // this is called when the user logs out
+        return () => { 
+            authListener!.unsubscribe(); 
+            setFirstTimeLogin(false);
+        }; 
     }, [ user ]);
 
     function handleSessionUser(session: Session | null) {
@@ -78,13 +90,13 @@ const AuthProvider = (props: Props) => {
             setSessionUser(null);
         } else {
             sessionToUser(session).then((user: AuthUser) => {
-                setSessionUser(user)
+                setSessionUser(user);
             }).catch((err: any) => setSessionUser(null));
         }
     };
 
     return (
-        <AuthContext.Provider value={{ user, session, sessionUser }}>
+        <AuthContext.Provider value={{ user, session, sessionUser, firstTimeLogin, setFirstTimeLogin }}>
             {props.children}
         </AuthContext.Provider>
     );

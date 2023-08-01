@@ -18,8 +18,6 @@ type renderItemProps = {
 
 function RenderItem({ title = "", value, icon, }: renderItemProps) {
 
-    if (title === "Additonal Resources") alert(value)
-
     const renderItem = () => {
         if (typeof value !== undefined) {
             if (Array.isArray(value)) {
