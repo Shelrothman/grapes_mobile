@@ -77,9 +77,6 @@ export function HistoryGrapeDay({ date, day, setDay, setGrape_date }: HomeGrapeI
                     : (validGrape === true) ? <HistoryGrapeBox day={day} validGrape={false} />
                         : <HistoryGrapeBox day={day} validGrape={true} />}
             </View>
-            {/* <Text style={{ display: day ? 'flex' : 'none' }} >
-                share a letter
-            </Text> */}
         </View>
     )
 }

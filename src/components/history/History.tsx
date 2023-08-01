@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { history_styles } from "../../styles/history";
 import { Text, SafeAreaView, FlatList, View } from "react-native";
-import * as grapes from '../../data/dummyGrapes.json';
 import { HistoryGrapeDay } from './GrapeDay';
 import { buildDateArray } from "../../utils";
 import { GrapeDayLetter } from "../../types";
 
 
 // TODO the logic and display of the load more button
-
 
 
 

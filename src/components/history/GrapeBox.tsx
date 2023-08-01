@@ -13,7 +13,6 @@ type HomeGrapeLetterRowProps = {
 };
 
 
-// ToDo lastly the load more button
 
 const isLast = (index: number, arr: any[]) => index === arr.length - 1;
 

@@ -38,17 +38,9 @@ export const history_styles = StyleSheet.create({
         // ! important that if ya wanna change these widths, have to change in HomeGrapeBox.tsx too
     },
     /** Grape Box styles */
-    row: {
-        ...grape_box_styles.row,
-    },
-    alt_row: {
-        ...grape_box_styles.row,
-        backgroundColor: '#A0E4BA'
-    },
-    noop_row: {
-        ...grape_box_styles.row,
-        padding: 10,
-    },
+    row: { ...grape_box_styles.row, },
+    alt_row: { ...grape_box_styles.row, backgroundColor: '#A0E4BA' },
+    noop_row: { ...grape_box_styles.row, padding: 10, },
     last_row: {
         ...grape_box_styles.row,
         backgroundColor: '#A0E4BA',
@@ -63,11 +55,7 @@ export const history_styles = StyleSheet.create({
         padding: 10,
         alignItems: 'center',
     },
-    letterColText: {
-        color: '#4E1E66',
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
+    letterColText: { color: '#4E1E66', fontSize: 20, fontWeight: 'bold', },
     letterValue: {
         // padding: 10,
         marginLeft: 10,
@@ -86,6 +74,7 @@ export const history_styles = StyleSheet.create({
         alignSelf: 'flex-start',
         alignItems: 'flex-end',
         marginRight: 0,
+        paddingTop: 5,
     },
     date_text: {
         color: '#cb9de2', fontWeight: 'bold',
@@ -104,8 +93,5 @@ export const history_styles = StyleSheet.create({
         justifyContent: 'space-between',
         // justifyContent: 'center',
     },
-    expander: {
-        marginHorizontal: 10,
-        // justifyContent: 'flex-end',
-    },
+    expander: { marginHorizontal: 10, },
 });
