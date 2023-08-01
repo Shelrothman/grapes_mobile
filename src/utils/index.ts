@@ -3,7 +3,19 @@
  */
 
 import { Grape, GrapeDayLetter, GrapeResponse } from "../types";
+import Toast from 'react-native-toast-message';
+import * as Clipboard from 'expo-clipboard';
 
+
+export const copyToClipboard = async (text: string) => {
+    await Clipboard.setStringAsync(text);
+    Toast.show({
+        type: 'success',
+        position: 'top',
+        text1: 'Copied Text to Clipboard!',
+        visibilityTime: 2000,
+    });
+};
 
 export function getUTCDate(next?: string) {
     const now = !next ? new Date() : new Date(next);
@@ -45,3 +57,15 @@ export function buildDateArray(next?: string): string[] {
     }
     return dateArray;
 }
+
+
+/**
+ * @function isCloseToBottom
+ * @description checks if the user is close to the bottom of the scrollview
+ * @returns {boolean}
+ */
+export const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }: any): boolean => {
+    const paddingToBottom = 30;
+    return layoutMeasurement.height + contentOffset.y >=
+        contentSize.height - paddingToBottom;
+};

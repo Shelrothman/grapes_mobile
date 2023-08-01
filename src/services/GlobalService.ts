@@ -34,13 +34,31 @@ export class GlobalService {
         return shared_letters;
     };
 
+    getLastTenRows = async (): Promise<SharedLetter[] | null> => {
+        const shared_letters = await this.getAllRowsWithPagination(10);
+        return shared_letters;
+    };
 
-    /** could use this for like the infinite scroll */
-    getAllRowsWithPagination = async (page: number, perPage: number): Promise<SharedLetter[] | null> => {
+
+    /**
+     * @function getAllRowsWithPagination
+     * @description get the first n amounts of rows from the table, most recent first
+     * when it is called again, it will get the next n rows, and so on
+     * starting at the @param page
+    */
+    getAllRowsWithPagination = async (
+        perPage: number,
+        nextPage?: number
+    ): Promise<SharedLetter[] | null> => {
+        // if (nextPage) alert(nextPage)
+        // fnjkajkasdhjkASDKLAHd baf
+        const startingRange = nextPage ? nextPage * perPage : 0;
         let { data: shared_letters, error } = await supabase
             .from(this.tableName)
             .select('*')
-            .range(page * perPage, (page + 1) * perPage - 1)
+            .order('created_at', { ascending: false })
+            // .range(0, 10) 
+            .range(startingRange, startingRange + perPage - 1)
         if (error) this.handleError(error);
         // TODO this needs testing and error handling and shiz
         return shared_letters;
@@ -74,7 +92,7 @@ export class GlobalService {
         return null;
     }
 
-    
+
 
     // TODO bulk updates?
 

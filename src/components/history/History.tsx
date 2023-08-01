@@ -2,15 +2,15 @@ import { useState } from "react";
 import { history_styles } from "../../styles/history";
 import { Text, SafeAreaView, FlatList, View, Button, Pressable, NativeScrollEvent } from "react-native";
 import { HistoryGrapeDay } from './GrapeDay';
-import { buildDateArray } from "../../utils";
+import { buildDateArray, isCloseToBottom } from "../../utils";
 import { GrapeDayLetter } from "../../types";
 import { Ionicons } from '@expo/vector-icons';
 
-const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }: any) => {
-    const paddingToBottom = 30;
-    return layoutMeasurement.height + contentOffset.y >=
-        contentSize.height - paddingToBottom;
-};
+// const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }: any) => {
+//     const paddingToBottom = 30;
+//     return layoutMeasurement.height + contentOffset.y >=
+//         contentSize.height - paddingToBottom;
+// };
 
 
 /** 
@@ -65,7 +65,7 @@ export default function History() {
             />
             <Pressable style={{ display: loadMoreVisibility === true ? 'flex' : 'none', ...history_styles.load_container }}
                 onPress={() => handlePressLoadMore()}>
-                <Text><Ionicons name="md-cloud-download" size={24} color="black" />{' '}Load More</Text>
+                <Text><Ionicons name="md-cloud-download" size={24} color="#2E3944" />{' '}Load More</Text>
             </Pressable>
             <Text style={{
                 ...history_styles.load_container,

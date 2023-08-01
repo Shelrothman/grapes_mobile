@@ -97,7 +97,7 @@ export const history_styles = StyleSheet.create({
     load_container: {
         padding: 10,
         margin: 10,
-        backgroundColor: '#8ABDAA',
+        backgroundColor: '#a8e4a0',
         borderRadius: 10,
     },
 });

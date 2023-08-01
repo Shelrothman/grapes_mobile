@@ -56,4 +56,12 @@ export const global_styles = StyleSheet.create({
     share_container: { justifyContent: 'center', marginLeft: 5, },
     shared_by_container: { justifyContent: 'center', marginRight: 5, maxWidth: '50%', },
     shared_by: { fontSize: 12, color: '#2E3944', },
+    load_container: {
+        padding: 10,
+        margin: 10,
+        backgroundColor: '#a8e4a0',
+        borderRadius: 10,
+        // justifyContent: 'center',
+        alignItems: 'center',
+    },
 });

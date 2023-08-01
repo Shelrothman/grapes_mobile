@@ -21,7 +21,7 @@ type BottomEditContainerProps = {
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-
+// TODO maybe have the canclwe and save contain the words for user-friendlyness
 
 // TODO need to add limit to amount of characters in the input
 
