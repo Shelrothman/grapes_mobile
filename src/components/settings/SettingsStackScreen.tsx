@@ -3,7 +3,7 @@ import { About } from './About';
 import { Account } from './Account';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 
@@ -30,8 +30,8 @@ export function SettingsStackScreen() {
                 tabBarItemStyle: { padding: 5 },
                 tabBarIndicatorStyle: { backgroundColor: 'darkgreen', height: 5 },
             })}>
-            <Tab.Screen name="About" component={About} options={{ title: 'About GRAPES™', }} />
-            <Tab.Screen name="Account" component={Account} options={{ title: 'My Account', }} />
+            <Tab.Screen name="About" component={About} options={{ title: 'About GRAPES™', swipeEnabled: false }} />
+            <Tab.Screen name="Account" component={Account} options={{ title: 'My Account', swipeEnabled: false }} />
         </Tab.Navigator>
     );
 }
