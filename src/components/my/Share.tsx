@@ -5,7 +5,7 @@ import { my_styles } from "../../styles/my";
 import { GrapeDayLetter } from "../../types";
 import { useAuthContext } from "../../contexts/AuthProvider";
 import { GlobalService } from "../../services/GlobalService";
-
+import { ShareService } from "../../services/ShareService";
 
 type ShareComponentProps = {
     /** indicates if in edit mode */
@@ -32,7 +32,8 @@ export function ShareComponent({ btnSize, grape_day_letter, setLoading, editMode
         {
             text: "OK", onPress: () => {
                 setLoading(true);
-                handleSharePress();
+                // handleSharePress();
+                ShareService.handleSharePress(setLoading, sessionUser!, grape_day_letter);
             }
         },
     ]);
