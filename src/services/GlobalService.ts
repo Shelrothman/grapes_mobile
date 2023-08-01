@@ -60,7 +60,6 @@ export class GlobalService {
             // .range(0, 10) 
             .range(startingRange, startingRange + perPage - 1)
         if (error) this.handleError(error);
-        // TODO this needs testing and error handling and shiz
         return shared_letters;
     };
 

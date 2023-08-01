@@ -18,12 +18,14 @@ export function Global() {
     const [ isLoading, setIsLoading ] = useState(true);
     const [ loadMoreVisibility, setLoadMoreVisibility ] = useState<boolean>(false);
     const [ currentPage, setCurrentPage ] = useState<number>(1);
+    const [ bottomText, setBottomText ] = useState<string>(' Load More');
+    const [refetchLoading, setRefetchLoading] = useState<boolean>(false);
     const globalService = new GlobalService();
 
 
-    useEffect(() => {
-        console.log('currentPageChange:', currentPage);
-    }, [currentPage])
+    // useEffect(() => {
+    //     console.log('currentPageChange:', currentPage);
+    // }, [ currentPage ])
 
     // * this runs only when the screen is refocused 
     useFocusEffect(
@@ -32,6 +34,8 @@ export function Global() {
             return () => {
                 setGlobalData(null);
                 setIsLoading(true);
+                setCurrentPage(1);
+                setBottomText(' Load More');
             };
         }, [])
     );
@@ -55,7 +59,11 @@ export function Global() {
         try {
             const response = await globalService.getAllRowsWithPagination(10, currentPage);
             // setCurrentPage((prev) => prev + 1);
-            setGlobalData([ ...globalData ? globalData : [], ...(response as RawSharedLetter[]) ]);
+            if (response && response.length < 1) return false;
+            else {
+                setGlobalData([ ...globalData ? globalData : [], ...(response as RawSharedLetter[]) ]);
+                return true;
+            }
         } catch (error) {
             setIsLoading(false);
             console.error('Error fetching data:', error);
@@ -63,10 +71,12 @@ export function Global() {
     };
 
     const handlePressLoadMore = () => {
-        fetchNextSet().then(() => { 
-            setCurrentPage((prev) => prev + 1);
-            setLoadMoreVisibility(false); 
-        });
+        setIsLoading(true);
+        fetchNextSet().then((res) => {
+            // if res is false that means there are no more rows to fetch
+            if (!res) setBottomText('You have reached the end of the list.');
+            else setCurrentPage((prev) => prev + 1);
+        }).finally(() => setIsLoading(false));
     };
 
 
@@ -76,21 +86,24 @@ export function Global() {
             <View style={global_styles.title_container}>
                 <Text style={global_styles.title}>Global Feed (inspiration)</Text>
             </View>
-            {isLoading ? <Loading /> : (
-                <>
-                <FlatList
+            <View style={{ marginBottom: 20 }}>
+                {isLoading ? <Loading /> : (
+                    <FlatList
                         data={globalData ? globalData : []}
                         renderItem={({ item }) => <SharedLetter {...item} onCopyClick={copyToClipboard} />}
                         showsVerticalScrollIndicator={false}
                         onScroll={({ nativeEvent }) => handleOnScroll(nativeEvent)}
                         alwaysBounceVertical={false} bounces={false}
                     />
-                    <Pressable style={{ display: loadMoreVisibility === true ? 'flex' : 'none', ...global_styles.load_container }}
-                        onPress={() => handlePressLoadMore()}>
-                        <Text><Ionicons name="md-cloud-download" size={24} color="#2E3944" />{' '}Load More</Text>
-                    </Pressable>
-                </>
-            )}
+                )}
+                <Pressable style={{ display: loadMoreVisibility === true ? 'flex' : 'none', ...global_styles.load_container }}
+                    onPress={() => handlePressLoadMore()}>
+                    {isLoading ? <Text>Loading...</Text> : (
+                        <Text><Ionicons name="md-cloud-download" size={24} color="#2E3944" />{bottomText}</Text>
+                    )}
+                </Pressable>
+            </View>
+
         </SafeAreaView>
     )
 }

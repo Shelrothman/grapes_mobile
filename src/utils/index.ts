@@ -65,7 +65,7 @@ export function buildDateArray(next?: string): string[] {
  * @returns {boolean}
  */
 export const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }: any): boolean => {
-    const paddingToBottom = 30;
+    const paddingToBottom = 10;
     return layoutMeasurement.height + contentOffset.y >=
         contentSize.height - paddingToBottom;
 };
