@@ -2,7 +2,6 @@ import React from 'react';
 import Toast, { ToastShowParams } from 'react-native-toast-message';
 import { GlobalService } from './GlobalService';
 import { GrapeDayLetter } from '../types';
-import { Alert } from 'react-native';
 
 const toastProps: ToastShowParams = { position: 'top', visibilityTime: 4000, };
 
