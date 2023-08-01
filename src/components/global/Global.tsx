@@ -9,10 +9,6 @@ import Loading from '../../utils/Loading';
 import { copyToClipboard } from '../../utils';
 import { Ionicons } from '@expo/vector-icons';
 import { isCloseToBottom } from '../../utils';
-// TODO this in Global also.. the load just ten and then load more if they want more... 
-// TODO: pagination and limit the amount returning. so only return 10 or so at a time. uyntil they scroll down.
-
-//!! OU uin here it still looks allittle buggy... so maybe rethink design or idlk
 
 
 export function Global() {
@@ -21,28 +17,23 @@ export function Global() {
     const [ loadMoreVisibility, setLoadMoreVisibility ] = useState<boolean>(false);
     const [ currentPage, setCurrentPage ] = useState<number>(1);
     const [ bottomText, setBottomText ] = useState<string>(' Load More');
-    // const [refetchLoading, setRefetchLoading] = useState<boolean>(false);
     const [ disableLoadMore, setDisableLoadMore ] = useState<boolean>(false);
     const globalService = new GlobalService();
 
-
-    // useEffect(() => {
-    //     console.log('currentPageChange:', currentPage);
-    // }, [ currentPage ])
-
-    // * this runs only when the screen is refocused 
-    useFocusEffect(
+    useFocusEffect( // * this runs only when the screen is refocused
         React.useCallback(() => {
             fetchData().then(() => setIsLoading(false));
-            return () => {
-                setGlobalData(null);
-                setIsLoading(true);
-                setCurrentPage(1);
-                setBottomText(' Load More');
-                setDisableLoadMore(false);
-            };
+            return () => { resetPage() };
         }, [])
     );
+
+    function resetPage() {
+        setGlobalData(null);
+        setIsLoading(true);
+        setCurrentPage(1);
+        setBottomText(' Load More');
+        setDisableLoadMore(false);
+    }
 
     async function fetchData() {
         try {
@@ -62,9 +53,9 @@ export function Global() {
     async function fetchNextSet() {
         try {
             const response = await globalService.getAllRowsWithPagination(10, currentPage);
-            // setCurrentPage((prev) => prev + 1);
-            if (response && response.length < 1) return false;
-            else {
+            if (response && response.length < 1) {
+                return false;
+            } else {
                 setGlobalData([ ...globalData ? globalData : [], ...(response as RawSharedLetter[]) ]);
                 return true;
             }
@@ -86,7 +77,6 @@ export function Global() {
     };
 
 
-
     return (
         <SafeAreaView style={global_styles.global_container}>
             <View style={global_styles.title_container}>
@@ -103,7 +93,8 @@ export function Global() {
                     />
                 )}
                 {!disableLoadMore && (
-                    <Pressable style={{ display: loadMoreVisibility === true ? 'flex' : 'none', ...global_styles.load_container }}
+                    <Pressable
+                        style={{ display: loadMoreVisibility === true ? 'flex' : 'none', ...global_styles.load_container }}
                         onPress={() => handlePressLoadMore()} disabled={disableLoadMore}
                     >
                         {isLoading ? <Text>Loading...</Text> : (

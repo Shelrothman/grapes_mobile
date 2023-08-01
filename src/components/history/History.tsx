@@ -6,12 +6,6 @@ import { buildDateArray, isCloseToBottom } from "../../utils";
 import { GrapeDayLetter } from "../../types";
 import { Ionicons } from '@expo/vector-icons';
 
-// const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize }: any) => {
-//     const paddingToBottom = 30;
-//     return layoutMeasurement.height + contentOffset.y >=
-//         contentSize.height - paddingToBottom;
-// };
-
 
 /** 
  * @description users history page of their past grape days
@@ -71,7 +65,7 @@ export default function History() {
                 ...history_styles.load_container,
                 display: noMoreVisibility === true ? 'flex' : 'none'
             }}>
-                Grape data is not saved past 30 days to protect your privacy.
+                Grape data is not saved past 1 month to protect your privacy.
             </Text>
         </SafeAreaView>
     );
