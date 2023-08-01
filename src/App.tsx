@@ -2,22 +2,12 @@ import { StatusBar } from "expo-status-bar";
 import { ThemeProvider } from "react-native-rapi-ui";
 import Navigation from "./components/navigation";
 import { AuthProvider } from "./contexts/AuthProvider";
+import Toast from 'react-native-toast-message';
+import { ToastConfig } from './utils/ToastConfig';
 
-
-
-
-/*
-import NetInfo from '@react-native-community/netinfo'
-import { onlineManager } from '@tanstack/react-query'
-
-onlineManager.setEventListener(setOnline => {
-  return NetInfo.addEventListener(state => {
-    setOnline(!!state.isConnected)
-  })
-})
-*/
 
 // TODO come back and re-asses whats really needed here
+
 
 export default function App() {
     const images = [
@@ -34,6 +24,7 @@ export default function App() {
                 <Navigation />
             </AuthProvider>
             <StatusBar hidden={true} />
+            <Toast config={ToastConfig} />
         </ThemeProvider>
     );
 }

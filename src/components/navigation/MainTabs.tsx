@@ -1,7 +1,5 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import Toast from 'react-native-toast-message';
-import { ToastConfig } from '../../utils/ToastConfig';
 import Home from "../my/Home";
 import History from "../history/History";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
@@ -13,12 +11,12 @@ import { useHomeGrapeContext } from '../../contexts/HomeGrapeContext';
 
 
 const Tab = createMaterialTopTabNavigator();
-// const tabBarOptions = { tabBarShowLabel: false, };
-// ? maybe we disable swiping everywhere so it doesnt confuse people
+
+// * disable swiping everywhere so it doesnt confuse people
 const tabBarOptions = { tabBarShowLabel: false, swipeEnabled: false, };
 
 const MainTabs = () => {
-    const { homeSwipeEnabled } = useHomeGrapeContext();
+    const { tabBarEnabled } = useHomeGrapeContext();
     const buildTabBarIcon = (routeName: string, focused: boolean, color: string) => {
         const iconProps = { size: 25, color: color };
         if (routeName === 'Home') {
@@ -35,29 +33,24 @@ const MainTabs = () => {
 
 
     return (
-        <>
-            <Tab.Navigator
-                screenOptions={({ route }) => ({
-                    tabBarIcon: ({ focused, color }) => {
-                        if (route.name) return buildTabBarIcon(route.name, focused, color);
-                    },
-                    tabBarActiveTintColor: '#8ABD91',
-                    tabBarInactiveTintColor: '#f3f0f5', // text color for words that are not selected
-                    tabBarStyle: {
-                        backgroundColor: '#4E1E66', paddingTop: 30, paddingBottom: 10,
-                        display: `${homeSwipeEnabled ? 'flex' : 'none'}`
-                    },
-                    tabBarIndicatorStyle: { backgroundColor: '#cb9de2', height: 5 },
-                })}>
-                <Tab.Screen name="Home" component={Home} options={{ ...tabBarOptions }} />
-                {/* //! <Tab.Screen name="Home" component={Home} options={{ ...tabBarOptions, swipeEnabled: homeSwipeEnabled }} /> */}
-                <Tab.Screen name="Global" component={Global} options={tabBarOptions} />
-                <Tab.Screen name="More" component={SettingsStackScreen} options={tabBarOptions} />
-                <Tab.Screen name="History" component={History} options={tabBarOptions} />
-            </Tab.Navigator>
-            {/* <StatusBar hidden={true} /> */}
-            <Toast config={ToastConfig} />
-        </>
+        <Tab.Navigator
+            screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, color }) => {
+                    if (route.name) return buildTabBarIcon(route.name, focused, color);
+                },
+                tabBarActiveTintColor: '#8ABD91',
+                tabBarInactiveTintColor: '#f3f0f5', // text color for words that are not selected
+                tabBarStyle: {
+                    backgroundColor: '#4E1E66', paddingTop: 30, paddingBottom: 10,
+                    display: `${tabBarEnabled ? 'flex' : 'none'}`
+                },
+                tabBarIndicatorStyle: { backgroundColor: '#cb9de2', height: 5 },
+            })}>
+            <Tab.Screen name="Home" component={Home} options={{ ...tabBarOptions }} />
+            <Tab.Screen name="Global" component={Global} options={tabBarOptions} />
+            <Tab.Screen name="More" component={SettingsStackScreen} options={tabBarOptions} />
+            <Tab.Screen name="History" component={History} options={tabBarOptions} />
+        </Tab.Navigator>
     );
 };
 

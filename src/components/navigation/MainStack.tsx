@@ -3,9 +3,6 @@ import MainTabs from "./MainTabs";
 import { HomeGrapeProvider } from "../../contexts/HomeGrapeContext";
 
 
-
-
-
 const MainStack = createNativeStackNavigator();
 
 

@@ -42,7 +42,7 @@ export function BottomEditContainer({
     // setInputValue
 }: BottomEditContainerProps) {
     const { sessionUser } = useAuthContext();
-    const { setHomeSwipeEnabled } = useHomeGrapeContext();
+    const { setTabBarEnabled } = useHomeGrapeContext();
     const [ inputValue, setInputValue ] = useState<string>(grape_day_letter.value);
 
     // console.log(inputRef)
@@ -53,7 +53,7 @@ export function BottomEditContainer({
     // and instead that X can be a "clear" button
 
     const exit = () => { 
-        setHomeSwipeEnabled!(true); 
+        setTabBarEnabled!(true); 
         setSelectedLetter(null);
         // setInputValue(grape_day_letter.value);
         // if (inputRef && inputRef.current) setInputValue(inputRef.current.props?.defaultValue!);
