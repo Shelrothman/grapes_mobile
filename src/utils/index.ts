@@ -31,14 +31,19 @@ export const resToGrape = (res: Partial<GrapeResponse>): Grape => {
 /**
  * @function buildDateArray
  * @description builds an array of dates from today to the past 10 days
- * @returns {string[]} array of dates in the format YYYY-MM-DD
+ * @returns {string[]} array of dates in the format YYYY-MM-DD in UTC
  */
-export function buildDateArray(){
+export function buildDateArray(): string[] {
     let dateArray: string[] = [];
     let startDay = new Date();
-    for (let i = 0; i < 10; i++) {
+    
+    // yo we dont want today bc that is in Home duh
+    
+    // let yesterday = startDay.getDate() - 1;
+
+    for (let i = 0; i < 15; i++) {
         let date = getUTCDate(startDay.toISOString());
-        dateArray.push(date);
+        if (i !== 0) dateArray.push(date); // skip today
         startDay.setDate(startDay.getDate() - 1);
     }
     return dateArray;

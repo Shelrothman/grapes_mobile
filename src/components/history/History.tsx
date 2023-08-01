@@ -34,6 +34,7 @@ export default function History() {
     /** the grape date of the grape day being viewed */
     const [ grape_date, setGrape_date ] = useState<string | null>(null);
 
+    // console.log("dates", dates)
 
     return (
         <SafeAreaView style={history_styles.container}>

@@ -57,7 +57,11 @@ export function HistoryGrapeDay({ date, day, setDay, setGrape_date }: HomeGrapeI
         return setDayAndValidity(resToGrape(viewGrape).day, true);
     };
 
-    const dateTitle:string = new Date(date).toDateString();
+    // make dateTitle be in UTC time bc it is in UTC time in the db so that the data matches...
+    const dateTitle: string = new Date(date).toUTCString().slice(0, 16);
+    // * always in Www, dd Mmm yyyy hh:mm:ss GMT format
+
+
 
     return (
         <View style={{ alignItems: 'center', marginTop: 30, }}>
