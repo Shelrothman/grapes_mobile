@@ -86,7 +86,7 @@ export const DataList: any = [
     {
         title: 'App Info', data: [
             { title: "Version", value: "1.0.0" }, // TODO get this from package.json
-            { title: "Expo SDK", value: "42.0.0" }, // TODO get this from package.json
+            { title: "Expo SDK", value: "^49.0.5" }, // TODO get this from package.json
             { title: "Bundle ID", value: "loremipsumbarfoo" }, // TODO get this 
             {
                 title: "About the App Developer", value: [

@@ -1,9 +1,7 @@
-// import { useState } from 'react';
 import { View, Text, SectionList, SafeAreaView } from 'react-native';
 import { A } from '@expo/html-elements';
 import { setting_styles } from '../../styles/settings';
-import { MaterialCommunityIcons, Ionicons, MaterialIcons } from '@expo/vector-icons';
-// import { isConditionalExpression } from 'typescript';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { GrapeIcons } from '../../utils/Icons';
 import { DataList } from './DataList';
 
@@ -16,16 +14,9 @@ type renderItemProps = {
 
 // TODO this will also need to be displayed to the user on their first login only.. the whole page just display it... and a note that they can view it in ther..
 
-// TODO research on whats needed for Some kind of disclaimer that this app does not replace a real therapist and to call 911 if feeeling bad.. blalala thang
 
 
-
-
-function RenderItem({
-    title = "",
-    value,
-    icon,
-}: renderItemProps) {
+function RenderItem({ title = "", value, icon, }: renderItemProps) {
 
     if (title === "Additonal Resources") alert(value)
 
@@ -73,7 +64,6 @@ export function About() {
 
     return (
         <SafeAreaView style={setting_styles.container}>
-            {/* <Text>About</Text> */}
             <SectionList
                 sections={DataList}
                 renderSectionHeader={({ section: { title } }) => (
@@ -83,7 +73,6 @@ export function About() {
                 )}
                 keyExtractor={(item) => item.title}
                 renderItem={({ item, index }) => <RenderItem {...item} />}
-
             />
         </SafeAreaView>
     )
