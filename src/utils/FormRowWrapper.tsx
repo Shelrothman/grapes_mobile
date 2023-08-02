@@ -1,13 +1,7 @@
-/**
- * @description wrapper component for a form row containing, label, input, helpText, and save button
- * mainly used in account screen but can be used elsewhere
- */
 import { TextInput, TextInputProps, View } from "react-native";
 import { Text, Button } from "react-native-rapi-ui";
-//? i think text from rapi-ui auto word wraps
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MyMap, MyNumMap } from "./constants";
-
 
 type FormRowWrapperProps = {
     label: string;
@@ -17,26 +11,14 @@ type FormRowWrapperProps = {
     inputValue: string;
 }
 
-const HELP_TEXT: MyMap = {
-    'Display Name': "How your name appears in the global feed.",
-    'Email': "Requires email confirmation.",
-    'Password': ''
-};
-const maxLength: MyNumMap = {
-    'Display Name': 8,
-    'Email': undefined,
-    'Password': 12,
-};
-const minLength: MyNumMap = {
-    'Display Name': 3,
-    'Email': undefined,
-    'Password': 6,
-};
-
-// // TODO: put a limit on the amount of characters that can be entered into the input fields 
+const HELP_TEXT: MyMap = { 'Display Name': "How your name appears in the global feed.", 'Email': "Requires email confirmation.", 'Password': '' };
+const maxLength: MyNumMap = { 'Display Name': 8, 'Email': undefined, 'Password': 12, };
 
 
-
+/**
+ * @description wrapper component for a form row containing, label, input, helpText, and save button
+ * mainly used in account screen but can be used elsewhere
+ */
 export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue, }: FormRowWrapperProps) {
 
     const saveButtonProps: any = {
@@ -57,10 +39,6 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
         },
         selectionColor: '#cb9de2', placeholderTextColor: '#cb9de2',
     };
-
-    // * ive confirmed all the changes to work from the backend
-
-
 
     return (
         <View key={label}>

@@ -31,12 +31,10 @@ export class AccountService {
         if (user_id) {
             const { data, error } = await supabase
                 .from('user_names')
-                .update({ user_name: displayVal })
-                .match({ id: user_id })
-            // console.log('data: ', data);
-            // if (error) console.log(error);
+                .upsert({ id: user_id, user_name: displayVal })
+            console.log("data: ", data);
             if (error) return error;
-            return data[ 0 ];
+            return data ? data[ 0 ] : null;
         }
         return null;
     };
@@ -47,16 +45,19 @@ export class AccountService {
             // TODO: more reasons that the value is no good.. maybe not unique or too short.. etc
             if (configVal.length === 0) throw new Error("Cannot send an empty value");
             if (configVal === '********' && configKey === 'password') throw new Error("Password value not changed!");
+            let retVal: User | null | ApiError | PostgrestError = null;
             switch (configKey) {
                 case "email":
-                    return await this.changeEmail(configVal);
+                    retVal = await this.changeEmail(configVal);
+                    break;
                 case "password":
-                    return await this.changePassword(configVal);
+                    retVal = await this.changePassword(configVal);
+                    break;
                 case "display":
-                    return await this.changeDisplayName(configVal);
-                default:
-                    return null;
+                    retVal = await this.changeDisplayName(configVal);
+                    break;
             }
+            return retVal;
         } catch (error: any) {
             console.error(error);
             throw new Error(error);

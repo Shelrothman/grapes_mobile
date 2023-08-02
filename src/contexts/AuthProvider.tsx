@@ -5,7 +5,7 @@ import { Session, User } from '@supabase/supabase-js';
 // !! Dont forget u are using the supabase js SDK **V1**
 // TODO update to V2
 
-type AuthUser = {
+export type AuthUser = {
     /** the unique identifier for the user matching supabase */
     user_uid: string;
     /** the user's display name */
@@ -18,6 +18,7 @@ type ContextProps = {
     user: null | boolean;
     session: Session | null;
     sessionUser: AuthUser | null;
+    setSessionUser: React.Dispatch<React.SetStateAction<AuthUser | null>>;
     /** is it user's first time login */
     firstTimeLogin: boolean;
     setFirstTimeLogin: React.Dispatch<React.SetStateAction<boolean>>;
@@ -67,7 +68,7 @@ const AuthProvider = (props: Props) => {
         setSession(session);
         setUser(session ? true : false);
         // * set the sessionUser:
-        handleSessionUser(session);
+        if (sessionUser == null) handleSessionUser(session);
         const { data: authListener } = supabase.auth.onAuthStateChange(
             async (event, session) => {
                 console.log(`Supabase auth event: ${event}`);
@@ -94,7 +95,7 @@ const AuthProvider = (props: Props) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, session, sessionUser, firstTimeLogin, setFirstTimeLogin }}>
+        <AuthContext.Provider value={{ user, session, sessionUser, firstTimeLogin, setFirstTimeLogin, setSessionUser }}>
             {props.children}
         </AuthContext.Provider>
     );
