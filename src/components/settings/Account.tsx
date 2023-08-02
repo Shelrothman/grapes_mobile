@@ -24,9 +24,6 @@ async function handleLogout() {
     if (error) alert(error.message);
 };
 
-
-// TODO  use a toast for when the change is successful. like did in Global
-
 export function Account() {
     const { sessionUser, setSessionUser } = useAuthContext();
     const [ loading, setLoading ] = useState<boolean>(false);

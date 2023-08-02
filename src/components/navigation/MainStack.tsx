@@ -13,8 +13,6 @@ const MainStack = createNativeStackNavigator();
 // ! pu HERE
 // TODO Get the links in the About working: https://github.dev/EvanBacon/pillar-valley/blob/master/app/credit.tsx
 
-// TODO there is a poroblem in the Account page its not filling out those TextInp[uts
-// TODO big time is finish creating that node app that simply does the password changing thing
 
 const Main = () => {
     const [ modalVisible, setModalVisible ] = useState<boolean>(true);
