@@ -12,10 +12,6 @@ type renderItemProps = {
 }
 
 
-// TODO this will also need to be displayed to the user on their first login only.. the whole page just display it... and a note that they can view it in ther..
-
-
-
 function RenderItem({ title = "", value, icon, }: renderItemProps) {
 
     const renderItem = () => {

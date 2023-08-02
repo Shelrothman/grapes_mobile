@@ -1,4 +1,3 @@
-import { View, Text, StyleSheet } from 'react-native';
 import { About } from './About';
 import { Account } from './Account';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
@@ -10,7 +9,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 const Tab = createMaterialTopTabNavigator();
 export function SettingsStackScreen() {
     return (
-        <Tab.Navigator sceneContainerStyle={styles.container}
+        <Tab.Navigator sceneContainerStyle={{backgroundColor: '#2E3944'}}
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color }) => {
                     let iconName: any = 'information-circle-outline';
@@ -35,12 +34,3 @@ export function SettingsStackScreen() {
         </Tab.Navigator>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#2E3944',
-        // height: '100%',
-        // paddingBottom: 20,
-        // marginBottom: 20,
-    },
-});

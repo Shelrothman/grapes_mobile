@@ -1,4 +1,4 @@
-import React,   { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ScrollView, KeyboardAvoidingView, Platform, Alert } from "react-native";
 import { useHeaderHeight } from '@react-navigation/elements';
 import { supabase } from '../../initSupabase';
@@ -8,8 +8,7 @@ import { useAuthContext, AuthUser } from "../../contexts/AuthProvider";
 import { AccountService } from "../../services/AccountService";
 import Loading from "../../utils/Loading";
 import { FormRowWrapper } from "../../utils/FormRowWrapper";
-import { MyMap, MyNumMap } from "../../utils/constants";
-import { useFocusEffect } from "@react-navigation/native";
+import { MyMap } from "../../utils/constants";
 
 type FormState = MyMap & {
     /** the displayName for the user, defaults to their email */
@@ -33,18 +32,6 @@ export function Account() {
         email: sessionUser?.email || "",
         password: "********",
     });
-
-    // TODO implement something like this
-    // useFocusEffect(() => {
-    //     React.useCallback(() => {
-    //         setFormState({
-    //             display: sessionUser?.display_name || sessionUser?.email || "",
-    //             email: sessionUser?.email || "",
-    //             password: "********",
-    //         });
-    //     }, [  ]);
-    // });
-
 
     useEffect(() => {
         setFormState({

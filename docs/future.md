@@ -8,7 +8,9 @@
 
 <!-- ?[FUTURE] a customizavle widget for their homescreen that displays their current days agenda or displays urge to go mke ojne for today if they havent yet -->
 
-
+<!-- *
+* encourage users to save the ones they like as photos on their phone...
+*    https://docs.expo.dev/tutorial/screenshot/ -->
 <!--? [FUTURE] may consider using blobl storage as thuiis starts to get bigger but not yet -->
 
 

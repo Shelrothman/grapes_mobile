@@ -88,7 +88,7 @@ export function BottomEditContainer({
                     color="#cb9de2" backgroundColor="transparent"
                     style={my_styles.buttons}
                     onPress={() => showCancelConfirmDialog(exit)} />
-                <FontAwesome5.Button name="eraser" size={30} key="Cancel"
+                <FontAwesome5.Button name="eraser" size={30} key="Clear"
                     color="#cb9de2" backgroundColor="transparent"
                     style={my_styles.buttons} onPress={() => setInputValue('')}
                 />

@@ -15,10 +15,6 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
 
     async function login() {
         setLoading(true);
-        // const { user, error } = await supabase.auth.signIn({
-        //     email: email,
-        //     password: password,
-        // });
         const { data: { user }, error, } = await supabase.auth
             .signInWithPassword({ email, password });
         if (!error && !user) {
