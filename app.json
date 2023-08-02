@@ -15,7 +15,8 @@
             "**/*"
         ],
         "ios": {
-            "supportsTablet": true
+            "supportsTablet": true,
+            "bundleIdentifier": "080423.0"
         },
         "android": {
             "adaptiveIcon": {
@@ -27,6 +28,11 @@
             "favicon": "./assets/images/favicon.png",
             "bundler": "metro"
         },
-        "scheme": "https"
+        "scheme": "https",
+        "extra": {
+            "eas": {
+                "projectId": "413c38f8-da16-4012-828d-b85ffd6c79b7"
+            }
+        }
     }
 }

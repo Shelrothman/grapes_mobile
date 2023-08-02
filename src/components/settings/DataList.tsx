@@ -95,7 +95,7 @@ export const DataList: any = [
             },
             {
                 title: "Bundle ID",
-                value: "091755"
+                value: require("../../../app.json").expo.ios.bundleIdentifier,
             }, 
             {
                 title: "About the App Developer", value: [

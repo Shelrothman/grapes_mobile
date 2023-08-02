@@ -1,0 +1,28 @@
+{
+    "cli": {
+        "version": ">= 3.18.3",
+        "appVersionSource": "remote"
+    },
+    "build": {
+        "development": {
+            "distribution": "internal",
+            "ios": {
+                "buildConfiguration": "Debug"
+            }
+        },
+        "preview": {
+            "distribution": "internal"
+        },
+        "production": {
+            "cache": {
+                "key": "barbie-world"
+            },
+            "ios": {
+                "autoIncrement": true
+            }
+        }
+    },
+    "submit": {
+        "production": {}
+    }
+}
