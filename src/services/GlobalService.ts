@@ -30,7 +30,6 @@ export class GlobalService {
         return shared_letters ? shared_letters : null;
     };
 
-
     /**
      * @function getAllRowsWithPagination
      * @description get the first n amounts of rows from the table, most recent first

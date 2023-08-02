@@ -1,5 +1,5 @@
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-
+// import * as packageJSON from '../../../package.json';
 /**
  * render this list into SectionList
  */
@@ -85,9 +85,18 @@ export const DataList: any = [
     // App Info
     {
         title: 'App Info', data: [
-            { title: "Version", value: "1.0.0" }, // TODO get this from package.json
-            { title: "Expo SDK", value: "^49.0.5" }, // TODO get this from package.json
-            { title: "Bundle ID", value: "loremipsumbarfoo" }, // TODO get this 
+            {
+                title: "Version",
+                value: require("../../../package.json").version,
+            },
+            {
+                title: "Expo SDK",
+                value: require("../../../package.json").dependencies[ "expo" ],
+            },
+            {
+                title: "Bundle ID",
+                value: "091755"
+            }, 
             {
                 title: "About the App Developer", value: [
                     { linkTitle: "LinkedIn", link: "https://www.linkedin.com/in/shelby-anne-rothman/" },
@@ -102,9 +111,18 @@ export const DataList: any = [
         title: "Support Grapes App", data: [
             {
                 value: [
-                    { linkTitle: "📝 Write a review", link: "https://jsonplaceholder.typicode.com/posts/2" }, // TODO use expo-store-review pkg
-                    { linkTitle: "⭐ Star the project on Github", link: "" }, // TODO link to github
-                    { linkTitle: "🐛 Report a bug", link: "" } // TODO link to github issues
+                    {
+                        linkTitle: "📝 Write a review",
+                        link: "https://jsonplaceholder.typicode.com/posts/2"
+                    }, 
+                    {
+                        linkTitle: "⭐ Star the project on Github",
+                        link: "https://github.com/Q118/grapes_mobile"
+                    },
+                    {
+                        linkTitle: "🐛 Report a bug",
+                        link: "https://github.com/Q118/grapes_mobile/issues/new"
+                    }
                 ]
             }
         ]

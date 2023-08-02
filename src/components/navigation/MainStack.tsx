@@ -10,9 +10,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const MainStack = createNativeStackNavigator();
 
-// ! pu HERE
-// TODO Get the links in the About working: https://github.dev/EvanBacon/pillar-valley/blob/master/app/credit.tsx
-
 
 const Main = () => {
     const [ modalVisible, setModalVisible ] = useState<boolean>(true);

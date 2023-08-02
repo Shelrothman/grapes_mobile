@@ -2,14 +2,7 @@ import { PostgrestError } from "@supabase/supabase-js";
 import { supabase } from "../initSupabase";
 import { RawGlobalGrape, GrapeResponse, RawGrapeDayLetter } from "../types";
 import { getUTCDate } from "../utils";
-// import useCachedResources from "react-native-rapi-ui/hooks/useCachedResources";
-// TODO some caching would be helpful here
 
-
-// * i cuuuud just useGlobalService and like make it agnostic to the table name
-// * but i think i like the idea of having a service for each table
-
-// ? I do wonder.. should i get all my logic and helpers like this into a grpahql server? and just hit those endpoints in the lightwight client?...
 
 /**
  * @class HomeService
@@ -28,7 +21,6 @@ export class HomeService {
         this.updateLetter = this.updateLetter.bind(this);
         this.upsertRow = this.upsertRow.bind(this);
     };
-
 
     private handleError(error: Partial<PostgrestError>) {
         console.log(error);
@@ -53,7 +45,6 @@ export class HomeService {
         if (error) this.handleError(error);
         return data ? data[ 0 ] : null;
     };
-
 
     private addRow = async (grape: Partial<GrapeResponse>): Promise<GrapeResponse | null> => {
         const { data, error } = await supabase
@@ -97,7 +88,6 @@ export class HomeService {
         return data ? data[ 0 ] : null;
     }
 
-
     static getOrCreateToday = async (user_id: string): Promise<GrapeResponse | null> => {
         let resVal: GrapeResponse | null = null;
         try {
@@ -114,7 +104,7 @@ export class HomeService {
             }
         } catch (error) {
             // this should really only catch if duplcation is attempted but we catch to be sure
-            console.error(error);
+            // console.error(error);
         }
         return resVal;
     }

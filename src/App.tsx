@@ -6,8 +6,6 @@ import Toast from 'react-native-toast-message';
 import { ToastConfig } from './utils/ToastConfig';
 
 
-// TODO come back and re-asses whats really needed here
-
 
 export default function App() {
     const images = [

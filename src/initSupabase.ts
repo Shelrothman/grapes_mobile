@@ -3,7 +3,7 @@ import { User as userType, createClient } from "@supabase/supabase-js";
 import { config } from "./config";
 
 
-//TODO Better put your these secret keys in .env file like you did in grapes-admin
+
 const SUPABASE_URL = config.supabase_url
 const SUPABASE_KEY = config.supabase_key;
 

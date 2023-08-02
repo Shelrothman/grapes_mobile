@@ -23,7 +23,6 @@ type MyGrapeLetterProps = {
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-// TODO make the edit pressable be a full width button underneath each letter
 
 export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLetter, setLoading, setGrape }: MyGrapeLetterProps) {
     const inputRef = useRef<TextInput>(null);

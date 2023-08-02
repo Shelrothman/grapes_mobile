@@ -1,9 +1,6 @@
 import { useContext, createContext, useState, useEffect } from 'react';
 import { supabase } from '../initSupabase';
-import { Session, User } from '@supabase/supabase-js';
-
-// !! Dont forget u are using the supabase js SDK **V1**
-// TODO update to V2
+import { Session } from '@supabase/supabase-js';
 
 export type AuthUser = {
     /** the unique identifier for the user matching supabase */

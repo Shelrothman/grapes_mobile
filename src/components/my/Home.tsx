@@ -10,7 +10,6 @@ import { HomeService } from "../../services/HomeService";
 import Loading from "../../utils/Loading";
 import { useAuthContext } from "../../contexts/AuthProvider";
 
-// TODO only problem now is that when u return from an update to a letter, it doesnt auto update.. it only will update when leave and return.... so do soemnthign...
 
 export default function Home() {
     const { sessionUser } = useAuthContext();
@@ -27,15 +26,13 @@ export default function Home() {
         }, [ sessionUser ])
     );
 
-    // * okay yay only seeing 4 requests in network which makes sense bc two for in dev mode and each of those has two fetching taking pkace... so i cud look at reducing threer.. in HomeService
 
     async function fetchData() {
-        console.info('inside fetchData in Home')
         try {
             if (sessionUser == null || sessionUser == undefined) return;
             const response = await HomeService.getOrCreateToday(sessionUser!.user_uid);
             if (response !== null) setGrape(resToGrape(response));
-            // else setIsError(true); //? do we do this?
+            // else setIsError(true); //? do we need this?
         } catch (error) {
             setIsLoading(false);
             console.error('Error fetching data:', error);

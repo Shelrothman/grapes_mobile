@@ -1,10 +1,9 @@
 import { PostgrestError } from "@supabase/supabase-js";
 import { supabase } from "../initSupabase";
-import { GrapeResponse, RawGlobalGrape, RawSharedLetter, SharedLetter } from "../types";
+import { GrapeResponse } from "../types";
 
 const TABLE_NAME = 'user_grapes';
 
-// TODO i could prob just have one Serivec fil;e like DBservice and combine all of these...
 
 /**
  * @class HistoryService

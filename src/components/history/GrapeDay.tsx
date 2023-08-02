@@ -49,7 +49,6 @@ export function HistoryGrapeDay({ date, day, setDay, setGrape_date }: HomeGrapeI
     const dateTitle: string = new Date(date).toUTCString().slice(0, 16);
     // * always in Www, dd Mmm yyyy hh:mm:ss GMT format.. aka 16 chars long
 
-
     return (
         <View style={{ alignItems: 'center', marginTop: 30, }}>
             <Pressable
