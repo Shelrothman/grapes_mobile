@@ -24,7 +24,7 @@
 <!-- TODO make only THE DISPLAY of the date titles be in local.. keeping everything else utc  -->
 <!-- TODO make the edit pressable be a full width button underneath each letter in Home-> Edit -->
 
-#### If things are SLOW: 
+#### If things are SLOW to download or laggy: 
 <!-- TODO: some caching may be helpful for Homeservices... if needed --> 
     - import useCachedResources from "react-native-rapi-ui/hooks/useCachedResources";
 
@@ -33,3 +33,8 @@
     - i cuuuud just useGlobalService and like make it agnostic to the table name
     - but i think i like the idea of having a service for each table
  <!-- TODO i could prob just have one Serivec fil;e like DBservice and combine all of these services into one file with multiple classes... -->
+
+ <!-- TODO after have some users and improving.. Enroll in this: https://developer.apple.com/app-store/small-business-program/#:~:text=Associated%20Developer%20Accounts%3F-,The%20App%20Store%20Small%20Business%20Program%20is,small%20businesses%20and%20individual%20developers. -->
+
+
+ https://tanstack.com/query/v4/docs/react/react-native

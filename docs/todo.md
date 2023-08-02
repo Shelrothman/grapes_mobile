@@ -10,6 +10,7 @@
 
 <!-- TODO ensure emails CAN be sent to others besides mine... -->
 <!-- and understnad howto turn off that testing flag -->
+https://resend.com/docs/send-with-supabase-smtp
 
 
 ## GET it hosted. And then: 
