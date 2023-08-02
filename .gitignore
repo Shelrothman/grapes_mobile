@@ -20,3 +20,5 @@ web-build/
 
 # config files
 *config.ts
+
+docs/
