@@ -1,9 +1,10 @@
-import { ApiError, PostgrestError } from "@supabase/supabase-js";
+import { PostgrestError } from "@supabase/supabase-js";
 import { supabase } from "../initSupabase";
 import { GrapeResponse, RawGlobalGrape, RawSharedLetter, SharedLetter } from "../types";
 
 const TABLE_NAME = 'user_grapes';
 
+// TODO i could prob just have one Serivec fil;e like DBservice and combine all of these...
 
 /**
  * @class HistoryService
@@ -33,10 +34,11 @@ export class HistoryService {
      * @returns {Promise<GrapeResponse|null>}
      **/
     async getGrapeByDate(date: string): Promise<GrapeResponse|null> {
+        const user_id = (await supabase.auth.getSession()).data.session?.user?.id;
         const { data, error } = await supabase
             .from(this.tableName)
             .select('*')
-            .match({ created_at: date, user_id: supabase.auth.user()?.id })
+            .match({ created_at: date, user_id: user_id })
         if (error) this.handleError(error);
         return data ? data[ 0 ] : null;
     };

@@ -11,7 +11,7 @@ type FormRowWrapperProps = {
     inputValue: string;
 }
 
-const HELP_TEXT: MyMap = { 'Display Name': "How your name appears in the global feed.", 'Email': "Requires email confirmation.", 'Password': '' };
+const HELP_TEXT: MyMap = { 'Display Name': "How your name appears in the global feed.", 'Email': "Requires email confirmation for changes to take effect.", 'Password': '' };
 const maxLength: MyNumMap = { 'Display Name': 8, 'Email': undefined, 'Password': 12, };
 
 

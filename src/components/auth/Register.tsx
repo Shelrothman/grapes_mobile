@@ -29,13 +29,19 @@ export default function ({
 
     async function register() {
         setLoading(true);
-        const { user, error } = await supabase.auth.signUp({
+        // const { user, error } = await supabase.auth.signUp({
+        //     email: email,
+        //     password: password,
+        // });
+        const { data, error } = await supabase.auth.signUp({
             email: email,
             password: password,
-        });
+        })
+        const { user } = data;
         if (!error && !user) {
             setLoading(false);
-            alert("Check your email for the login link!");
+            // WE ARENT requiring email confirmation.. only required for an update
+            // alert("Check your email for the login link!");
         }
         if (error) {
             setLoading(false);

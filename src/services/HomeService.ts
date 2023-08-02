@@ -56,31 +56,15 @@ export class HomeService {
         return data ? data[ 0 ] : null;
     };
 
-    // private getRowByGrapeId = async (grape_id: string): Promise<GrapeResponse | null> => {
-    //     const { data, error } = await supabase
-    //         .from(this.tableName)
-    //         .select('*')
-    //         .match({ grape_id })
-    //     if (error) this.handleError(error);
-    //     return data ? data[ 0 ] : null;
-    // };
 
     private addRow = async (grape: Partial<GrapeResponse>): Promise<GrapeResponse | null> => {
         const { data, error } = await supabase
             .from(this.tableName)
-            .insert(grape) // by default in v1 the new record is returned
+            .insert(grape) 
+            .select() // in v2 you have to select the new record
         if (error) this.handleError(error);
         return data ? data[ 0 ] : null;
     };
-
-    // private updateRow = async (grape: RawGlobalGrape): Promise<GrapeResponse | null> => {
-    //     const { data, error } = await supabase
-    //         .from(this.tableName)
-    //         .update(grape)
-    //         .match({ user_id: grape.user_id })
-    //     if (error) this.handleError(error);
-    //     return data ? data[ 0 ] : null;
-    // };
 
     updateLetter = async ({ letter, value, user_id }: RawGrapeDayLetter): Promise<GrapeResponse | null> => {
         const data = await this.upsertRow({ [ letter ]: value, user_id });
@@ -110,6 +94,7 @@ export class HomeService {
             .from(this.tableName)
             .update(partialGrape)
             .match({ user_id: partialGrape.user_id, created_at: getUTCDate() })
+            .select()
         if (error) this.handleError(error);
         return data ? data[ 0 ] : null;
     }
@@ -125,10 +110,13 @@ export class HomeService {
             if (existence) {
                 resVal = await homeService.getRow(user_id, today);
             } else {
+                console.log("existence," , existence)
                 resVal = await homeService.addRow({ user_id, created_at: today });
+                
             }
         } catch (error) {
             // this should really only catch if duplcation is attempted but we catch to be sure
+            console.error(error);
         }
         return resVal;
     }

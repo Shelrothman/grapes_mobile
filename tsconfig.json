@@ -1,7 +1,7 @@
 {
     "extends": "expo/tsconfig.base",
     "compilerOptions": {
-        "jsx": "react-jsx",
+        "jsx": "react-native",
         "strict": true,
         "resolveJsonModule": true,
         // "module": "ESNext",
@@ -10,7 +10,7 @@
         // "checkJs": true,
         "strictNullChecks": true,
         // "strictFunctionTypes": true,
-        "lib": ["dom.iterable", "ES6"] // ? this may help the warning
+        "lib": ["dom.iterable", "ES6", "DOM", "ESNext"]
     },
     "include": [
         "./src/**/*",

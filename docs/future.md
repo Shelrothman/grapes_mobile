@@ -10,3 +10,6 @@
 
 
 <!--? [FUTURE] may consider using blobl storage as thuiis starts to get bigger but not yet -->
+
+
+ <!-- TODO add option to delete a grape from the global feed if its their own? -->
