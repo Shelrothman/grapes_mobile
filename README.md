@@ -1,13 +1,10 @@
-# Grapes
+# Grapes-App
 
-(readme in progress)
-
-Set the environment variable `EXPO_USE_TYPED_ROUTES=true` to enable TypeScript support for routes.
+Grapes-App is a mobile app for mental health and wellness. It is built with React Native and Expo.
 
 
-## Development set up for WSL2
-- run `npx expose-wsl@latest` and get the accessible IP 
-- run `npx expo start`
-    - go to `exp://[accessibleIP]:19000` in browser on phone and then click `open in expo app` 
-        - if its not your first time, just open the expo app and click on the project from recents after starting the server
-    - or just open the project in your local browser on `http://localhost:19000/`
+
+## What is GRAPES©?
+GRAPES© is a daily practice. Each day, choose a simple activity from each of the different categories. GRAPES is great for anyone, but particularly can help with those who experience anxiety and depression. It can help you to feel more balanced and improve your mood. 
+
+GRAPES© is a tool from [Dialetical Behaviour Therapy](https://my.clevelandclinic.org/health/treatments/22838-dialectical-behavior-therapy-dbt#:~:text=Dialectical%20behavior%20therapy%20(DBT)%20is,mental%20health%20conditions%20as%20well.) (DBT); an evidence-based psychotherapy created by [Marsha M. Linehan](https://en.wikipedia.org/wiki/Marsha_M._Linehan) and branches from [Cognitive Behaviour Therapy](https://www.apa.org/ptsd-guideline/patients-and-families/cognitive-behavioral) (CBT).
