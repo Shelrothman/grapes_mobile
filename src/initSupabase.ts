@@ -3,8 +3,8 @@ import { User as userType, createClient } from "@supabase/supabase-js";
 
 
 
-const SUPABASE_URL = process.env.SUPABASE_URL || require("../config").supabase_url;
-const SUPABASE_KEY = process.env.SUPABASE_KEY || require("../config").supabase_key;
+const SUPABASE_URL = process.env.SUPABASE_URL || '';
+const SUPABASE_KEY = process.env.SUPABASE_KEY || '';
 
 
 
