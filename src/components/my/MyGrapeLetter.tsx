@@ -28,7 +28,7 @@ type MyGrapeLetterProps = {
 export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLetter, setLoading, setGrape }: MyGrapeLetterProps) {
     const inputRef = useRef<TextInput>(null);
     const { handlePressIn, handlePressOut, pressStyle } = usePressAnimation();
-    const { setTabBarEnabled: setTabBarEnabled } = useHomeGrapeContext();
+    const { setTabBarEnabled } = useHomeGrapeContext();
 
     useEffect(() => {
         if (selectedLetter && selectedLetter.letter === grape_day_letter.letter) {

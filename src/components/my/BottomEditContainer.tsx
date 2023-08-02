@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { View, TextInput } from "react-native";
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { my_styles } from "../../styles/my";
 import { Grape, GrapeDayLetter } from "../../types";
 import Toast, { ToastShowParams } from 'react-native-toast-message';
@@ -21,11 +21,7 @@ type BottomEditContainerProps = {
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-// TODO maybe have the canclwe and save contain the words for user-friendlyness
 
-// TODO need to add limit to amount of characters in the input
-
-// TODO this could be a constant
 const toastProps: ToastShowParams = { position: 'top', visibilityTime: 4000, };
 
 /**
@@ -38,26 +34,14 @@ export function BottomEditContainer({
     inputRef,
     setLoading,
     setGrape,
-    // inputValue,
-    // setInputValue
 }: BottomEditContainerProps) {
     const { sessionUser } = useAuthContext();
     const { setTabBarEnabled } = useHomeGrapeContext();
     const [ inputValue, setInputValue ] = useState<string>(grape_day_letter.value);
 
-    // console.log(inputRef)
-
-
-    // TODO will u need to do this to make ut more user friendly?
-    // * maybe move that x exit button to the top right corner of the screen.
-    // and instead that X can be a "clear" button
-
-    const exit = () => { 
-        setTabBarEnabled!(true); 
+    const exit = () => {
+        setTabBarEnabled!(true);
         setSelectedLetter(null);
-        // setInputValue(grape_day_letter.value);
-        // if (inputRef && inputRef.current) setInputValue(inputRef.current.props?.defaultValue!);
-        // else setInputValue(grape_day_letter.value);
     };
 
     const successToast = () => Toast.show({
@@ -74,13 +58,10 @@ export function BottomEditContainer({
     });
 
     function handleSaveClick() {
+        if (inputValue === '') return alert('Cannot save an empty value');
         setLoading(true);
         const homeService = new HomeService();
-        const toSend = {
-            letter: grape_day_letter.letter,
-            value: inputValue,
-            user_id: sessionUser!.user_uid,
-        }
+        const toSend = { letter: grape_day_letter.letter, value: inputValue, user_id: sessionUser!.user_uid, };
         homeService.updateLetter(toSend).then((res) => {
             if (res !== null) {
                 setGrape(resToGrape(res)) // set the grape in Home so that it updates before the refetch
@@ -100,15 +81,19 @@ export function BottomEditContainer({
                 key={grape_day_letter.letter} style={my_styles.input_text}
                 defaultValue={inputValue}
                 ref={inputRef} onChangeText={(text) => setInputValue(text)}
+                maxLength={1000}
             />
             <View style={my_styles.row}>
-                <MaterialIcons.Button name="cancel" size={30} key="Cancel"
+                <Ionicons.Button name="arrow-back-circle-outline" size={30} key="Cancel"
                     color="#cb9de2" backgroundColor="transparent"
-                    style={my_styles.buttons} 
-                    onPress={() => showCancelConfirmDialog(exit)}
+                    style={my_styles.buttons}
+                    onPress={() => showCancelConfirmDialog(exit)} />
+                <FontAwesome5.Button name="eraser" size={30} key="Cancel"
+                    color="#cb9de2" backgroundColor="transparent"
+                    style={my_styles.buttons} onPress={() => setInputValue('')}
                 />
-                <MaterialCommunityIcons.Button name="content-save-check-outline" size={30}
-                    color="#cb9de2" key="Save" backgroundColor="transparent"
+                <MaterialCommunityIcons.Button name="content-save-check-outline" size={35}
+                    color="#a8e4a0" key="Save" backgroundColor="transparent"
                     style={my_styles.buttons} onPress={handleSaveClick}
                 />
             </View>

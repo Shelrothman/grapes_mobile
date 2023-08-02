@@ -8,7 +8,6 @@ on insert on read on every SINGLE thing
 only the TITLE string to be the users local. utc everythign else
 <!-- TODO make only THE DISPLAY of the date titles be in local.. keeping everything else utc  -->
 <!-- TODO: the styles files for auth and settogs -->
-<!-- TODO remove all dependencies and imports for rapi-ui stufff.. get it out? -->
 
 <!-- TODO replace all touchables with Pressable -->
 
@@ -27,8 +26,5 @@ TODO so i need to set up a cron job to delete grapes older than 30 days -->
 
 <!-- TODO: review all: https://supabase.com/docs/guides/platform/going-into-prod -->
 
-<!-- TODO: convert the supabase sdk from v1 -> v2 -->
-https://supabase.com/docs/reference/javascript/v1/upgrade-guide
 
-// const currentTimeStampInMilliseconds = (new Date()).getTime();
 
