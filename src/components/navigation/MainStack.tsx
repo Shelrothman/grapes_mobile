@@ -7,17 +7,20 @@ import { useAuthContext } from "../../contexts/AuthProvider";
 import { nav_styles } from "../../styles/nav";
 import { About } from "../settings/About";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 const MainStack = createNativeStackNavigator();
 
+// ! pu HERE
+// TODO Get the links in the About working: https://github.dev/EvanBacon/pillar-valley/blob/master/app/credit.tsx
+
+// TODO there is a poroblem in the Account page its not filling out those TextInp[uts
+// TODO big time is finish creating that node app that simply does the password changing thing
 
 const Main = () => {
     const [ modalVisible, setModalVisible ] = useState<boolean>(true);
     const { firstTimeLogin, setFirstTimeLogin } = useAuthContext();
 
-
-    // ! swithch after making
-    // if (firstTimeLogin === true && modalVisible === true) {
-    if (modalVisible === true) {
+    if (firstTimeLogin === true && modalVisible === true) {
         return (
             <View style={nav_styles.centeredView}>
                 <Modal animationType="slide" transparent={true}

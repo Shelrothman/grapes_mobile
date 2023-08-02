@@ -29,10 +29,14 @@ export default function ({
 
     async function forget() {
         setLoading(true);
-        const { data, error } = await supabase.auth.api.resetPasswordForEmail(email);
+        const { data, error } = await supabase.auth.api.resetPasswordForEmail(email, {
+            redirectTo: "https://grapes-admin.vercel.app",
+        });
         if (!error) {
             setLoading(false);
             alert("Check your email to reset your password!");
+            // then redirect to login
+            navigation.navigate("Login");
         }
         if (error) {
             setLoading(false);

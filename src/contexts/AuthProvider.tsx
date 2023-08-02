@@ -3,7 +3,7 @@ import { supabase } from '../initSupabase';
 import { Session, User } from '@supabase/supabase-js';
 
 // !! Dont forget u are using the supabase js SDK **V1**
-
+// TODO update to V2
 
 type AuthUser = {
     /** the unique identifier for the user matching supabase */
@@ -44,7 +44,7 @@ const getDisplayName = async (user_id: string): Promise<string | null> => {
 const sessionToUser = (session: Session | null): any => {
     if (session == null) return null;
     return getDisplayName(session.user!.id).then((displayName) => {
-        if (displayName == null) console.log('displayName is null, so first time?')
+        // if (displayName == null) console.log('displayName is null, so first time?')
         return {
             user_uid: session.user!.id,
             //* if userName is null, use email 
@@ -66,8 +66,6 @@ const AuthProvider = (props: Props) => {
     useEffect(() => {
         const session = supabase.auth.session();
         setSession(session);
-        console.log(`session: ${JSON.stringify(session, null, 2)}`);
-        // console.log(session?.user?.last_sign_in_at);
         setUser(session ? true : false);
         // * set the sessionUser:
         handleSessionUser(session);
