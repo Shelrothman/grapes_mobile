@@ -5,7 +5,6 @@ import { supabase } from '../../initSupabase';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Button } from "react-native-rapi-ui";
 import { useAuthContext } from "../../contexts/AuthProvider";
-// import { AccountService } from "./services";
 import { AccountService } from "../../services/AccountService";
 import Loading from "../../utils/Loading";
 import { FormRowWrapper } from "../../utils/FormRowWrapper";
@@ -32,7 +31,7 @@ export function Account() {
     const [ formState, setFormState ] = useState<FormState>({
         display: sessionUser?.display_name || sessionUser?.email || "",
         email: sessionUser?.email || "",
-        password: "********", 
+        password: "********",
     });
 
     // TODO put the below functions into a hook or service
@@ -69,6 +68,7 @@ export function Account() {
     async function handleConfirmChange(key: string) {
         // console.log("formState", formState)
         const displayKey: string = key === 'display' ? 'display name' : key;
+        if (formState[ key ] && formState[ key ]!.length < 6) return alert(`${displayKey} must be at least 6 characters.`);
         try {
             const accountService = new AccountService();
             const user = await accountService.changeConfig(formState[ key ], key);

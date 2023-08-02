@@ -9,6 +9,10 @@ export interface MyMap {
     [ key: string ]: string | undefined
 }
 
+export interface MyNumMap {
+    [ key: string ]: number | undefined
+}
+
 
 
 export const GRAPE_DAY: MyMap = {

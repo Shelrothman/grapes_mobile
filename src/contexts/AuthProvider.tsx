@@ -44,7 +44,6 @@ const getDisplayName = async (user_id: string): Promise<string | null> => {
 const sessionToUser = (session: Session | null): any => {
     if (session == null) return null;
     return getDisplayName(session.user!.id).then((displayName) => {
-        // if (displayName == null) console.log('displayName is null, so first time?')
         return {
             user_uid: session.user!.id,
             //* if userName is null, use email 
@@ -74,6 +73,7 @@ const AuthProvider = (props: Props) => {
                 console.log(`Supabase auth event: ${event}`);
                 setSession(session);
                 setUser(session ? true : false);
+                handleSessionUser(session);
             }
         ); 
         // this is called when the user logs out

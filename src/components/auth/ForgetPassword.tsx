@@ -1,28 +1,11 @@
 import { useState } from "react";
-// import { StatusBar } from "expo-status-bar";
-import {
-    ScrollView,
-    TouchableOpacity,
-    View,
-    KeyboardAvoidingView,
-    Image,
-    Platform,
-} from "react-native";
+import { ScrollView, TouchableOpacity, View, KeyboardAvoidingView, Image, Platform, } from "react-native";
 import { supabase } from "../../initSupabase";
 import { AuthStackParamList } from "../../types/navigation";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import {
-    Layout,
-    Text,
-    TextInput,
-    Button,
-    useTheme,
-    themeColor,
-} from "react-native-rapi-ui";
+import { Layout, Text, TextInput, Button, useTheme, themeColor, } from "react-native-rapi-ui";
 
-export default function ({
-    navigation,
-}: NativeStackScreenProps<AuthStackParamList, "ForgetPassword">) {
+export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamList, "ForgetPassword">) {
     const { isDarkmode, setTheme } = useTheme();
     const [ email, setEmail ] = useState<string>("");
     const [ loading, setLoading ] = useState<boolean>(false);

@@ -6,7 +6,7 @@ import { TextInput, TextInputProps, View } from "react-native";
 import { Text, Button } from "react-native-rapi-ui";
 //? i think text from rapi-ui auto word wraps
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { MyMap } from "./constants";
+import { MyMap, MyNumMap } from "./constants";
 
 
 type FormRowWrapperProps = {
@@ -21,6 +21,16 @@ const HELP_TEXT: MyMap = {
     'Display Name': "How your name appears in the global feed.",
     'Email': "Requires email confirmation.",
     'Password': ''
+};
+const maxLength: MyNumMap = {
+    'Display Name': 8,
+    'Email': undefined,
+    'Password': 12,
+};
+const minLength: MyNumMap = {
+    'Display Name': 3,
+    'Email': undefined,
+    'Password': 6,
 };
 
 // // TODO: put a limit on the amount of characters that can be entered into the input fields 
@@ -50,6 +60,8 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
 
     // * ive confirmed all the changes to work from the backend
 
+
+
     return (
         <View key={label}>
             <Text style={{ color: '#a8e4a0', }}>{label}</Text>
@@ -57,7 +69,7 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
                 onChangeText={onChangeText} key={`${label}-input`}
                 secureTextEntry={label !== 'Password' ? false : true}
                 keyboardType={label === 'Email' ? 'email-address' : 'default'}
-                maxLength={label !== 'Display Name' ? undefined : 8}
+                maxLength={maxLength[label]}
             />
             <Text size="sm" italic={true} style={{ color: '#cb9de2', marginTop: 5 }}>{HELP_TEXT[label]}</Text>
             <Button {...saveButtonProps} text={`Save ${label}`} key={`${label}-save`} onPress={onButtonPress} />
