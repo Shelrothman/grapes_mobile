@@ -12,6 +12,8 @@ only the TITLE string to be the users local. utc everythign else
 
 <!-- TODO replace all touchables with Pressable -->
 
+<!-- TODO - a clear input button for the myGrape TextINput -->
+
 <!-- TODO maybe add CHECK contrainst to the grapes tables and stuff to not let it be too long and also contraints inside the TextINputs inhere -->
 <!-- todo: SET UP policy to delete grapes after 30 days or something! https://supabase.com/blog/postgres-as-a-cron-server -->
 

@@ -10,9 +10,11 @@ const SUPABASE_KEY = config.supabase_key;
 
 
 export const supabase = createClient(SUPABASE_URL, SUPABASE_KEY, {
-    localStorage: AsyncStorage as any,
-    // below Prevents Supabase from evaluating window.location.href, breaking mobile
-    detectSessionInUrl: false 
+    auth: {
+        storage: AsyncStorage,
+        // below Prevents Supabase from evaluating window.location.href, breaking mobile
+        detectSessionInUrl: false,
+    },
 });
 
 export type User = userType;

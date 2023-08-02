@@ -64,24 +64,17 @@ const AuthProvider = (props: Props) => {
     const [ firstTimeLogin, setFirstTimeLogin ] = useState<boolean>(false);
 
     useEffect(() => {
-        const session = supabase.auth.session();
-        setSession(session);
-        setUser(session ? true : false);
-        // * set the sessionUser:
-        if (sessionUser == null) handleSessionUser(session);
-        const { data: authListener } = supabase.auth.onAuthStateChange(
-            async (event, session) => {
-                console.log(`Supabase auth event: ${event}`);
-                setSession(session);
-                setUser(session ? true : false);
-                handleSessionUser(session);
-            }
-        ); 
-        // this is called when the user logs out
-        return () => { 
-            authListener!.unsubscribe(); 
+        const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
+            console.log(`Supabase auth event: ${event}`);
+            setSession(session);
+            setUser(session ? true : false);
+            if (sessionUser == null) handleSessionUser(session);
+        });
+
+        return () => {
+            authListener.subscription.unsubscribe();
             setFirstTimeLogin(false);
-        }; 
+        };
     }, [ user ]);
 
     function handleSessionUser(session: Session | null) {

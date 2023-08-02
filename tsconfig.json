@@ -10,7 +10,7 @@
         // "checkJs": true,
         "strictNullChecks": true,
         // "strictFunctionTypes": true,
-        // "lib": ["dom.iterable", "ES6"]
+        "lib": ["dom.iterable", "ES6"] // ? this may help the warning
     },
     "include": [
         "./src/**/*",

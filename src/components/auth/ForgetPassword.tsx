@@ -12,7 +12,7 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
 
     async function forget() {
         setLoading(true);
-        const { data, error } = await supabase.auth.api.resetPasswordForEmail(email, {
+        const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
             redirectTo: "https://grapes-admin.vercel.app",
         });
         if (!error) {
