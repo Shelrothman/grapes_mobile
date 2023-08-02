@@ -1,13 +1,5 @@
 import { useState } from "react";
-// import { StatusBar } from "expo-status-bar";
-import {
-    ScrollView,
-    TouchableOpacity,
-    View,
-    KeyboardAvoidingView,
-    Image,
-    Platform,
-} from "react-native";
+import { ScrollView, TouchableOpacity, View, KeyboardAvoidingView, Image, Platform, } from "react-native";
 import { supabase } from "../../initSupabase";
 import { AuthStackParamList } from "../../types/navigation";
 
@@ -29,10 +21,6 @@ export default function ({
 
     async function register() {
         setLoading(true);
-        // const { user, error } = await supabase.auth.signUp({
-        //     email: email,
-        //     password: password,
-        // });
         const { data, error } = await supabase.auth.signUp({
             email: email,
             password: password,
@@ -41,7 +29,6 @@ export default function ({
         if (!error && !user) {
             setLoading(false);
             // WE ARENT requiring email confirmation.. only required for an update
-            // alert("Check your email for the login link!");
         }
         if (error) {
             setLoading(false);

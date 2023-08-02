@@ -23,9 +23,7 @@ export class HomeService {
         this.tableName = 'user_grapes';
         this.doesRowExist = this.doesRowExist.bind(this);
         this.getRow = this.getRow.bind(this);
-        // this.getRowByGrapeId = this.getRowByGrapeId.bind(this);
         this.addRow = this.addRow.bind(this);
-        // this.updateRow = this.updateRow.bind(this);
         this.deleteRow = this.deleteRow.bind(this);
         this.updateLetter = this.updateLetter.bind(this);
         this.upsertRow = this.upsertRow.bind(this);

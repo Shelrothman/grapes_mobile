@@ -14,18 +14,15 @@ const TABLE_NAME = 'user_grapes';
 export class HistoryService {
     tableName: string;
 
-
     constructor() {
         this.tableName = TABLE_NAME;
         this.getGrapeByDate = this.getGrapeByDate.bind(this);
     };
 
-
     private handleError(error: PostgrestError) {
         console.log(error);
         throw new Error(error.message);
     }
-
 
     /**
      * @function getGrapeByDate

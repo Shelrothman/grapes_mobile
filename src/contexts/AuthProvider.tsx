@@ -69,7 +69,6 @@ const AuthProvider = (props: Props) => {
             setSession(session);
             setUser(session ? true : false);
             if (sessionUser == null) handleSessionUser(session);
-            // if (event === 'INITIAL_SESSION') setFirstTimeLogin(true);
         });
         return () => {
             authListener.subscription.unsubscribe();
