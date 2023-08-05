@@ -17,7 +17,7 @@
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
                BuildableName = "grapes-app.app"
                BlueprintName = "grapes-app"
-               ReferencedContainer = "container:grapes-app.xcodeproj">
+               ReferencedContainer = "container:grapesapp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,7 +35,7 @@
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
                BuildableName = "grapes-appTests.xctest"
                BlueprintName = "grapes-appTests"
-               ReferencedContainer = "container:grapes-app.xcodeproj">
+               ReferencedContainer = "container:grapesapp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,7 +57,7 @@
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "grapes-app.app"
             BlueprintName = "grapes-app"
-            ReferencedContainer = "container:grapes-app.xcodeproj">
+            ReferencedContainer = "container:grapesapp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -74,7 +74,7 @@
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
             BuildableName = "grapes-app.app"
             BlueprintName = "grapes-app"
-            ReferencedContainer = "container:grapes-app.xcodeproj">
+            ReferencedContainer = "container:grapesapp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
