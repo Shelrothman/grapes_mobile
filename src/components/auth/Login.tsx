@@ -58,11 +58,11 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
                                 <Text size="md" fontWeight="bold" style={{ marginLeft: 5, }}>Register here</Text>
                             </TouchableOpacity>
                         </View>
-                        <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10, justifyContent: "center", }} >
+                        {/* <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10, justifyContent: "center", }} >
                             <TouchableOpacity onPress={() => { navigation.navigate("ForgetPassword"); }} >
                                 <Text size="md" fontWeight="bold">Forget password</Text>
                             </TouchableOpacity>
-                        </View>
+                        </View> */}
                         <View style={{ flexDirection: "row", alignItems: "center", marginTop: 30, justifyContent: "center", }}>
                             <TouchableOpacity onPress={() => { isDarkmode ? setTheme("light") : setTheme("dark"); }}>
                                 <Text size="md" fontWeight="bold" style={{ marginLeft: 5, }} >

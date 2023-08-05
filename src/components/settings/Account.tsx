@@ -108,10 +108,10 @@ export function Account() {
                         onChangeText={(text) => setFormState({ ...formState, display: text })}
                         onButtonPress={() => showConfirmDialog('display')} key="display"
                     />
-                    <FormRowWrapper label="Email" inputValue={formState.email}
+                    {/* <FormRowWrapper label="Email" inputValue={formState.email}
                         onChangeText={(text) => setFormState({ ...formState, email: text })}
                         onButtonPress={() => showConfirmDialog('email')} key="email"
-                    />
+                    /> */}
                     <FormRowWrapper label="Password" inputValue={formState.password}
                         onChangeText={(text) => setFormState({ ...formState, password: text })}
                         onButtonPress={() => showConfirmDialog('password')} key="password"
