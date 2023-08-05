@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
-import ForgetPassword from "../auth/ForgetPassword";
+// import ForgetPassword from "../auth/ForgetPassword";
 
 
 
@@ -15,7 +15,7 @@ const Auth = () => {
             {/* @ts-ignore */}
             <AuthStack.Screen name="Register" component={Register} />
             {/* @ts-ignore */}
-            <AuthStack.Screen name="ForgetPassword" component={ForgetPassword} />
+            {/* <AuthStack.Screen name="ForgetPassword" component={ForgetPassword} /> */}
         </AuthStack.Navigator>
     );
 };
