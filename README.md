@@ -24,29 +24,17 @@ This app is a mobile version of the GRAPES© practice. It is a tool to help you 
 - The `Global Feed`  screen is where you can view other people's grapes for inspiration and ideas. You can copy any of the values directly and use.
 - The `History` screen is where you can view your past grapes. Keep in mind we don't store your data past one month.
 ## Screenshots
-<span style="display:flex;flexDirection:row;">
 Home Screen <br/> 
-<img src="https://user-images.githubusercontent.com/62257716/258556234-8026afc5-4cad-40e2-99ea-43f532b1f53a.PNG" alt="Home Screenshot" width="300" />
-<span style="padding:5px">
-</span>
+<img src="https://user-images.githubusercontent.com/62257716/258556234-8026afc5-4cad-40e2-99ea-43f532b1f53a.PNG" alt="Home Screenshot" width="300" /><br/>
 Global Feed <br/>
-<img src="https://user-images.githubusercontent.com/62257716/258557320-867fc272-9b8a-4d7a-83d9-484dbcc6671a.PNG" alt="Global Screenshot" width="300" />
-<span style="padding:5px">
-</span>
+<img src="https://user-images.githubusercontent.com/62257716/258557320-867fc272-9b8a-4d7a-83d9-484dbcc6671a.PNG" alt="Global Screenshot" width="300" /><br/>
 Settings-About<br/>
-<img src="https://user-images.githubusercontent.com/62257716/258557353-fe5997d1-a5b4-4d3c-af83-79396f65cebf.PNG" alt="About Screenshot" width="300" />
-</span>
-<br/>
-<span style="display:flex;flexDirection:row;">
+<img src="https://user-images.githubusercontent.com/62257716/258557353-fe5997d1-a5b4-4d3c-af83-79396f65cebf.PNG" alt="About Screenshot" width="300" /><br/>
 Settings-Account <br/> 
-<img src="https://user-images.githubusercontent.com/62257716/258557371-7c97cb1a-26f3-4bdb-8790-6b3faee4fd93.PNG" alt="Account Screenshot" width="300" />
-<span style="padding:5px">
-</span>
+<img src="https://user-images.githubusercontent.com/62257716/258557371-7c97cb1a-26f3-4bdb-8790-6b3faee4fd93.PNG" alt="Account Screenshot" width="300" /><br/>
 History Feed <br/>
-<img src="https://user-images.githubusercontent.com/62257716/258557394-f8d95340-c9c1-4e4c-b28d-4c4a4f5b2fb4.PNG" alt="Global Screenshot" width="300" />
-<span style="padding:5px">
-</span>
-</span>
+<img src="https://user-images.githubusercontent.com/62257716/258557394-f8d95340-c9c1-4e4c-b28d-4c4a4f5b2fb4.PNG" alt="Global Screenshot" width="300" /><br/>
+
 
 
 ## Additional Resources
