@@ -1,9 +1,13 @@
-// import "expo-router/entry";
-import 'react-native-url-polyfill/auto';
+import { AppRegistry, NativeModules, Platform } from 'react-native'
+import App from './src/App'
+// import { name as appName } from './app.json'
 
-import registerRootComponent from 'expo/build/launch/registerRootComponent';
 
-import App from './src/App';
 
-registerRootComponent(App);
+AppRegistry.registerComponent('main', () => App)
 
+
+if (Platform.OS === 'web') {
+    const rootTag = document.getElementById('root') || document.getElementById('X');
+    AppRegistry.runApplication('X', { rootTag });
+}

@@ -1,7 +1,9 @@
 {
+    "name": "grapes-app",
+    "displayName": "grapes-app",
     "expo": {
-        "name": "grapes",
-        "slug": "grapes",
+        "name": "grapes-app",
+        "slug": "grapes-app",
         "version": "1.0.0",
         "orientation": "portrait",
         "icon": "./assets/images/icon.png",
@@ -22,7 +24,8 @@
             "adaptiveIcon": {
                 "foregroundImage": "./assets/images/adaptive-icon.png",
                 "backgroundColor": "#2E3944"
-            }
+            },
+            "package": "com.nini_bee.grapesapp"
         },
         "web": {
             "favicon": "./assets/images/favicon.png",
