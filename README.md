@@ -1,6 +1,6 @@
 # Grapes-App
 
-Grapes-App is a mobile app for mental health and wellness. It is built with React Native and Expo.
+Grapes-App is a mobile app for mental health and wellness. The UI is built with React Native, Typescript, Node, and Expo. The backend is built with Vite, Typescript, and PostgreSQL hosted on Supabase. See full stack list below.
 
 <!-- table of contents -->
 <!-- ## Table of Contents
@@ -19,7 +19,10 @@ GRAPES© is a tool from [Dialetical Behaviour Therapy](https://my.clevelandclini
 ## What is this App?
 This app is a mobile version of the GRAPES© practice. It is a tool to help you to practice GRAPES© daily. It is also a tool to help you to track your progress and see your growth over time. You keep track every day of your planned activities. You can share the activities you have done with others. You can also see what others have done and get ideas for your own GRAPES© practice in the Global Feed.
 
-
+## How to use this App
+- The `Home` screen is where you can edit your grape for the day. Tap on the text in the letter you want to edit, fill it in, then hit save! From the home screen, you can share any of your letters to the global feed. 
+- The `Global Feed`  screen is where you can view other people's grapes for inspiration and ideas. You can copy any of the values directly and use.
+- The `History` screen is where you can view your past grapes. Keep in mind we don't store your data past one month.
 ## Screenshots
 <span style="display:flex;flexDirection:row;">
 Home Screen <br/> 
@@ -48,20 +51,29 @@ History Feed <br/>
 
 ## Additional Resources
 Learn more about what's behind GRAPES© and how it can help you:
+- [Dialectical behaviour therapy (DBT)](https://behavioraltech.org/)
+- [Creator of DBT, Marsha M. Linehan](https://en.wikipedia.org/wiki/Marsha_M._Linehan)
+- [Helpful books](https://books.google.com.br/books?hl=en&lr=&id=xlzyDwAAQBAJ&oi=fnd&pg=PP1&dq=dialectical+behavior+therapy&ots=IN4XpK4uml&sig=3K7e8F_V6OWu4K2mbEl1Jp7rL78&redir_esc=y#v=onepage&q=dialectical%20behavior%20therapy&f=false)
+- [CogToolz](https://www.cogtoolz.com/pages/grapes-tool)
+- [GRAPES for depression](https://moderntherapy.online/blog-2/2022/2/7/grapes-for-depression-when-life-gives-you-lemons-make-grapes)
+- [IntegrityCounselingGroup](https://www.integritycounselinggroup.com/blog/2018/12/22/how-to-use-the-grapes-tool-daily-to-combat-depression)
 
 
-## Get your GRAPES© on!
-link to app store
-link to run in Expo 
-link to play online (todo: host on vercel)
+## Get your GRAPES© on! (in progress)
+- link to app store
+- link to run in Expo 
+- link to backend repo
 
-link to backend repo
-
-
-
-
-licenses
+## Licenses
+- [MIT](https://choosealicense.com/licenses/mit/)
 
 ## Stack
+[React Native](https://reactnative.dev/) - UI
+[Typescript](https://www.typescriptlang.org/) - Language
+[Node](https://nodejs.org/en/) - Backend
+[Expo](https://expo.io/) - Mobile App
+[PostgreSQL](https://www.postgresql.org/) - Database
+[Supabase](https://supabase.io/) - Database Hosting
+[Vite](https://vitejs.dev/) - Backend Hosting
 
 
