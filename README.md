@@ -14,3 +14,11 @@ This app is a mobile version of the GRAPES© practice. It is a tool to help you 
 
 
 ## Screenshots
+<span style="display:flex;flexDirection:row;">
+Home Screen <br/>
+<img src="https://user-images.githubusercontent.com/62257716/258556234-8026afc5-4cad-40e2-99ea-43f532b1f53a.PNG" alt="Home Screenshot" width="300" />
+<span style="padding:5px">
+</span>
+Global Feed <br/>
+<img src="https://user-images.githubusercontent.com/62257716/258557320-867fc272-9b8a-4d7a-83d9-484dbcc6671a.PNG" alt="Global Screenshot" width="300" />
+</span>

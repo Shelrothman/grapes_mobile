@@ -18,7 +18,7 @@
         ],
         "ios": {
             "supportsTablet": true,
-            "bundleIdentifier": "080423.0"
+            "bundleIdentifier": "080523.0"
         },
         "android": {
             "adaptiveIcon": {
@@ -31,7 +31,7 @@
             "favicon": "https://user-images.githubusercontent.com/62257716/258604320-4c2b3b04-262e-4f6e-86a4-5e0569e6711a.png",
             "bundler": "metro"
         },
-        "scheme": "https",
+        "scheme": "com.nini_bee.grapesapp",
         "extra": {
             "eas": {
                 "projectId": "dcb3fd06-2e7e-4c68-995b-8e772d1f041c"
