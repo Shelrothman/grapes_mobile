@@ -20,13 +20,6 @@
             "supportsTablet": true,
             "bundleIdentifier": "080523.0"
         },
-        "android": {
-            "adaptiveIcon": {
-                "foregroundImage": "https://user-images.githubusercontent.com/62257716/258604258-346a6f68-42a9-41cb-9c19-c8a4704d1eb1.png",
-                "backgroundColor": "#2E3944"
-            },
-            "package": "com.nini_bee.grapes-app"
-        },
         "web": {
             "favicon": "https://user-images.githubusercontent.com/62257716/258604320-4c2b3b04-262e-4f6e-86a4-5e0569e6711a.png",
             "bundler": "metro"
