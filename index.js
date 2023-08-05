@@ -9,5 +9,5 @@ AppRegistry.registerComponent('main', () => App)
 
 if (Platform.OS === 'web') {
     const rootTag = document.getElementById('root') || document.getElementById('X');
-    AppRegistry.runApplication('X', { rootTag });
+    AppRegistry.runApplication('main', { rootTag });
 }

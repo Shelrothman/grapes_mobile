@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, KeyboardAvoidingView, Platform, Alert } from "react-native";
+import { ScrollView, KeyboardAvoidingView, Platform, Alert, Button, View } from "react-native";
 import { useHeaderHeight } from '@react-navigation/elements';
 import { supabase } from '../../initSupabase';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { Button } from "react-native-rapi-ui";
 import { useAuthContext, AuthUser } from "../../contexts/AuthProvider";
 import { AccountService } from "../../services/AccountService";
 import Loading from "../../utils/Loading";
@@ -62,7 +60,7 @@ export function Account() {
     function handleCancelClick(key: string) {
         if (key === 'email') return setFormState({ ...formState, email: sessionUser!.email });
         if (key === 'password') return setFormState({ ...formState, password: "********" });
-        if (key === 'display') return setFormState({ ...formState, display: sessionUser!.display_name});
+        if (key === 'display') return setFormState({ ...formState, display: sessionUser!.display_name });
     };
 
 
@@ -100,10 +98,9 @@ export function Account() {
         >
             {loading ? <Loading /> : (
                 <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: "#2E3944", marginTop: 20, paddingBottom: 40 }} >
-                    <Button color="#3d4b59" text='Logout' size="md" style={{ marginBottom: 20, borderColor: '#4E1E66', borderWidth: 2 }} textStyle={{ color: 'white' }}
-                        leftContent={<MaterialCommunityIcons name="logout" size={24} color="white" />}
-                        onPress={() => showConfirmLogout()}
-                    />
+                    <View style={{ marginBottom: 20, borderColor: '#4E1E66', borderWidth: 2, backgroundColor: "#3d4b59", borderRadius: 10 }}>
+                        <Button color="#a8e4a0" title='Logout' onPress={() => showConfirmLogout()} />
+                    </View>
                     <FormRowWrapper label="Display Name" inputValue={formState.display}
                         onChangeText={(text) => setFormState({ ...formState, display: text })}
                         onButtonPress={() => showConfirmDialog('display')} key="display"

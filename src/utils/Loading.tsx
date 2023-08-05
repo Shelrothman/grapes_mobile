@@ -1,12 +1,16 @@
 import { View, ActivityIndicator } from "react-native";
-import { Layout } from "react-native-rapi-ui";
 
 export default function () {
     return (
-        <Layout backgroundColor="#2E3944">
+        <View style={{
+            flex: 1, alignItems: "center", justifyContent: "center",
+            backgroundColor: "#2E3944",
+            height: "100%",
+            width: "100%",
+        }}>
             <View style={{ flex: 1, alignItems: "center", justifyContent: "center", }} >
                 <ActivityIndicator size="large" color='#8031A7' />
             </View>
-        </Layout>
+        </View>
     );
 }

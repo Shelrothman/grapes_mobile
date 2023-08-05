@@ -1,5 +1,4 @@
-import { TextInput, TextInputProps, View } from "react-native";
-import { Text, Button } from "react-native-rapi-ui";
+import { TextInput, TextInputProps, View, Text, Button } from "react-native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MyMap, MyNumMap } from "./constants";
 
@@ -21,15 +20,6 @@ const maxLength: MyNumMap = { 'Display Name': 8, 'Email': undefined, 'Password':
  */
 export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue, }: FormRowWrapperProps) {
 
-    const saveButtonProps: any = {
-        color: '#a8e4a0', size: "sm",
-        textStyle: { color: '#2E3944' },
-        style: {
-            alignSelf: 'flex-end', 
-            ...label !== 'Password' ? { marginTop: 20 } : { marginTop: 0 },
-        },
-        leftContent: <MaterialCommunityIcons name="content-save-check-outline" size={25} color="#2E3944" />,
-    };
 
     const textInputProps: TextInputProps | Readonly<TextInputProps> = {
         autoCapitalize: "none", autoComplete: "off", autoCorrect: false,
@@ -43,14 +33,23 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
     return (
         <View key={label}>
             <Text style={{ color: '#a8e4a0', }}>{label}</Text>
-            <TextInput placeholder={`Enter your ${label}`} {...textInputProps} value={inputValue} 
+            <TextInput placeholder={`Enter your ${label}`} {...textInputProps} value={inputValue}
                 onChangeText={onChangeText} key={`${label}-input`}
                 secureTextEntry={label !== 'Password' ? false : true}
                 keyboardType={label === 'Email' ? 'email-address' : 'default'}
-                maxLength={maxLength[label]}
+                maxLength={maxLength[ label ]}
             />
-            <Text size="sm" italic={true} style={{ color: '#cb9de2', marginTop: 5 }}>{HELP_TEXT[label]}</Text>
-            <Button {...saveButtonProps} text={`Save ${label}`} key={`${label}-save`} onPress={onButtonPress} />
+            <Text style={{ color: '#cb9de2', marginTop: 5, fontSize: 12, fontStyle: 'italic' }}>{HELP_TEXT[ label ]}</Text>
+            <View style={{
+                borderColor: '#4E1E66',
+                borderWidth: 2, 
+                borderRadius: 10,
+                backgroundColor: '#a8e4a0',
+                alignSelf: 'flex-end',
+                ...label !== 'Password' ? { marginTop: 20 } : { marginTop: 0 },
+            }}>
+                <Button title={`Save ${label}`} key={`${label}-save`} onPress={onButtonPress} color="#3d4b59" />
+            </View>
         </View>
     )
 }
