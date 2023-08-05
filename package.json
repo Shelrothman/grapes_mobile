@@ -18,6 +18,7 @@
     "@react-navigation/native-stack": "^6.9.13",
     "@supabase/supabase-js": "^2.31.0",
     "@types/react": "~18.2.14",
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "expo": "^49.0.5",
     "expo-clipboard": "~4.3.0",
     "expo-constants": "^14.4.2",
