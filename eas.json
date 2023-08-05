@@ -18,6 +18,12 @@
         "production": {}
     },
     "submit": {
-        "production": {}
+        "production": {
+            "ios": {
+                "appleId": "shel.programmer@gmail.com",
+                "ascAppId": "1234567890",
+                "appleTeamId": "LS86WU648R"
+            }
+        }
     }
 }
