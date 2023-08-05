@@ -15,7 +15,6 @@ type IconsProps = {
 
 
 export function GrapeIcons({ letter, color, size }: IconsProps) {
-    console.log("grapeIcons.." + letter)
     const iconSize = size ? size : 25; // 25 unless otherwise specified
     const _letter = letter.toUpperCase();
     switch (_letter) {
