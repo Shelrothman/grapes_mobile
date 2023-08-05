@@ -6,7 +6,6 @@ import { AuthStackParamList } from "../../types/navigation";
 
 
 export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamList, "Login">) {
-    // const { isDarkmode, setTheme } = useTheme();
     const [ email, setEmail ] = useState<string>("");
     const [ password, setPassword ] = useState<string>("");
     const [ loading, setLoading ] = useState<boolean>(false);

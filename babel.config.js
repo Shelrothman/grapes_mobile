@@ -5,17 +5,15 @@ module.exports = function (api) {
         plugins: [
             [
                 '@babel/plugin-proposal-decorators',
-                {
-                    legacy: true,
-                },
+                { legacy: true, },
             ],
             [ '@babel/plugin-proposal-optional-catch-binding' ],
             'react-native-reanimated/plugin',
         ],
+        env: {
+            production: {
+                plugins: [ 'transform-remove-console' ],
+            },
+        },
     }
-    // env: {
-    //     production: {
-    //         plugins: [ 'transform-remove-console' ],
-    //     },
-    // },
 }

@@ -40,14 +40,7 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
                 maxLength={maxLength[ label ]}
             />
             <Text style={{ color: '#cb9de2', marginTop: 5, fontSize: 12, fontStyle: 'italic' }}>{HELP_TEXT[ label ]}</Text>
-            <View style={{
-                borderColor: '#4E1E66',
-                borderWidth: 2, 
-                borderRadius: 10,
-                backgroundColor: '#a8e4a0',
-                alignSelf: 'flex-end',
-                ...label !== 'Password' ? { marginTop: 20 } : { marginTop: 0 },
-            }}>
+            <View style={{ borderColor: '#4E1E66', borderWidth: 2, borderRadius: 10, backgroundColor: '#a8e4a0', alignSelf: 'flex-end', ...label !== 'Password' ? { marginTop: 20 } : { marginTop: 0 }, }}>
                 <Button title={`Save ${label}`} key={`${label}-save`} onPress={onButtonPress} color="#3d4b59" />
             </View>
         </View>
