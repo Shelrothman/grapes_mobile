@@ -44,7 +44,7 @@ Learn more about what's behind GRAPES© and how it can help you:
 - link to backend repo
 
 ## Licenses
-- [MIT](https://choosealicense.com/licenses/mit/)
+- [MIT](./License.txt)
 
 ## Stack
 - [React Native](https://reactnative.dev/) - UI
@@ -55,3 +55,4 @@ Learn more about what's behind GRAPES© and how it can help you:
 - [Supabase](https://supabase.io/) - Database Hosting
 - [Vite](https://vitejs.dev/) - Framework
 
+## Future Features
