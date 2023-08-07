@@ -4,7 +4,7 @@ import { supabase } from "../../initSupabase";
 import { AuthStackParamList } from "../../types/navigation";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useAuthContext } from "../../contexts/AuthProvider";
-
+import { AccountService } from "../../services/AccountService";
 
 
 export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamList, "Register">) {
@@ -23,13 +23,18 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
         const { user } = data;
         if (!error && !user) {
             setLoading(false);
-            // WE ARENT requiring email confirmation.. only required for an update
+            // NOT requiring email confirmation.. only required for an update
         }
         if (error) {
             setLoading(false);
-            alert(error.message);
+            alert(error.message); // alerts if duplicate email
         }
         if (user) {
+            const data = await AccountService.setUpNewUser(email, user.id);
+            if (!data) { 
+                alert("There was an error setting up your account. Please try again later.");
+                return navigation.navigate("Login");
+            }
             setFirstTimeLogin && setFirstTimeLogin(true);
         }
     }

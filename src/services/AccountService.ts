@@ -40,6 +40,26 @@ export class AccountService {
         return null;
     };
 
+    /*
+                    const userString: string = JSON.stringify(user);
+                const _user = JSON.parse(userString);
+                if ((_user.message && _user.message.includes('unique constraint')) && key === 'display') {
+                    handleCancelClick(key); // reset the value back
+                    return alert(`Display Name already exists, please choose another.`);
+                }
+    */
+
+    static setUpNewUser = async (email: string, id: string): Promise<any> => {
+        const { data, error } = await supabase.from('user_names')
+            .insert({ id, user_name: email, email_val: email })
+            .select();
+        if (error) return error;
+        // todo HANDLE THE UNIQUE CONSTRAINT ERROR HERE
+
+        return data ? data[ 0 ] : null;
+    };
+
+
     changeConfig = async (configVal: string = "", configKey: string): Promise<User | null | AuthError | PostgrestError> => {
         try {
 
