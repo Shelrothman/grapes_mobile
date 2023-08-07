@@ -1,8 +1,21 @@
 # Grapes-App
 
-Grapes-App is a mobile app for mental health and wellness. This app is a pocket-size version of the GRAPES© practice. It is a tool to help you practice GRAPES© daily, and also a tool to help you track your progress and see your growth over time. You can keep track every day of your planned activities. You can share the activities you have done with others. You can also see what others have done and get ideas for your own GRAPES© practice in the Global Feed.
+Grapes-App is a mobile app for mental health and wellness; a pocket-size version of the GRAPES© practice. It is a tool to help you practice GRAPES© daily, and also a tool to help you track your progress and see your growth over time. You can keep track every day of your planned activities. You can share the activities you have done with others. You can also see what others have done and get ideas for your own GRAPES© practice in the Global Feed.
 
 *Research shows that the simple act of planning your daily activities can increase your success at personal development, accomplishing long term goals, and reducing stress and anxiety.*
+
+**This app is free to all and will remain that way. If you would like to help me cover the costs of maintaining it, please donate to [Venmo (shel-grapes-dev)](https://account.venmo.com/u/shel-grapes-dev) and help support it!**
+
+[![Donate](https://img.shields.io/badge/Donate-Venmo-g.svg)](https://account.venmo.com/u/shel-grapes-dev)
+
+**Table of Contents**
+- [What is GRAPES©?](#what-is-grapes)
+- [Screenshots](#screenshots)
+- [Additional Resources](#additional-resources)
+- [Get your GRAPES© on!](#get-your-grapes-on)
+- [Stack](#stack)
+- [Licenses](#licenses)
+- [Future Features](#future-features)
 
 ## What is GRAPES©?
 GRAPES© is a daily practice. Each day, choose a simple activity from each of the different categories. GRAPES is great for anyone, but particularly can help with those who experience anxiety and depression. It can help you to feel more balanced and improve your mood. 
@@ -49,10 +62,14 @@ Learn more about what's behind GRAPES© and how it can help you:
 - [IntegrityCounselingGroup](https://www.integritycounselinggroup.com/blog/2018/12/22/how-to-use-the-grapes-tool-daily-to-combat-depression)
 
 
-## Get your GRAPES© on! (in progress)
-- `coming soon`: <i>link download in the app store (approval in-process)</i>
+## Get your GRAPES© on!
+
+*(in progress)*
+- [Run in Expo Go](https://expo.dev/%40nini_bee/grapes-app?serviceType=eas&distribution=expo-go&scheme=exp%2Bgrapes-app&channel=master&sdkVersion=49.0.0)
+- `coming soon`: <i>link download in the app store (AppReview in-process)</i>
 <!-- - link to run in Expo  -->
 - [App Privacy Policy](https://grapes-admin.vercel.app/privacypolicy)
+
 
 
 ## Stack
