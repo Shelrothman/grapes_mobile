@@ -13,9 +13,13 @@
             }
         },
         "preview": {
+            "channel": "default",
             "distribution": "internal"
         },
-        "production": {}
+        "production": {
+            "channel": "production",
+            "distribution": "internal"
+        }
     },
     "submit": {
         "production": {
