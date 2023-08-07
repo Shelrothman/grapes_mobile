@@ -4,6 +4,7 @@
     },
     "build": {
         "development": {
+            "channel": "dev",
             "distribution": "internal",
             "android": {
                 "gradleCommand": ":app:assembleDebug"
@@ -13,11 +14,11 @@
             }
         },
         "preview": {
-            "channel": "default",
+            "channel": "preview",
             "distribution": "internal"
         },
         "production": {
-            "channel": "production",
+            "channel": "master",
             "distribution": "internal"
         }
     },
