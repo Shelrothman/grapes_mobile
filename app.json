@@ -4,7 +4,7 @@
     "expo": {
         "name": "grapes-app",
         "slug": "grapes-app",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "orientation": "portrait",
         "icon": "https://user-images.githubusercontent.com/62257716/258604288-87e3723c-673e-4f14-8b26-b0bed405da35.png",
         "userInterfaceStyle": "light",
@@ -18,7 +18,10 @@
         ],
         "ios": {
             "supportsTablet": true,
-            "bundleIdentifier": "G080523.0"
+            "bundleIdentifier": "G080523.0",
+            "runtimeVersion": {
+                "policy": "sdkVersion"
+            }
         },
         "web": {
             "favicon": "https://user-images.githubusercontent.com/62257716/258604320-4c2b3b04-262e-4f6e-86a4-5e0569e6711a.png",
