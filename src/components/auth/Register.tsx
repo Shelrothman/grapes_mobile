@@ -23,7 +23,7 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
         const { user } = data;
         if (!error && !user) {
             setLoading(false);
-            // NOT requiring email confirmation.. only required for an update
+            // NOT requiring email confirmation.. only requiring directing to admin for an update
         }
         if (error) {
             setLoading(false);

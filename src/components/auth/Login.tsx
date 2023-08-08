@@ -58,6 +58,12 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
                             <Text style={{ fontWeight: 'bold', color: 'white' }}>Register here</Text>
                         </TouchableOpacity>
                     </View>
+                    {/* // !TODO return to uncomment once figure out the other bug */}
+                    {/* <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10, justifyContent: "center", }} >
+                        <TouchableOpacity onPress={() => { navigation.navigate("ForgetPassword"); }} >
+                            <Text style={{ color: 'white' }}>Forget password</Text>
+                        </TouchableOpacity>
+                    </View> */}
                     <View style={{ flexDirection: "row", alignItems: "center", marginTop: 30, justifyContent: "center", }}>
                     </View>
                 </View>

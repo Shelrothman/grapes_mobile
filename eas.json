@@ -15,11 +15,15 @@
         },
         "preview": {
             "channel": "preview",
-            "distribution": "internal"
+            "ios": {
+                "simulator": true
+            }
         },
         "production": {
             "channel": "master",
-            "distribution": "internal"
+            "ios": {
+                "buildConfiguration": "Release"
+            }
         }
     },
     "submit": {
