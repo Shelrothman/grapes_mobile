@@ -37,7 +37,8 @@
     "react-native-scroll-into-view": "^2.0.2",
     "react-native-toast-message": "^2.1.6",
     "react-native-web": "~0.19.6",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "expo-updates": "~0.18.11"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",

@@ -41,7 +41,7 @@ const MainTabs = () => {
                 tabBarActiveTintColor: '#8ABD91',
                 tabBarInactiveTintColor: '#f3f0f5', // text color for words that are not selected
                 tabBarStyle: {
-                    backgroundColor: '#4E1E66', paddingTop: 30, paddingBottom: 10,
+                    backgroundColor: '#4E1E66', paddingTop: 50, paddingBottom: 10,
                     display: `${tabBarEnabled ? 'flex' : 'none'}`
                 },
                 tabBarIndicatorStyle: { backgroundColor: '#cb9de2', height: 5 },
