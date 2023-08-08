@@ -16,7 +16,8 @@
         "preview": {
             "channel": "preview",
             "ios": {
-                "simulator": true
+                "simulator": true,
+                "buildConfiguration": "Debug"
             }
         },
         "production": {
