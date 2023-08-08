@@ -18,7 +18,10 @@
         ],
         "ios": {
             "supportsTablet": true,
-            "bundleIdentifier": "G080523.0"
+            "bundleIdentifier": "G080523.0",
+            "runtimeVersion": {
+                "policy": "sdkVersion"
+            }
         },
         "web": {
             "favicon": "https://user-images.githubusercontent.com/62257716/258604320-4c2b3b04-262e-4f6e-86a4-5e0569e6711a.png",
