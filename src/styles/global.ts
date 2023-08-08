@@ -29,7 +29,8 @@ export const global_styles = StyleSheet.create({
         borderWidth: 2,
         marginTop: 20,
         marginBottom: 10,
-        width: '85%',
+        minWidth: '85%',
+        maxWidth: '85%',
         alignSelf: 'center',
     },
     card_header: {
