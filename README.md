@@ -64,11 +64,11 @@ Learn more about what's behind GRAPES© and how it can help you:
 
 ## Get your GRAPES© on!
 
-*(in progress)*
-- [Run in Expo Go](https://expo.dev/%40nini_bee/grapes-app?serviceType=eas&distribution=expo-go&scheme=exp%2Bgrapes-app&channel=master&sdkVersion=49.0.0)
-- `coming soon`: <i>link download in the app store (AppReview in-process)</i>
-<!-- - link to run in Expo  -->
-- [App Privacy Policy](https://grapes-admin.vercel.app/privacypolicy)
+[![Run in Expo Go](https://img.shields.io/badge/Run%20in%20Expo%20Go-a8e4a0.svg?style=flat-square&logo=EXPO&labelColor=4E1E66&logoColor=fff)](https://expo.dev/%40nini_bee/grapes-app?serviceType=eas&distribution=expo-go&scheme=exp%2Bgrapes-app&channel=master&sdkVersion=49.0.0)
+
+[![Download on the Apple App Store](https://img.shields.io/badge/App%20Store-a8e4a0.svg?style=flat-square&logo=App-Store&labelColor=4E1E66&logoColor=fff)](https://apps.apple.com/us/app/grapes-app/id6458539604)
+
+[![App Privacy Policy](https://img.shields.io/badge/Grapes_App-privacy_policy-4E1E66)](https://grapes-admin.vercel.app/privacypolicy)
 
 
 
@@ -95,7 +95,6 @@ Learn more about what's behind GRAPES© and how it can help you:
 - [MIT](./License.txt)
 
 
-
 ## Future Features
 - ability to reset password from within the app. (currently have to go to admin page)
 - dynamic width for the global page. (for ipad)
@@ -105,3 +104,7 @@ Learn more about what's behind GRAPES© and how it can help you:
 - implement caching if needed
 - potentially convert data to blob storage for scaling if needed
 
+## Get in touch
+[![Shelby Rothman Developer Website](https://img.shields.io/badge/Shelby%20Rothman🧑‍💻-4E1E66)](https://shelbyrothman.com/) &nbsp;  &nbsp;  &nbsp; 
+[![Email the Developer](https://img.shields.io/badge/Email%20📧-a8e4a0)](mailto:shel.programmer@gmail.com) &nbsp;  &nbsp;  &nbsp; 
+[![Follow Shelby on Github](https://img.shields.io/github/followers/Q118.svg?label=Follow&style=for-the-badge&logo=github&logoColor=FFFFFF&labelColor=4E1E66&logoWidth=20&color=a8e4a0)](https://github.com/Q118)
