@@ -68,7 +68,7 @@ Learn more about what's behind GRAPES© and how it can help you:
 
 [![Download on the Apple App Store](https://img.shields.io/badge/App%20Store-a8e4a0.svg?style=flat-square&logo=App-Store&labelColor=4E1E66&logoColor=fff)](https://apps.apple.com/us/app/grapes-app/id6458539604)
 
-[![App Privacy Policy](https://img.shields.io/badge/Grapes_App-privacy_policy-4E1E66)](https://grapes-admin.vercel.app/privacypolicy)
+[![App Privacy Policy](https://img.shields.io/badge/Grapes_App-privacy_policy-4E1E66)](https://grapes-admin.vercel.app/?privacypolicy)
 
 
 
