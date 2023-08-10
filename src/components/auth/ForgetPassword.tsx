@@ -7,8 +7,6 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { GrapesUser } from "../../types";
 import {default_error} from "../../utils/constants";
 
-
-
 // switch out during development
 // const support_url = "http://localhost:5173/?resetpassword?id="
 const support_url = "https://grapes-admin.vercel.app/?resetpassword?id="
