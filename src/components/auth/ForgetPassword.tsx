@@ -5,13 +5,8 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AccountService } from "../../services/AccountService";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { GrapesUser } from "../../types";
+import {default_error} from "../../utils/constants";
 
-// TODO: make it more secure by when link to go there is clicked... send a jwt token to the user_name table applied to their row.. and it expires in 5 minutes or something... and then its another way to verify and if its not there anymore.. send message link go get a new link.. for secrity purposes bblalala this way only the can reset their password and not someonw else? someone who just knows the url..
-
-// interface GrapeError extends PostgrestError {
-//     message: string;
-// }
-const default_error: string = "Something went wrong completing your request. Please try again. If this problem persists, please contact support: shel.programmer@gmail.com";
 
 
 // switch out during development
@@ -65,7 +60,6 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
                         keyboardType="email-address"
                         onChangeText={(text) => setEmail(text)}
                     />
-                    {/* <Text style={{ color: '#cb9de2', marginTop: 5, fontSize: 12, fontStyle: 'italic' }}>psst if you forgot what email you used to sign up. </Text> */}
                     <View style={{ marginTop: 20, borderWidth: 2, borderRadius: 10, padding: 5, backgroundColor: "#a8e4a0", flexDirection: 'row', justifyContent: 'center' }}>
                         <Button title={loading ? "Loading" : "Password Reset"} onPress={() => { forget(); }} color="#2E3944" disabled={loading} />
                         <MaterialCommunityIcons name="open-in-new" size={25} color="black" />
@@ -77,8 +71,6 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
                                 Login here
                             </Text>
                         </TouchableOpacity>
-                    </View>
-                    <View style={{ flexDirection: "row", alignItems: "center", marginTop: 30, justifyContent: "center", }}>
                     </View>
                 </View>
             </ScrollView>

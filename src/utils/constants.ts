@@ -43,3 +43,6 @@ export const defaultGrape_UI: Grape = {
     creation_date: '',
     day: Object.entries(defaultGrape).map(([ letter, value ]) => ({ letter, value }))
 }
+
+
+export const default_error: string = "Something went wrong completing your request. Please try again. If this problem persists, please contact support: shel.programmer@gmail.com";
