@@ -20,7 +20,7 @@ export const DataList: any = [
                     { letter: "r", letterTitle: "R is for Relaxation", letterValue: "Take time to relax and unwind from stress. Examples include taking a bath, reading a book, or playing with a pet." },
                     { letter: "a", letterTitle: "A is for Accomplishment", letterValue: "Commit to completing at least one task. Examples include doing the laundry or completing something from your to-do list." },
                     { letter: "p", letterTitle: "P is for Pleasure", letterValue: "Do something that you enjoy and makes you feel good. Examples include listening to your favorite music or treating yourself to a tasty snack." },
-                    { letter: "e", letterTitle: "E is for Exercise", letterValue: "Get moving to improve your move and health. Examples include doing some stretches or going for a walk." },
+                    { letter: "e", letterTitle: "E is for Exercise", letterValue: "Get moving to improve your mood and health. Examples include doing some stretches or going for a walk." },
                     { letter: "s", letterTitle: "S is for Social", letterValue: "Connect and interact with others. Examples include making small talk to a neighbor or having dinner with a friend." },
                 ]
             },
