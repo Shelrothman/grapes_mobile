@@ -106,6 +106,8 @@ export function Account() {
         return setLoading(false);
     };
 
+    // const renderConfirmNewPW = () => <FormRowWrapper label="Confirm New Password" inputValue={formState.password} key="confirm" />;
+
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled
@@ -130,6 +132,10 @@ export function Account() {
                         onChangeText={(text) => setFormState({ ...formState, password: text })}
                         onButtonPress={() => showConfirmDialog('password')} key="password" btnText="Save New Password"
                     />
+                    {/* <FormRowWrapper label="Confirm New password" inputValue={formState.password}
+                        onChangeText={(text) => setFormState({ ...formState, password: text })}
+                        onButtonPress={() => showConfirmDialog('password')} key="password" btnText="Save New Password"
+                    /> */}
                 </ScrollView>
             )}
         </KeyboardAvoidingView>

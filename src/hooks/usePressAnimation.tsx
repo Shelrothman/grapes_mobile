@@ -4,7 +4,7 @@
 * it sets the styling onPress and removes on PressOut
  */
 import { useState } from 'react';
-import { Pressable, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 
 export function usePressAnimation(color?: string) {
@@ -21,24 +21,12 @@ export function usePressAnimation(color?: string) {
         },
     });
 
-    // const GrapePressable = ({ children }: { children: JSX.Element }) => {
-    //     return (
-    //         <Pressable onPressOut={handlePressOut}
-    //             onPress={onPressHandler} onPressIn={handlePressIn}
-    //             style={isPressed ? pressStyles.pressed : {}}
-    //         > {children}
-    //         </Pressable>
-    //     )
-    // };
-
-
     return {
         isPressed,
         setIsPressed,
         handlePressIn,
         handlePressOut,
         pressStyle: isPressed ? pressStyle.pressed : {},
-        // GrapePressable,
     } as const;
 
 

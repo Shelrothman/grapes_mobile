@@ -97,13 +97,11 @@ Learn more about what's behind GRAPES© and how it can help you:
 
 
 ## Future Features
-- ability to reset password from within the app. (currently have to go to admin page)
-- dynamic width for the global page. (for ipad)
 - create build and release for android. (if there is demand)
 - ability to display each day to a widget on their os.
-- optional push notifications reminding users
+- optional push notifications reminding users to fill-out or complete their daily GRAPES©.
 - implement caching if needed
-- potentially convert data to blob storage for scaling if needed
+- potentially convert backend data to blob storage for scaling if needed
 
 ## Get in touch
 [![Shelby Rothman Developer Website](https://img.shields.io/badge/Shelby%20Rothman🧑‍💻-4E1E66)](https://shelbyrothman.com/) &nbsp;  &nbsp;  &nbsp; 
