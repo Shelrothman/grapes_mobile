@@ -1,6 +1,6 @@
 import { AuthError, PostgrestError } from "@supabase/supabase-js";
 import { supabase, User } from "../initSupabase";
-
+import { GrapesUser } from "../types";
 
 /**
  * @class AccountService - services cruding the authenticated user's account configuration
@@ -40,22 +40,21 @@ export class AccountService {
         return null;
     };
 
-    /*
-                    const userString: string = JSON.stringify(user);
-                const _user = JSON.parse(userString);
-                if ((_user.message && _user.message.includes('unique constraint')) && key === 'display') {
-                    handleCancelClick(key); // reset the value back
-                    return alert(`Display Name already exists, please choose another.`);
-                }
-    */
+    /** used during reset password */
+    static getUserByEmail = async (email: string): Promise<GrapesUser | null | PostgrestError> => {
+        const { data, error } = await supabase
+            .from('user_names')
+            .select('*')
+            .eq('email_val', email);
+        if (error) return error;
+        return data ? data[ 0 ] : null;
+    };
 
     static setUpNewUser = async (email: string, id: string): Promise<any> => {
         const { data, error } = await supabase.from('user_names')
             .insert({ id, user_name: email, email_val: email })
             .select();
         if (error) return error;
-        // todo HANDLE THE UNIQUE CONSTRAINT ERROR HERE
-
         return data ? data[ 0 ] : null;
     };
 

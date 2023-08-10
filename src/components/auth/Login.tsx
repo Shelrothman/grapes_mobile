@@ -47,9 +47,10 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
                         secureTextEntry={true} onChangeText={(text) => setPassword(text)}
                     />
                     <View style={{ marginTop: 20, borderWidth: 2, borderRadius: 10, padding: 5, backgroundColor: "#a8e4a0" }}>
-                        <Button title={loading ? "Loading" : "Continue"} onPress={() => { login(); }}
-                            color="#3d4b59"
+                       {/* // TODO  change this and other buttons in auth flow to use touchopacoity wrapping the texts*/}
+                        <Button title={loading ? "Loading" : "Continue"} onPress={() => { login(); }} 
                             disabled={loading}
+                            color="#2E3944"
                         />
                     </View>
                     <View style={{ flexDirection: "row", alignItems: "center", marginTop: 15, justifyContent: "center" }} >
@@ -59,12 +60,11 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
                         </TouchableOpacity>
                     </View>
                     {/* // !TODO return to uncomment once figure out the other bug */}
-                    {/* <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10, justifyContent: "center", }} >
-                        <TouchableOpacity onPress={() => { navigation.navigate("ForgetPassword"); }} >
-                            <Text style={{ color: 'white' }}>Forget password</Text>
+                    <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10, justifyContent: "center", }} >
+                        <Text style={{ color: 'white' }}>Forgot your password?{' '}</Text>
+                        <TouchableOpacity onPress={() => { navigation.navigate("ForgetPassword"); }} style={{ borderWidth: 1, padding: 5, borderRadius: 10, backgroundColor: '#8031A7' }} >
+                            <Text style={{ fontWeight: 'bold', color: 'white' }}>Reset password</Text>
                         </TouchableOpacity>
-                    </View> */}
-                    <View style={{ flexDirection: "row", alignItems: "center", marginTop: 30, justifyContent: "center", }}>
                     </View>
                 </View>
             </ScrollView>

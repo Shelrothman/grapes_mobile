@@ -53,3 +53,10 @@ export type SharedLetter = RawSharedLetter & {
     created_at: string | null;
     id: string;
 };
+
+/** resource type for res of user_names table */
+export type GrapesUser = {
+    id: string;
+    user_name: string;
+    email_val: string;
+};
