@@ -16,6 +16,7 @@ Grapes-App is a mobile app for mental health and wellness; a pocket-size version
 - [Stack](#stack)
 - [Licenses](#licenses)
 - [Future Features](#future-features)
+- [Contact](#get-in-touch)
 
 ## What is GRAPES©?
 GRAPES© is a daily practice. Each day, choose a simple activity from each of the different categories. GRAPES is great for anyone, but particularly can help with those who experience anxiety and depression. It can help you to feel more balanced and improve your mood. 

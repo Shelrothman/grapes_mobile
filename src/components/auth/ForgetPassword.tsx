@@ -5,7 +5,7 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AccountService } from "../../services/AccountService";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { GrapesUser } from "../../types";
-import {default_error} from "../../utils/constants";
+import { default_error } from "../../utils/constants";
 
 // switch out during development
 // const support_url = "http://localhost:5173/?resetpassword?id="
@@ -25,7 +25,8 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
             if (grapesUser) {
                 const user_id = grapesUser as GrapesUser & { id: string };
                 if (user_id.id) {
-                    await Linking.openURL(`${support_url}${user_id.id}`);
+                    // await Linking.openURL(`${support_url}${user_id.id}`);
+                    await Linking.openURL(support_url + user_id.id);
                     setLoading(false);
                     return navigation.navigate("Login");
                 } else {

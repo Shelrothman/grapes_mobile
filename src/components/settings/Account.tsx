@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, KeyboardAvoidingView, Platform, Alert, Button, View } from "react-native";
+import { ScrollView, KeyboardAvoidingView, Platform, Alert, Button, View, Linking } from "react-native";
 import { useHeaderHeight } from '@react-navigation/elements';
 import { supabase } from '../../initSupabase';
 import { useAuthContext, AuthUser } from "../../contexts/AuthProvider";
@@ -21,23 +21,21 @@ async function handleLogout() {
     if (error) alert(error.message);
 };
 
+const support_url = "https://grapes-admin.vercel.app/?emailupdate?id="
+
+
 export function Account() {
     const { sessionUser, setSessionUser } = useAuthContext();
     const [ loading, setLoading ] = useState<boolean>(false);
     const height = useHeaderHeight();
-    const [ formState, setFormState ] = useState<FormState>({
+    const defaultFormState: FormState = {
         display: sessionUser?.display_name || sessionUser?.email || "",
         email: sessionUser?.email || "",
         password: "********",
-    });
+    };
+    const [ formState, setFormState ] = useState<FormState>(defaultFormState);
 
-    useEffect(() => {
-        setFormState({
-            display: sessionUser?.display_name || sessionUser?.email || "",
-            email: sessionUser?.email || "",
-            password: "********",
-        });
-    }, [ sessionUser ]);
+    useEffect(() => { setFormState(defaultFormState); }, [ sessionUser ]);
 
     const showConfirmDialog = (key: string) => Alert.alert("Are you sure?",
         `Are you sure you want to permanetly change your ${key === 'display' ? 'display name' : key}?`, [
@@ -91,6 +89,23 @@ export function Account() {
         }
     };
 
+    const confirmEmailChange = () => Alert.alert("Are you sure?",
+        "This will direct you to an external webpage to enter your new email value. Your current session will be logged out.", [
+        { text: "Cancel", style: "cancel", onPress: () => handleCancelClick('email') },
+        { text: "Take me there", onPress: async () => await handleEmailChange() },
+    ]);
+
+    const handleEmailChange = async () => {
+        setLoading(true);
+        if (sessionUser && sessionUser.user_uid) {
+            await Linking.openURL(support_url + sessionUser.user_uid);
+            // then log them out so they can verify their new email
+            setLoading(false);
+            await handleLogout();
+        }
+        return setLoading(false);
+    };
+
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled
@@ -104,14 +119,16 @@ export function Account() {
                     <FormRowWrapper label="Display Name" inputValue={formState.display}
                         onChangeText={(text) => setFormState({ ...formState, display: text })}
                         onButtonPress={() => showConfirmDialog('display')} key="display"
+                        btnText="Save Display Name"
                     />
-                    {/* <FormRowWrapper label="Email" inputValue={formState.email}
+                    <FormRowWrapper label="Email" inputValue={formState.email}
                         onChangeText={(text) => setFormState({ ...formState, email: text })}
-                        onButtonPress={() => showConfirmDialog('email')} key="email"
-                    /> */}
+                        onButtonPress={() => confirmEmailChange()}
+                        key="email" btnText="Change Email"
+                    />
                     <FormRowWrapper label="Password" inputValue={formState.password}
                         onChangeText={(text) => setFormState({ ...formState, password: text })}
-                        onButtonPress={() => showConfirmDialog('password')} key="password"
+                        onButtonPress={() => showConfirmDialog('password')} key="password" btnText="Save New Password"
                     />
                 </ScrollView>
             )}
