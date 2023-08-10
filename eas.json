@@ -11,12 +11,18 @@
             },
             "ios": {
                 "buildConfiguration": "Debug"
+            },
+            "web": {
+                "buildConfiguration": "Debug"
             }
         },
         "preview": {
             "channel": "preview",
             "ios": {
                 "simulator": true,
+                "buildConfiguration": "Debug"
+            },
+            "web": {
                 "buildConfiguration": "Debug"
             }
         },
