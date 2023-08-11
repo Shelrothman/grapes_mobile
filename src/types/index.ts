@@ -1,3 +1,7 @@
+// TODO ensure i use all these
+
+import { MyMap } from "../utils/constants";
+
 /** this is the type for rendering to the UI */
 export type Grape = {
     grape_id: string;
@@ -9,6 +13,15 @@ export type GrapeDayLetter = {
     letter: string;
     value: string;
 }
+
+export type Home_Grape = {
+    g: string;
+    r: string;
+    a: string;
+    p: string;
+    e: string;
+    s: string;
+} & MyMap;
 
 /** resource type for updating a user grape's Letter */
 export type RawGrapeDayLetter = {

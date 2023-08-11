@@ -8,9 +8,13 @@ import { Global } from "../global/Global";
 import { MaterialIcons } from '@expo/vector-icons'; // not filled
 import { FontAwesome } from '@expo/vector-icons'; // filled
 import { useHomeGrapeContext } from '../../contexts/HomeGrapeContext';
+// import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 
 const Tab = createMaterialTopTabNavigator();
+
+
+
 
 // * disable swiping everywhere so it doesnt confuse people
 const tabBarOptions = { tabBarShowLabel: false, swipeEnabled: false, };
@@ -46,10 +50,18 @@ const MainTabs = () => {
                 },
                 tabBarIndicatorStyle: { backgroundColor: '#cb9de2', height: 5 },
             })}>
-            <Tab.Screen name="Home" component={Home} options={{ ...tabBarOptions }} />
-            <Tab.Screen name="Global" component={Global} options={tabBarOptions} />
-            <Tab.Screen name="More" component={SettingsStackScreen} options={tabBarOptions} />
-            <Tab.Screen name="History" component={History} options={tabBarOptions} />
+            <Tab.Screen name="Home" component={Home}
+                options={tabBarOptions}
+            />
+            <Tab.Screen name="Global" component={Global}
+                options={tabBarOptions}
+            />
+            <Tab.Screen name="More" component={SettingsStackScreen}
+                options={tabBarOptions}
+            />
+            <Tab.Screen name="History" component={History}
+                options={tabBarOptions}
+            />
         </Tab.Navigator>
     );
 };

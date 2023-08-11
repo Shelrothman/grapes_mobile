@@ -2,7 +2,7 @@
  * @fileoverview miscellanious utility functions
  */
 
-import { Grape, GrapeDayLetter, GrapeResponse } from "../types";
+import { Grape, GrapeDayLetter, GrapeResponse, Home_Grape } from "../types";
 import Toast from 'react-native-toast-message';
 import * as Clipboard from 'expo-clipboard';
 
@@ -28,16 +28,27 @@ export function getUTCDate(next?: string) {
 
 const avoidArray = [ 'grape_id', 'user_id', 'created_at' ];
 
-export const resToGrape = (res: Partial<GrapeResponse>): Grape => {
+// export const resToGrape = (res: Partial<GrapeResponse>): Grape => {
+//     let dayArray: any[] = Object.entries(res).map(([ key, value ]) => {
+//         if (avoidArray.includes(key)) return;
+//         return { letter: key, value: value as string };
+//     }).filter((item) => item !== undefined);
+//     return {
+//         grape_id: res.grape_id!,
+//         day: dayArray as GrapeDayLetter[],
+//         creation_date: res.created_at!,
+//     }
+// };
+
+export const resToHomeGrape = (res: Partial<GrapeResponse>): Home_Grape => {
     let dayArray: any[] = Object.entries(res).map(([ key, value ]) => {
         if (avoidArray.includes(key)) return;
-        return { letter: key, value: value as string };
+        return { [ key ]: value }
     }).filter((item) => item !== undefined);
-    return {
-        grape_id: res.grape_id!,
-        day: dayArray as GrapeDayLetter[],
-        creation_date: res.created_at!,
-    }
+
+    return dayArray.reduce((acc, curr) => {
+        return { ...acc, ...curr, }
+    });
 };
 
 /**

@@ -21,7 +21,7 @@ async function handleLogout() {
     if (error) alert(error.message);
 };
 
-const support_url = "https://grapes-admin.vercel.app/?emailupdate?id="
+const support_url = "https://grapes-admin.vercel.app/?emailupdate?id=";
 
 
 export function Account() {
@@ -132,10 +132,6 @@ export function Account() {
                         onChangeText={(text) => setFormState({ ...formState, password: text })}
                         onButtonPress={() => showConfirmDialog('password')} key="password" btnText="Save New Password"
                     />
-                    {/* <FormRowWrapper label="Confirm New password" inputValue={formState.password}
-                        onChangeText={(text) => setFormState({ ...formState, password: text })}
-                        onButtonPress={() => showConfirmDialog('password')} key="password" btnText="Save New Password"
-                    /> */}
                 </ScrollView>
             )}
         </KeyboardAvoidingView>

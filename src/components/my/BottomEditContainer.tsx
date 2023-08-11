@@ -8,7 +8,7 @@ import { HomeService } from "../../services/HomeService";
 import { useHomeGrapeContext } from "../../contexts/HomeGrapeContext";
 import { useAuthContext } from "../../contexts/AuthProvider";
 import { showCancelConfirmDialog } from "../../utils/GrapeAlerts";
-import { resToGrape } from "../../utils";
+// import { resToGrape } from "../../utils";
 
 
 type BottomEditContainerProps = {
@@ -64,7 +64,7 @@ export function BottomEditContainer({
         const toSend = { letter: grape_day_letter.letter, value: inputValue, user_id: sessionUser!.user_uid, };
         homeService.updateLetter(toSend).then((res) => {
             if (res !== null) {
-                setGrape(resToGrape(res)) // set the grape in Home so that it updates before the refetch
+                // setGrape(resToGrape(res)) // set the grape in Home so that it updates before the refetch
                 return successToast();
             }
             else return errorToast();
@@ -81,7 +81,7 @@ export function BottomEditContainer({
                 key={grape_day_letter.letter} style={my_styles.input_text}
                 defaultValue={inputValue}
                 ref={inputRef} onChangeText={(text) => setInputValue(text)}
-                maxLength={1000}
+                maxLength={250} // between 35 words and 63 words👌
             />
             <View style={my_styles.row}>
                 <Ionicons.Button name="arrow-back-circle-outline" size={30} key="Cancel"

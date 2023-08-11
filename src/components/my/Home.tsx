@@ -2,9 +2,12 @@ import React, { useState, Fragment } from "react";
 import { View, Text, SafeAreaView } from 'react-native';
 import { useFocusEffect } from "@react-navigation/native";
 import { MyGrape } from "./MyGrape";
-import { resToGrape } from "../../utils";
+import { HomeComponent } from "./HomeComponent";
+
+
+import { resToHomeGrape } from "../../utils";
 import { GrapeIcons } from "../../utils/Icons";
-import { Grape, GrapeDayLetter } from "../../types";
+import { Grape, GrapeDayLetter, Home_Grape } from "../../types";
 import { my_styles } from "../../styles/my";
 import { HomeService } from "../../services/HomeService";
 import Loading from "../../utils/Loading";
@@ -14,7 +17,7 @@ import { useAuthContext } from "../../contexts/AuthProvider";
 export default function Home() {
     const { sessionUser } = useAuthContext();
     const [ selectedLetter, setSelectedLetter ] = useState<GrapeDayLetter | null>(null);
-    const [ grape, setGrape ] = useState<Grape | null>(null);
+    const [ grape, setGrape ] = useState<Home_Grape | null>(null);
     const [ isLoading, setIsLoading ] = useState<boolean>(true);
     const [ isError, setIsError ] = useState<boolean>(false);
 
@@ -31,7 +34,7 @@ export default function Home() {
         try {
             if (sessionUser == null || sessionUser == undefined) return;
             const response = await HomeService.getOrCreateToday(sessionUser!.user_uid);
-            if (response !== null) setGrape(resToGrape(response));
+            if (response !== null) setGrape(resToHomeGrape(response));
             // else setIsError(true); //? do we need this?
         } catch (error) {
             setIsLoading(false);
@@ -52,18 +55,23 @@ export default function Home() {
                 <Text style={my_styles.date_title}>Internal Server Error</Text>
                 <Text style={my_styles.date_title}>Please try again later</Text>
             </View>) : grape && (
-                <View style={my_styles.main_container}>
-                    <SafeAreaView style={my_styles.header_container}>
-                        {selectedLetter ? (
-                            <Text style={my_styles.icon_title}>
-                                {selectedLetterTitle}
-                            </Text>
-                        ) : <Text style={my_styles.date_title}> Today: {new Date().toDateString()} </Text>}
-                    </SafeAreaView>
-                    <MyGrape grape={grape} selectedLetter={selectedLetter} setSelectedLetter={setSelectedLetter}
-                        setGrape={setGrape} 
-                    />
-                </View>
+                <HomeComponent
+                    grape={grape} 
+                    setGrape={setGrape} 
+                    loading={isLoading}
+                />
+                // <View style={my_styles.main_container}>
+                //     <SafeAreaView style={my_styles.header_container}>
+                //         {selectedLetter ? (
+                //             <Text style={my_styles.icon_title}>
+                //                 {selectedLetterTitle}
+                //             </Text>
+                //         ) : <Text style={my_styles.date_title}> Today: {new Date().toDateString()} </Text>}
+                //     </SafeAreaView>
+                //     <MyGrape grape={grape} selectedLetter={selectedLetter} setSelectedLetter={setSelectedLetter}
+                //         setGrape={setGrape} 
+                //     />
+                // </View>
             )}
         </SafeAreaView>
     );

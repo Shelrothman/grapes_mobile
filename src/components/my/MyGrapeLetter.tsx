@@ -52,6 +52,7 @@ export function MyGrapeLetter({ grape_day_letter, setSelectedLetter, selectedLet
         </View>;
     };
 
+    // i do wonder if i build this out again.. like a scroll form thing like i did with account.. if ther scroll would work and jsut ve better and not have to be all hacky like this os
 
     return (
         <View style={my_styles.card}>
