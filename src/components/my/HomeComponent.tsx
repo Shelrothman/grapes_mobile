@@ -27,6 +27,9 @@ export function HomeComponent({ grape, setGrape, loading }: HomeComponentProps) 
 
     // TODo modulate and make more dynamic
 
+// !! PU here!! I got th UX-logic done. now i need to hook back up api and stuff
+
+
     return (
         <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled
             style={{ flex: 1, paddingHorizontal: 20 }} keyboardVerticalOffset={height + 200}
