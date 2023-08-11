@@ -50,6 +50,7 @@ const Main = () => {
         <HomeGrapeProvider>
             <MainStack.Navigator screenOptions={{ headerShown: false }} >
                 <MainStack.Screen name="MainTabs" component={MainTabs} />
+                {/* // * aka.. "Layout" */}
             </MainStack.Navigator>
         </HomeGrapeProvider>
     );

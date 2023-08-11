@@ -25,16 +25,16 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
     const [ showConfirm, setShowConfirm ] = useState<boolean>(false);
     const [ confirmValue, setConfirmValue ] = useState<string>('');
 
+    const reset = () => { setConfirmValue(''); setShowConfirm(false); }
+
     useFocusEffect(
         React.useCallback(() => {
-            setShowConfirm(false);
-            setConfirmValue('');
-            return () => {
-                setShowConfirm(false);
-                setConfirmValue('');
-            };
+            reset();
+            return () => reset(); 
         }, [])
     );
+
+
 
     const textInputProps: TextInputProps | Readonly<TextInputProps> = {
         autoCapitalize: "none", autoComplete: "off", autoCorrect: false,
