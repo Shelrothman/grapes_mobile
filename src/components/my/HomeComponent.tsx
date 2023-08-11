@@ -36,54 +36,42 @@ export function HomeComponent({ grape, setGrape, loading }: HomeComponentProps) 
                     <View style={{ marginBottom: 20, borderColor: '#4E1E66', borderWidth: 2, backgroundColor: "#3d4b59", borderRadius: 10 }}>
                         {/* <Button color="#a8e4a0" title='Logout' onPress={() => showConfirmLogout()} /> */}
                     </View>
-                    <HomeFormWrapper onEnter={() => setFormState({
-                        ...formState,
-                        g: "",
-                    })} label="G" inputValue={formState.g}
-                        onChangeText={(text) => setFormState({ ...formState, g: text })}
-                        // onButtonPress={() => showConfirmDialog('display')} 
+                    <HomeFormWrapper
+                        label="G" inputValue={formState.g} key="g"
+                        setFormState={setFormState} formState={formState}
                         onButtonPress={() => handleSaveLetter()}
-                        key="g"
                     />
-                    <HomeFormWrapper onEnter={() => setFormState({
-                        ...formState,
-                        r: "",
-                    })} label="R" inputValue={formState.r}
-                        onChangeText={(text) => setFormState({ ...formState, r: text })}
+                    <HomeFormWrapper
+                        label="R" inputValue={formState.r} key="r"
+                        setFormState={setFormState}
+                        formState={formState}
                         onButtonPress={() => handleSaveLetter()}
-                        key="r"
-                    // btnText="Change Email"
                     />
-                    <HomeFormWrapper onEnter={() => setFormState({
-                        ...formState,
-                        a: "",
-                    })} label="A" inputValue={formState.a}
-                        onChangeText={(text) => setFormState({ ...formState, a: text })}
-                        onButtonPress={() => handleSaveLetter()} key="a"
+                    <HomeFormWrapper
+                        label="A" inputValue={formState.a} key="a"
+                        setFormState={setFormState}
+                        formState={formState}
+                        onButtonPress={() => handleSaveLetter()} 
                     />
-
-                    <HomeFormWrapper onEnter={() => setFormState({
-                        ...formState,
-                        p: ""
-                    })} label="P" inputValue={formState.p}
-                        onChangeText={(text) => setFormState({ ...formState, p: text })}
-                        onButtonPress={() => handleSaveLetter()} key="p"
+                    <HomeFormWrapper
+                        label="P" inputValue={formState.p} key="p"
+                        setFormState={setFormState}
+                        formState={formState}
+                        onButtonPress={() => handleSaveLetter()} 
                     />
 
-                    <HomeFormWrapper onEnter={() => setFormState({
-                        ...formState,
-                        e: ""
-                    })} label="E" inputValue={formState.e}
-                        onChangeText={(text) => setFormState({ ...formState, e: text })}
-                        onButtonPress={() => handleSaveLetter()} key="e"
+                    <HomeFormWrapper
+                        label="E" inputValue={formState.e} key="e"
+                        setFormState={setFormState}
+                        formState={formState}
+                        onButtonPress={() => handleSaveLetter()}
                     />
 
-                    <HomeFormWrapper onEnter={() => setFormState({
-                        ...formState,
-                        s: ""
-                    })} label="S" inputValue={formState.s}
-                        onChangeText={(text) => setFormState({ ...formState, s: text })}
-                        onButtonPress={() => handleSaveLetter()} key="s"
+                    <HomeFormWrapper
+                        label="S" inputValue={formState.s} key="s"
+                        setFormState={setFormState}
+                        formState={formState}
+                        onButtonPress={() => handleSaveLetter()}
                     />
                 </ScrollView>
             )}

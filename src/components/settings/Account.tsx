@@ -7,13 +7,8 @@ import { AccountService } from "../../services/AccountService";
 import Loading from "../../utils/Loading";
 import { FormRowWrapper } from "../../utils/FormRowWrapper";
 import { MyMap } from "../../utils/constants";
+import { FormState } from "../../types";
 
-type FormState = MyMap & {
-    /** the displayName for the user, defaults to their email */
-    display: string;
-    email: string;
-    password: string;
-};
 
 async function handleLogout() {
     const { error } = await supabase.auth.signOut();

@@ -2,6 +2,15 @@
 
 import { MyMap } from "../utils/constants";
 
+export type FormState = MyMap & {
+    /** the displayName for the user, defaults to their email */
+    display: string;
+    email: string;
+    password: string;
+};
+
+
+
 /** this is the type for rendering to the UI */
 export type Grape = {
     grape_id: string;
