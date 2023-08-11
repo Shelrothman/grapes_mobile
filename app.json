@@ -4,7 +4,7 @@
     "expo": {
         "name": "grapes-app",
         "slug": "grapes-app",
-        "version": "1.0.1",
+        "version": "1.0.2",
         "orientation": "portrait",
         "icon": "https://user-images.githubusercontent.com/62257716/258604288-87e3723c-673e-4f14-8b26-b0bed405da35.png",
         "userInterfaceStyle": "light",
