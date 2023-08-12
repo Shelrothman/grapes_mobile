@@ -9,6 +9,8 @@ import { FormRowWrapper } from "../../utils/FormRowWrapper";
 import { MyMap } from "../../utils/constants";
 import { FormState } from "../../types";
 
+// !! PU around here and make that confirm new password appearence work better
+
 
 async function handleLogout() {
     const { error } = await supabase.auth.signOut();

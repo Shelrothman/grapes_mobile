@@ -1,6 +1,8 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import Home from "../my/Home";
+import HomeComponent from "../my/HomeComponent";
+
+
 import History from "../history/History";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { SettingsStackScreen } from "../settings/SettingsStackScreen";
@@ -38,6 +40,7 @@ const MainTabs = () => {
 
     return (
         <Tab.Navigator
+            sceneContainerStyle={{ backgroundColor: '#2E3944' }}
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color }) => {
                     if (route.name) return buildTabBarIcon(route.name, focused, color);
@@ -50,7 +53,7 @@ const MainTabs = () => {
                 },
                 tabBarIndicatorStyle: { backgroundColor: '#cb9de2', height: 5 },
             })}>
-            <Tab.Screen name="Home" component={Home}
+            <Tab.Screen name="Home" component={HomeComponent}
                 options={tabBarOptions}
             />
             <Tab.Screen name="Global" component={Global}

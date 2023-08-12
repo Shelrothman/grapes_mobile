@@ -9,7 +9,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 const Tab = createMaterialTopTabNavigator();
 export function SettingsStackScreen() {
     return (
-        <Tab.Navigator sceneContainerStyle={{backgroundColor: '#2E3944'}}
+        <Tab.Navigator
+            sceneContainerStyle={{ backgroundColor: '#2E3944' }}
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color }) => {
                     let iconName: any = 'information-circle-outline';

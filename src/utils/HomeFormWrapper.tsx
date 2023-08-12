@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TextInput, TextInputProps, View, Text, Button } from "react-native";
 import { MyMap, MyNumMap } from "./constants";
 // import { MaterialCommunityIcons } from '@expo/vector-icons';
-// import { useFocusEffect } from "@react-navigation/native";
+import { useFocusEffect } from "@react-navigation/native";
 import { defaultGrape } from "./constants";
 import { Home_Grape } from "../types";
 
@@ -26,19 +26,19 @@ const HELP_TEXT: MyMap = { 'Display Name': "How your name appears in the global 
  * to render around each letter of Grape
  */
 export function HomeFormWrapper({ label, onButtonPress, inputValue, setFormState, formState }: FormRowWrapperProps) {
-    // const [ showConfirm, setShowConfirm ] = useState<boolean>(false);
-    // const [ confirmValue, setConfirmValue ] = useState<string>('');
+    const [ showConfirm, setShowConfirm ] = useState<boolean>(false);
+    const [ confirmValue, setConfirmValue ] = useState<string>('');
 
-    // const reset = () => { setConfirmValue(''); setShowConfirm(false); }
+    const reset = () => { setConfirmValue(''); setShowConfirm(false); }
 
-    // useFocusEffect(
-    //     React.useCallback(() => {
-    //         reset();
-    //         return () => reset(); 
-    //     }, [])
-    // );
+    useFocusEffect(
+        React.useCallback(() => {
+            reset();
+            return () => reset(); 
+        }, [])
+    );
 
-
+// WHy does the focused input not scroll into view?? i have this set up just like 
 
     const textInputProps: TextInputProps | Readonly<TextInputProps> = {
         autoCapitalize: "none", autoComplete: "off", autoCorrect: false,
@@ -55,31 +55,41 @@ export function HomeFormWrapper({ label, onButtonPress, inputValue, setFormState
     //     }
     //     return onButtonPress();
     // }
+// style={{
+    // minWidth: "95%", maxWidth: "95%", alignSelf: "center", justifyContent: "center",
+// }}
 
     return (
-        <View key={label}>
+        <View key={label} >
             <Text style={{ color: '#a8e4a0', }}>{label}</Text>
             <TextInput
-                {...textInputProps} value={inputValue}
-                // onChangeText={onChangeText} key={`${label}-input`}
-                secureTextEntry={false}
-                autoCapitalize="none" autoComplete="off" autoCorrect={false}
-                placeholder={HELP_TEXT[ label ]}
-                onTouchStart={() => setFormState({ ...formState, [ label ]: "" })}
-                onTouchEnd={() => setFormState({ ...formState, [ label ]: defaultGrape[ label ] })}
-                onChangeText={(text) => setFormState({ ...formState, [ label ]: text })}
-            // maxLength={maxLength[ label ]}
-            // editable={label === 'Email' ? false : true}
-            // onTouchStart={label === 'Password' ? () => setShowConfirm(true) : undefined}
+                {...textInputProps}
+                // multiline={true} //! this fucks up the keyboardAvoiding view scroll event
+                // maxLength={maxLength[ label ]}
+                maxLength={250} // between 35 words and 63 words👌
+                // value={inputValue}
+                // secureTextEntry={false}
+                // placeholder={HELP_TEXT[ label ]}
+                // onChangeText={(text) => setFormState({ ...formState, [ label.toLowerCase() ]: text })}
+                // placeholder={`Enter your ${label}`} {...textInputProps} value={inputValue}
+                // key={`${label}-input`}
+                // secureTextEntry={false}
+                // keyboardType={label === 'Email' ? 'email-address' : 'default'}
+                // editable={label === 'Email' ? false : true}
+                // onTouchStart={label === 'Password' ? () => setShowConfirm(true) : undefined}
             />
             <Text style={{ color: '#cb9de2', marginTop: 5, fontSize: 12, fontStyle: 'italic' }}>{HELP_TEXT[ label ]}</Text>
             <View style={{
-                marginTop: 5,
-                marginBottom: 20,
-                flexDirection: 'row', borderColor: '#4E1E66', borderWidth: 2,
-                borderRadius: 10, backgroundColor: '#a8e4a0',
-                flex: 1, justifyContent: 'center',
+                // marginTop: 5,
+                // marginBottom: 20,
+                // flexDirection: 'row', borderColor: '#4E1E66', borderWidth: 2,
+                // borderRadius: 10, backgroundColor: '#a8e4a0',
+                // flex: 1, justifyContent: 'center',
                 // ...label !== 'S' ? { marginTop: 20 } : { marginTop: 0 },
+                flexDirection: 'row', borderColor: '#4E1E66', borderWidth: 2,
+                borderRadius: 10, backgroundColor: '#a8e4a0', alignSelf: 'flex-end',
+                // ...label !== 'Password' ? { marginTop: 20 } : { marginTop: 0 },
+                // ...label === 'Email' && { paddingRight: 5 }
             }}>
                 <Button
                     title="Save" key={label} color="#3d4b59"
