@@ -33,7 +33,7 @@ export default function HomeComponent() {
 
 
     const { sessionUser } = useAuthContext();
-    const [ selectedLetter, setSelectedLetter ] = useState<GrapeDayLetter | null>(null);
+    // const [ selectedLetter, setSelectedLetter ] = useState<GrapeDayLetter | null>(null);
     const [ isLoading, setIsLoading ] = useState<boolean>(true);
     const [ isError, setIsError ] = useState<boolean>(false);
 
@@ -43,9 +43,9 @@ export default function HomeComponent() {
     useFocusEffect(
         React.useCallback(() => {
             fetchData().then(() => setIsLoading(false));
-            return () => {
-                setSelectedLetter(null);
-            };
+            // return () => {
+            //     setSelectedLetter(null);
+            // };
         }, [ sessionUser ])
     );
     async function fetchData() {
@@ -60,7 +60,7 @@ export default function HomeComponent() {
             setIsError(true);
         }
     }
-    const iconProps = { letter: selectedLetter?.letter || '', color: "#a8e4a0", size: 35 };
+    // const iconProps = { letter: selectedLetter?.letter || '', color: "#a8e4a0", size: 35 };
 
     const handleSaveLetter = () => {
         // setGrapeFormState(formState);
@@ -71,9 +71,6 @@ export default function HomeComponent() {
 
     // !! PU here!! I got th UX-logic done. now i need to hook back up api and stuff
 
-    // why is it not scrolling into view when press in>??? is it bc of the keyboardavoidingview??? no bc i use that in Account.tsx.. so what could be sifferent? it works in Account?? 
-    // it works in Account bc i use a ScrollView there. so i need to use a ScrollView here too. but i need to make sure it doesnt scroll when keyboard is up. so i need to use a KeyboardAvoidingView too. so i need to use both. so i need to make sure they work together.
-
 
     return (
         <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled
@@ -83,45 +80,43 @@ export default function HomeComponent() {
                 <Text style={my_styles.date_title}>Internal Server Error</Text>
                 <Text style={my_styles.date_title}>Please try again later</Text>
             </View>) : grapeFormState && (
-                <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: "#2E3944", marginTop: 20, paddingBottom: 40 }}
-                // automaticallyAdjustContentInsets={false}
-                >
-                    <View style={{ marginBottom: 20, borderColor: '#4E1E66', borderWidth: 2, backgroundColor: "#3d4b59", borderRadius: 10 }}>
-                        <Button color="#a8e4a0" title='Logout' onPress={() => console.log('da')} />
+                <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: "#2E3944", marginTop: 20, paddingBottom: 40, }}>
+                    <View style={{ marginBottom: 20, backgroundColor: "#3d4b59", borderRadius: 10 }}>
+                        {/* <Button color="#a8e4a0" title='Logout' onPress={() => console.log('da')} /> */}
                     </View>
                     <HomeFormWrapper
-                        label="G" inputValue={grapeFormState.g} key="g"
+                        label="G" key="g"
                         setFormState={setGrapeFormState} formState={grapeFormState}
                         onButtonPress={() => handleSaveLetter()}
                     />
                     <HomeFormWrapper
-                        label="R" inputValue={grapeFormState.r} key="r"
+                        label="R" key="r"
                         setFormState={setGrapeFormState}
                         formState={grapeFormState}
                         onButtonPress={() => handleSaveLetter()}
                     />
                     <HomeFormWrapper
-                        label="A" inputValue={grapeFormState.a} key="a"
+                        label="A" key="a"
                         setFormState={setGrapeFormState}
                         formState={grapeFormState}
                         onButtonPress={() => handleSaveLetter()}
                     />
                     <HomeFormWrapper
-                        label="P" inputValue={grapeFormState.p} key="p"
+                        label="P" key="p"
                         setFormState={setGrapeFormState}
                         formState={grapeFormState}
                         onButtonPress={() => handleSaveLetter()}
                     />
                     <HomeFormWrapper
                         label="E"
-                        inputValue={grapeFormState.e}
+                    
                         key="e"
                         setFormState={setGrapeFormState}
                         formState={grapeFormState}
                         onButtonPress={() => handleSaveLetter()}
                     />
                     <HomeFormWrapper
-                        label="S" inputValue={grapeFormState.s} key="s"
+                        label="S" key="s"
                         setFormState={setGrapeFormState}
                         formState={grapeFormState}
                         onButtonPress={() => handleSaveLetter()}

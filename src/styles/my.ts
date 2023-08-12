@@ -1,5 +1,8 @@
 import { StyleSheet } from 'react-native';
 
+// TODO remove the ones i dont use
+
+
 /**
  * @description styles for all the components in the home/my screens
  * and their children
@@ -15,10 +18,11 @@ export const my_styles = StyleSheet.create({
     card: {
         borderWidth: 2,
         borderRadius: 10,
-        marginTop: 20,
+        marginTop: 40,
         borderColor: '#cb9de2',
         backgroundColor: '#3d4b59',
         flexDirection: 'column',
+        marginBottom: 3,
     },
     iconOne_container: { justifyContent: 'center', marginLeft: 5, },
     iconTwo_container: { justifyContent: 'center', marginRight: 5, },
@@ -39,6 +43,7 @@ export const my_styles = StyleSheet.create({
         backgroundColor: '#4E1E66',
         borderTopStartRadius: 10,
         borderTopEndRadius: 10,
+        paddingBottom: 10,
     },
     input_text: { marginLeft: 10, color: '#f3f0f5', },
     bottomRowContainer: {
@@ -50,6 +55,15 @@ export const my_styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         // paddingTop: 5,
+    },
+
+    /**this is the button itself */
+    shareBtn: {
+        flexDirection: 'row', 
+        borderColor: '#4E1E66', borderWidth: 2,
+        borderRadius: 10, 
+        backgroundColor: '#a8e4a0', 
+        padding: 2,
     },
     bottomInEditContainer: {
         flexDirection: 'column',

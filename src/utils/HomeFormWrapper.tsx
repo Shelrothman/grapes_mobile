@@ -1,102 +1,147 @@
 import React, { useState } from "react";
-import { TextInput, TextInputProps, View, Text, Button } from "react-native";
-import { MyMap, MyNumMap } from "./constants";
+import { TextInput, TextInputProps, View, Text, Button, NativeSyntheticEvent, TextInputEndEditingEventData } from "react-native";
+import { MyMap, MyNumMap, GRAPE_DAY } from "./constants";
 // import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useFocusEffect } from "@react-navigation/native";
 import { defaultGrape } from "./constants";
 import { Home_Grape } from "../types";
+import { GrapeIcons } from "./Icons";
+import { HomeService } from "../services/HomeService";
+import { my_styles } from "../styles/my";
+import { useAuthContext } from "../contexts/AuthProvider";
+import { resToHomeGrape } from ".";
 
 type FormRowWrapperProps = {
     label: string;
     formState: Home_Grape;
     setFormState: (formState: Home_Grape) => void;
     onButtonPress: () => void;
-    /** value for the textInput */
-    inputValue: string;
-    /** call back upon entering input */
-    // onEnter: () => void;
 }
 
-const HELP_TEXT: MyMap = { 'Display Name': "How your name appears in the global feed.", 'Email': "This is what you use to login. Press the button below to change it.", 'Password': '' };
-// const maxLength: MyNumMap = { 'Display Name': 8, 'Email': undefined, 'Password': 15, };
 
-
+// TODO modulate and clean up this whole thing
 /**
  * @description wrapper component for a home form row 
  * to render around each letter of Grape
  */
-export function HomeFormWrapper({ label, onButtonPress, inputValue, setFormState, formState }: FormRowWrapperProps) {
-    const [ showConfirm, setShowConfirm ] = useState<boolean>(false);
-    const [ confirmValue, setConfirmValue ] = useState<string>('');
+export function HomeFormWrapper({ label, onButtonPress, setFormState, formState }: FormRowWrapperProps) {
+    const [ inFocus, setInFocus ] = useState<boolean>(false);
+    const { sessionUser } = useAuthContext();
 
-    const reset = () => { setConfirmValue(''); setShowConfirm(false); }
+    // const [ showConfirm, setShowConfirm ] = useState<boolean>(false);
+    // const [ confirmValue, setConfirmValue ] = useState<string>('');
 
-    useFocusEffect(
-        React.useCallback(() => {
-            reset();
-            return () => reset(); 
-        }, [])
-    );
+    // const reset = () => { setConfirmValue(''); setShowConfirm(false); }
 
-// WHy does the focused input not scroll into view?? i have this set up just like 
+    // useFocusEffect(
+    //     React.useCallback(() => {
+    //         reset();
+    //         return () => reset();
+    //     }, [])
+
+    // );
+
+
+    /** lowercase of the letter */
+    const subKey: string = label.toLowerCase();
+
+    // WHy does the focused input not scroll into view?? i have this set up just like 
 
     const textInputProps: TextInputProps | Readonly<TextInputProps> = {
-        autoCapitalize: "none", autoComplete: "off", autoCorrect: false,
         style: {
-            color: "#cb9de2", backgroundColor: "#4E1E66", height: 50, borderRadius: 10,
-            paddingHorizontal: 10, marginTop: 15, borderColor: '#cb9de2', borderWidth: 1,
+            color: "white",
+            height: 'auto',
+            textAlign: 'left', // this makes the words wrap
+            padding: 10,
+            backgroundColor: inFocus ? '#cb9de2' : undefined,
         },
+        // why is there weird vertical padding on top
+        clearButtonMode: 'while-editing', // this may be most intuitive rather then clear right away?...
+        // clearTextOnFocus: true,  //?
+        textAlignVertical: 'top',
         selectionColor: '#cb9de2', placeholderTextColor: '#cb9de2',
+        // multiline={true} //! this fucks up the keyboardAvoiding view scroll event
+        maxLength: 250 // between 35 words and 63 words👌
     };
 
-    // const handlePassword = () => {
-    //     if (inputValue !== confirmValue) {
-    //         return alert('Password values do not match. Please try again');
-    //     }
-    //     return onButtonPress();
-    // }
-// style={{
-    // minWidth: "95%", maxWidth: "95%", alignSelf: "center", justifyContent: "center",
-// }}
+    const handleOnEndEditing = () => {
+        // console.log(e)
+        const inputValue = formState[ subKey ] || defaultGrape[ subKey ];
+        console.log(inputValue);
+        if (inputValue.length <= 3) {
+            return; // dont send a blank thing
+        }
+        if (inputValue === defaultGrape[ subKey ]) {
+            return; // its the same
+        }
+        // setLoading(true);
+        const homeService = new HomeService();
+        const toSend = {
+            letter: subKey,
+            value: inputValue,
+            user_id: sessionUser!.user_uid,
+        };
+        homeService.updateLetter(toSend).then((res) => {
+            if (res !== null) {
+                // setGrape(resToGrape(res)) 
+                // return successToast();
+                return setFormState(resToHomeGrape(res)); // set the grape in Home so that it updates before the refetch
+            }
+            // else return errorToast();
+        }).catch((err: any) => {
+            console.error(err);
+            setFormState({ ...formState, [ subKey ]: defaultGrape[ subKey ] });
+            // setLoading(false);
+            // return errorToast();
+        }).finally(() => {
+            // setLoading(false);
+            // exit();
+        });
+        console.log('end edit')
+    };
+
+
+    const GrapeTitleComponent = (letter: string): JSX.Element => {
+        letter = letter.toLowerCase();
+        return <Text>
+            <Text style={my_styles.titleLetterText}>
+                {letter.toUpperCase()}
+            </Text>
+            <Text style={my_styles.titleText}>{GRAPE_DAY[ letter ]}</Text>
+        </Text>;
+    };
+
+    const IconContainer = (containerOne: boolean, letter: string): JSX.Element => {
+        const constainerStyle = containerOne ? my_styles.iconOne_container : my_styles.iconTwo_container;
+        return <View style={constainerStyle}>
+            <GrapeIcons letter={letter} color="#cb9De2" size={30} />
+        </View>;
+    };
+
+    // TODO come back and make the share button not look so bad...
 
     return (
-        <View key={label} >
-            <Text style={{ color: '#a8e4a0', }}>{label}</Text>
-            <TextInput
-                {...textInputProps}
-                // multiline={true} //! this fucks up the keyboardAvoiding view scroll event
-                // maxLength={maxLength[ label ]}
-                maxLength={250} // between 35 words and 63 words👌
-                // value={inputValue}
-                // secureTextEntry={false}
-                // placeholder={HELP_TEXT[ label ]}
-                // onChangeText={(text) => setFormState({ ...formState, [ label.toLowerCase() ]: text })}
-                // placeholder={`Enter your ${label}`} {...textInputProps} value={inputValue}
-                // key={`${label}-input`}
-                // secureTextEntry={false}
-                // keyboardType={label === 'Email' ? 'email-address' : 'default'}
-                // editable={label === 'Email' ? false : true}
-                // onTouchStart={label === 'Password' ? () => setShowConfirm(true) : undefined}
-            />
-            <Text style={{ color: '#cb9de2', marginTop: 5, fontSize: 12, fontStyle: 'italic' }}>{HELP_TEXT[ label ]}</Text>
-            <View style={{
-                // marginTop: 5,
-                // marginBottom: 20,
-                // flexDirection: 'row', borderColor: '#4E1E66', borderWidth: 2,
-                // borderRadius: 10, backgroundColor: '#a8e4a0',
-                // flex: 1, justifyContent: 'center',
-                // ...label !== 'S' ? { marginTop: 20 } : { marginTop: 0 },
-                flexDirection: 'row', borderColor: '#4E1E66', borderWidth: 2,
-                borderRadius: 10, backgroundColor: '#a8e4a0', alignSelf: 'flex-end',
-                // ...label !== 'Password' ? { marginTop: 20 } : { marginTop: 0 },
-                // ...label === 'Email' && { paddingRight: 5 }
-            }}>
-                <Button
-                    title="Save" key={label} color="#3d4b59"
-                    onPress={onButtonPress}
+        <>
+            <View key={label} style={my_styles.card}>
+                <View style={my_styles.titleContainer}>
+                    {IconContainer(true, label)}
+                    {GrapeTitleComponent(label)}
+                    {IconContainer(false, label)}
+                </View>
+
+                <TextInput
+                    {...textInputProps}
+                    value={formState[ subKey ]} key={`${label}-input`}
+                    onEndEditing={() => handleOnEndEditing()}
+                    onChangeText={(text) => setFormState({ ...formState, [ subKey ]: text })}
                 />
             </View>
-        </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+                <View style={my_styles.shareBtn}>
+                    <Text>Share</Text>
+                </View>
+            </View>
+        </>
     )
 }
 
