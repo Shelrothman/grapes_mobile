@@ -18,6 +18,8 @@ type FormRowWrapperProps = {
     onButtonPress: () => void;
 }
 
+//!! PU in here! this is ALMIOST done..just the "share" part.. lets instead move the share to the history page and they can share from there. WILL ALSO NEED TO CHANGE INSTRUCTIONS FOR THAT.
+// TODO also jsut on press like on press of input have it highlight to light green just for  a moment.. but then back to normal as start typing into it
 
 // TODO modulate and clean up this whole thing
 /**
@@ -136,11 +138,11 @@ export function HomeFormWrapper({ label, onButtonPress, setFormState, formState 
                     onChangeText={(text) => setFormState({ ...formState, [ subKey ]: text })}
                 />
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
+            {/* <View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
                 <View style={my_styles.shareBtn}>
                     <Text>Share</Text>
                 </View>
-            </View>
+            </View> */}
         </>
     )
 }

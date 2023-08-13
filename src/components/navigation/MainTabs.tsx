@@ -11,15 +11,17 @@ import { MaterialIcons } from '@expo/vector-icons'; // not filled
 import { FontAwesome } from '@expo/vector-icons'; // filled
 import { useHomeGrapeContext } from '../../contexts/HomeGrapeContext';
 // import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 
-const Tab = createMaterialTopTabNavigator();
+// const Tab = createMaterialTopTabNavigator();
 
+const Tab = createMaterialBottomTabNavigator();
 
 
 
 // * disable swiping everywhere so it doesnt confuse people
-const tabBarOptions = { tabBarShowLabel: false, swipeEnabled: false, };
+// const tabBarOptions = { tabBarShowLabel: false, swipeEnabled: false, };
 
 const MainTabs = () => {
     const { tabBarEnabled } = useHomeGrapeContext();
@@ -40,7 +42,7 @@ const MainTabs = () => {
 
     return (
         <Tab.Navigator
-            sceneContainerStyle={{ backgroundColor: '#2E3944' }}
+            // sceneContainerStyle={{ backgroundColor: '#2E3944' }}
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color }) => {
                     if (route.name) return buildTabBarIcon(route.name, focused, color);
@@ -54,16 +56,16 @@ const MainTabs = () => {
                 tabBarIndicatorStyle: { backgroundColor: '#cb9de2', height: 5 },
             })}>
             <Tab.Screen name="Home" component={HomeComponent}
-                options={tabBarOptions}
+                // options={tabBarOptions}
             />
             <Tab.Screen name="Global" component={Global}
-                options={tabBarOptions}
+                // options={tabBarOptions}
             />
             <Tab.Screen name="More" component={SettingsStackScreen}
-                options={tabBarOptions}
+                // options={tabBarOptions}
             />
             <Tab.Screen name="History" component={History}
-                options={tabBarOptions}
+                // options={tabBarOptions}
             />
         </Tab.Navigator>
     );

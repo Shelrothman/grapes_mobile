@@ -22,7 +22,7 @@ export const my_styles = StyleSheet.create({
         borderColor: '#cb9de2',
         backgroundColor: '#3d4b59',
         flexDirection: 'column',
-        marginBottom: 3,
+        // marginBottom: 3,
     },
     iconOne_container: { justifyContent: 'center', marginLeft: 5, },
     iconTwo_container: { justifyContent: 'center', marginRight: 5, },
