@@ -16,7 +16,7 @@ export default function App() {
     return (
         <AuthProvider>
             <Navigation />
-            <StatusBar hidden={true} />
+            <StatusBar style="light" />
             <Toast config={ToastConfig} />
         </AuthProvider>
     );

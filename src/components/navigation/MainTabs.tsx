@@ -47,25 +47,43 @@ const MainTabs = () => {
                 tabBarIcon: ({ focused, color }) => {
                     if (route.name) return buildTabBarIcon(route.name, focused, color);
                 },
-                tabBarActiveTintColor: '#8ABD91',
-                tabBarInactiveTintColor: '#f3f0f5', // text color for words that are not selected
-                tabBarStyle: {
-                    backgroundColor: '#4E1E66', paddingTop: 50, paddingBottom: 10,
-                    display: `${tabBarEnabled ? 'flex' : 'none'}`
+                labelStyle: {
+                    margin: 0,
+                    padding: 0
                 },
-                tabBarIndicatorStyle: { backgroundColor: '#cb9de2', height: 5 },
-            })}>
+                // tabBarActiveTintColor: '#8ABD91',
+                // tabBarInactiveTintColor: '#f3f0f5', // text color for words that are not selected
+                // tabBarStyle: {
+                //     backgroundColor: '#4E1E66', paddingTop: 50, paddingBottom: 10,
+                //     display: `${tabBarEnabled ? 'flex' : 'none'}`
+                // },
+                // tabBarIndicatorStyle: { backgroundColor: '#cb9de2', height: 5 },
+            })}
+            labeled={false}
+            activeColor='#4E1E66'
+            inactiveColor='#f3f0f5'
+            
+            barStyle={{
+                height: 100,
+                backgroundColor: '#2E3944',
+                // paddingTop: 50,
+                // paddingTop: 50,
+                // paddingBottom: 10,
+                // margin?Bottom: 48
+                // display: `${tabBarEnabled ? 'flex' : 'none'}`
+            }}
+        >
             <Tab.Screen name="Home" component={HomeComponent}
-                // options={tabBarOptions}
+            // options={tabBarOptions}
             />
             <Tab.Screen name="Global" component={Global}
-                // options={tabBarOptions}
+            // options={tabBarOptions}
             />
             <Tab.Screen name="More" component={SettingsStackScreen}
-                // options={tabBarOptions}
+            // options={tabBarOptions}
             />
             <Tab.Screen name="History" component={History}
-                // options={tabBarOptions}
+            // options={tabBarOptions}
             />
         </Tab.Navigator>
     );

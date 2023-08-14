@@ -21,6 +21,8 @@ type FormRowWrapperProps = {
 //!! PU in here! this is ALMIOST done..just the "share" part.. lets instead move the share to the history page and they can share from there. WILL ALSO NEED TO CHANGE INSTRUCTIONS FOR THAT.
 // TODO also jsut on press like on press of input have it highlight to light green just for  a moment.. but then back to normal as start typing into it
 
+// * AND NOW EVERYTHING needs work bc using bottom tabs...
+
 // TODO modulate and clean up this whole thing
 /**
  * @description wrapper component for a home form row 
@@ -52,9 +54,11 @@ export function HomeFormWrapper({ label, onButtonPress, setFormState, formState 
     const textInputProps: TextInputProps | Readonly<TextInputProps> = {
         style: {
             color: "white",
+            minHeight: 50,
             height: 'auto',
-            textAlign: 'left', // this makes the words wrap
+            textAlign: 'auto', // this makes the words wrap .. well now all a sudden its not.
             padding: 10,
+
             backgroundColor: inFocus ? '#cb9de2' : undefined,
         },
         // why is there weird vertical padding on top

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
-import { KeyboardAvoidingView, Platform, ScrollView, Button, Text, View } from "react-native";
+import { KeyboardAvoidingView, Platform, ScrollView, Button, Text, View, SafeAreaView } from "react-native";
 import { HomeFormWrapper } from "../../utils/HomeFormWrapper";
 import { useHeaderHeight } from '@react-navigation/elements';
 import Loading from "../../utils/Loading";
@@ -73,59 +73,64 @@ export default function HomeComponent() {
 
 
     return (
-        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled
-            style={{ flex: 1, paddingHorizontal: 20 }} keyboardVerticalOffset={height + 125}
-        >
-            {isLoading ? <Loading /> : isError ? (<View style={my_styles.main_container}>
-                <Text style={my_styles.date_title}>Internal Server Error</Text>
-                <Text style={my_styles.date_title}>Please try again later</Text>
-            </View>) : grapeFormState && (
-                <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: "#2E3944", marginTop: 20, paddingBottom: 40, }}>
-                    <View style={{ marginBottom: 20, backgroundColor: "#3d4b59", borderRadius: 10 }}>
-                        {/* <Button color="#a8e4a0" title='Logout' onPress={() => console.log('da')} /> */}
-                    </View>
-                    <HomeFormWrapper
-                        label="G" key="g"
-                        setFormState={setGrapeFormState} formState={grapeFormState}
-                        onButtonPress={() => handleSaveLetter()}
-                    />
-                    <HomeFormWrapper
-                        label="R" key="r"
-                        setFormState={setGrapeFormState}
-                        formState={grapeFormState}
-                        onButtonPress={() => handleSaveLetter()}
-                    />
-                    <HomeFormWrapper
-                        label="A" key="a"
-                        setFormState={setGrapeFormState}
-                        formState={grapeFormState}
-                        onButtonPress={() => handleSaveLetter()}
-                    />
-                    <HomeFormWrapper
-                        label="P" key="p"
-                        setFormState={setGrapeFormState}
-                        formState={grapeFormState}
-                        onButtonPress={() => handleSaveLetter()}
-                    />
-                    <HomeFormWrapper
-                        label="E"
-                    
-                        key="e"
-                        setFormState={setGrapeFormState}
-                        formState={grapeFormState}
-                        onButtonPress={() => handleSaveLetter()}
-                    />
-                    <HomeFormWrapper
-                        label="S" key="s"
-                        setFormState={setGrapeFormState}
-                        formState={grapeFormState}
-                        onButtonPress={() => handleSaveLetter()}
-                    />
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#2E3944" }}>
+            <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled
+                style={{
+                    flex: 1,
 
-                </ScrollView>
-            )}
-        </KeyboardAvoidingView>
+                    // marginHorizontal: 20 
+                }} keyboardVerticalOffset={height + 125}
+            >
+                {isLoading ? <Loading /> : isError ? (<View style={my_styles.main_container}>
+                    <Text style={my_styles.date_title}>Internal Server Error</Text>
+                    <Text style={my_styles.date_title}>Please try again later</Text>
+                </View>) : grapeFormState && (
+                    <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: "#2E3944", paddingBottom: 40, }}>
+                        <View style={{ marginBottom: 20, backgroundColor: "#3d4b59", borderRadius: 10 }}>
+                            {/* <Button color="#a8e4a0" title='Logout' onPress={() => console.log('da')} /> */}
+                        </View>
+                        <HomeFormWrapper
+                            label="G" key="g"
+                            setFormState={setGrapeFormState} formState={grapeFormState}
+                            onButtonPress={() => handleSaveLetter()}
+                        />
+                        <HomeFormWrapper
+                            label="R" key="r"
+                            setFormState={setGrapeFormState}
+                            formState={grapeFormState}
+                            onButtonPress={() => handleSaveLetter()}
+                        />
+                        <HomeFormWrapper
+                            label="A" key="a"
+                            setFormState={setGrapeFormState}
+                            formState={grapeFormState}
+                            onButtonPress={() => handleSaveLetter()}
+                        />
+                        <HomeFormWrapper
+                            label="P" key="p"
+                            setFormState={setGrapeFormState}
+                            formState={grapeFormState}
+                            onButtonPress={() => handleSaveLetter()}
+                        />
+                        <HomeFormWrapper
+                            label="E"
 
+                            key="e"
+                            setFormState={setGrapeFormState}
+                            formState={grapeFormState}
+                            onButtonPress={() => handleSaveLetter()}
+                        />
+                        <HomeFormWrapper
+                            label="S" key="s"
+                            setFormState={setGrapeFormState}
+                            formState={grapeFormState}
+                            onButtonPress={() => handleSaveLetter()}
+                        />
+
+                    </ScrollView>
+                )}
+            </KeyboardAvoidingView>
+        </SafeAreaView>
 
     );
 }
