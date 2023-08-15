@@ -14,6 +14,21 @@ export const my_styles = StyleSheet.create({
         borderBottomStartRadius: 10,
         paddingBottom: 10,
     },
+    clearButtonParent: {
+        justifyContent: "center",
+        alignItems: "center",
+        marginRight: 5,
+    },
+    inputParent: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+    },
+    clearButton: {
+        height: 16,
+        width: 16,
+        color: '#2E3944',
+        backgroundColor: '#cb9de2',
+    },
     share_container_edit: { flexDirection: 'row', justifyContent: 'center', },
     card: {
         borderWidth: 2,
@@ -21,6 +36,7 @@ export const my_styles = StyleSheet.create({
         marginTop: 40,
         borderColor: '#cb9de2',
         backgroundColor: '#3d4b59',
+        // backgroundColor: '#ebe6f0', //? may be more accessible?
         flexDirection: 'column',
         maxWidth: '85%',
         minWidth: '85%',
