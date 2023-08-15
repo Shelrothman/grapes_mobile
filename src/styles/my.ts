@@ -18,16 +18,11 @@ export const my_styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         marginRight: 5,
+        borderRadius: 50,
     },
     inputParent: {
         flexDirection: "row",
         justifyContent: "space-between",
-    },
-    clearButton: {
-        height: 16,
-        width: 16,
-        color: '#2E3944',
-        backgroundColor: '#cb9de2',
     },
     share_container_edit: { flexDirection: 'row', justifyContent: 'center', },
     card: {

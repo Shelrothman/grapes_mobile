@@ -7,40 +7,22 @@ import Loading from "../../utils/Loading";
 import { useAuthContext } from "../../contexts/AuthProvider";
 import { HomeService } from "../../services/HomeService";
 import { my_styles } from "../../styles/my";
-import { Grape, GrapeDayLetter, Home_Grape } from "../../types";
+import { Home_Grape } from "../../types";
 import { resToHomeGrape } from "../../utils";
-import { GrapeIcons } from "../../utils/Icons";
-import { defaultGrape } from "../../utils/constants";
 
 
-
-
-
-
-// TODO use "refreshControl" prop for refreshing in global dood. for <ScrollView>
-
-// this bout to temp be all the bottomEditor and stuff combin and myGraoe and all combined
 
 export default function HomeComponent() {
-
-
     const height = useHeaderHeight();
-
-
     const { sessionUser } = useAuthContext();
-    // const [ selectedLetter, setSelectedLetter ] = useState<GrapeDayLetter | null>(null);
     const [ isLoading, setIsLoading ] = useState<boolean>(true);
     const [ isError, setIsError ] = useState<boolean>(false);
-
-    // const [ grape, setGrape ] = useState<Home_Grape | null>(null);
     const [ grapeFormState, setGrapeFormState ] = useState<Home_Grape | null>(null);
-    // * memoize the fetchData function so that it only runs when the sessionUser changes or when the screen is re-focused
+    
+    /** memoize the fetchData function so that it only runs when the sessionUser changes or when the screen is re-focused */
     useFocusEffect(
         React.useCallback(() => {
             fetchData().then(() => setIsLoading(false));
-            // return () => {
-            //     setSelectedLetter(null);
-            // };
             return () => setIsLoading(true);
         }, [ sessionUser ])
     );
@@ -59,14 +41,7 @@ export default function HomeComponent() {
         }
     }
 
-    // const handleSaveLetter = () => {
-    //     // setGrapeFormState(formState);
-    //     console.log("handleSaveLetter");
-    // };
-
     // TODo modulate and make more dynamic
-
-    // !! PU here!! I got th UX-logic done. now i need to hook back up api and stuff
 
 
     return (
