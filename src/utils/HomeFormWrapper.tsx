@@ -15,7 +15,7 @@ type FormRowWrapperProps = {
     label: string;
     formState: Home_Grape;
     setFormState: (formState: Home_Grape) => void;
-    onButtonPress: () => void;
+    // onButtonPress: () => void;
 }
 
 //!! PU in here! this is ALMIOST done..just the "share" part.. lets instead move the share to the history page and they can share from there. WILL ALSO NEED TO CHANGE INSTRUCTIONS FOR THAT.
@@ -28,7 +28,7 @@ type FormRowWrapperProps = {
  * @description wrapper component for a home form row 
  * to render around each letter of Grape
  */
-export function HomeFormWrapper({ label, onButtonPress, setFormState, formState }: FormRowWrapperProps) {
+export function HomeFormWrapper({ label, setFormState, formState }: FormRowWrapperProps) {
     const [ inFocus, setInFocus ] = useState<boolean>(false);
     const { sessionUser } = useAuthContext();
 

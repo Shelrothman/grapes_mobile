@@ -47,10 +47,7 @@ const MainTabs = () => {
                 tabBarIcon: ({ focused, color }) => {
                     if (route.name) return buildTabBarIcon(route.name, focused, color);
                 },
-                labelStyle: {
-                    margin: 0,
-                    padding: 0
-                },
+                // labelStyle: { margin: 0, padding: 0 },
                 // tabBarActiveTintColor: '#8ABD91',
                 // tabBarInactiveTintColor: '#f3f0f5', // text color for words that are not selected
                 // tabBarStyle: {
@@ -62,9 +59,8 @@ const MainTabs = () => {
             labeled={false}
             activeColor='#4E1E66'
             inactiveColor='#f3f0f5'
-            
             barStyle={{
-                height: 100,
+                height: 100, // TODO make this dynamic
                 backgroundColor: '#2E3944',
                 // paddingTop: 50,
                 // paddingTop: 50,

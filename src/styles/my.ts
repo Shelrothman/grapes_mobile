@@ -22,6 +22,9 @@ export const my_styles = StyleSheet.create({
         borderColor: '#cb9de2',
         backgroundColor: '#3d4b59',
         flexDirection: 'column',
+        maxWidth: '85%',
+        minWidth: '85%',
+        alignSelf: 'center',
         // marginBottom: 3,
     },
     iconOne_container: { justifyContent: 'center', marginLeft: 5, },
@@ -59,10 +62,10 @@ export const my_styles = StyleSheet.create({
 
     /**this is the button itself */
     shareBtn: {
-        flexDirection: 'row', 
+        flexDirection: 'row',
         borderColor: '#4E1E66', borderWidth: 2,
-        borderRadius: 10, 
-        backgroundColor: '#a8e4a0', 
+        borderRadius: 10,
+        backgroundColor: '#a8e4a0',
         padding: 2,
     },
     bottomInEditContainer: {
@@ -72,7 +75,12 @@ export const my_styles = StyleSheet.create({
         color: '#f3f0f5',
     },
     main_container: { height: '100%', backgroundColor: '#2E3944', width: '85%', },
-    date_title: { fontSize: 18, fontWeight: 'bold', color: '#a8e4a0', },
+    date_title: {
+        fontSize: 18, fontWeight: 'bold', color: '#a8e4a0',
+        alignSelf: 'center',
+        marginTop: 10,
+        // marginBottom: 10, 
+    },
     icon_title: {
         marginBottom: 10, fontSize: 18,
         fontWeight: 'bold', color: '#a8e4a0',

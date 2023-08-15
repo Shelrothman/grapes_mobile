@@ -12,6 +12,8 @@ import { FormState } from "../../types";
 // !! PU around here and make that confirm new password appearence work better
 
 
+// TODO rework the keybiard avoiding logic noiw that we have bottom nav.
+
 async function handleLogout() {
     const { error } = await supabase.auth.signOut();
     if (!error) alert("Signed out!");
