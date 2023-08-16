@@ -16,11 +16,8 @@ type FormRowWrapperProps = {
     setFormState: (formState: Home_Grape) => void;
 }
 
-//!! PU in here! this is ALMIOST done..just the "share" part.. lets instead move the share to the history page and they can share from there. WILL ALSO NEED TO CHANGE INSTRUCTIONS FOR THAT.
-// * AND NOW EVERYTHING needs work bc using bottom tabs...
 
-// TODO modulate and clean up this whole thing
-// TODO come back and make the share button not look so bad...
+
 
 /**
  * @description wrapper component for a home form row 

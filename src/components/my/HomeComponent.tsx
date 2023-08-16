@@ -48,7 +48,6 @@ export default function HomeComponent() {
         <SafeAreaView style={{ flex: 1, backgroundColor: "#2E3944" }}>
             <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled
                 style={{ flex: 1, }} keyboardVerticalOffset={height}
-
             >
                 <Text style={my_styles.date_title}> Today: {new Date().toDateString()} </Text>
                 {isLoading ? <Loading /> : isError ? (<View style={my_styles.main_container}>

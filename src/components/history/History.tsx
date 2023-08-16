@@ -6,6 +6,10 @@ import { buildDateArray, isCloseToBottom } from "../../utils";
 import { GrapeDayLetter } from "../../types";
 import { Ionicons } from '@expo/vector-icons';
 
+//!! TODO move to in here! 
+// just the "share" part.. lets instead move the share to the history page and they can share from there. WILL ALSO NEED TO CHANGE INSTRUCTIONS FOR THAT.
+
+
 
 /** 
  * @description users history page of their past grape days

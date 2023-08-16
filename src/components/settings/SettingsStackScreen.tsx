@@ -3,19 +3,23 @@ import { Account } from './Account';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+import { useWindowDimensions } from 'react-native';
 
 
 const Tab = createMaterialTopTabNavigator();
 export function SettingsStackScreen() {
+
+    const { height, width } = useWindowDimensions();
+    console.log("sas", height, width);
+
     return (
         <Tab.Navigator
-            sceneContainerStyle={{ backgroundColor: '#2E3944' }}
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color }) => {
-                    let iconName: any = 'information-circle-outline';
-                    if (route.name) {
-                        if (route.name === 'Account') {
+        sceneContainerStyle={{ backgroundColor: '#2E3944' }}
+        screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color }) => {
+                let iconName: any = 'information-circle-outline';
+                if (route.name) {
+                    if (route.name === 'Account') {
                             iconName = focused ? 'account-settings' : 'account-settings-outline';
                             return <MaterialCommunityIcons name={iconName} size={25} color={color} />;
                         } else if (route.name === 'About') {
@@ -26,7 +30,10 @@ export function SettingsStackScreen() {
                 },
                 tabBarActiveTintColor: 'darkgreen',
                 tabBarInactiveTintColor: 'gray',
-                tabBarStyle: { backgroundColor: '#a8e4a0', paddingTop: 0 },
+                tabBarStyle: {
+                    backgroundColor: '#a8e4a0',
+                    paddingTop: height * 0.05
+                },
                 tabBarItemStyle: { padding: 5 },
                 tabBarIndicatorStyle: { backgroundColor: 'darkgreen', height: 5 },
             })}>
