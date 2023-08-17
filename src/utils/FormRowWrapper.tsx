@@ -30,7 +30,7 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
     useFocusEffect(
         React.useCallback(() => {
             reset();
-            return () => reset(); 
+            return () => reset();
         }, [])
     );
 
@@ -45,12 +45,18 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
         selectionColor: '#cb9de2', placeholderTextColor: '#cb9de2',
     };
 
-    const handlePassword = () => {
+    const handleShowPassword = () => {
+        if (!showConfirm) {
+            if (inputValue.length < 8 || inputValue === '********') return alert('Password must be a new value and at least 8 characters long');
+            return setShowConfirm(true);
+        }
         if (inputValue !== confirmValue) {
             return alert('Password values do not match. Please try again');
         }
         return onButtonPress();
     }
+
+    // TODO the clear buttons
 
     return (
         <View key={label}>
@@ -58,14 +64,13 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
             <TextInput
                 placeholder={`Enter your ${label}`} {...textInputProps} value={inputValue}
                 onChangeText={onChangeText} key={`${label}-input`}
-                secureTextEntry={label !== 'Password' ? false : true}
+                secureTextEntry={label !== 'New Password' ? false : true}
                 keyboardType={label === 'Email' ? 'email-address' : 'default'}
                 maxLength={maxLength[ label ]}
                 editable={label === 'Email' ? false : true}
-                onTouchStart={label === 'Password' ? () => setShowConfirm(true) : undefined}
             />
-            {(showConfirm && label === 'Password') && <>
-                <Text style={{ color: '#a8e4a0', marginTop: 10 }}>Confirm New Password</Text>
+            {(showConfirm && label === 'New Password') && <>
+                <Text style={{ color: '#a8e4a0', marginTop: 10 }}>Re-Enter New Password</Text>
                 <TextInput
                     placeholder={`Confirm your ${label}`}
                     {...textInputProps} value={confirmValue}
@@ -77,12 +82,12 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
             <View style={{
                 flexDirection: 'row', borderColor: '#4E1E66', borderWidth: 2,
                 borderRadius: 10, backgroundColor: '#a8e4a0', alignSelf: 'flex-end',
-                ...label !== 'Password' ? { marginTop: 20 } : { marginTop: 0 },
+                ...label !== 'New Password' ? { marginTop: 20 } : { marginTop: 0 },
                 ...label === 'Email' && { paddingRight: 5 }
             }}>
                 <Button
-                    title={btnText} key={`${label}-save`} color="#3d4b59"
-                    onPress={label !== "Password" ? onButtonPress : handlePassword}
+                    title={(showConfirm && label === 'New Password') ? 'Submit New Password' : btnText} key={`${label}-save`} color="#3d4b59"
+                    onPress={label !== 'New Password' ? onButtonPress : handleShowPassword}
                 />
                 {label === 'Email' && <MaterialCommunityIcons name="open-in-new" size={25} color="#3d4b59" />}
             </View>

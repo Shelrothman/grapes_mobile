@@ -127,9 +127,9 @@ export function Account() {
                         onButtonPress={() => confirmEmailChange()}
                         key="email" btnText="Change Email"
                     />
-                    <FormRowWrapper label="Password" inputValue={formState.password}
+                    <FormRowWrapper label="New Password" inputValue={formState.password}
                         onChangeText={(text) => setFormState({ ...formState, password: text })}
-                        onButtonPress={() => showConfirmDialog('password')} key="password" btnText="Save New Password"
+                        onButtonPress={() => showConfirmDialog('password')} key="password" btnText="Change Password"
                     />
                 </ScrollView>
             )}

@@ -56,7 +56,8 @@ export class HomeService {
     };
 
     updateLetter = async ({ letter, value, user_id }: RawGrapeDayLetter): Promise<GrapeResponse | null> => {
-        const data = await this.upsertRow({ [ letter ]: value, user_id });
+        const trimmedValue = value.trim().replace(/\s+/g, ' '); // remove extra spaces and trim
+        const data = await this.upsertRow({ [ letter ]: trimmedValue, user_id });
         return data ? data : null;
     }
 
