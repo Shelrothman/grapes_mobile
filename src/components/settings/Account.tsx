@@ -30,7 +30,7 @@ const support_url = "https://grapes-admin.vercel.app/?emailupdate?id=";
 
 export function Account() {
     const { sessionUser, setSessionUser } = useAuthContext();
-    const [ loading, setLoading ] = useState<boolean>(false);
+    const [ loading, setLoading ] = useState<boolean>(true);
     const height = useHeaderHeight();
     const defaultFormState: FormState = {
         display: sessionUser?.display_name || sessionUser?.email || "",
@@ -38,22 +38,21 @@ export function Account() {
         password: "********",
     };
     const [ formState, setFormState ] = useState<FormState>(defaultFormState);
-
-    // useEffect(() = > { setFormState(defaultFormState); }, [ sessionUser ]);
+    
 
     // const handleFormChange = (key: string, value: string) => setFormState({ ...formState, [ key ]: value });
     useFocusEffect( // * this runs only when the screen is refocused
         React.useCallback(() => {
-            // fetchData().then(() => 
-            setFormState(defaultFormState);
             setLoading(false);
-            // .finally(() => setLoading(false));
+            setFormState(defaultFormState);
             return () => {
                 setFormState(defaultFormState);
-                setLoading(false);
+                setLoading(true);
             };
-        }, [ ])
+        }, [])
     );
+
+
 
     const showConfirmDialog = (key: string) => Alert.alert("Are you sure?",
         `Are you sure you want to permanetly change your ${key === 'display' ? 'display name' : key}?`, [
@@ -124,7 +123,6 @@ export function Account() {
         return setLoading(false);
     };
 
-    // const renderConfirmNewPW = () => <FormRowWrapper label="Confirm New Password" inputValue={formState.password} key="confirm" />;
 
 
     return (
@@ -136,7 +134,7 @@ export function Account() {
                     <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: "#2E3944", paddingBottom: 40, }}
                         keyboardShouldPersistTaps='handled'
                     >
-                        <View style={{ marginBottom: 20, borderColor: '#a8e4a0', borderWidth: 1, backgroundColor: "#3d4b59", borderRadius: 10 }}>
+                        <View style={{ marginBottom: 20, borderColor: '#a8e4a0', borderWidth: 1, backgroundColor: "#3d4b59", borderRadius: 10, minWidth: '85%', maxWidth: '85%', alignSelf: 'center' }}>
                             <Button color="#a8e4a0" title='Logout' onPress={() => showConfirmLogout()} />
                         </View>
                         <FormRowWrapper label="Display Name" inputValue={formState.display}
