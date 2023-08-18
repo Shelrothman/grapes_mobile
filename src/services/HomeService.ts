@@ -2,7 +2,7 @@ import { PostgrestError } from "@supabase/supabase-js";
 import { supabase } from "../initSupabase";
 import { RawGlobalGrape, GrapeResponse, RawGrapeDayLetter } from "../types";
 import { getUTCDate } from "../utils";
-
+import { cleanStringNoExtraSpace } from "../utils";
 
 /**
  * @class HomeService
@@ -56,7 +56,7 @@ export class HomeService {
     };
 
     updateLetter = async ({ letter, value, user_id }: RawGrapeDayLetter): Promise<GrapeResponse | null> => {
-        const trimmedValue = value.trim().replace(/\s+/g, ' '); // remove extra spaces and trim
+        const trimmedValue = cleanStringNoExtraSpace(value);
         const data = await this.upsertRow({ [ letter ]: trimmedValue, user_id });
         return data ? data : null;
     }

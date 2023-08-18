@@ -1,7 +1,7 @@
 import { AuthError, PostgrestError } from "@supabase/supabase-js";
 import { supabase, User } from "../initSupabase";
 import { GrapesUser } from "../types";
-
+import { cleanStringNoExtraSpace } from "../utils";
 /**
  * @class AccountService - services cruding the authenticated user's account configuration
  * ! to handle any errors in here, just throw an Error if there is one and then 
@@ -66,12 +66,12 @@ export class AccountService {
             if (configVal === '********' && configKey === 'password') throw new Error("Password value not changed!");
             let retVal: User | null | AuthError | PostgrestError = null;
             switch (configKey) {
-                case "email": retVal = await this.changeEmail(configVal.replace('\s', '').trim());
+                case "email": retVal = await this.changeEmail(cleanStringNoExtraSpace(configVal));
                     break;
-                case "password": retVal = await this.changePassword(configVal.replace('\s', '').trim());
+                case "password": retVal = await this.changePassword(cleanStringNoExtraSpace(configVal));
                     break;
-                case "display": retVal = await this.changeDisplayName(configVal.replace('\s', '').trim());
-                    break;
+                case "display": retVal = await this.changeDisplayName(cleanStringNoExtraSpace(configVal)) 
+                break;
             }
             return retVal;
         } catch (error: any) {

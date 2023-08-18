@@ -1,6 +1,7 @@
 import { PostgrestError } from "@supabase/supabase-js";
 import { supabase } from "../initSupabase";
 import { RawSharedLetter, SharedLetter } from "../types";
+import { cleanStringNoExtraSpace } from "../utils";
 
 const TABLE_NAME = 'shared_letters';
 
@@ -50,9 +51,14 @@ export class GlobalService {
     };
 
     addRow = async (letterToShare: RawSharedLetter): Promise<SharedLetter | null> => {
+        const cleanLetterToShare = {
+            ...letterToShare,
+            letter: cleanStringNoExtraSpace(letterToShare.letter),
+        }
+        
         const { data: shared_letter, error } = await supabase
             .from(this.tableName)
-            .insert(letterToShare) 
+            .insert(cleanLetterToShare) 
             .select() // in v2 you have to select the new record
         if (error) this.handleError(error);
         return shared_letter ? shared_letter[ 0 ] : null;
