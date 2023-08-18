@@ -106,9 +106,7 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
                     onPressIn={() => setAboutToFocus(true)}
                     onPressOut={() => setAboutToFocus(false)}
                     style={{
-                        color: "white", width: '90%', height: 'auto', borderRadius: 10,
-                        padding: 10, 
-                        // marginTop: 15,
+                        color: "white", width: '90%', height: 'auto', borderRadius: 10, padding: 10, 
                         backgroundColor: (aboutToFocus && label !== 'Email') ? '#3d5945' : '#3d4b59',
                     }}
                     onChangeText={onChangeText} key={`${label}-input`}

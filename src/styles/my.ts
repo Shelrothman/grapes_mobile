@@ -47,7 +47,7 @@ export const my_styles = StyleSheet.create({
         maxWidth: '85%',
         minWidth: '85%',
         alignSelf: 'center',
-        marginTop: 20,
+        marginTop: 10,
     },
     iconOne_container: { justifyContent: 'center', marginLeft: 5, },
     iconTwo_container: { justifyContent: 'center', marginRight: 5, },

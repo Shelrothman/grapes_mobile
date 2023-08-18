@@ -80,3 +80,6 @@ export const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize 
     return layoutMeasurement.height + contentOffset.y >=
         contentSize.height - paddingToBottom;
 };
+
+
+export const cleanStringNoExtraSpace = (str: string) => str.replace(/\s{2,}/, '').trim()
