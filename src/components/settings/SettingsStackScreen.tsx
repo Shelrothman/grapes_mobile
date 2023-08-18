@@ -10,16 +10,17 @@ const Tab = createMaterialTopTabNavigator();
 export function SettingsStackScreen() {
 
     const { height, width } = useWindowDimensions();
-    console.log("sas", height, width);
+    // TODO there is an issue where there appears some inner padding on the Accoutn screen but i cannot for hte life of me figure out where it is coming from i have looked through all the params and they are saetup just lije the other screens
+    // * it only happens in ios aand not in the web version
 
     return (
         <Tab.Navigator
-        sceneContainerStyle={{ backgroundColor: '#2E3944' }}
-        screenOptions={({ route }) => ({
-            tabBarIcon: ({ focused, color }) => {
-                let iconName: any = 'information-circle-outline';
-                if (route.name) {
-                    if (route.name === 'Account') {
+            sceneContainerStyle={{ backgroundColor: '#2E3944' }}
+            screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, color }) => {
+                    let iconName: any = 'information-circle-outline';
+                    if (route.name) {
+                        if (route.name === 'Account') {
                             iconName = focused ? 'account-settings' : 'account-settings-outline';
                             return <MaterialCommunityIcons name={iconName} size={25} color={color} />;
                         } else if (route.name === 'About') {
@@ -34,7 +35,7 @@ export function SettingsStackScreen() {
                     backgroundColor: '#a8e4a0',
                     paddingTop: height * 0.05
                 },
-                tabBarItemStyle: { padding: 5 },
+                // tabBarItemStyle: { padding: 5 },
                 tabBarIndicatorStyle: { backgroundColor: 'darkgreen', height: 5 },
             })}>
             <Tab.Screen name="About" component={About} options={{ title: 'About GRAPES™', swipeEnabled: false }} />

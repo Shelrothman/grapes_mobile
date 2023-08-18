@@ -18,6 +18,8 @@ export const global_styles = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'center',
         marginTop: 10,
+        // bottomBorderWidth: 1,
+        // borderBottomColor: '#cb9De2',
     },
     // sharedLetter styles
     button: { paddingRight: 0, marginRight: 0, },

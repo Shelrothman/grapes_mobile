@@ -11,14 +11,13 @@ import { Home_Grape } from "../../types";
 import { resToHomeGrape } from "../../utils";
 
 
-
 export default function HomeComponent() {
     const height = useHeaderHeight();
     const { sessionUser } = useAuthContext();
     const [ isLoading, setIsLoading ] = useState<boolean>(true);
     const [ isError, setIsError ] = useState<boolean>(false);
     const [ grapeFormState, setGrapeFormState ] = useState<Home_Grape | null>(null);
-    
+
     /** memoize the fetchData function so that it only runs when the sessionUser changes or when the screen is re-focused */
     useFocusEffect(
         React.useCallback(() => {
@@ -29,9 +28,9 @@ export default function HomeComponent() {
     async function fetchData() {
         try {
             if (sessionUser == null || sessionUser == undefined) return;
-            // if (grapeFormState === defaultGrape) return; // ? do we need this?
             //* bc it should change if we change a letter so..
             const response = await HomeService.getOrCreateToday(sessionUser!.user_uid);
+            // TODO caching mechanism around here
             if (response !== null) setGrapeFormState(resToHomeGrape(response));
             // else setIsError(true); //? do we need this?
         } catch (error) {
@@ -40,8 +39,6 @@ export default function HomeComponent() {
             setIsError(true);
         }
     }
-
-    // TODo modulate and make more dynamic
 
 
     return (
@@ -54,33 +51,13 @@ export default function HomeComponent() {
                     <Text style={my_styles.date_title}>Internal Server Error</Text>
                     <Text style={my_styles.date_title}>Please try again later</Text>
                 </View>) : grapeFormState && (
-                    <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: "#2E3944", paddingBottom: 40, }}
-                        keyboardShouldPersistTaps='handled' //! this is the KEY to allow the button INSIDE the textInput to function WITHOUT dismissing the keyboard
-                    >
-                        <HomeFormWrapper
-                            label="G" key="g"
-                            setFormState={setGrapeFormState} formState={grapeFormState}
-                        />
-                        <HomeFormWrapper
-                            label="R" key="r"
-                            setFormState={setGrapeFormState} formState={grapeFormState}
-                        />
-                        <HomeFormWrapper
-                            label="A" key="a"
-                            setFormState={setGrapeFormState} formState={grapeFormState}
-                        />
-                        <HomeFormWrapper
-                            label="P" key="p"
-                            setFormState={setGrapeFormState} formState={grapeFormState}
-                        />
-                        <HomeFormWrapper
-                            label="E" key="e"
-                            setFormState={setGrapeFormState} formState={grapeFormState}
-                        />
-                        <HomeFormWrapper
-                            label="S" key="s"
-                            setFormState={setGrapeFormState} formState={grapeFormState}
-                        />
+                    <ScrollView keyboardShouldPersistTaps='handled' contentContainerStyle={{ flexGrow: 1, backgroundColor: "#2E3944", paddingBottom: 40, }}>
+                        {[ 'G', 'R', 'A', 'P', 'E', 'S' ].map((letter, index) => (
+                            <HomeFormWrapper
+                                label={letter} key={index}
+                                setFormState={setGrapeFormState} formState={grapeFormState}
+                            />
+                        ))}
                     </ScrollView>
                 )}
             </KeyboardAvoidingView>

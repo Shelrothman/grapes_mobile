@@ -4,12 +4,12 @@ import HomeComponent from "../my/HomeComponent";
 
 
 import History from "../history/History";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+// import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { SettingsStackScreen } from "../settings/SettingsStackScreen";
 import { Global } from "../global/Global";
 import { MaterialIcons } from '@expo/vector-icons'; // not filled
 import { FontAwesome } from '@expo/vector-icons'; // filled
-import { useHomeGrapeContext } from '../../contexts/HomeGrapeContext';
+// import { useHomeGrapeContext } from '../../contexts/HomeGrapeContext';
 // import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
@@ -24,7 +24,7 @@ const Tab = createMaterialBottomTabNavigator();
 // const tabBarOptions = { tabBarShowLabel: false, swipeEnabled: false, };
 
 const MainTabs = () => {
-    const { tabBarEnabled } = useHomeGrapeContext();
+    // const { tabBarEnabled } = useHomeGrapeContext();
     const buildTabBarIcon = (routeName: string, focused: boolean, color: string) => {
         const iconProps = { size: 25, color: color };
         if (routeName === 'Home') {
@@ -62,6 +62,9 @@ const MainTabs = () => {
             barStyle={{
                 height: 100, // TODO make this dynamic
                 backgroundColor: '#2E3944',
+                borderTopColor: '#3d4b59',
+                borderTopWidth: 2,
+                // backgroundColor: 'transparent',
                 // paddingTop: 50,
                 // paddingTop: 50,
                 // paddingBottom: 10,

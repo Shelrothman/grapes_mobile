@@ -98,7 +98,7 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
 
                 <Text style={{ color: '#a8e4a0', }}>{label}</Text>
             </View>
-            <View style={my_styles.inputParent} key={`${label}-parent`}>
+            <View style={{... my_styles.inputParent, borderColor: '#a8e4a0', borderWidth: .5}} key={`${label}-parent`}>
                 <TextInput
                     placeholder={`Enter your ${label}`}
                     ref={inputOneRef}

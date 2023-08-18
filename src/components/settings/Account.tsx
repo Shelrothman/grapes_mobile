@@ -6,18 +6,13 @@ import { useAuthContext, AuthUser } from "../../contexts/AuthProvider";
 import { AccountService } from "../../services/AccountService";
 import Loading from "../../utils/Loading";
 import { FormRowWrapper } from "../../utils/FormRowWrapper";
-import { MyMap } from "../../utils/constants";
+// import { MyMap } from "../../utils/constants";
 import { FormState } from "../../types";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-
-import { HomeFormWrapper } from "../../utils/HomeFormWrapper";
 import { useFocusEffect } from "@react-navigation/native";
 
-// !! PU around here and make that confirm new password appearence work better
-// clean uup all aroud
 
-// TODO rework the keybiard avoiding logic noiw that we have bottom nav.
+// TODO clean everything up
 
 async function handleLogout() {
     const { error } = await supabase.auth.signOut();
@@ -38,20 +33,18 @@ export function Account() {
         password: "********",
     };
     const [ formState, setFormState ] = useState<FormState>(defaultFormState);
-    
 
-    // const handleFormChange = (key: string, value: string) => setFormState({ ...formState, [ key ]: value });
+
     useFocusEffect( // * this runs only when the screen is refocused
-        React.useCallback(() => {
-            setLoading(false);
+    React.useCallback(() => {
+        setFormState(defaultFormState);
+        setLoading(false);
+        return () => {
             setFormState(defaultFormState);
-            return () => {
-                setFormState(defaultFormState);
-                setLoading(true);
-            };
-        }, [])
+            setLoading(true);
+        };
+    }, [])
     );
-
 
 
     const showConfirmDialog = (key: string) => Alert.alert("Are you sure?",
@@ -126,7 +119,10 @@ export function Account() {
 
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#2E3944" }}>
+        <SafeAreaView style={{ flex: 1, 
+        // backgroundColor: "#2E3944", 
+        // height: '100%', width: '100%' 
+        }}>
             <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled
                 style={{ flex: 1 }} keyboardVerticalOffset={height + 100}
             >
