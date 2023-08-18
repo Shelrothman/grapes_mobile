@@ -4,6 +4,8 @@ import { MyMap, MyNumMap } from "./constants";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useFocusEffect } from "@react-navigation/native";
 import { Octicons } from '@expo/vector-icons';
+import { my_styles } from "../styles/my";
+
 
 type FormRowWrapperProps = {
     label: string;
@@ -21,6 +23,8 @@ const maxLength: MyNumMap = { 'Display Name': 8, 'Email': undefined, 'Password':
 
 
 // TODO need to ensure that  the defaults arent getting sent without i knew it
+
+//! PU here. do all the TODOS. but first.. fix the little X button to show inside the input
 
 /**
  * @description wrapper component for a form row containing, label, input, helpText, and save button
@@ -60,10 +64,17 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
         //     height: 50, borderRadius: 10,
         //     paddingHorizontal: 10, marginTop: 15, borderColor: '#cb9de2', borderWidth: 1,
         //     width: '90%',
-        //     // backgroundColor: aboutToFocus ? '#3d5945' : '#3d4b59', // little effect for accessibility
+        //     // backgroundColor: (aboutToFocus && label !== 'Email') ? '#3d5945' : '#3d4b59', // little effect for accessibility
         // },
         selectionColor: '#cb9de2',
         placeholderTextColor: '#cb9de2',
+        /** 
+         *! this is the hack that makes it work WITH
+         * @link  https://github.com/facebook/react-native/issues/16826 
+         * * keep in mind it only works for ios
+         * */
+        scrollEnabled: false,
+        returnKeyLabel: 'done', // ? this is for ios only and isnt even working?
     };
 
     const handleShowPassword = () => {
@@ -79,12 +90,15 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
 
     // TODO the clear buttons
 
-    // TODO modulate the repetitive view input view
+    // TODO way need to modulate the repetitive view input view
 
     return (
-        <View key={label} style={{ minWidth: '85%', maxWidth: '85%', alignSelf: 'center'  }}>
-            <Text style={{ color: '#a8e4a0', }}>{label}</Text>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+        <View key={label} style={my_styles.account_card}>
+            <View style={{ ...my_styles.titleContainer, backgroundColor: '#2E3944'  }}>
+
+                <Text style={{ color: '#a8e4a0', }}>{label}</Text>
+            </View>
+            <View style={my_styles.inputParent} key={`${label}-parent`}>
                 <TextInput
                     placeholder={`Enter your ${label}`}
                     ref={inputOneRef}
@@ -92,9 +106,10 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
                     onPressIn={() => setAboutToFocus(true)}
                     onPressOut={() => setAboutToFocus(false)}
                     style={{
-                        color: "white", width: '100%', height: 50, borderRadius: 10,
-                        paddingHorizontal: 10, marginTop: 15, borderColor: '#cb9de2', borderWidth: 1,
-                        backgroundColor: aboutToFocus ? '#3d5945' : '#3d4b59',
+                        color: "white", width: '90%', height: 'auto', borderRadius: 10,
+                        padding: 10, 
+                        // marginTop: 15,
+                        backgroundColor: (aboutToFocus && label !== 'Email') ? '#3d5945' : '#3d4b59',
                     }}
                     onChangeText={onChangeText} key={`${label}-input`}
                     onFocus={() => setInFocus(true)}
@@ -102,9 +117,8 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
                     secureTextEntry={label !== 'New Password' ? false : true}
                     keyboardType={label === 'Email' ? 'email-address' : 'default'}
                     maxLength={maxLength[ label ]} editable={label === 'Email' ? false : true}
-                // clearButtonMode='while-editing' // TODO use the same was a HomeFormWrapper so it works for anroid too
                 />
-                {inFocus && <Pressable onPress={() => inputOneRef!.current!.clear()} style={{ justifyContent: "center", alignItems: "center", marginRight: 5, borderRadius: 50, }}>
+                {inFocus && <Pressable onPress={() => inputOneRef!.current!.clear()} style={my_styles.clearButtonParent}>
                     <Octicons name="x-circle-fill" size={16} color="#ccc8c8" />
                 </Pressable>}
             </View>

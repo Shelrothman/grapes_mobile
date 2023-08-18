@@ -44,7 +44,7 @@ export function HomeFormWrapper({ label, setFormState, formState }: FormRowWrapp
         maxLength: 250, // between 35 words and 63 words👌
         multiline: true,
         /** @link https://github.com/facebook/react-native/issues/16826 */
-        scrollEnabled: false, // this is the hack that makes it work WITH multiline //* keep in mind it only works for ios and now its making the clearButton not show up
+        scrollEnabled: false, // this is the hack that makes it work WITH multiline //* keep in mind it only works for ios
         returnKeyLabel: 'done', // ? this is for ios only and isnt even working?
         // enablesReturnKeyAutomatically: true,
         keyboardType: 'default',

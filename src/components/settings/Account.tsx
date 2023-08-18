@@ -10,6 +10,10 @@ import { MyMap } from "../../utils/constants";
 import { FormState } from "../../types";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+
+import { HomeFormWrapper } from "../../utils/HomeFormWrapper";
+import { useFocusEffect } from "@react-navigation/native";
+
 // !! PU around here and make that confirm new password appearence work better
 // clean uup all aroud
 
@@ -35,7 +39,21 @@ export function Account() {
     };
     const [ formState, setFormState ] = useState<FormState>(defaultFormState);
 
-    useEffect(() => { setFormState(defaultFormState); }, [ sessionUser ]);
+    // useEffect(() = > { setFormState(defaultFormState); }, [ sessionUser ]);
+
+    // const handleFormChange = (key: string, value: string) => setFormState({ ...formState, [ key ]: value });
+    useFocusEffect( // * this runs only when the screen is refocused
+        React.useCallback(() => {
+            // fetchData().then(() => 
+            setFormState(defaultFormState);
+            setLoading(false);
+            // .finally(() => setLoading(false));
+            return () => {
+                setFormState(defaultFormState);
+                setLoading(false);
+            };
+        }, [ ])
+    );
 
     const showConfirmDialog = (key: string) => Alert.alert("Are you sure?",
         `Are you sure you want to permanetly change your ${key === 'display' ? 'display name' : key}?`, [
@@ -111,36 +129,36 @@ export function Account() {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#2E3944" }}>
-        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled
-            style={{ flex: 1 }} keyboardVerticalOffset={height + 100}
-        >
-            {loading ? <Loading /> : (
-                <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: "#2E3944",  paddingBottom: 40 }}
-                    keyboardShouldPersistTaps='handled'
-                >
-                    <View style={{ marginBottom: 20, borderColor: '#a8e4a0', borderWidth: 1, backgroundColor: "#3d4b59", borderRadius: 10 }}>
-                        <Button color="#a8e4a0" title='Logout' onPress={() => showConfirmLogout()} />
-                    </View>
-                    <FormRowWrapper label="Display Name" inputValue={formState.display}
-                        onChangeText={(text) => setFormState({ ...formState, display: text })}
-                        onButtonPress={() => showConfirmDialog('display')} key="display"
-                        btnText="Save Display Name"
-                        initialValue={sessionUser?.display_name || ""}
-                    />
-                    <FormRowWrapper label="Email" inputValue={formState.email}
-                        onChangeText={(text) => setFormState({ ...formState, email: text })}
-                        onButtonPress={() => confirmEmailChange()}
-                        key="email" btnText="Change Email"
-                        initialValue={sessionUser?.email || ""}
-                    />
-                    <FormRowWrapper label="New Password" inputValue={formState.password}
-                        initialValue={defaultFormState.password}
-                        onChangeText={(text) => setFormState({ ...formState, password: text })}
-                        onButtonPress={() => showConfirmDialog('password')} key="password" btnText="Change Password"
-                    />
-                </ScrollView>
-            )}
-        </KeyboardAvoidingView>
+            <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled
+                style={{ flex: 1 }} keyboardVerticalOffset={height + 100}
+            >
+                {loading ? <Loading /> : (
+                    <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: "#2E3944", paddingBottom: 40, }}
+                        keyboardShouldPersistTaps='handled'
+                    >
+                        <View style={{ marginBottom: 20, borderColor: '#a8e4a0', borderWidth: 1, backgroundColor: "#3d4b59", borderRadius: 10 }}>
+                            <Button color="#a8e4a0" title='Logout' onPress={() => showConfirmLogout()} />
+                        </View>
+                        <FormRowWrapper label="Display Name" inputValue={formState.display}
+                            onChangeText={(text) => setFormState({ ...formState, display: text })}
+                            onButtonPress={() => showConfirmDialog('display')} key="display"
+                            btnText="Save Display Name"
+                            initialValue={sessionUser?.display_name || ""}
+                        />
+                        <FormRowWrapper label="Email" inputValue={formState.email}
+                            onChangeText={(text) => setFormState({ ...formState, email: text })}
+                            onButtonPress={() => confirmEmailChange()}
+                            key="email" btnText="Change Email"
+                            initialValue={sessionUser?.email || ""}
+                        />
+                        <FormRowWrapper label="New Password" inputValue={formState.password}
+                            initialValue={defaultFormState.password}
+                            onChangeText={(text) => setFormState({ ...formState, password: text })}
+                            onButtonPress={() => showConfirmDialog('password')} key="password" btnText="Change Password"
+                        />
+                    </ScrollView>
+                )}
+            </KeyboardAvoidingView>
         </SafeAreaView>
     )
 }

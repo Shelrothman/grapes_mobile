@@ -23,6 +23,9 @@ export const my_styles = StyleSheet.create({
     inputParent: {
         flexDirection: "row",
         justifyContent: "space-between",
+        backgroundColor: '#3d4b59',
+        borderRadius: 10,
+        paddingRight: 5,
     },
     share_container_edit: { flexDirection: 'row', justifyContent: 'center', },
     card: {
@@ -37,6 +40,14 @@ export const my_styles = StyleSheet.create({
         minWidth: '85%',
         alignSelf: 'center',
         // marginBottom: 3,
+    },
+    account_card: {
+        // backgroundColor: '#3d4b59',
+        flexDirection: 'column',
+        maxWidth: '85%',
+        minWidth: '85%',
+        alignSelf: 'center',
+        marginTop: 20,
     },
     iconOne_container: { justifyContent: 'center', marginLeft: 5, },
     iconTwo_container: { justifyContent: 'center', marginRight: 5, },

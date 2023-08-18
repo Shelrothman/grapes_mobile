@@ -66,11 +66,11 @@ export class AccountService {
             if (configVal === '********' && configKey === 'password') throw new Error("Password value not changed!");
             let retVal: User | null | AuthError | PostgrestError = null;
             switch (configKey) {
-                case "email": retVal = await this.changeEmail(configVal);
+                case "email": retVal = await this.changeEmail(configVal.replace('\s', '').trim());
                     break;
-                case "password": retVal = await this.changePassword(configVal);
+                case "password": retVal = await this.changePassword(configVal.replace('\s', '').trim());
                     break;
-                case "display": retVal = await this.changeDisplayName(configVal);
+                case "display": retVal = await this.changeDisplayName(configVal.replace('\s', '').trim());
                     break;
             }
             return retVal;
