@@ -95,7 +95,6 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
     return (
         <View key={label} style={my_styles.account_card}>
             <View style={{ ...my_styles.titleContainer, backgroundColor: '#2E3944'  }}>
-
                 <Text style={{ color: '#a8e4a0', }}>{label}</Text>
             </View>
             <View style={{... my_styles.inputParent, borderColor: '#a8e4a0', borderWidth: .5}} key={`${label}-parent`}>

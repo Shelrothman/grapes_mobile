@@ -9,7 +9,11 @@ import { HomeService } from "../../services/HomeService";
 import { my_styles } from "../../styles/my";
 import { Home_Grape } from "../../types";
 import { resToHomeGrape } from "../../utils";
+import { HomePageService } from "../../services/ui";
 
+
+// !! crap. the utc thing is making a new day start before the user's day is over.
+// TODO fix this by making the date be the date of the user's timezone... or something
 
 export default function HomeComponent() {
     const height = useHeaderHeight();
@@ -25,19 +29,15 @@ export default function HomeComponent() {
             return () => setIsLoading(true);
         }, [ sessionUser ])
     );
+
     async function fetchData() {
-        try {
-            if (sessionUser == null || sessionUser == undefined) return;
-            //* bc it should change if we change a letter so..
-            const response = await HomeService.getOrCreateToday(sessionUser!.user_uid);
-            // TODO caching mechanism around here
-            if (response !== null) setGrapeFormState(resToHomeGrape(response));
-            // else setIsError(true); //? do we need this?
-        } catch (error) {
-            setIsLoading(false);
-            console.error('Error fetching data:', error);
-            setIsError(true);
-        }
+        if (sessionUser == null || sessionUser == undefined) return;
+        await HomePageService.fetchDataOnFocus(
+            sessionUser!.user_uid,
+            setGrapeFormState,
+            setIsLoading,
+            setIsError
+        );
     }
 
 
