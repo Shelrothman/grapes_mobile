@@ -2,7 +2,7 @@ import React from 'react';
 import Toast, { ToastShowParams } from 'react-native-toast-message';
 import { GlobalService } from './GlobalService';
 import { GrapeDayLetter } from '../types';
-
+import { defaultGrape } from '../utils/constants';
 import { cleanStringNoExtraSpace } from '../utils';
 
 const toastProps: ToastShowParams = { position: 'top', visibilityTime: 4000, };
@@ -21,6 +21,15 @@ export class ShareService {
         sessionUser: any,
         grape_day_letter: GrapeDayLetter,
     ) {
+        // first ensure its not the default value
+        if (defaultGrape[grape_day_letter.letter] === grape_day_letter.value) {
+            return Toast.show({
+                type: 'error',
+                text1: 'Cannot share the default value!',
+                text2: 'Please customize it first',
+                ...toastProps,
+            });
+        }
         const globalService = new GlobalService();
         const toShare = {
             ...grape_day_letter,
