@@ -24,7 +24,6 @@ export function HistoryGrapeBox({ day, validGrape }: HomeGrapeLetterRowProps) {
 
     const [ loading, setLoading ] = useState<boolean>(false);
 
-    // ? why is this working?
     if (validGrape) return <View style={history_styles.noop_row}>
         <Text style={history_styles.letterValueText}> No grape recorded this day </Text>
     </View>;

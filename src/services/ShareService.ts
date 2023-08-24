@@ -21,16 +21,6 @@ export class ShareService {
         sessionUser: any,
         grape_day_letter: GrapeDayLetter,
     ) {
-        // first ensure its not the default value
-        if (defaultGrape[grape_day_letter.letter] === grape_day_letter.value) {
-            setLoading(false);
-            return Toast.show({
-                type: 'error',
-                text1: 'Cannot share the default value!',
-                text2: 'Please customize it first',
-                ...toastProps,
-            });
-        }
         const globalService = new GlobalService();
         const toShare = {
             ...grape_day_letter,
@@ -57,5 +47,13 @@ export class ShareService {
     }
 
 
+    static handleUnchangedValue() {
+        return Toast.show({
+            type: 'error',
+            text1: 'Cannot share the default value!',
+            text2: 'Please customize it first',
+            ...toastProps,
+        });
+    }
 
 }

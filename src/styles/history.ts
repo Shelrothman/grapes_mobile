@@ -20,7 +20,7 @@ export const history_styles = StyleSheet.create({
     container: { backgroundColor: '#2E3944', alignItems: 'center', height: '100%', width: '100%' },
     title: { fontSize: 18, fontWeight: 'bold', color: '#a8e4a0', },
     title_container: {
-        flexDirection: 'row',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'center',
@@ -32,7 +32,6 @@ export const history_styles = StyleSheet.create({
         borderColor: '#4E1E66',
         backgroundColor: '#8ABDAA',
         alignContent: 'center',
-        // borderWidth: 2.5,
         minWidth: '95%',
         maxWidth: '95%',
         // ! important that if ya wanna change these widths, have to change in HomeGrapeBox.tsx too
