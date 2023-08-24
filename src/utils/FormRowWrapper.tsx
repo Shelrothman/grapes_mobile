@@ -5,7 +5,6 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useFocusEffect } from "@react-navigation/native";
 import { Octicons } from '@expo/vector-icons';
 import { my_styles } from "../styles/my";
-// import { InputFormWrapper, InputFormWrapperProps } from "./InputFormWrapper";
 
 type FormRowWrapperProps = {
     label: string;
@@ -32,7 +31,6 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
     const [ confirmValue, setConfirmValue ] = useState<string>('');
     const [ inFocus, setInFocus ] = useState<boolean>(false); // for the clear btn
     const [ inFocusConfirm, setInFocusConfirm ] = useState<boolean>(false); // for the clear btn
-
     const inputOneRef = useRef<TextInput>(null);
     const inputTwoRef = useRef<TextInput>(null);
 
@@ -48,9 +46,7 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
     const textInputProps: TextInputProps | Readonly<TextInputProps> = {
         autoCapitalize: "none", autoComplete: "off", autoCorrect: false, selectionColor: '#cb9de2',
         placeholderTextColor: '#cb9de2', scrollEnabled: false, returnKeyLabel: 'done',
-        style: {
-            color: "white", width: '90%', height: 'auto', borderRadius: 10, padding: 10,
-        }
+        style: { color: "white", width: '90%', height: 'auto', borderRadius: 10, padding: 10, }
     };
 
     const handleShowPassword = () => {
