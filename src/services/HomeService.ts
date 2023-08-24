@@ -95,13 +95,12 @@ export class HomeService {
             const homeService = new HomeService();
             const today = getUTCDate();
             const existence = await homeService.doesRowExist(user_id, today);
-            console.log('existence of todays grape', existence);
+            // console.log('existence of todays grape', existence);
             if (existence) {
                 resVal = await homeService.getRow(user_id, today);
             } else {
-                console.log("existence," , existence)
+                // console.log("existence," , existence)
                 resVal = await homeService.addRow({ user_id, created_at: today });
-                
             }
         } catch (error) {
             // this should really only catch if duplcation is attempted but we catch to be sure
