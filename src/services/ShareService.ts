@@ -23,6 +23,7 @@ export class ShareService {
     ) {
         // first ensure its not the default value
         if (defaultGrape[grape_day_letter.letter] === grape_day_letter.value) {
+            setLoading(false);
             return Toast.show({
                 type: 'error',
                 text1: 'Cannot share the default value!',
@@ -44,7 +45,7 @@ export class ShareService {
                 ...toastProps,
             });
         }).catch((err: any) => {
-            console.error(err);
+            // console.error(err);
             setLoading(false);
             return Toast.show({
                 type: 'error',

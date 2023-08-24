@@ -7,7 +7,6 @@ import { GrapeDayLetter } from "../../types";
 import { Ionicons } from '@expo/vector-icons';
 
 //!! TODO move to in here! 
-// just the "share" part.. lets instead move the share to the history page and they can share from there. WILL ALSO NEED TO CHANGE INSTRUCTIONS FOR THAT.
 
 
 
@@ -42,7 +41,7 @@ export default function History() {
     return (
         <SafeAreaView style={history_styles.container}>
             <View style={history_styles.title_container}>
-                <Text style={history_styles.title}>My Past G.R.A.P.E.S</Text>
+                <Text style={history_styles.title}>My Past G.R.A.P.E.S.</Text>
             </View>
             <FlatList
                 data={dates.map(date => ({ created_at: date, day: expandedDay }))}

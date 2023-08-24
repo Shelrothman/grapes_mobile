@@ -24,6 +24,7 @@ export function HistoryGrapeBox({ day, validGrape }: HomeGrapeLetterRowProps) {
 
     const [ loading, setLoading ] = useState<boolean>(false);
 
+    // ? why is this working?
     if (validGrape) return <View style={history_styles.noop_row}>
         <Text style={history_styles.letterValueText}> No grape recorded this day </Text>
     </View>;
@@ -51,6 +52,7 @@ export function HistoryGrapeBox({ day, validGrape }: HomeGrapeLetterRowProps) {
                         <View style={history_styles.shareCol}>
                             <ShareComponent color="#4E1E66" btnSize={25}
                                 grape_day_letter={day} setLoading={setLoading} editMode={false}
+                                // loading={loading} setLoading={setLoading}s
                             />
                         </View>
                     </View>

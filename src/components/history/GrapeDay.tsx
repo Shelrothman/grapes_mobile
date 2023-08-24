@@ -38,11 +38,16 @@ export function HistoryGrapeDay({ date, day, setDay, setGrape_date }: HomeGrapeI
 
     const handlePress = async () => {
         if (day !== null) return setDayAndValidity(null, null);
-        const historyService = new HistoryService();
-        setGrape_date(date); // control which one is expanded
-        const viewGrape = await historyService.getGrapeByDate(date);
-        if (!viewGrape) return setDayAndValidity([], false);
-        return setDayAndValidity(resToGrape(viewGrape).day, true);
+        try {
+            const historyService = new HistoryService();
+            setGrape_date(date); // control which one is expanded
+            const viewGrape = await historyService.getGrapeByDate(date);
+            if (!viewGrape) return setDayAndValidity([], false);
+            return setDayAndValidity(resToGrape(viewGrape).day, true);            
+        } catch (error) {
+            return setDayAndValidity([], false);
+            // console.log(error);
+        }
     };
 
     // dateTitle in UTC time bc it is UTC in the db SO THAT the data matches...

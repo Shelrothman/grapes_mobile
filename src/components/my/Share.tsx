@@ -14,6 +14,8 @@ type ShareComponentProps = {
     grape_day_letter: GrapeDayLetter;
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
     color?: string;
+    // loading: boolean;
+    // setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 // const toastProps: ToastShowParams = { position: 'top', visibilityTime: 4000, };
