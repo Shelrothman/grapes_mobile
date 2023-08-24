@@ -16,16 +16,13 @@ const toastProps: ToastShowParams = { position: 'top', visibilityTime: 4000, };
  */
 export class ShareService {
 
-    static handleSharePress(
-        setLoading: React.Dispatch<React.SetStateAction<boolean>>,
-        sessionUser: any,
-        grape_day_letter: GrapeDayLetter,
-    ) {
+    static handleSharePress( setLoading: React.Dispatch<React.SetStateAction<boolean>>, sessionUser: any, grape_day_letter: GrapeDayLetter) {
         const globalService = new GlobalService();
         const toShare = {
             ...grape_day_letter,
             letter: cleanStringNoExtraSpace(grape_day_letter.letter),
-            user_name: sessionUser!.display_name
+            // user_name: sessionUser!.display_name
+            user_id: sessionUser!.id,
         };
         globalService.addRow(toShare).then((res) => {
             return Toast.show({

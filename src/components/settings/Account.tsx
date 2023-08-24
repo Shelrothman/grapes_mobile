@@ -12,7 +12,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect } from "@react-navigation/native";
 
 
-// TODO clean everything up
+// TODO clean everything up and modulate to a servie like did for home ui
+
+// !! shoot! the problem now is like in the web i canm update and send new doisplay name. but not working from ios...wtf
+// * well its bc its responding with a 409
+// ! so i need to error handle better for that!
+// * but also the 409 is bc of the relation to the shared_letters hollding the username from the other tabkle so it makes a conflict
+/*
+    "message": "update or delete on table \"user_names\" violates foreign key constraint \"shared_letters_user_name_fkey\" on table \"shared_letters\""
+! so i need to use the user_uid instead of the display name in the shared letters table and THEN change the logic for when posting to the shared letters table, it sends the id instead of the display name and then CHANGE the history feed to read from the user_names table instead of the shared letters table to get the displayname property based on that id.
+*/
 
 async function handleLogout() {
     const { error } = await supabase.auth.signOut();
@@ -36,19 +45,19 @@ export function Account() {
 
 
     useFocusEffect( // * this runs only when the screen is refocused
-    React.useCallback(() => {
-        setFormState(defaultFormState);
-        setLoading(false);
-        return () => {
+        React.useCallback(() => {
             setFormState(defaultFormState);
-            setLoading(true);
-        };
-    }, [])
+            setLoading(false);
+            return () => {
+                setFormState(defaultFormState);
+                setLoading(true);
+            };
+        }, [ ]) // ? this maybe needs a dependency of sessionUser
     );
 
 
     const showConfirmDialog = (key: string) => Alert.alert("Are you sure?",
-        `Are you sure you want to permanetly change your ${key === 'display' ? 'display name' : key}?`, [
+        `Are you sure you want to permanently change your ${key === 'display' ? 'display name' : key}?`, [
         { text: "Cancel", style: "cancel", onPress: () => handleCancelClick(key) },
         {
             text: "OK", onPress: () => {
@@ -88,8 +97,7 @@ export function Account() {
                 if (key === 'email') setSessionUser!({ ...sessionUser, email: formState.email } as AuthUser);
                 if (key === 'display') setSessionUser!({ ...sessionUser, display_name: formState.display } as AuthUser);
                 return alert(`${displayKey} updated!`);
-            }
-            else if (user == null) {
+            } else if (user == null) {
                 handleCancelClick(key);
                 return alert(`Error updating ${displayKey}.`);
             }
@@ -119,9 +127,10 @@ export function Account() {
 
 
     return (
-        <SafeAreaView style={{ flex: 1, 
-        // backgroundColor: "#2E3944", 
-        // height: '100%', width: '100%' 
+        <SafeAreaView style={{
+            flex: 1,
+            // backgroundColor: "#2E3944", 
+            // height: '100%', width: '100%' 
         }}>
             <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled
                 style={{ flex: 1 }} keyboardVerticalOffset={height + 100}
@@ -135,7 +144,9 @@ export function Account() {
                         </View>
                         <FormRowWrapper label="Display Name" inputValue={formState.display}
                             onChangeText={(text) => setFormState({ ...formState, display: text })}
-                            onButtonPress={() => showConfirmDialog('display')} key="display"
+                            // onButtonPress={() => showConfirmDialog('display')} 
+                            onButtonPress={() => handleConfirmChange('display')}
+                            key="display"
                             btnText="Save Display Name"
                             initialValue={sessionUser?.display_name || ""}
                         />

@@ -86,7 +86,9 @@ export function Global() {
                 {isLoading ? <Loading /> : (
                     <FlatList
                         data={globalData ? globalData : []}
-                        renderItem={({ item }) => <SharedLetter {...item} onCopyClick={copyToClipboard} />}
+                        renderItem={({ item }) => <SharedLetter {...item} onCopyClick={copyToClipboard} 
+                        user_name='YOFixME'
+                        />}
                         showsVerticalScrollIndicator={false}
                         onScroll={({ nativeEvent }) => handleOnScroll(nativeEvent)}
                         alwaysBounceVertical={false} bounces={false}

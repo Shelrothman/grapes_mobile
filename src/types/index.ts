@@ -66,7 +66,8 @@ export type GrapeResponse = RawGlobalGrape & {
 export type RawSharedLetter = {
     letter: string;
     value: string;
-    user_name: string;
+    /** the user_id of the user who shared this letter */
+    user_id: string;
 };
 
 
