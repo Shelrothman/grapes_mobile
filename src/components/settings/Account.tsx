@@ -127,11 +127,7 @@ export function Account() {
 
 
     return (
-        <SafeAreaView style={{
-            flex: 1,
-            // backgroundColor: "#2E3944", 
-            // height: '100%', width: '100%' 
-        }}>
+        <SafeAreaView style={{ flex: 1, }}>
             <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled
                 style={{ flex: 1 }} keyboardVerticalOffset={height + 100}
             >
@@ -144,8 +140,7 @@ export function Account() {
                         </View>
                         <FormRowWrapper label="Display Name" inputValue={formState.display}
                             onChangeText={(text) => setFormState({ ...formState, display: text })}
-                            // onButtonPress={() => showConfirmDialog('display')} 
-                            onButtonPress={() => handleConfirmChange('display')}
+                            onButtonPress={() => showConfirmDialog('display')} 
                             key="display"
                             btnText="Save Display Name"
                             initialValue={sessionUser?.display_name || ""}

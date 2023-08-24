@@ -3,7 +3,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { View, Text, SafeAreaView, FlatList, Pressable, NativeScrollEvent } from 'react-native';
 import { SharedLetter } from './SharedLetter';
 import { GlobalService } from '../../services/GlobalService';;
-import { RawSharedLetter } from '../../types';
+import { SharedLetterUI } from '../../types';
 import { global_styles } from '../../styles/global';
 import Loading from '../../utils/Loading';
 import { copyToClipboard } from '../../utils';
@@ -12,7 +12,7 @@ import { isCloseToBottom } from '../../utils';
 
 
 export function Global() {
-    const [ globalData, setGlobalData ] = useState<RawSharedLetter[] | null>(null);
+    const [ globalData, setGlobalData ] = useState<SharedLetterUI[] | null>(null);
     const [ isLoading, setIsLoading ] = useState(true);
     const [ loadMoreVisibility, setLoadMoreVisibility ] = useState<boolean>(false);
     const [ currentPage, setCurrentPage ] = useState<number>(1);
@@ -56,7 +56,7 @@ export function Global() {
             if (response && response.length < 1) {
                 return false;
             } else {
-                setGlobalData([ ...globalData ? globalData : [], ...(response as RawSharedLetter[]) ]);
+                setGlobalData([ ...globalData ? globalData : [], ...(response as SharedLetterUI[]) ]);
                 return true;
             }
         } catch (error) {
@@ -87,7 +87,7 @@ export function Global() {
                     <FlatList
                         data={globalData ? globalData : []}
                         renderItem={({ item }) => <SharedLetter {...item} onCopyClick={copyToClipboard} 
-                        user_name='YOFixME'
+                        // user_name='YOFixME' // ! get userName from service
                         />}
                         showsVerticalScrollIndicator={false}
                         onScroll={({ nativeEvent }) => handleOnScroll(nativeEvent)}

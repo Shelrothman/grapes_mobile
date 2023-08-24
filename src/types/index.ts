@@ -64,7 +64,7 @@ export type GrapeResponse = RawGlobalGrape & {
 
 /** resource type for inserting , id and created_at are system generated */
 export type RawSharedLetter = {
-    letter: string;
+    letter_int: number;
     value: string;
     /** the user_id of the user who shared this letter */
     user_id: string;
@@ -75,6 +75,15 @@ export type RawSharedLetter = {
 export type SharedLetter = RawSharedLetter & {
     created_at: string | null;
     id: string;
+};
+
+/** resource type for the UI */
+export type SharedLetterUI = {
+    id: string;
+    user_name: string;
+    letter: string;
+    user_id: string;
+    value: string;
 };
 
 /** resource type for res of user_names table */
