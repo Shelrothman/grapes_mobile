@@ -5,7 +5,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useFocusEffect } from "@react-navigation/native";
 import { Octicons } from '@expo/vector-icons';
 import { my_styles } from "../styles/my";
-
+// import { InputFormWrapper, InputFormWrapperProps } from "./InputFormWrapper";
 
 type FormRowWrapperProps = {
     label: string;
@@ -21,10 +21,7 @@ type FormRowWrapperProps = {
 const HELP_TEXT: MyMap = { 'Display Name': "How your name appears in the global feed.", 'Email': "This is what you use to login. Press the button below to change it.", 'Password': '' };
 const maxLength: MyNumMap = { 'Display Name': 8, 'Email': undefined, 'Password': 15, };
 
-
-// TODO need to ensure that  the defaults arent getting sent without i knew it
-
-//! PU here. do all the TODOS. but first.. fix the little X button to show inside the input
+// TODO way need to modulate the repetitive view input view
 
 /**
  * @description wrapper component for a form row containing, label, input, helpText, and save button
@@ -35,17 +32,11 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
     const [ confirmValue, setConfirmValue ] = useState<string>('');
     const [ inFocus, setInFocus ] = useState<boolean>(false); // for the clear btn
     const [ inFocusConfirm, setInFocusConfirm ] = useState<boolean>(false); // for the clear btn
-    const [ aboutToFocus, setAboutToFocus ] = useState<boolean>(false);
-    const [ aboutToFocusConfirm, setAboutToFocusConfirm ] = useState<boolean>(false);
 
     const inputOneRef = useRef<TextInput>(null);
     const inputTwoRef = useRef<TextInput>(null);
 
-    const reset = () => {
-        setConfirmValue('');
-        setShowConfirm(false);
-        setInFocus(false);
-    }
+    const reset = () => { setConfirmValue(''); setShowConfirm(false); setInFocus(false); }
 
     useFocusEffect(
         React.useCallback(() => {
@@ -54,27 +45,12 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
         }, [])
     );
 
-
-
     const textInputProps: TextInputProps | Readonly<TextInputProps> = {
-        autoCapitalize: "none",
-        autoComplete: "off", autoCorrect: false,
-        // style: {
-        //     color: "white",
-        //     height: 50, borderRadius: 10,
-        //     paddingHorizontal: 10, marginTop: 15, borderColor: '#cb9de2', borderWidth: 1,
-        //     width: '90%',
-        //     // backgroundColor: (aboutToFocus && label !== 'Email') ? '#3d5945' : '#3d4b59', // little effect for accessibility
-        // },
-        selectionColor: '#cb9de2',
-        placeholderTextColor: '#cb9de2',
-        /** 
-         *! this is the hack that makes it work WITH
-         * @link  https://github.com/facebook/react-native/issues/16826 
-         * * keep in mind it only works for ios
-         * */
-        scrollEnabled: false,
-        returnKeyLabel: 'done', // ? this is for ios only and isnt even working?
+        autoCapitalize: "none", autoComplete: "off", autoCorrect: false, selectionColor: '#cb9de2',
+        placeholderTextColor: '#cb9de2', scrollEnabled: false, returnKeyLabel: 'done',
+        style: {
+            color: "white", width: '90%', height: 'auto', borderRadius: 10, padding: 10,
+        }
     };
 
     const handleShowPassword = () => {
@@ -82,32 +58,22 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
             if (inputValue.length < 8 || inputValue === initialValue) return alert('Password must be a new value and at least 8 characters long');
             return setShowConfirm(true);
         }
-        if (inputValue !== confirmValue) {
-            return alert('Password values do not match. Please try again');
-        }
+        if (inputValue !== confirmValue) return alert('Password values do not match. Please try again');
         return onButtonPress();
     }
 
-    // TODO the clear buttons
 
-    // TODO way need to modulate the repetitive view input view
 
     return (
         <View key={label} style={my_styles.account_card}>
-            <View style={{ ...my_styles.titleContainer, backgroundColor: '#2E3944'  }}>
+            <View style={{ ...my_styles.titleContainer, backgroundColor: '#2E3944' }}>
                 <Text style={{ color: '#a8e4a0', }}>{label}</Text>
             </View>
-            <View style={{... my_styles.inputParent, borderColor: '#a8e4a0', borderWidth: .5}} key={`${label}-parent`}>
+            <View style={{ ...my_styles.inputParent, borderColor: '#a8e4a0', borderWidth: .5 }} key={`${label}-parent`}>
                 <TextInput
                     placeholder={`Enter your ${label}`}
                     ref={inputOneRef}
                     {...textInputProps} value={inputValue}
-                    onPressIn={() => setAboutToFocus(true)}
-                    onPressOut={() => setAboutToFocus(false)}
-                    style={{
-                        color: "white", width: '90%', height: 'auto', borderRadius: 10, padding: 10, 
-                        backgroundColor: (aboutToFocus && label !== 'Email') ? '#3d5945' : '#3d4b59',
-                    }}
                     onChangeText={onChangeText} key={`${label}-input`}
                     onFocus={() => setInFocus(true)}
                     onBlur={() => setInFocus(false)}
@@ -121,22 +87,14 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
             </View>
             {(showConfirm && label === 'New Password') && <>
                 <Text style={{ color: '#a8e4a0', marginTop: 10 }}>Re-Enter New Password</Text>
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <View style={{ ...my_styles.inputParent, borderColor: '#a8e4a0', borderWidth: .5 }} key={`${label}-parent`}>
                     <TextInput
-                        ref={inputTwoRef}
-                        placeholder={`Confirm your ${label}`}
+                        ref={inputTwoRef} placeholder={`Confirm your ${label}`}
                         {...textInputProps} value={confirmValue}
                         onChangeText={(text) => setConfirmValue(text)}
                         key={`${label}-confirm`} secureTextEntry={true} maxLength={maxLength[ label ]}
                         onFocus={() => setInFocusConfirm(true)}
                         onBlur={() => setInFocusConfirm(false)}
-                        onPressIn={() => setAboutToFocusConfirm(true)}
-                        onPressOut={() => setAboutToFocusConfirm(false)}
-                        style={{
-                            color: "white", width: '100%', height: 50, borderRadius: 10,
-                            paddingHorizontal: 10, marginTop: 15, borderColor: '#cb9de2', borderWidth: 1,
-                            backgroundColor: aboutToFocusConfirm ? '#3d5945' : '#3d4b59',
-                        }}
                     />
                     {inFocusConfirm && <Pressable onPress={() => inputTwoRef!.current!.clear()} style={{ justifyContent: "center", alignItems: "center", marginRight: 5, borderRadius: 50, }}>
                         <Octicons name="x-circle-fill" size={16} color="#ccc8c8" />
