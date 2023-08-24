@@ -1,19 +1,14 @@
 import React, { useState } from "react";
 import { useFocusEffect } from "@react-navigation/native";
-import { KeyboardAvoidingView, Platform, ScrollView, Button, Text, View, SafeAreaView } from "react-native";
+import { KeyboardAvoidingView, Platform, ScrollView, Text, View, SafeAreaView } from "react-native";
 import { HomeFormWrapper } from "../../utils/HomeFormWrapper";
 import { useHeaderHeight } from '@react-navigation/elements';
 import Loading from "../../utils/Loading";
 import { useAuthContext } from "../../contexts/AuthProvider";
-import { HomeService } from "../../services/HomeService";
 import { my_styles } from "../../styles/my";
 import { Home_Grape } from "../../types";
-import { resToHomeGrape } from "../../utils";
 import { HomePageService } from "../../services/ui";
 
-
-// !! crap. the utc thing is making a new day start before the user's day is over.
-// TODO fix this by making the date be the date of the user's timezone... or something
 
 export default function HomeComponent() {
     const height = useHeaderHeight();

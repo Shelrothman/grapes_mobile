@@ -22,13 +22,13 @@ export class HomePageService {
                 height: 'auto',
                 width: '90%', // give room to the clearBtn
                 padding: 10,
-                backgroundColor: aboutToFocus ? '#3d5945' : undefined, // little effect for accessibility
+                // backgroundColor: aboutToFocus ? '#3d5945' : undefined, // little effect for accessibility
             },
             selectionColor: '#cb9de2', placeholderTextColor: '#cb9de2',
             maxLength: 250, // between 35 words and 63 words👌
             multiline: true,
             /**
-             * this is the hack that makes it work WITH multiline 
+             * !this is the hack that makes it work WITH multiline 
              * * keep in mind it only works for ios
              *  @link https://github.com/facebook/react-native/issues/16826 
              * */

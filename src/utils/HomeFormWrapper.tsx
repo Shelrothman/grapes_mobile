@@ -40,8 +40,8 @@ export function HomeFormWrapper({ label, setFormState, formState }: FormRowWrapp
     };
 
     const IconContainer = (containerOne: boolean, letter: string): JSX.Element => {
-        const constainerStyle = containerOne ? my_styles.iconOne_container : my_styles.iconTwo_container;
-        return <View style={constainerStyle}><GrapeIcons letter={letter} color="#cb9De2" size={30} /></View>;
+        const containerStyle = containerOne ? my_styles.iconOne_container : my_styles.iconTwo_container;
+        return <View style={containerStyle}><GrapeIcons letter={letter} color="#cb9De2" size={30} /></View>;
     };
 
     return (
