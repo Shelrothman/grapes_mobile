@@ -76,6 +76,7 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
                     secureTextEntry={label !== 'New Password' ? false : true}
                     keyboardType={label === 'Email' ? 'email-address' : 'default'}
                     maxLength={maxLength[ label ]} editable={label === 'Email' ? false : true}
+                    returnKeyType="done"
                 />
                 {inFocus && <Pressable onPress={() => inputOneRef!.current!.clear()} style={my_styles.clearButtonParent}>
                     <Octicons name="x-circle-fill" size={16} color="#ccc8c8" />
@@ -91,6 +92,7 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
                         key={`${label}-confirm`} secureTextEntry={true} maxLength={maxLength[ label ]}
                         onFocus={() => setInFocusConfirm(true)}
                         onBlur={() => setInFocusConfirm(false)}
+                        returnKeyType="done"
                     />
                     {inFocusConfirm && <Pressable onPress={() => inputTwoRef!.current!.clear()} style={{ justifyContent: "center", alignItems: "center", marginRight: 5, borderRadius: 50, }}>
                         <Octicons name="x-circle-fill" size={16} color="#ccc8c8" />

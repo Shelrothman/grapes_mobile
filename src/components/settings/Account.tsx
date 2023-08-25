@@ -52,7 +52,7 @@ export function Account() {
                 setFormState(defaultFormState);
                 setLoading(true);
             };
-        }, [ ]) // ? this maybe needs a dependency of sessionUser
+        }, [ sessionUser ]) // ? this maybe needs a dependency of sessionUser
     );
 
 
@@ -140,7 +140,7 @@ export function Account() {
                         </View>
                         <FormRowWrapper label="Display Name" inputValue={formState.display}
                             onChangeText={(text) => setFormState({ ...formState, display: text })}
-                            onButtonPress={() => showConfirmDialog('display')} 
+                            onButtonPress={() => showConfirmDialog('display')}
                             key="display"
                             btnText="Save Display Name"
                             initialValue={sessionUser?.display_name || ""}

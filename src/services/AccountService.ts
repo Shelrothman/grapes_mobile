@@ -29,7 +29,6 @@ export class AccountService {
 
     private changeDisplayName = async (displayVal: string): Promise<User | PostgrestError | null> => {
         const user_id = (await supabase.auth.getSession()).data.session?.user?.id;
-        console.log('user_id:', user_id);
         if (user_id) {
             const { data, error } = await supabase
                 .from('user_names')
@@ -61,8 +60,6 @@ export class AccountService {
 
 
     changeConfig = async (configVal: string = "", configKey: string): Promise<User | null | AuthError | PostgrestError> => {
-            console.log( 'configKey:', configKey);
-        
         try {
             if (configVal.length === 0) throw new Error("Cannot send an empty value");
             if (configVal === '********' && configKey === 'password') throw new Error("Password value not changed!");

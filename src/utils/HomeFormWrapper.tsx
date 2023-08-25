@@ -60,6 +60,7 @@ export function HomeFormWrapper({ label, setFormState, formState }: FormRowWrapp
                     onPressOut={() => setAboutToFocus(false)}
                     onFocus={() => setInFocus(true)}
                     onBlur={() => setInFocus(false)}
+                    returnKeyType="done"
                 />
                 {inFocus && <Pressable onPress={() => inputRef!.current!.clear()} style={my_styles.clearButtonParent} >
                     <Octicons name="x-circle-fill" size={16} color="#ccc8c8" />
