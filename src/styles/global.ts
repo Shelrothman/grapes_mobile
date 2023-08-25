@@ -61,11 +61,10 @@ export const global_styles = StyleSheet.create({
     shared_by: { fontSize: 12, color: '#2E3944', },
     load_container: {
         padding: 10,
-        marginBottom: 10,
-        marginTop: 20,
+        marginBottom: 30,
+        marginTop: 10,
         backgroundColor: '#cb9De2',
         borderRadius: 10,
-        // justifyContent: 'center',
         alignItems: 'center',
     },
 });

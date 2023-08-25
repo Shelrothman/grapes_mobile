@@ -29,7 +29,15 @@ export class GlobalService {
         this.convertRowsToUI = this.convertRowsToUI.bind(this);
         this.getLetterFromInt = this.getLetterFromInt.bind(this);
         this.getIntFromLetter = this.getIntFromLetter.bind(this);
+        this.getTotalRows = this.getTotalRows.bind(this);
     };
+
+    getTotalRows = async (): Promise<number> => {
+        const { data, count } = await supabase
+            .from(this.tableName)
+            .select('*', { count: 'exact', head: true })
+        return count ? count : 0;
+    }
 
     private handleError(error: PostgrestError) {
         console.log(error);
@@ -53,8 +61,9 @@ export class GlobalService {
             .select('*')
             .order('created_at', { ascending: false })
             .range(startingRange, startingRange + perPage - 1)
-        if (error) this.handleError(error);
+        // console.log('shared_letters', shared_letters);
         if (!shared_letters || shared_letters.length < 1) return null;
+        if (error) this.handleError(error);
         const shared_letters_with_user_names = await this.convertRowsToUI(shared_letters);
         return shared_letters_with_user_names;
     };
@@ -64,7 +73,7 @@ export class GlobalService {
     addRow = async ({ letterString, letterValue, user_id }: addRowParams): Promise<SharedLetter | null> => {
         const cleanLetterToShare = {
             user_id: user_id,
-            value: cleanStringNoExtraSpace(letterValue), 
+            value: cleanStringNoExtraSpace(letterValue),
             letter_int: this.getIntFromLetter(letterString),
         };
         const { data: shared_letter, error } = await supabase
