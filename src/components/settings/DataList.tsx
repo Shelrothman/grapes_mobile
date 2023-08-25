@@ -48,7 +48,7 @@ export const DataList: any = [
         title: 'How to use this App', expandableProp: true,
         data: [
             {
-                title: "Home Screen", value: "The home screen is where you can edit your grape for the day. Tap on the text in the letter you want to edit, fill it in, then tap anywhere outside the input to save your letter automatically!",
+                title: "Home Screen", value: "The home screen is where you can edit your grape for the day. Tap on the text in the letter you want to edit, fill it in, then return out or tap anywhere outside the input to save your letter automatically!",
                 icon: <Ionicons name="home-outline" size={24} color="#cb9de2" />
             },
             {

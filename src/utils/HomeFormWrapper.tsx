@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { TextInput, View, Text, Pressable } from "react-native";
+import { TextInput, View, Text, Pressable, Keyboard } from "react-native";
 import { GRAPE_DAY } from "./constants";
 import { Home_Grape } from "../types";
 import { GrapeIcons } from "./Icons";
@@ -61,6 +61,8 @@ export function HomeFormWrapper({ label, setFormState, formState }: FormRowWrapp
                     onFocus={() => setInFocus(true)}
                     onBlur={() => setInFocus(false)}
                     returnKeyType="done"
+                    onSubmitEditing={() => Keyboard.dismiss()}
+                    blurOnSubmit={true}
                 />
                 {inFocus && <Pressable onPress={() => inputRef!.current!.clear()} style={my_styles.clearButtonParent} >
                     <Octicons name="x-circle-fill" size={16} color="#ccc8c8" />

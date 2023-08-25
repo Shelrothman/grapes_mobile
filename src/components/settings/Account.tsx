@@ -52,7 +52,7 @@ export function Account() {
                 setFormState(defaultFormState);
                 setLoading(true);
             };
-        }, [ sessionUser ]) // ? this maybe needs a dependency of sessionUser
+        }, [ sessionUser ])
     );
 
 
