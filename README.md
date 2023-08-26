@@ -90,6 +90,7 @@ Learn more about what's behind GRAPES© and how it can help you:
 - [React](https://reactjs.org/)
 - [WSL2](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#1-overview)
 - [Bash](https://www.gnu.org/software/bash/)
+- [Metro](https://facebook.github.io/metro/)
 - [Babel](https://babeljs.io/)
 - [VSCode](https://code.visualstudio.com/)
 

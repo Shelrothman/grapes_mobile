@@ -57,15 +57,20 @@ export const my_styles = StyleSheet.create({
     pressed: { backgroundColor: '#4E1E66', padding: 7, },
     buttons: { paddingLeft: 15 },
     row: { flexDirection: 'row', justifyContent: 'space-between', },
-    titleLetterText: { fontSize: 26, color: '#cb9de2', fontStyle: 'italic', fontWeight: 'bold', },
-    titleText: { fontWeight: 'bold', fontStyle: 'italic', color: '#cb9de2', },
+    titleLetterText: {
+        fontSize: 26,
+        color: '#cb9de2', 
+        // fontStyle: 'italic', fontWeight: 'bold',
+        fontFamily: 'Grape-Header-a'
+    },
+    titleText: { fontFamily: 'Grape-Header-b', fontSize: 20, color: '#cb9de2', },
     titleContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: '#4E1E66',
         borderTopStartRadius: 10,
         borderTopEndRadius: 10,
-        paddingBottom: 10,
+        // paddingBottom: 10,
     },
     main_container: { height: '100%', backgroundColor: '#2E3944', width: '85%', },
     date_title: {

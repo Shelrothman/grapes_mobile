@@ -13,9 +13,13 @@ export default function App() {
     //     require("../assets/images/register.png"),
     //     require("../assets/images/forget.png"),
     // ];
+
+
     const GRAPE_FONTS = {
-        "Body-Reg": require("./assets/fonts/Nunito-Light.ttf"),
-        //more
+        "Body-Reg": require("./assets/fonts/Nunito-Regular.ttf"),
+        "Grape-Header-a": require("./assets/fonts/Nunito-Black.ttf"),
+        "Grape-Header-b": require("./assets/fonts/Nunito-Bold.ttf"),
+        // "Grape-Header-b": require("./assets/fonts/PermanentMarker-Regular.ttf"),
     };
 
 
