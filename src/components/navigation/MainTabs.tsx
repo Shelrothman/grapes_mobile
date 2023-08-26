@@ -14,7 +14,6 @@ const Tab = createMaterialBottomTabNavigator();
 // * disable swiping everywhere so it doesn't confuse people
 
 const MainTabs = () => {
-    // const { tabBarEnabled } = useHomeGrapeContext();
     const buildTabBarIcon = (routeName: string, focused: boolean, color: string) => {
         const iconProps = { size: 25, color: color };
         if (routeName === 'Home') {

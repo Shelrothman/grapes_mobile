@@ -1,14 +1,11 @@
-import { useCallback } from 'react';
 import { StatusBar } from "expo-status-bar";
 import Navigation from "./components/navigation";
 import { AuthProvider } from "./contexts/AuthProvider";
 import Toast from 'react-native-toast-message';
 import { ToastConfig } from './utils/ToastConfig';
-import { useFonts } from 'expo-font';
+import { ThemeProvider } from "react-native-rapi-ui";
+import Loading from "./utils/Loading";
 
-// SplashScreen.preventAutoHideAsync(); // prevent from hiding before the fonts are loaded
-
-//* <Text style={{ fontFamily: 'Inter-Black', fontSize: 30 }}>Inter Black</Text>
 
 export default function App() {
     // const images = [
@@ -16,27 +13,19 @@ export default function App() {
     //     require("../assets/images/register.png"),
     //     require("../assets/images/forget.png"),
     // ];
+    const GRAPE_FONTS = {
+        "Body-Reg": require("./assets/fonts/Nunito-Light.ttf"),
+        //more
+    };
 
-    // const [ fontsLoaded ] = useFonts({
-    //     // 'Inter-Black': require('./assets/fonts/Inter-Black.otf'),
-    //     'Body-Grapes': require('./assets/fonts/Nunito-Light.ttf'),
-    // });
-
-    // const onLayoutRootView = useCallback(async () => {
-    //     if (fontsLoaded) {
-    //         await SplashScreen.hideAsync();
-    //     }
-    // }, [ fontsLoaded ]);
-
-    // if (!fontsLoaded) {
-    //     return null;
-    // }
 
     return (
-        <AuthProvider>
-            <Navigation />
-            <StatusBar style="light" />
-            <Toast config={ToastConfig} />
-        </AuthProvider>
+        <ThemeProvider fonts={GRAPE_FONTS} loading={<Loading />}>
+            <AuthProvider>
+                <Navigation />
+                <StatusBar style="light" />
+                <Toast config={ToastConfig} />
+            </AuthProvider>
+        </ThemeProvider>
     );
 }

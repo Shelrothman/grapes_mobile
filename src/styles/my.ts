@@ -34,15 +34,12 @@ export const my_styles = StyleSheet.create({
         marginTop: 40,
         borderColor: '#cb9de2',
         backgroundColor: '#3d4b59',
-        // backgroundColor: '#ebe6f0', //? may be more accessible?
         flexDirection: 'column',
         maxWidth: '85%',
         minWidth: '85%',
         alignSelf: 'center',
-        // marginBottom: 3,
     },
     account_card: {
-        // backgroundColor: '#3d4b59',
         flexDirection: 'column',
         maxWidth: '85%',
         minWidth: '85%',
@@ -70,34 +67,6 @@ export const my_styles = StyleSheet.create({
         borderTopEndRadius: 10,
         paddingBottom: 10,
     },
-    input_text: { marginLeft: 10, color: '#f3f0f5',
-    fontFamily: 'Body-Grapes'
-},
-    bottomRowContainer: {
-        flexDirection: 'row',
-        flex: 1,
-        borderBottomEndRadius: 10,
-        borderBottomStartRadius: 10,
-        color: '#f3f0f5',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        // paddingTop: 5,
-    },
-
-    /**this is the button itself */
-    shareBtn: {
-        flexDirection: 'row',
-        borderColor: '#4E1E66', borderWidth: 2,
-        borderRadius: 10,
-        backgroundColor: '#a8e4a0',
-        padding: 2,
-    },
-    bottomInEditContainer: {
-        flexDirection: 'column',
-        borderBottomEndRadius: 10,
-        borderBottomStartRadius: 10,
-        color: '#f3f0f5',
-    },
     main_container: { height: '100%', backgroundColor: '#2E3944', width: '85%', },
     date_title: {
         fontSize: 18, fontWeight: 'bold', color: '#a8e4a0',
@@ -105,16 +74,4 @@ export const my_styles = StyleSheet.create({
         marginTop: 10,
         // marginBottom: 10, 
     },
-    icon_title: {
-        marginBottom: 10, fontSize: 18,
-        fontWeight: 'bold', color: '#a8e4a0',
-    },
-    header_container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        marginTop: 10,
-    },
-    home_container: { backgroundColor: '#2E3944', alignItems: 'center', height: '100%', width: '100%' }
 });

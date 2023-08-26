@@ -2,16 +2,15 @@ import { useState } from "react";
 import { View, Text, Modal, Pressable } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MainTabs from "./MainTabs";
-import { HomeGrapeProvider } from "../../contexts/HomeGrapeContext";
 import { useAuthContext } from "../../contexts/AuthProvider";
 import { nav_styles } from "../../styles/nav";
 import { About } from "../settings/About";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { useCallback } from 'react';
-import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
-SplashScreen.preventAutoHideAsync();
+// import { useCallback } from 'react';
+// import { useFonts } from 'expo-font';
+// // import * as SplashScreen from 'expo-splash-screen';
+// // SplashScreen.preventAutoHideAsync();
 
 
 const MainStack = createNativeStackNavigator();
@@ -52,12 +51,10 @@ const Main = () => {
     }
 
     return (
-        <HomeGrapeProvider>
-            <MainStack.Navigator screenOptions={{ headerShown: false }} >
-                <MainStack.Screen name="MainTabs" component={MainTabs} />
-                {/* // * aka.. "Layout" */}
-            </MainStack.Navigator>
-        </HomeGrapeProvider>
+        <MainStack.Navigator screenOptions={{ headerShown: false }} >
+            <MainStack.Screen name="MainTabs" component={MainTabs} />
+            {/* // * aka.. "Layout" */}
+        </MainStack.Navigator>
     );
 };
 
