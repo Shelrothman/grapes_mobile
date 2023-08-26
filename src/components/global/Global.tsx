@@ -121,7 +121,7 @@ export function Global() {
                         onPress={() => handlePressLoadMore()} disabled={isMoreLoading}
                     >
                         {isMoreLoading ? <Text>Loading...</Text> : (
-                            <Text><Ionicons name="md-cloud-download" size={24} color="#2E3944" />{bottomText}</Text>
+                            <Text><Ionicons name="md-cloud-download" size={24} color="#1a1e47" />{bottomText}</Text>
                         )}
                     </Pressable>
                 )}

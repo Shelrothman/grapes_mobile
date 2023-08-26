@@ -23,18 +23,18 @@ export function SharedLetter({ user_name, letter, value, onCopyClick }: SharedLe
             {/* HEADER */}
             <View style={global_styles.card_header}>
                 <View style={global_styles.iconOne_container}>
-                    <GrapeIcons letter={letter} color="#cb9De2" />
+                    <GrapeIcons letter={letter} color="#c6bfc9" />
                 </View>
                 <View style={global_styles.fullTitle_container}>
                     <Text style={global_styles.letter}>{letter.toUpperCase()}</Text>
                     <View style={global_styles.suffix_container}>
-                        <Text style={{ color: '#cb9De2', }}>
+                        <Text style={{ color: '#c6bfc9', }}>
                             {GRAPE_DAY[ letter.toLowerCase() ]}
                         </Text>
                     </View>
                 </View>
                 <View style={global_styles.iconTwo_container}>
-                    <GrapeIcons letter={letter} color="#cb9De2" />
+                    <GrapeIcons letter={letter} color="#c6bfc9" />
                 </View>
             </View>
             {/* BODY */}
@@ -44,7 +44,7 @@ export function SharedLetter({ user_name, letter, value, onCopyClick }: SharedLe
             {/* FOOTER */}
             <View style={global_styles.card_footer}>
                 <View style={global_styles.share_container}>
-                    <FontAwesome5.Button name="copy" size={25} color="#cb9De2" backgroundColor='#4E1E66'
+                    <FontAwesome5.Button name="copy" size={25} color="#c6bfc9" backgroundColor='#4E1E66'
                         onPress={() => onCopyClick(value)} style={global_styles.button}
                     />
                 </View>

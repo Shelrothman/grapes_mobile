@@ -40,7 +40,7 @@ const Main = () => {
                             <About />
                             <Text style={nav_styles.helpText}>
                                 You can review this info any time in the <Text style={{ fontStyle: 'normal', fontWeight: 'bold' }}>About</Text> section.
-                                <MaterialCommunityIcons name='fruit-grapes-outline' size={20} color="#2E3944" />
+                                <MaterialCommunityIcons name='fruit-grapes-outline' size={20} color="#1a1e47" />
                             </Text>
                         </View>
                     </View>

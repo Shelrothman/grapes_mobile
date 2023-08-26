@@ -45,9 +45,9 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
     return (
         <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled style={{ flex: 1 }}>
             <ScrollView contentContainerStyle={{ flexGrow: 1, }} >
-                <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#2E3944", }} >
+                <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#1a1e47", }} >
                 </View>
-                <View style={{ flex: 3, paddingHorizontal: 20, paddingBottom: 20, backgroundColor: "#2E3944", }}>
+                <View style={{ flex: 3, paddingHorizontal: 20, paddingBottom: 20, backgroundColor: "#1a1e47", }}>
                     <Text style={{ alignSelf: "center", paddingVertical: 30, fontWeight: "bold", color: "#8031A7", fontSize: 30, }} >
                         Forgot your Password?
                     </Text>
@@ -60,7 +60,7 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
                         onChangeText={(text) => setEmail(text)}
                     />
                     <View style={{ marginTop: 20, borderWidth: 2, borderRadius: 10, padding: 5, backgroundColor: "#a8e4a0", flexDirection: 'row', justifyContent: 'center' }}>
-                        <Button title={loading ? "Loading" : "Password Reset"} onPress={() => { forget(); }} color="#2E3944" disabled={loading} />
+                        <Button title={loading ? "Loading" : "Password Reset"} onPress={() => { forget(); }} color="#1a1e47" disabled={loading} />
                         <MaterialCommunityIcons name="open-in-new" size={25} color="black" />
                     </View>
                     <View style={{ flexDirection: "row", alignItems: "center", marginTop: 15, justifyContent: "center", }}>

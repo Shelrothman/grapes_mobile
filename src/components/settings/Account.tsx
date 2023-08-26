@@ -132,7 +132,7 @@ export function Account() {
                 style={{ flex: 1 }} keyboardVerticalOffset={height + 100}
             >
                 {loading ? <Loading /> : (
-                    <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: "#2E3944", paddingBottom: 40, }}
+                    <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: "#1a1e47", paddingBottom: 40, }}
                         keyboardShouldPersistTaps='handled'
                     >
                         <View style={{ marginBottom: 20, borderColor: '#a8e4a0', borderWidth: 1, backgroundColor: "#3d4b59", borderRadius: 10, minWidth: '85%', maxWidth: '85%', alignSelf: 'center' }}>

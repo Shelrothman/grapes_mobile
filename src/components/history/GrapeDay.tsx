@@ -18,8 +18,8 @@ type HomeGrapeItemProps = {
 };
 
 
-const ExpandDownIcon = () => <MaterialCommunityIcons name="arrow-expand-down" size={24} color="#cb9de2" style={history_styles.expander} />
-const ExpandLeftIcon = () => <MaterialCommunityIcons name="arrow-expand-left" size={24} color="#cb9de2" style={history_styles.expander} />
+const ExpandDownIcon = () => <MaterialCommunityIcons name="arrow-expand-down" size={24} color="#c6bfc9" style={history_styles.expander} />
+const ExpandLeftIcon = () => <MaterialCommunityIcons name="arrow-expand-left" size={24} color="#c6bfc9" style={history_styles.expander} />
 
 /**
  * @component - wrapper of HomeGrapeBox containing the Title/date of the grape day

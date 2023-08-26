@@ -15,7 +15,7 @@ export function SettingsStackScreen() {
 
     return (
         <Tab.Navigator
-            sceneContainerStyle={{ backgroundColor: '#2E3944' }}
+            sceneContainerStyle={{ backgroundColor: '#1a1e47' }}
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused, color }) => {
                     let iconName: any = 'information-circle-outline';
@@ -29,14 +29,14 @@ export function SettingsStackScreen() {
                     }
                     return <Ionicons name={iconName} size={25} color={color} />;
                 },
-                tabBarActiveTintColor: 'darkgreen',
-                tabBarInactiveTintColor: 'gray',
+                tabBarActiveTintColor: '#608a5c',
+                tabBarInactiveTintColor: '#85a3ad',
                 tabBarStyle: {
                     backgroundColor: '#a8e4a0',
                     paddingTop: height * 0.05
                 },
                 // tabBarItemStyle: { padding: 5 },
-                tabBarIndicatorStyle: { backgroundColor: 'darkgreen', height: 5 },
+                tabBarIndicatorStyle: { backgroundColor: '#608a5c', height: 5 },
             })}>
             <Tab.Screen name="About" component={About} options={{ title: 'About GRAPES™', swipeEnabled: false }} />
             <Tab.Screen name="Account" component={Account} options={{ title: 'My Account', swipeEnabled: false }} />

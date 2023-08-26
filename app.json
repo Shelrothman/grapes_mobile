@@ -11,7 +11,7 @@
         "splash": {
             "image": "https://user-images.githubusercontent.com/62257716/258604235-c0ef84bc-e537-439a-97bf-af124fb5d270.png",
             "resizeMode": "contain",
-            "backgroundColor": "#2E3944"
+            "backgroundColor": "#1a1e47"
         },
         "assetBundlePatterns": [
             "**/*"

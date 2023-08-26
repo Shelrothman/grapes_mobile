@@ -14,12 +14,14 @@ export default function App() {
     //     require("../assets/images/forget.png"),
     // ];
 
+    //! PU HERE and continue setting up the fonts globally
+
 
     const GRAPE_FONTS = {
         "Body-Reg": require("./assets/fonts/Nunito-Regular.ttf"),
         "Grape-Header-a": require("./assets/fonts/Nunito-Black.ttf"),
         "Grape-Header-b": require("./assets/fonts/Nunito-Bold.ttf"),
-        // "Grape-Header-b": require("./assets/fonts/PermanentMarker-Regular.ttf"),
+        "Screen-Header": require("./assets/fonts/Nunito-Light.ttf"),
     };
 
 

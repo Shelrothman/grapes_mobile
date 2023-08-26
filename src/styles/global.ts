@@ -6,7 +6,7 @@ import { StyleSheet } from 'react-native';
  */
 export const global_styles = StyleSheet.create({
     global_container: {
-        backgroundColor: '#2E3944',
+        backgroundColor: '#1a1e47',
         alignItems: 'center',
         height: '100%',
         width: '100%',
@@ -19,7 +19,7 @@ export const global_styles = StyleSheet.create({
         alignSelf: 'center',
         marginTop: 10,
         // bottomBorderWidth: 1,
-        // borderBottomColor: '#cb9De2',
+        // borderBottomColor: '#c6bfc9',
     },
     // sharedLetter styles
     button: { paddingRight: 0, marginRight: 0, },
@@ -27,7 +27,7 @@ export const global_styles = StyleSheet.create({
     card: {
         backgroundColor: '#a8e4a0',
         borderRadius: 10,
-        borderColor: '#cb9De2',
+        borderColor: '#c6bfc9',
         borderWidth: 2,
         marginTop: 20,
         marginBottom: 10,
@@ -45,7 +45,7 @@ export const global_styles = StyleSheet.create({
     iconOne_container: { justifyContent: 'center', marginLeft: 5, },
     iconTwo_container: { justifyContent: 'center', marginRight: 5, },
     card_body: {
-        borderBottomColor: '#cb9De2',
+        borderBottomColor: '#c6bfc9',
         borderBottomWidth: 0.5,
         padding: 10,
         backgroundColor: '#3d4b59',
@@ -54,16 +54,16 @@ export const global_styles = StyleSheet.create({
     card_footer: { flexDirection: 'row', justifyContent: 'space-between', padding: 5, },
     suffix_container: { justifyContent: 'flex-end', marginBottom: 5, },
     fullTitle_container: { flexDirection: 'row', justifyContent: 'center', },
-    letter: { fontSize: 30, color: '#cb9De2', },
+    letter: { fontSize: 30, color: '#c6bfc9', },
     value: { fontSize: 15, color: '#f3f0f5', },
     share_container: { justifyContent: 'center', marginLeft: 5, },
     shared_by_container: { justifyContent: 'center', marginRight: 5, maxWidth: '50%', },
-    shared_by: { fontSize: 12, color: '#2E3944', },
+    shared_by: { fontSize: 12, color: '#1a1e47', },
     load_container: {
         padding: 10,
         marginBottom: 30,
         marginTop: 10,
-        backgroundColor: '#cb9De2',
+        backgroundColor: '#c6bfc9',
         borderRadius: 10,
         alignItems: 'center',
     },

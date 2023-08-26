@@ -17,7 +17,7 @@ const grape_box_styles = StyleSheet.create({
  * and their children
  */
 export const history_styles = StyleSheet.create({
-    container: { backgroundColor: '#2E3944', alignItems: 'center', height: '100%', width: '100%' },
+    container: { backgroundColor: '#1a1e47', alignItems: 'center', height: '100%', width: '100%' },
     title: { fontSize: 18, fontWeight: 'bold', color: '#a8e4a0', },
     title_container: {
         flexDirection: 'column',
@@ -76,7 +76,7 @@ export const history_styles = StyleSheet.create({
         paddingTop: 5,
     },
     date_text: {
-        color: '#cb9de2', fontWeight: 'bold',
+        color: '#c6bfc9', fontWeight: 'bold',
     },
     date_container: {
         alignItems: 'center', marginBottom: 10,
@@ -85,7 +85,7 @@ export const history_styles = StyleSheet.create({
         minWidth: '95%',
         // paddingVertical: 10,
         padding: 10,
-        borderColor: '#cb9de2',
+        borderColor: '#c6bfc9',
         borderWidth: 1,
         borderRadius: 10,
         flexDirection: 'row',

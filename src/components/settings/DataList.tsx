@@ -49,15 +49,15 @@ export const DataList: any = [
         data: [
             {
                 title: "Home Screen", value: "The home screen is where you can edit your grape for the day. Tap on the text in the letter you want to edit, fill it in, then return out or tap anywhere outside the input to save your letter automatically!",
-                icon: <Ionicons name="home-outline" size={24} color="#cb9de2" />
+                icon: <Ionicons name="home-outline" size={24} color="#c6bfc9" />
             },
             {
                 title: "Global Screen", value: "The global screen is where you can view other people's grapes for inspiration and ideas. You can copy any of the values directly to paste and use in your own.",
-                icon: <Ionicons name="earth-outline" size={24} color="#cb9de2" />
+                icon: <Ionicons name="earth-outline" size={24} color="#c6bfc9" />
             },
             {
                 title: "History Screen", value: "The history screen is where you can view your past grapes. Keep in mind we don't store your data past one month. On this screen, tap on a date to expand the letters for that day. From each letter row, you can optionally tap the share icon to share that individual letter to the Global feed.",
-                icon: <MaterialIcons name="history" size={24} color="#cb9de2" />
+                icon: <MaterialIcons name="history" size={24} color="#c6bfc9" />
             }
         ]
     },

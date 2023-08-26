@@ -6,7 +6,7 @@ export default function () {
     return (
         <View style={{
             flex: 1, alignItems: "center", justifyContent: "center",
-            backgroundColor: "#2E3944",
+            backgroundColor: "#1a1e47",
             height: "100%",
             width: "100%",
         }}>

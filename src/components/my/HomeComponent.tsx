@@ -34,10 +34,10 @@ export default function HomeComponent() {
             setIsError
         );
     }
-
+    // #1a1e47
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#2E3944" }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#1a1e47" }}>
             <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled
                 style={{ flex: 1, }} keyboardVerticalOffset={height}
             >
@@ -46,7 +46,7 @@ export default function HomeComponent() {
                     <Text style={my_styles.date_title}>Internal Server Error</Text>
                     <Text style={my_styles.date_title}>Please try again later</Text>
                 </View>) : grapeFormState && (
-                    <ScrollView keyboardShouldPersistTaps='handled' contentContainerStyle={{ flexGrow: 1, backgroundColor: "#2E3944", paddingBottom: 40, }}>
+                    <ScrollView keyboardShouldPersistTaps='handled' contentContainerStyle={{ flexGrow: 1, backgroundColor: "#1a1e47", paddingBottom: 40, }}>
                         {[ 'G', 'R', 'A', 'P', 'E', 'S' ].map((letter, index) => (
                             <HomeFormWrapper
                                 label={letter} key={index}

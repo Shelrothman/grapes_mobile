@@ -22,7 +22,7 @@ function RenderItem({ title = "", value, icon, }: renderItemProps) {
                         if (Object.keys(item).includes("letter")) {
                             return <View key={index}>
                                 <Text style={{ fontWeight: "bold", color: "white", fontSize: 16 }}>
-                                    <GrapeIcons letter={item.letter} color="#cb9de2" size={25} />{` `}{item.letterTitle}
+                                    <GrapeIcons letter={item.letter} color="#c6bfc9" size={25} />{` `}{item.letterTitle}
                                 </Text>
                                 <Text style={{ color: "white", fontSize: 16, marginLeft: 20, }}>
                                     {item.letterValue}{'\n'}
@@ -61,7 +61,7 @@ export function About() {
             <SectionList
                 sections={DataList}
                 renderSectionHeader={({ section: { title } }) => (
-                    <View style={{ backgroundColor: "#4E1E66", alignItems: 'center' }}>
+                    <View style={{ backgroundColor: "#608a5c", alignItems: 'center' }}>
                         <Text style={setting_styles.header}>{title}</Text>
                     </View>
                 )}

@@ -41,7 +41,7 @@ export function HomeFormWrapper({ label, setFormState, formState }: FormRowWrapp
 
     const IconContainer = (containerOne: boolean, letter: string): JSX.Element => {
         const containerStyle = containerOne ? my_styles.iconOne_container : my_styles.iconTwo_container;
-        return <View style={containerStyle}><GrapeIcons letter={letter} color="#cb9De2" size={30} /></View>;
+        return <View style={containerStyle}><GrapeIcons letter={letter} color="#c6bfc9" size={30} /></View>;
     };
 
     const textInputProps: TextInputProps | Readonly<TextInputProps> = {
@@ -53,7 +53,7 @@ export function HomeFormWrapper({ label, setFormState, formState }: FormRowWrapp
             backgroundColor: aboutToFocus ? '#3d5945' : undefined, // little effect for accessibility
             fontFamily: 'Body-Reg'
         },
-        selectionColor: '#cb9de2', placeholderTextColor: '#cb9de2',
+        selectionColor: '#c6bfc9', placeholderTextColor: '#c6bfc9',
         maxLength: 250, // between 35 words and 63 words👌
         /**
          * !this is the hack that makes it work WITH multiline 

@@ -44,8 +44,8 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
     );
 
     const textInputProps: TextInputProps | Readonly<TextInputProps> = {
-        autoCapitalize: "none", autoComplete: "off", autoCorrect: false, selectionColor: '#cb9de2',
-        placeholderTextColor: '#cb9de2', scrollEnabled: false, returnKeyLabel: 'done',
+        autoCapitalize: "none", autoComplete: "off", autoCorrect: false, selectionColor: '#c6bfc9',
+        placeholderTextColor: '#c6bfc9', scrollEnabled: false, returnKeyLabel: 'done',
         style: { color: "white", width: '90%', height: 'auto', borderRadius: 10, padding: 10, }
     };
 
@@ -62,7 +62,7 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
 
     return (
         <View key={label} style={my_styles.account_card}>
-            <View style={{ ...my_styles.titleContainer, backgroundColor: '#2E3944' }}>
+            <View style={{ ...my_styles.titleContainer, backgroundColor: '#1a1e47' }}>
                 <Text style={{ color: '#a8e4a0', }}>{label}</Text>
             </View>
             <View style={{ ...my_styles.inputParent, borderColor: '#a8e4a0', borderWidth: .5 }} key={`${label}-parent`}>
@@ -99,7 +99,7 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
                     </Pressable>}
                 </View>
             </>}
-            <Text style={{ color: '#cb9de2', marginTop: 5, fontSize: 12, fontStyle: 'italic' }}>{HELP_TEXT[ label ]}</Text>
+            <Text style={{ color: '#c6bfc9', marginTop: 5, fontSize: 12, fontStyle: 'italic' }}>{HELP_TEXT[ label ]}</Text>
             <View style={{
                 flexDirection: 'row', borderColor: '#4E1E66', borderWidth: 2,
                 borderRadius: 10, backgroundColor: '#a8e4a0', alignSelf: 'flex-end',

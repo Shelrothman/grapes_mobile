@@ -61,7 +61,7 @@ export default function History() {
             />
             <Pressable style={{ display: loadMoreVisibility === true ? 'flex' : 'none', ...history_styles.load_container }}
                 onPress={() => handlePressLoadMore()}>
-                <Text><Ionicons name="md-cloud-download" size={24} color="#2E3944" />{' '}Load More</Text>
+                <Text><Ionicons name="md-cloud-download" size={24} color="#1a1e47" />{' '}Load More</Text>
             </Pressable>
             <Text style={{
                 ...history_styles.load_container,
