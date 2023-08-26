@@ -8,8 +8,13 @@ import { nav_styles } from "../../styles/nav";
 import { About } from "../settings/About";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const MainStack = createNativeStackNavigator();
+import { useCallback } from 'react';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+SplashScreen.preventAutoHideAsync();
 
+
+const MainStack = createNativeStackNavigator();
 
 const Main = () => {
     const [ modalVisible, setModalVisible ] = useState<boolean>(true);

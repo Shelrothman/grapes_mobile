@@ -70,7 +70,9 @@ export const my_styles = StyleSheet.create({
         borderTopEndRadius: 10,
         paddingBottom: 10,
     },
-    input_text: { marginLeft: 10, color: '#f3f0f5', },
+    input_text: { marginLeft: 10, color: '#f3f0f5',
+    fontFamily: 'Body-Grapes'
+},
     bottomRowContainer: {
         flexDirection: 'row',
         flex: 1,
