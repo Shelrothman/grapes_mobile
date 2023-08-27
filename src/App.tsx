@@ -14,8 +14,7 @@ export default function App() {
     //     require("../assets/images/forget.png"),
     // ];
 
-    //! PU HERE and continue setting up the fonts globally JUST need to do history page
-
+    // ! just neeed to ujpdae4 the nav screens     to hnew fohts
 
     const GRAPE_FONTS = {
         "Body-Reg": require("./assets/fonts/Nunito-Regular.ttf"),

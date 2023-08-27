@@ -10,7 +10,7 @@ const Tab = createMaterialTopTabNavigator();
 export function SettingsStackScreen() {
 
     const { height, width } = useWindowDimensions();
-    // TODO there is an issue where there appears some inner padding on the Accoutn screen but i cannot for hte life of me figure out where it is coming from i have looked through all the params and they are saetup just lije the other screens
+    // TODO there is an issue where there appears some inner padding on the Account screen but i cannot for hte life of me figure out where it is coming from i have looked through all the params and they are saetup just lije the other screens
     // * it only happens in ios aand not in the web version
 
     return (
@@ -36,7 +36,6 @@ export function SettingsStackScreen() {
                     paddingTop: height * 0.05,
                     fontFamily: 'Body-Reg',
                 },
-                // tabBarItemStyle: { padding: 5 },
                 tabBarIndicatorStyle: { backgroundColor: '#608a5c', height: 5 },
             })}>
             <Tab.Screen name="About" component={About} options={{ title: 'About GRAPES™', swipeEnabled: false }} />

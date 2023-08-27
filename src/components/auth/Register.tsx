@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { ScrollView, TouchableOpacity, View, KeyboardAvoidingView, Image, Platform, Text, TextInput, Button, } from "react-native";
+import { ScrollView, TouchableOpacity, View, KeyboardAvoidingView, Image, Platform, Text, TextInput} from "react-native";
 import { supabase } from "../../initSupabase";
 import { AuthStackParamList } from "../../types/navigation";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useAuthContext } from "../../contexts/AuthProvider";
 import { AccountService } from "../../services/AccountService";
+import { Button } from 'react-native-rapi-ui';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamList, "Register">) {
@@ -41,32 +43,42 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
 
 
     return (
-        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled style={{ flex: 1 }}>
-            <ScrollView contentContainerStyle={{ flexGrow: 1, }} >
+        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled style={{ flex: 1, backgroundColor: "#1a1e47", }}>
+            <ScrollView contentContainerStyle={{ flexGrow: 1, marginTop: 40}} >
                 <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: "#1a1e47", }}>
+                <Image resizeMode="contain" style={{ height: 300, width: 300, }}
+                            source={require("../../assets/images/register.png")}
+                        />
                 </View>
                 <View style={{ flex: 3, paddingHorizontal: 20, paddingBottom: 20, backgroundColor: "#1a1e47", }}>
-                    <Text style={{ alignSelf: "center", paddingVertical: 30, fontWeight: "bold", color: "#8031A7", fontSize: 30, }} >
+                    <Text style={{ alignSelf: "center", fontFamily: 'Grape-Header-a', color: "white", fontSize: 30, }} >
                         Register
                     </Text>
-                    <Text style={{ color: 'white' }}>Email</Text>
-                    <TextInput style={{ color: 'white', marginTop: 15, borderWidth: 2, borderColor: "#8031A7", borderRadius: 10, padding: 10 }}
-                        value={email} autoCapitalize="none" placeholder="Enter your email"
-                        autoComplete="off" autoCorrect={false} keyboardType="email-address" onChangeText={(text) => setEmail(text)}
+                    <Text style={{ color: 'white', fontFamily: 'Grape-Header-b' }}>Email</Text>
+                    <TextInput style={{ color: 'white', marginTop: 15, borderWidth: 2, borderColor: "#474115", borderRadius: 10, padding: 10, fontFamily: 'Body-Reg',  backgroundColor: '#3d4b59' }}
+                        returnKeyType="done" value={email} autoCapitalize="none" placeholder="Enter your email" 
+                        autoComplete="off" autoCorrect={false} keyboardType="email-address" onChangeText={(text) => setEmail(text)} placeholderTextColor={'#a8e4a0'}
                     />
-                    <Text style={{ marginTop: 15, color: 'white', }}>Password</Text>
-                    <TextInput style={{ color: 'white', marginTop: 15, borderWidth: 2, borderColor: "#8031A7", borderRadius: 10, padding: 10 }}
-                        placeholder="Enter your password"
-                        value={password} autoCapitalize="none" autoComplete="off" autoCorrect={false}
-                        secureTextEntry={true} onChangeText={(text) => setPassword(text)}
+                    <Text style={{ marginTop: 15, color: 'white',fontFamily: 'Grape-Header-b' }}>Password</Text>
+                    <TextInput style={{ color: 'white', marginTop: 15, borderWidth: 2, borderColor: "#474115", borderRadius: 10, padding: 10, fontFamily: 'Body-Reg',  backgroundColor: '#3d4b59' }}
+                        placeholder="Enter your password" value={password} autoCapitalize="none" autoComplete="off" autoCorrect={false}
+                        secureTextEntry={true} onChangeText={(text) => setPassword(text)} placeholderTextColor={'#a8e4a0'}
+                        returnKeyType="done"
                     />
-                    <View style={{ marginTop: 20, borderWidth: 2, borderRadius: 10, padding: 5, backgroundColor: "#a8e4a0" }}>
-                        <Button title={loading ? "Loading" : "Create an account"} onPress={() => { register(); }} color="#3d4b59" disabled={loading} />
+                    <View style={{ marginTop: 20, padding: 5, flexDirection: 'row', justifyContent: 'center' }}>
+                        <Button style={{ borderWidth: 2, borderRadius: 10, borderColor: '#474115', }}
+                            leftContent={<Text style={{ fontFamily: 'Grape-Header-b', fontSize: 14, color: 'black'}}>
+                                {loading ? "Loading" : "Create an account"}
+                            </Text>}
+                            onPress={() => { register(); }} color="#a8e4a0" disabled={loading}
+                            rightContent={<MaterialCommunityIcons name="open-in-new" size={25} color="black" />}
+
+                        />
                     </View>
                     <View style={{ flexDirection: "row", alignItems: "center", marginTop: 15, justifyContent: "center" }} >
-                        <Text style={{ color: 'white' }}>Already have an account?{' '}</Text>
-                        <TouchableOpacity onPress={() => { navigation.navigate("Login"); }} style={{ borderWidth: 1, padding: 5, borderRadius: 10, backgroundColor: '#8031A7' }} >
-                            <Text style={{ fontWeight: 'bold', color: 'white' }} >
+                        <Text style={{ color: 'white', fontFamily: 'Body-Reg' }}>Already have an account?{' '}</Text>
+                        <TouchableOpacity onPress={() => { navigation.navigate("Login"); }} style={{ borderWidth: 1, padding: 5, borderRadius: 10, backgroundColor: '#4E1E66' }} >
+                            <Text style={{ fontWeight: 'bold', color: 'white', fontFamily: 'Grape-Header-b' }} >
                                 Login here
                             </Text>
                         </TouchableOpacity>
