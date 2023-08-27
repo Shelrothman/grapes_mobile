@@ -33,7 +33,8 @@ export function SettingsStackScreen() {
                 tabBarInactiveTintColor: '#85a3ad',
                 tabBarStyle: {
                     backgroundColor: '#a8e4a0',
-                    paddingTop: height * 0.05
+                    paddingTop: height * 0.05,
+                    fontFamily: 'Body-Reg',
                 },
                 // tabBarItemStyle: { padding: 5 },
                 tabBarIndicatorStyle: { backgroundColor: '#608a5c', height: 5 },

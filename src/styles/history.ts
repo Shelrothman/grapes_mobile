@@ -11,6 +11,7 @@ const grape_box_styles = StyleSheet.create({
     },
 });
 
+// !! PU here finish srefactoing font and coliors in History screen last one left to do
 
 /**
  * @description styles for all the components in the home/my screens

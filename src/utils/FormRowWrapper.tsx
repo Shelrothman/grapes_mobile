@@ -7,7 +7,7 @@ import { Octicons } from '@expo/vector-icons';
 import { my_styles } from "../styles/my";
 import { Button } from 'react-native-rapi-ui';
 
-// TODO LOTS of cleanup and fix the Change email button styl;e
+// TODO LOTS of cleanup and fix the Change email button styl;e and the font style for the Buttons wtf
 
 
 type FormRowWrapperProps = {
@@ -104,20 +104,24 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
             </>}
             <Text style={{ color: '#c6bfc9', marginTop: 5, fontSize: 12, fontFamily: 'Reg-Italic', }}>{HELP_TEXT[ label ]}</Text>
             <View style={{
-                flexDirection: 'row', borderColor: '#474115', borderWidth: 2,
-                borderRadius: 10, backgroundColor: '#a8e4a0', alignSelf: 'flex-end',
+                alignSelf: 'flex-end',
                 ...label !== 'New Password' ? { marginTop: 20 } : { marginTop: 0 },
                 ...label === 'Email' && { paddingRight: 5 }
             }}>
                 <Button
                     color="#3d4b59"
-                    text={(showConfirm && label === 'New Password') ? 'Submit New Password' : btnText} key={`${label}-save`}
+                    key={`${label}-save`}
+                    style={{ borderRadius: 10, backgroundColor: '#3d4b59',
+                    borderColor: '#a8e4a0', borderWidth: 1,
+                }}
                     onPress={label !== 'New Password' ? onButtonPress : handleShowPassword}
                     rightContent={label === 'Email' && <MaterialCommunityIcons name="open-in-new" size={22} color="#a8e4a0" style={{
                         backgroundColor: '#3d4b59',
-                        // marginRight
+                        fontFamily: 'Body-Reg',
                     }} />}
-                    textStyle={{ color: '#a8e4a0', fontFamily: 'Body-Reg', }}
+                    leftContent={<Text style={{ color: '#a8e4a0', fontFamily: 'Grape-Header-b', fontSize: 14, backgroundColor: '#3d4b59', }}>
+                        {(showConfirm && label === 'New Password') ? 'Submit New Password' : btnText}
+                    </Text>}
 
                 />
             </View>

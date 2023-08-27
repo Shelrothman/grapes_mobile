@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, KeyboardAvoidingView, Platform, Alert, View, Linking } from "react-native";
+import { ScrollView, KeyboardAvoidingView, Platform, Alert, View, Linking, Text } from "react-native";
 import { useHeaderHeight } from '@react-navigation/elements';
 import { supabase } from '../../initSupabase';
 import { useAuthContext, AuthUser } from "../../contexts/AuthProvider";
@@ -134,11 +134,14 @@ export function Account() {
                     <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: "#1a1e47", paddingBottom: 40, }}
                         keyboardShouldPersistTaps='handled'
                     >
-                        <View style={{ marginBottom: 20, borderColor: '#a8e4a0', borderWidth: 1, backgroundColor: "#3d4b59", borderRadius: 10, minWidth: '85%', maxWidth: '85%', alignSelf: 'center', }}>
+                        <View style={{ marginBottom: 20, minWidth: '85%', maxWidth: '85%', alignSelf: 'center', }}>
                             <Button
                                 color="#3d4b59"
+                                leftContent={<Text style={{ color: '#a8e4a0', fontFamily: 'Grape-Header-b', fontSize: 14, backgroundColor: '#3d4b59', }}>Logout</Text>}
                                 textStyle={{ color: '#a8e4a0', fontFamily: 'Body-Reg', fontSize: 16, }}
-                                text='Logout' onPress={() => showConfirmLogout()} />
+                                onPress={() => showConfirmLogout()}
+                                style={{ borderRadius: 10, backgroundColor: '#3d4b59', borderColor: '#a8e4a0', borderWidth: 1, }}
+                            />
                         </View>
                         <FormRowWrapper label="Display Name" inputValue={formState.display}
                             onChangeText={(text) => setFormState({ ...formState, display: text })}
