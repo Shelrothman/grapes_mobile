@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { ScrollView, KeyboardAvoidingView, Platform, Alert, Button, View, Linking } from "react-native";
+import React, { useState } from "react";
+import { ScrollView, KeyboardAvoidingView, Platform, Alert, View, Linking } from "react-native";
 import { useHeaderHeight } from '@react-navigation/elements';
 import { supabase } from '../../initSupabase';
 import { useAuthContext, AuthUser } from "../../contexts/AuthProvider";
 import { AccountService } from "../../services/AccountService";
 import Loading from "../../utils/Loading";
 import { FormRowWrapper } from "../../utils/FormRowWrapper";
-// import { MyMap } from "../../utils/constants";
 import { FormState } from "../../types";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect } from "@react-navigation/native";
-
+import { Button } from 'react-native-rapi-ui';
 
 // TODO clean everything up and modulate to a servie like did for home ui
 
@@ -135,8 +134,11 @@ export function Account() {
                     <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: "#1a1e47", paddingBottom: 40, }}
                         keyboardShouldPersistTaps='handled'
                     >
-                        <View style={{ marginBottom: 20, borderColor: '#a8e4a0', borderWidth: 1, backgroundColor: "#3d4b59", borderRadius: 10, minWidth: '85%', maxWidth: '85%', alignSelf: 'center' }}>
-                            <Button color="#a8e4a0" title='Logout' onPress={() => showConfirmLogout()} />
+                        <View style={{ marginBottom: 20, borderColor: '#a8e4a0', borderWidth: 1, backgroundColor: "#3d4b59", borderRadius: 10, minWidth: '85%', maxWidth: '85%', alignSelf: 'center', }}>
+                            <Button
+                                color="#3d4b59"
+                                textStyle={{ color: '#a8e4a0', fontFamily: 'Body-Reg', fontSize: 16, }}
+                                text='Logout' onPress={() => showConfirmLogout()} />
                         </View>
                         <FormRowWrapper label="Display Name" inputValue={formState.display}
                             onChangeText={(text) => setFormState({ ...formState, display: text })}

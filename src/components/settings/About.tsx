@@ -21,16 +21,16 @@ function RenderItem({ title = "", value, icon, }: renderItemProps) {
                     {value.filter(Boolean).map((item: any, index: number) => {
                         if (Object.keys(item).includes("letter")) {
                             return <View key={index}>
-                                <Text style={{ fontWeight: "bold", color: "white", fontSize: 16 }}>
+                                <Text style={{ fontWeight: "bold", color: "white", fontSize: 16, fontFamily: 'Grape-Header-a' }}>
                                     <GrapeIcons letter={item.letter} color="#c6bfc9" size={25} />{` `}{item.letterTitle}
                                 </Text>
-                                <Text style={{ color: "white", fontSize: 16, marginLeft: 20, }}>
+                                <Text style={{ color: "white", fontSize: 16, marginLeft: 20, fontFamily: 'Body-Reg' }}>
                                     {item.letterValue}{'\n'}
                                 </Text>
                             </View>
                         } else if (Object.keys(item).includes("link")) {
                             return <View key={index}>
-                                <A href={`${item.link}`} style={{ color: "#a8e4a0", fontSize: 16, marginLeft: 20, marginBottom: 10 }}>
+                                <A href={`${item.link}`} style={{ color: "white", fontSize: 16, marginLeft: 20, marginBottom: 10, fontFamily: 'Body-Reg', textDecorationLine: 'underline'}}>
                                     {item.linkTitle}{` `}<MaterialCommunityIcons name="open-in-new" size={20} color="#a8e4a0" />
                                 </A>
                             </View>

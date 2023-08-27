@@ -1,10 +1,14 @@
 import React, { useState, useRef } from "react";
-import { TextInput, TextInputProps, View, Text, Button, Pressable } from "react-native";
+import { TextInput, TextInputProps, View, Text, Pressable } from "react-native";
 import { MyMap, MyNumMap } from "./constants";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useFocusEffect } from "@react-navigation/native";
 import { Octicons } from '@expo/vector-icons';
 import { my_styles } from "../styles/my";
+import { Button } from 'react-native-rapi-ui';
+
+// TODO LOTS of cleanup and fix the Change email button styl;e
+
 
 type FormRowWrapperProps = {
     label: string;
@@ -44,9 +48,10 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
     );
 
     const textInputProps: TextInputProps | Readonly<TextInputProps> = {
-        autoCapitalize: "none", autoComplete: "off", autoCorrect: false, selectionColor: '#c6bfc9',
+        autoCapitalize: "none", autoComplete: "off", autoCorrect: false, selectionColor: '#4E1E66',
         placeholderTextColor: '#c6bfc9', scrollEnabled: false, returnKeyLabel: 'done',
-        style: { color: "white", width: '90%', height: 'auto', borderRadius: 10, padding: 10, }
+        style: { color: "white", width: '90%', height: 'auto', borderRadius: 10, padding: 10, fontFamily: 'Body-Reg', },
+        returnKeyType: "done"
     };
 
     const handleShowPassword = () => {
@@ -62,10 +67,10 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
 
     return (
         <View key={label} style={my_styles.account_card}>
-            <View style={{ ...my_styles.titleContainer, backgroundColor: '#1a1e47' }}>
-                <Text style={{ color: '#a8e4a0', }}>{label}</Text>
+            <View style={{ ...my_styles.titleContainer, backgroundColor: '#1a1e47', borderBottomWidth: 0 }}>
+                <Text style={{ color: '#a8e4a0', fontFamily: 'Body-Reg', }}>{label}</Text>
             </View>
-            <View style={{ ...my_styles.inputParent, borderColor: '#a8e4a0', borderWidth: .5 }} key={`${label}-parent`}>
+            <View style={{ ...my_styles.inputParent, borderColor: '#474115', borderWidth: .5 }} key={`${label}-parent`}>
                 <TextInput
                     placeholder={`Enter your ${label}`}
                     ref={inputOneRef}
@@ -76,14 +81,13 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
                     secureTextEntry={label !== 'New Password' ? false : true}
                     keyboardType={label === 'Email' ? 'email-address' : 'default'}
                     maxLength={maxLength[ label ]} editable={label === 'Email' ? false : true}
-                    returnKeyType="done"
                 />
                 {inFocus && <Pressable onPress={() => inputOneRef!.current!.clear()} style={my_styles.clearButtonParent}>
                     <Octicons name="x-circle-fill" size={16} color="#ccc8c8" />
                 </Pressable>}
             </View>
             {(showConfirm && label === 'New Password') && <>
-                <Text style={{ color: '#a8e4a0', marginTop: 10 }}>Re-Enter New Password</Text>
+                <Text style={{ color: '#a8e4a0', marginTop: 10, fontFamily: 'Body-Reg', }}>Re-Enter New Password</Text>
                 <View style={{ ...my_styles.inputParent, borderColor: '#a8e4a0', borderWidth: .5 }} key={`${label}-parent`}>
                     <TextInput
                         ref={inputTwoRef} placeholder={`Confirm your ${label}`}
@@ -92,25 +96,30 @@ export function FormRowWrapper({ label, onChangeText, onButtonPress, inputValue,
                         key={`${label}-confirm`} secureTextEntry={true} maxLength={maxLength[ label ]}
                         onFocus={() => setInFocusConfirm(true)}
                         onBlur={() => setInFocusConfirm(false)}
-                        returnKeyType="done"
                     />
                     {inFocusConfirm && <Pressable onPress={() => inputTwoRef!.current!.clear()} style={{ justifyContent: "center", alignItems: "center", marginRight: 5, borderRadius: 50, }}>
                         <Octicons name="x-circle-fill" size={16} color="#ccc8c8" />
                     </Pressable>}
                 </View>
             </>}
-            <Text style={{ color: '#c6bfc9', marginTop: 5, fontSize: 12, fontStyle: 'italic' }}>{HELP_TEXT[ label ]}</Text>
+            <Text style={{ color: '#c6bfc9', marginTop: 5, fontSize: 12, fontFamily: 'Reg-Italic', }}>{HELP_TEXT[ label ]}</Text>
             <View style={{
-                flexDirection: 'row', borderColor: '#4E1E66', borderWidth: 2,
+                flexDirection: 'row', borderColor: '#474115', borderWidth: 2,
                 borderRadius: 10, backgroundColor: '#a8e4a0', alignSelf: 'flex-end',
                 ...label !== 'New Password' ? { marginTop: 20 } : { marginTop: 0 },
                 ...label === 'Email' && { paddingRight: 5 }
             }}>
                 <Button
-                    title={(showConfirm && label === 'New Password') ? 'Submit New Password' : btnText} key={`${label}-save`} color="#3d4b59"
+                    color="#3d4b59"
+                    text={(showConfirm && label === 'New Password') ? 'Submit New Password' : btnText} key={`${label}-save`}
                     onPress={label !== 'New Password' ? onButtonPress : handleShowPassword}
+                    rightContent={label === 'Email' && <MaterialCommunityIcons name="open-in-new" size={22} color="#a8e4a0" style={{
+                        backgroundColor: '#3d4b59',
+                        // marginRight
+                    }} />}
+                    textStyle={{ color: '#a8e4a0', fontFamily: 'Body-Reg', }}
+
                 />
-                {label === 'Email' && <MaterialCommunityIcons name="open-in-new" size={25} color="#3d4b59" />}
             </View>
         </View>
     )

@@ -7,6 +7,7 @@ import { my_styles } from "../styles/my";
 import { useAuthContext } from "../contexts/AuthProvider";
 import { Octicons } from '@expo/vector-icons';
 import { HomePageService } from "../services/ui";
+import { LetterHeader } from "./LetterHeader";
 
 type FormRowWrapperProps = {
     label: string;
@@ -31,27 +32,12 @@ export function HomeFormWrapper({ label, setFormState, formState }: FormRowWrapp
         HomePageService.handleOnEndEditing(formState, setFormState, subKey, sessionUser!.user_uid);
     };
 
-    const GrapeTitleComponent = (letter: string): JSX.Element => {
-        letter = letter.toLowerCase();
-        return <Text>
-            <Text style={my_styles.titleLetterText}>{letter.toUpperCase()}</Text>
-            <Text style={my_styles.titleText}>{GRAPE_DAY[ letter ]}</Text>
-        </Text>;
-    };
-
-    const IconContainer = (containerOne: boolean, letter: string): JSX.Element => {
-        const containerStyle = containerOne ? my_styles.iconOne_container : my_styles.iconTwo_container;
-        return <View style={containerStyle}><GrapeIcons letter={letter} color="#c6bfc9" size={30} /></View>;
-    };
-
     const textInputProps: TextInputProps | Readonly<TextInputProps> = {
         style: {
-            color: "white",
-            height: 'auto',
+            fontSize: 16,
+            color: "white", height: 'auto', padding: 10, fontFamily: 'Body-Reg',
             width: '90%', // give room to the clearBtn
-            padding: 10,
             backgroundColor: aboutToFocus ? '#3d5945' : undefined, // little effect for accessibility
-            fontFamily: 'Body-Reg'
         },
         selectionColor: '#c6bfc9', placeholderTextColor: '#c6bfc9',
         maxLength: 250, // between 35 words and 63 words👌
@@ -66,9 +52,10 @@ export function HomeFormWrapper({ label, setFormState, formState }: FormRowWrapp
 
     return (
         <View key={label} style={my_styles.card}>
-            <View style={my_styles.titleContainer}>
+            {/* <View style={my_styles.titleContainer}>
                 {IconContainer(true, label)}{GrapeTitleComponent(label)}{IconContainer(false, label)}
-            </View>
+            </View> */}
+            <LetterHeader label={label} />
             <View style={my_styles.inputParent} key={`${label}-parent`}>
                 <TextInput
                     {...textInputProps}

@@ -71,6 +71,8 @@ export const my_styles = StyleSheet.create({
         backgroundColor: '#4E1E66',
         borderTopStartRadius: 10,
         borderTopEndRadius: 10,
+        borderBottomColor: '#c6bfc9',
+        borderBottomWidth: 0.3,
     },
     main_container: { height: '100%', backgroundColor: '#1a1e47', width: '85%', },
     date_title: {

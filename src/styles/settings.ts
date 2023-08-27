@@ -12,12 +12,14 @@ export const setting_styles = StyleSheet.create({
         padding: 16, 
         color: "#eeffec",
         fontSize: 18,
-        fontWeight: "bold",
+        fontFamily: 'Grape-Header-a',
+        // fontWeight: "bold",
     },
     
     sub_header: {
-        color: '#c6bfc9',
-        fontWeight: "bold",
+        color: '#a8e4a0',
+        // fontWeight: "bold",
+        fontFamily: 'Grape-Header-a',
         fontSize: 16,
         paddingLeft: 10,
         marginTop: 10,

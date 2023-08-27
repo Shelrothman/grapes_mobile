@@ -22,6 +22,7 @@ export default function App() {
         "Grape-Header-a": require("./assets/fonts/Nunito-Black.ttf"),
         "Grape-Header-b": require("./assets/fonts/Nunito-Bold.ttf"),
         "Screen-Header": require("./assets/fonts/Nunito-Light.ttf"),
+        "Reg-Italic": require("./assets/fonts/Nunito-Italic.ttf"),
     };
 
 

@@ -97,7 +97,7 @@ export function Global() {
 
 
     return (
-        <SafeAreaView style={global_styles.global_container}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#1a1e47" }}>
             <View style={global_styles.title_container}>
                 <Text style={global_styles.title}>Global Feed (inspiration)</Text>
             </View>
