@@ -38,7 +38,7 @@ function RenderItem({ title = "", value, icon, }: renderItemProps) {
                     })}
                 </View>
             }
-            return <Text style={{ fontSize: 16, color: "white" }}>{value}</Text>;
+            return <Text style={{ fontSize: 16, color: "white", fontFamily: 'Body-Reg' }}>{value}</Text>;
         }
     };
 
