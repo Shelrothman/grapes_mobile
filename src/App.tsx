@@ -14,7 +14,7 @@ export default function App() {
     //     require("../assets/images/forget.png"),
     // ];
 
-    //! PU HERE and continue setting up the fonts globally
+    //! PU HERE and continue setting up the fonts globally JUST need to do history page
 
 
     const GRAPE_FONTS = {
@@ -23,6 +23,7 @@ export default function App() {
         "Grape-Header-b": require("./assets/fonts/Nunito-Bold.ttf"),
         "Screen-Header": require("./assets/fonts/Nunito-Light.ttf"),
         "Reg-Italic": require("./assets/fonts/Nunito-Italic.ttf"),
+        "Bold-Italic": require("./assets/fonts/Nunito-BoldItalic.ttf"),
     };
 
 
