@@ -19,11 +19,13 @@ export const nav_styles = StyleSheet.create({
     },
     welcomeText: {
         fontSize: 18,
+        fontFamily: 'Body-Reg',
     },
     helpText: {
         fontSize: 12,
-        fontStyle: 'italic',
+        // fontStyle: 'italic',
         marginTop: 5,
+        fontFamily: 'Reg-Italic',
     },
     modalHeader: {
         flexDirection: 'row',

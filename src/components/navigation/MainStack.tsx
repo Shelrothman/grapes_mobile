@@ -34,12 +34,12 @@ const Main = () => {
                             <View style={nav_styles.modalHeader}>
                                 <Text style={nav_styles.welcomeText}>Welcome to G.R.A.P.E.S!</Text>
                                 <Pressable onPress={() => setModalVisible(false)} style={nav_styles.x_pressable}>
-                                    <Text style={{ fontWeight: 'bold' }}>X</Text>
+                                    <Text style={{ fontFamily: 'Reg-Italic' }}>X</Text>
                                 </Pressable>
                             </View>
                             <About />
                             <Text style={nav_styles.helpText}>
-                                You can review this info any time in the <Text style={{ fontStyle: 'normal', fontWeight: 'bold' }}>About</Text> section.
+                                You can review this info any time in the <Text style={{ fontFamily: 'Grapes-Header-b' }}>About</Text> section.
                                 <MaterialCommunityIcons name='fruit-grapes-outline' size={20} color="#1a1e47" />
                             </Text>
                         </View>
