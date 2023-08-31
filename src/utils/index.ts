@@ -7,8 +7,8 @@ import Toast from 'react-native-toast-message';
 import * as Clipboard from 'expo-clipboard';
 import { getCalendars } from 'expo-localization';
 export type dateTitleProps = {
-    month: number;
     year: number;
+    month: number;
     day: number;
 };
 
@@ -60,6 +60,7 @@ export const resToHomeGrape = (res: Partial<GrapeResponse>): Home_Grape => {
  * @function buildDateArray
  * @description builds an array of dates from today to the past 2 weeks
  * @returns {string[]} array of dates in the format YYYY-MM-DD in UTC
+ * * it takes here the utc date as thats whats in the db to identidy them and they get converted to local time in their components
  */
 export function buildDateArray(next?: string): string[] {
     let dateArray: string[] = [];
@@ -89,13 +90,19 @@ export const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize 
 
 export const cleanStringNoExtraSpace = (str: string) => str.replace(/\s{2,}/, '').trim()
 
+/**
+ * @function getDayIndex
+ *  calculates the day of the week using the Zeller's Congruence algorithm.
+ * @param {dateTitleProps} { year, month, day }
+ */
 const getDayIndex = ({ year, month, day }: dateTitleProps) => {
     return (year + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400) + Math.floor((13 * month + 8) / 5) + day) % 7;
 }
 
 
-export function getLocalDateForTitle(date: string) {
-    return formatDateToTitle(new Date(date).toLocaleString('en-US', { timeZone: getCalendars()[ 0 ].timeZone! }))
+export function getLocalDateForTitle(date?: string) {
+    if (date) return formatDateToTitle(new Date(date).toLocaleString('en-US', { timeZone: getCalendars()[ 0 ].timeZone! }));
+    return formatDateToTitle(new Date().toLocaleString('en-US', { timeZone: getCalendars()[ 0 ].timeZone! }));
 }
 
 
@@ -103,7 +110,7 @@ export function getLocalDateForTitle(date: string) {
 /**
  * format local date for title
  *  this version avoids using any Date object instantiation and 
- * calculates the day of the week using the Zeller's Congruence algorithm.
+ 
  * @link https://www.geeksforgeeks.org/zellers-congruence-find-day-date/
  */
 function formatDateToTitle(inputDate: string) {

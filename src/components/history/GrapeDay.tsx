@@ -55,7 +55,7 @@ export function HistoryGrapeDay({ date, day, setDay, setGrape_date }: HomeGrapeI
     //[ { "calendar": "gregory", "timeZone": "Europe/Warsaw", "uses24hourClock": true, "firstWeekday": 1 } ]
     // console.log(userDeviceTimeList);
     // dateTitle in UTC time bc it is UTC in the db SO THAT the data matches...
-    // const dateTitle: string = new Date(date).toUTCString().slice(0, 16);
+    const dateTitle: string = new Date(date).toUTCString().slice(0, 16);
     // * always in Www, dd Mmm yyyy hh:mm:ss GMT format.. aka 16 chars long
 
     // {/* {formatDateToTitle(new Date(date).toLocaleString('en-US', { timeZone: getCalendars()[ 0 ].timeZone! })) */}

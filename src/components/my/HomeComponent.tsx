@@ -8,6 +8,7 @@ import { useAuthContext } from "../../contexts/AuthProvider";
 import { my_styles } from "../../styles/my";
 import { Home_Grape } from "../../types";
 import { HomePageService } from "../../services/ui";
+import { getLocalDateForTitle } from "../../utils";
 
 // todo: make sure i double checkd there even a change before posting to db (like if they tap in but no change)
 
@@ -41,7 +42,7 @@ export default function HomeComponent() {
             <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled
                 style={{ flex: 1, }} keyboardVerticalOffset={height}
             >
-                <Text style={my_styles.date_title}> Today: {new Date().toDateString()} </Text>
+                <Text style={my_styles.date_title}> Today: {getLocalDateForTitle()} </Text>
                 {isLoading ? <Loading /> : isError ? (<View style={my_styles.main_container}>
                     <Text style={my_styles.date_title}>Internal Server Error</Text>
                     <Text style={my_styles.date_title}>Please try again later</Text>
