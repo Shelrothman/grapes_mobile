@@ -6,10 +6,10 @@
         "slug": "grapes-app",
         "version": "1.0.2",
         "orientation": "portrait",
-        "icon": "https://user-images.githubusercontent.com/62257716/258604288-87e3723c-673e-4f14-8b26-b0bed405da35.png",
+        "icon": "https://user-images.githubusercontent.com/62257716/264522331-c7610181-a16f-4ad0-9fcc-ed7272234c98.png",
         "userInterfaceStyle": "light",
         "splash": {
-            "image": "https://user-images.githubusercontent.com/62257716/258604235-c0ef84bc-e537-439a-97bf-af124fb5d270.png",
+            "image": "https://user-images.githubusercontent.com/62257716/264520512-4dc72e4e-bd28-4eb1-886f-56b3efb001c4.png",
             "resizeMode": "contain",
             "backgroundColor": "#1a1e47"
         },
