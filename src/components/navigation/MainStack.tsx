@@ -39,7 +39,7 @@ const Main = () => {
                             </View>
                             <About />
                             <Text style={nav_styles.helpText}>
-                                You can review this info any time in the <Text style={{ fontFamily: 'Grapes-Header-b' }}>About</Text> section.
+                                You can review this info any time in the <Text style={{ fontFamily: 'Grape-Header-b' }}>About</Text> section.
                                 <MaterialCommunityIcons name='fruit-grapes-outline' size={20} color="#1a1e47" />
                             </Text>
                         </View>

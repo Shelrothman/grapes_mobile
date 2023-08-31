@@ -7,7 +7,7 @@ import { useAuthContext } from "../../contexts/AuthProvider";
 import { AccountService } from "../../services/AccountService";
 import { Button } from 'react-native-rapi-ui';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamList, "Register">) {
     const [ email, setEmail ] = useState<string>("");
@@ -25,14 +25,15 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
         const { user } = data;
         if (!error && !user) {
             setLoading(false);
-            // NOT requiring email confirmation.. only requiring directing to admin for an update
+            // NOT requiring email confirmation.. only requiring directing to admin to go through
         }
         if (error) {
             setLoading(false);
             alert(error.message); // alerts if duplicate email
         }
         if (user) {
-            const data = await AccountService.setUpNewUser(email, user.id);
+            const accountService = new AccountService();
+            const data = await accountService.setUpNewUser(email, user.id);
             if (!data) { 
                 alert("There was an error setting up your account. Please try again later.");
                 return navigation.navigate("Login");
@@ -71,8 +72,7 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
                                 {loading ? "Loading" : "Create an account"}
                             </Text>}
                             onPress={() => { register(); }} color="#a8e4a0" disabled={loading}
-                            rightContent={<MaterialCommunityIcons name="open-in-new" size={25} color="black" />}
-
+                            rightContent={<FontAwesome name="check-square-o" size={25} color="black" />}
                         />
                     </View>
                     <View style={{ flexDirection: "row", alignItems: "center", marginTop: 15, justifyContent: "center" }} >

@@ -7,7 +7,20 @@ import { cleanStringNoExtraSpace } from "../utils";
  * ! to handle any errors in here, just throw an Error if there is one and then 
  * in the calling function, catch it and handle it there
  */
+
+const TABLE_NAME = 'user_names';
+
 export class AccountService {
+    userNameTable: string;
+
+
+    constructor() {
+        this.userNameTable = TABLE_NAME;
+        this.changeConfig = this.changeConfig.bind(this);
+        this.changeDisplayName = this.changeDisplayName.bind(this);
+        this.changeEmail = this.changeEmail.bind(this);
+        this.changePassword = this.changePassword.bind(this);
+    }
 
     private changeEmail = async (emailVal: string): Promise<User | AuthError | null> => {
         const {
@@ -17,6 +30,13 @@ export class AccountService {
         if (error) return error;
         return user;
     };
+
+    private getTotalRows = async (): Promise<number> => {
+        const { data, count } = await supabase
+            .from(this.userNameTable)
+            .select('*', { count: 'exact', head: true })
+        return count ? count : 0;
+    }
 
     private changePassword = async (passwordVal: string): Promise<User | AuthError | null> => {
         const {
@@ -31,7 +51,7 @@ export class AccountService {
         const user_id = (await supabase.auth.getSession()).data.session?.user?.id;
         if (user_id) {
             const { data, error } = await supabase
-                .from('user_names')
+                .from(this.userNameTable)
                 .upsert({ id: user_id, user_name: displayVal })
                 .select();
             if (error) return error;
@@ -43,16 +63,18 @@ export class AccountService {
     /** used during reset password */
     static getUserByEmail = async (email: string): Promise<GrapesUser | null | PostgrestError> => {
         const { data, error } = await supabase
-            .from('user_names')
+            .from(TABLE_NAME)
             .select('*')
             .eq('email_val', email);
         if (error) return error;
         return data ? data[ 0 ] : null;
     };
 
-    static setUpNewUser = async (email: string, id: string): Promise<any> => {
-        const { data, error } = await supabase.from('user_names')
-            .insert({ id, user_name: email, email_val: email })
+    setUpNewUser = async (email: string, id: string): Promise<any> => {
+        const count = await this.getTotalRows();
+        const user_name = `user00g${count + 1}`;
+        const { data, error } = await supabase.from(this.userNameTable)
+            .insert({ id, user_name, email_val: email })
             .select();
         if (error) return error;
         return data ? data[ 0 ] : null;
@@ -69,8 +91,8 @@ export class AccountService {
                     break;
                 case "password": retVal = await this.changePassword(cleanStringNoExtraSpace(configVal));
                     break;
-                case "display": retVal = await this.changeDisplayName(cleanStringNoExtraSpace(configVal)) 
-                break;
+                case "display": retVal = await this.changeDisplayName(cleanStringNoExtraSpace(configVal))
+                    break;
             }
             return retVal;
         } catch (error: any) {
