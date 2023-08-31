@@ -5,7 +5,12 @@
 import { Grape, GrapeDayLetter, GrapeResponse, Home_Grape } from "../types";
 import Toast from 'react-native-toast-message';
 import * as Clipboard from 'expo-clipboard';
-
+import { getCalendars } from 'expo-localization';
+export type dateTitleProps = {
+    month: number;
+    year: number;
+    day: number;
+};
 
 export const copyToClipboard = async (text: string) => {
     await Clipboard.setStringAsync(text);
@@ -83,3 +88,33 @@ export const isCloseToBottom = ({ layoutMeasurement, contentOffset, contentSize 
 
 
 export const cleanStringNoExtraSpace = (str: string) => str.replace(/\s{2,}/, '').trim()
+
+const getDayIndex = ({ year, month, day }: dateTitleProps) => {
+    return (year + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400) + Math.floor((13 * month + 8) / 5) + day) % 7;
+}
+
+
+export function getLocalDateForTitle(date: string) {
+    return formatDateToTitle(new Date(date).toLocaleString('en-US', { timeZone: getCalendars()[ 0 ].timeZone! }))
+}
+
+
+
+/**
+ * format local date for title
+ *  this version avoids using any Date object instantiation and 
+ * calculates the day of the week using the Zeller's Congruence algorithm.
+ * @link https://www.geeksforgeeks.org/zellers-congruence-find-day-date/
+ */
+function formatDateToTitle(inputDate: string) {
+    const daysOfWeek = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ];
+    const months = [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    const [ month, day, year ] = inputDate.split('/').map(part => parseInt(part, 10));
+    const dayOfWeekIndex = getDayIndex({ year, month, day })
+    const dayOfWeek = daysOfWeek[ dayOfWeekIndex ];
+    const formattedDate = `${dayOfWeek}, ${day} ${months[ month - 1 ]} ${year}`;
+    return formattedDate;
+}
