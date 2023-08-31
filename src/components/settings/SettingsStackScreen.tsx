@@ -10,7 +10,7 @@ const Tab = createMaterialTopTabNavigator();
 export function SettingsStackScreen() {
 
     const { height, width } = useWindowDimensions();
-    // TODO there is an issue where there appears some inner padding on the Account screen but i cannot for hte life of me figure out where it is coming from i have looked through all the params and they are saetup just lije the other screens
+    // todo: there is an issue where there appears some inner padding on the Account screen but i cannot for hte life of me figure out where it is coming from i have looked through all the params and they are saetup just lije the other screens
     // * it only happens in ios aand not in the web version
 
     return (

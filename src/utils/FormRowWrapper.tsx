@@ -7,7 +7,7 @@ import { Octicons } from '@expo/vector-icons';
 import { my_styles } from "../styles/my";
 import { Button } from 'react-native-rapi-ui';
 
-// TODO LOTS of cleanup and fix the Change email button styl;e and the font style for the Buttons wtf
+// todo: LOTS of cleanup and fix the Change email button styl;e and the font style for the Buttons wtf
 
 
 type FormRowWrapperProps = {
@@ -24,7 +24,7 @@ type FormRowWrapperProps = {
 const HELP_TEXT: MyMap = { 'Display Name': "How your name appears in the global feed.", 'Email': "This is what you use to login. Press the button below to change it.", 'Password': '' };
 const maxLength: MyNumMap = { 'Display Name': 8, 'Email': undefined, 'Password': 15, };
 
-// TODO way need to modulate the repetitive view input view
+// todo: way need to modulate the repetitive view input view
 
 /**
  * @description wrapper component for a form row containing, label, input, helpText, and save button

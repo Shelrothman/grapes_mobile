@@ -11,7 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect } from "@react-navigation/native";
 import { Button } from 'react-native-rapi-ui';
 
-// TODO clean everything up and modulate to a servie like did for home ui
+// todo: clean everything up and modulate to a servie like did for home ui
 
 // !! shoot! the problem now is like in the web i canm update and send new doisplay name. but not working from ios...wtf
 // * well its bc its responding with a 409

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-// TODO : a bunch of these are repeated in my_styles so consolidate
+// todo: : a bunch of these are repeated in my_styles so consolidate
 
 /**
  * @description styles for all the components in the global screens

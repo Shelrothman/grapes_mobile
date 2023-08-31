@@ -9,7 +9,7 @@ import { my_styles } from "../../styles/my";
 import { Home_Grape } from "../../types";
 import { HomePageService } from "../../services/ui";
 
-// TODO make sure i double checkd there even a change before posting to db (like if they tap in but no change)
+// todo: make sure i double checkd there even a change before posting to db (like if they tap in but no change)
 
 export default function HomeComponent() {
     const height = useHeaderHeight();

@@ -4,7 +4,7 @@ import { supabase } from "../../initSupabase";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AuthStackParamList } from "../../types/navigation";
 import { Button } from 'react-native-rapi-ui';
-
+import { AntDesign } from '@expo/vector-icons';
 
 export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamList, "Login">) {
     const [ email, setEmail ] = useState<string>("");
@@ -27,7 +27,7 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
     }
     return (
         <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled style={{ flex: 1, backgroundColor: "#1a1e47", }}>
-            <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: "#1a1e47", marginTop: 40,  }}>
+            <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: "#1a1e47", marginTop: 40, }}>
                 <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }} >
                     <Image resizeMode="contain" style={{ height: 275, width: 300 }}
                         source={require("../../assets/images/login.png")}
@@ -51,14 +51,14 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
                         value={password} autoCapitalize="none" autoComplete="off" autoCorrect={false}
                         secureTextEntry={true} onChangeText={(text) => setPassword(text)}
                     />
-                    <View style={{ marginTop: 20, padding: 5, flexDirection: 'row', justifyContent: 'center'  }}>
-                        {/* // TODO  change this and other buttons in auth flow to use touchopacoity wrapping the texts*/}
+                    <View style={{ marginTop: 20, padding: 5, flexDirection: 'row', justifyContent: 'center' }}>
+                        {/* // todo:  change this and other buttons in auth flow to use touchopacoity wrapping the texts*/}
                         <Button onPress={() => { login(); }}
                             disabled={loading}
                             color="#a8e4a0" style={{ borderWidth: 2, borderRadius: 10, borderColor: '#474115', minWidth: '85%', maxWidth: '85%' }}
-                            leftContent={<Text style={{ fontFamily: 'Grape-Header-b', fontSize: 14, color: 'black'}}>
-                            {loading ? "Loading" : "Continue"}
-                        </Text>}
+                            leftContent={<Text style={{ fontFamily: 'Grape-Header-b', fontSize: 14, color: 'black' }}>
+                                {loading ? "Loading" : "Continue"}</Text>}
+                            rightContent={<AntDesign name="login" size={24} color="black" />}
                         />
                     </View>
                     <View style={{ flexDirection: "row", alignItems: "center", marginTop: 15, justifyContent: "center" }} >

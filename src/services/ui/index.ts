@@ -4,7 +4,7 @@ import { HomeService } from "../HomeService";
 import { defaultGrape } from "../../utils/constants";
 
 
-// Todo tests and make files liek this for the other screens
+// todo: tests and make files liek this for the other screens
 
 /**
  * @class HomePageService
@@ -21,9 +21,10 @@ export class HomePageService {
     ) {
         try {
             const response = await HomeService.getOrCreateToday(user_uid);
-            // TODO caching mechanism or something around here or in HomeService
-            if (response !== null) setGrapeFormState(resToHomeGrape(response));
-            else setIsError(true);
+            // todo: caching mechanism or something around here or in HomeService
+            if (response !== null) return setGrapeFormState(resToHomeGrape(response));
+            else console.error('response was null wha?');
+            //FIXME:  lets figure ^^this out over next few days
         } catch (error) {
             setIsLoading(false);
             console.error('Error fetching data:', error);
@@ -34,7 +35,7 @@ export class HomePageService {
 
     static handleOnEndEditing(
         formState: Home_Grape,
-        setFormState: React.Dispatch<React.SetStateAction<Home_Grape|null>>,
+        setFormState: React.Dispatch<React.SetStateAction<Home_Grape | null>>,
         subKey: string,
         user_uid: string,
     ) {

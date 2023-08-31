@@ -27,13 +27,13 @@ export function Global() {
     useFocusEffect( // * this runs only when the screen is refocused
         React.useCallback(() => {
             fetchData().then(() => setIsInitialLoading(false));
-            return () => { resetPage() }; // TODO remove this need and just have user pull down to refresh
+            return () => { resetPage() }; // todo: remove this need and just have user pull down to refresh
         }, [])
     );
 
 
     const onRefresh = React.useCallback(() => {
-        // TODO caching would be nice here
+        // TODO: caching would be nice here
         setIsInitialLoading(true);
         setRefreshing(true);
         fetchData().finally(() => {

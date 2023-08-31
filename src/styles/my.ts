@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-// TODO remove the ones i dont use
+// todo: remove the ones i dont use
 
 
 /**
