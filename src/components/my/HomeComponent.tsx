@@ -25,7 +25,6 @@ export default function HomeComponent() {
     useFocusEffect(
         React.useCallback(() => {
             fetchData().finally(() => setIsLoading(false));
-            // return () => setIsLoading(true);
         }, [ sessionUser ])
     );
 
