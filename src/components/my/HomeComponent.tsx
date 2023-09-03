@@ -18,12 +18,14 @@ export default function HomeComponent() {
     const [ isLoading, setIsLoading ] = useState<boolean>(true);
     const [ isError, setIsError ] = useState<boolean>(false);
     const [ grapeFormState, setGrapeFormState ] = useState<Home_Grape | null>(null);
+    
+    // PICKUP: grapeDataOnLoad setGrapeDataOnLoad.// to use for comparing to not send it erroneously
 
     /** memoize the fetchData function so that it only runs when the sessionUser changes or when the screen is re-focused */
     useFocusEffect(
         React.useCallback(() => {
-            fetchData().then(() => setIsLoading(false));
-            return () => setIsLoading(true);
+            fetchData().finally(() => setIsLoading(false));
+            // return () => setIsLoading(true);
         }, [ sessionUser ])
     );
 
@@ -32,7 +34,6 @@ export default function HomeComponent() {
         await HomePageService.fetchDataOnFocus(
             sessionUser!.user_uid,
             setGrapeFormState,
-            setIsLoading,
             setIsError
         );
     }

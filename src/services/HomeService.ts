@@ -23,8 +23,7 @@ export class HomeService {
     };
 
     private handleError(error: Partial<PostgrestError>) {
-        console.log(error);
-        throw new Error(error.message);
+        console.error('Home Service Error: ', JSON.stringify(error, undefined, 2));
     }
 
     private doesRowExist = async (user_id: string, utc_today: string): Promise<boolean> => {
@@ -49,7 +48,7 @@ export class HomeService {
     private addRow = async (grape: Partial<GrapeResponse>): Promise<GrapeResponse | null> => {
         const { data, error } = await supabase
             .from(this.tableName)
-            .insert(grape) 
+            .insert(grape)
             .select() // in v2 you have to select the new record
         if (error) this.handleError(error);
         return data ? data[ 0 ] : null;
@@ -91,20 +90,18 @@ export class HomeService {
 
     static getOrCreateToday = async (user_id: string): Promise<GrapeResponse | null> => {
         let resVal: GrapeResponse | null = null;
+        const homeService = new HomeService();
         try {
-            const homeService = new HomeService();
             const today = getUTCDate();
             const existence = await homeService.doesRowExist(user_id, today);
-            // console.log('existence of todays grape', existence);
             if (existence) {
                 resVal = await homeService.getRow(user_id, today);
             } else {
-                // console.log("existence," , existence)
                 resVal = await homeService.addRow({ user_id, created_at: today });
             }
-        } catch (error) {
-            // this should really only catch if duplcation is attempted but we catch to be sure
-            // console.error(error);
+        } catch (error: any) {
+            homeService.handleError(error);
+            return null;
         }
         return resVal;
     }

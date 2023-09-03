@@ -95,9 +95,7 @@ export const cleanStringNoExtraSpace = (str: string) => str.replace(/\s{2,}/, ''
  *  calculates the day of the week using the Zeller's Congruence algorithm.
  * @param {dateTitleProps} { year, month, day }
  */
-const getDayIndex = ({ year, month, day }: dateTitleProps) => {
-    return (year + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400) + Math.floor((13 * month + 8) / 5) + day) % 7;
-}
+const getDayIndex = ({ year, month, day }: dateTitleProps) =>  (year + Math.floor(year / 4) - Math.floor(year / 100) + Math.floor(year / 400) + Math.floor((13 * month + 8) / 5) + day) % 7;
 
 
 export function getLocalDateForTitle(date?: string) {

@@ -16,7 +16,7 @@ export class HomePageService {
     static async fetchDataOnFocus(
         user_uid: string,
         setGrapeFormState: React.Dispatch<React.SetStateAction<Home_Grape | null>>,
-        setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
+        // setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
         setIsError: React.Dispatch<React.SetStateAction<boolean>>,
     ) {
         try {
@@ -26,7 +26,6 @@ export class HomePageService {
             else console.error('response was null wha?');
             //FIXME:  lets figure ^^this out over next few days
         } catch (error) {
-            setIsLoading(false);
             console.error('Error fetching data:', error);
             setIsError(true);
         }
@@ -42,6 +41,8 @@ export class HomePageService {
         const inputValue = formState[ subKey ] || defaultGrape[ subKey ];
         if (inputValue.length <= 3) return; // dont send a blank thing
         if (inputValue === defaultGrape[ subKey ]) return; // its the same
+        // FIXME: this needs to check if the value is the same as it just was, if so dont send
+        // TODO: so make a state for that..
         const homeService = new HomeService();
         const toSend = {
             letter: subKey,
