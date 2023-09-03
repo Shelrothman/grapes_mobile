@@ -6,8 +6,7 @@ import { buildDateArray, isCloseToBottom } from "../../utils";
 import { GrapeDayLetter } from "../../types";
 import { Ionicons } from '@expo/vector-icons';
 
-//!! todo: move to in here! 
-
+//!! todo: pu here... 
 
 
 /** 

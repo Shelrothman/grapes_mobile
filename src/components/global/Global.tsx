@@ -14,6 +14,8 @@ import { isCloseToBottom } from '../../utils';
 export function Global() {
     const [ globalData, setGlobalData ] = useState<SharedLetterUI[] | null>(null);
     const [ isInitialLoading, setIsInitialLoading ] = useState(true);
+    
+    
     const [ isMoreLoading, setIsMoreLoading ] = useState(false);
     const [ refreshing, setRefreshing ] = useState(false);
 
@@ -27,7 +29,7 @@ export function Global() {
     useFocusEffect( // * this runs only when the screen is refocused
         React.useCallback(() => {
             fetchData().then(() => setIsInitialLoading(false));
-            return () => { resetPage() }; // todo: remove this need and just have user pull down to refresh
+            // return () => { resetPage() }; // todo: remove this need and just have user pull down to refresh
         }, [])
     );
 
@@ -42,14 +44,14 @@ export function Global() {
         });
     }, []);
 
-    function resetPage() {
-        // setGlobalData(null);
-        setCurrentPage(1);
-        setBottomText(' Load More');
-        setDisableLoadMore(false);
-        setMaxLength(10);
-        setLoadMoreVisibility(false);
-    }
+    // function resetPage() { // derppp you only really should have it be once like unless they exit the app and reponen or else you are erroneously making calls tothe db
+    //     // setGlobalData(null);
+    //     setCurrentPage(1);
+    //     setBottomText(' Load More');
+    //     setDisableLoadMore(false);
+    //     setMaxLength(10);
+    //     setLoadMoreVisibility(false);
+    // }
 
     async function fetchData() {
         try {
@@ -58,10 +60,11 @@ export function Global() {
             const maxCount = await globalService.getTotalRows();
             setMaxLength(maxCount);
         } catch (error) {
-            setIsInitialLoading(false);
             console.error('Error fetching data:', error);
         }
     };
+
+    // JUst do infinite scroll>>>??? kind of seems like i should do that instead...
 
     const handleOnScroll = (nativeEvent: NativeScrollEvent) => {
         if (maxLength <= globalData!.length) return setLoadMoreVisibility(false);
