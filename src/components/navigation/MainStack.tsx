@@ -51,7 +51,9 @@ const Main = () => {
     }
 
     return (
-        <MainStack.Navigator screenOptions={{ headerShown: false }} >
+        <MainStack.Navigator 
+        screenOptions={{ headerShown: false }} 
+        >
             <MainStack.Screen name="MainTabs" component={MainTabs} />
             {/* // * aka.. "Layout" */}
         </MainStack.Navigator>

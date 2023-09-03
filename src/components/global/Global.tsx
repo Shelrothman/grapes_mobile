@@ -14,44 +14,46 @@ import { isCloseToBottom } from '../../utils';
 export function Global() {
     const [ globalData, setGlobalData ] = useState<SharedLetterUI[] | null>(null);
     const [ isInitialLoading, setIsInitialLoading ] = useState(true);
-    
-    
+
+
     const [ isMoreLoading, setIsMoreLoading ] = useState(false);
     const [ refreshing, setRefreshing ] = useState(false);
 
-    const [ loadMoreVisibility, setLoadMoreVisibility ] = useState<boolean>(false);
+    const [ needToLoadMore, setNeedToLoadMore ] = useState<boolean>(false);
+    // * for each odf ^ these states its reallylike shoule we load more.
+
+    const flatListRef = React.useRef<React.MutableRefObject<FlatList<SharedLetterUI>> | null>(null);
+
     const [ currentPage, setCurrentPage ] = useState<number>(1);
-    const [ bottomText, setBottomText ] = useState<string>(' Load More');
-    const [ disableLoadMore, setDisableLoadMore ] = useState<boolean>(false);
+    const [ noMoreLeft, setNoMoreLeft ] = useState<boolean>(false);
     const [ maxLength, setMaxLength ] = useState<number>(10);
     const globalService = new GlobalService();
 
     useFocusEffect( // * this runs only when the screen is refocused
         React.useCallback(() => {
-            fetchData().then(() => setIsInitialLoading(false));
-            // return () => { resetPage() }; // todo: remove this need and just have user pull down to refresh
+            fetchData().finally(() => setIsInitialLoading(false));
+            return () => {
+                setNoMoreLeft(false);
+                setNeedToLoadMore(false);
+            }
         }, [])
     );
 
+    // !! PICKUP:  infiniste scroll is set upppp.. now just need to see why the bottom div isnt showing...
 
-    const onRefresh = React.useCallback(() => {
+    // const onRefresh = React.useCallback(() => {
+    const onRefresh = () => {
         // TODO: caching would be nice here
         setIsInitialLoading(true);
         setRefreshing(true);
         fetchData().finally(() => {
             setRefreshing(false);
             setIsInitialLoading(false);
+            setNoMoreLeft(false);
+            setCurrentPage(1);
         });
-    }, []);
+    };
 
-    // function resetPage() { // derppp you only really should have it be once like unless they exit the app and reponen or else you are erroneously making calls tothe db
-    //     // setGlobalData(null);
-    //     setCurrentPage(1);
-    //     setBottomText(' Load More');
-    //     setDisableLoadMore(false);
-    //     setMaxLength(10);
-    //     setLoadMoreVisibility(false);
-    // }
 
     async function fetchData() {
         try {
@@ -64,13 +66,13 @@ export function Global() {
         }
     };
 
-    // JUst do infinite scroll>>>??? kind of seems like i should do that instead...
+    // const handleOnScroll = (event: NativeScrollEvent) => {
+    //     const isBottom = isCloseToBottom(event);
+    //     if (isBottom) {
+    //         setNeedToLoadMore(true);
+    //     }
+    // };
 
-    const handleOnScroll = (nativeEvent: NativeScrollEvent) => {
-        if (maxLength <= globalData!.length) return setLoadMoreVisibility(false);
-        if (isCloseToBottom(nativeEvent)) return setLoadMoreVisibility(true);
-        else return setLoadMoreVisibility(false);
-    };
 
     async function fetchNextSet() {
         try {
@@ -83,18 +85,19 @@ export function Global() {
         }
     };
 
-    const handlePressLoadMore = () => {
+    const handleLoadMore = () => {
         if (maxLength >= globalData!.length) {
             setIsMoreLoading(true);
-            fetchNextSet().then(() => {
+            return fetchNextSet().then(() => {
                 setCurrentPage((prev) => prev + 1);
             }).finally(() => {
                 setIsMoreLoading(false);
-                setLoadMoreVisibility(false);
+                // setNeedToLoadMore(false);
             });
         } else {
-            setDisableLoadMore(true);
-            setLoadMoreVisibility(false);
+            // else there is no more data to load
+            setNoMoreLeft(true);
+            setNeedToLoadMore(false);
         }
     };
 
@@ -107,28 +110,34 @@ export function Global() {
             <View style={{ paddingBottom: 20, marginBottom: 20 }}>
                 {isInitialLoading ? <Loading /> : (
                     <FlatList
+                        // @ts-ignore
+                        ref={flatListRef}
                         data={globalData ? globalData : []}
                         renderItem={({ item }) => <SharedLetter {...item} onCopyClick={copyToClipboard} />}
-                        showsVerticalScrollIndicator={false}
-                        onScroll={({ nativeEvent }) => handleOnScroll(nativeEvent)}
+                        // showsVerticalScrollIndicator={false}
+                        // onScroll={({ nativeEvent }) => handleOnScroll(nativeEvent)}
                         alwaysBounceVertical={false}
                         // bounces={false} have to disable so refresh control works
-                        scrollEnabled={!isMoreLoading}
+                        // scrollEnabled={!isMoreLoading}
+                        scrollEnabled={true}
                         keyExtractor={(item, index) => item.id.toString()}
                         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+                        onEndReached={() => handleLoadMore()}
                     />
                 )}
-                {!disableLoadMore && (
-                    <Pressable
-                        style={{ display: loadMoreVisibility ? 'flex' : 'none', ...global_styles.load_container }}
-                        onPress={() => handlePressLoadMore()} disabled={isMoreLoading}
-                    >
-                        {isMoreLoading ? <Text>Loading...</Text> : (
-                            <Text><Ionicons name="md-cloud-download" size={24} color="#1a1e47" />{bottomText}</Text>
-                        )}
-                    </Pressable>
-                )}
             </View>
+            {noMoreLeft && (
+                <Pressable
+                    style={{ display: needToLoadMore ? 'flex' : 'none', ...global_styles.load_container }}
+                    onPress={() => handleLoadMore()}
+                    disabled={isMoreLoading}
+                >
+                    {isMoreLoading ? <Text>Loading...</Text> : (
+                        // <Text><Ionicons name="md-cloud-download" size={24} color="#1a1e47" />{bottomText}</Text>
+                        <Text>Back To Top</Text>
+                    )}
+                </Pressable>
+            )}
         </SafeAreaView>
     )
 }

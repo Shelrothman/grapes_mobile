@@ -16,7 +16,6 @@ export class HomePageService {
     static async fetchDataOnFocus(
         user_uid: string,
         setGrapeFormState: React.Dispatch<React.SetStateAction<Home_Grape | null>>,
-        // setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
         setIsError: React.Dispatch<React.SetStateAction<boolean>>,
     ) {
         try {
