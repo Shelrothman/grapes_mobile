@@ -1,22 +1,19 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
-import Home from "../my/Home";
+import HomeComponent from "../my/HomeComponent";
 import History from "../history/History";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { SettingsStackScreen } from "../settings/SettingsStackScreen";
 import { Global } from "../global/Global";
 import { MaterialIcons } from '@expo/vector-icons'; // not filled
 import { FontAwesome } from '@expo/vector-icons'; // filled
-import { useHomeGrapeContext } from '../../contexts/HomeGrapeContext';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+const Tab = createMaterialBottomTabNavigator();
 
 
-const Tab = createMaterialTopTabNavigator();
 
-// * disable swiping everywhere so it doesnt confuse people
-const tabBarOptions = { tabBarShowLabel: false, swipeEnabled: false, };
+// * disable swiping everywhere so it doesn't confuse people
 
 const MainTabs = () => {
-    const { tabBarEnabled } = useHomeGrapeContext();
     const buildTabBarIcon = (routeName: string, focused: boolean, color: string) => {
         const iconProps = { size: 25, color: color };
         if (routeName === 'Home') {
@@ -38,18 +35,17 @@ const MainTabs = () => {
                 tabBarIcon: ({ focused, color }) => {
                     if (route.name) return buildTabBarIcon(route.name, focused, color);
                 },
-                tabBarActiveTintColor: '#8ABD91',
-                tabBarInactiveTintColor: '#f3f0f5', // text color for words that are not selected
-                tabBarStyle: {
-                    backgroundColor: '#4E1E66', paddingTop: 50, paddingBottom: 10,
-                    display: `${tabBarEnabled ? 'flex' : 'none'}`
-                },
-                tabBarIndicatorStyle: { backgroundColor: '#cb9de2', height: 5 },
-            })}>
-            <Tab.Screen name="Home" component={Home} options={{ ...tabBarOptions }} />
-            <Tab.Screen name="Global" component={Global} options={tabBarOptions} />
-            <Tab.Screen name="More" component={SettingsStackScreen} options={tabBarOptions} />
-            <Tab.Screen name="History" component={History} options={tabBarOptions} />
+            })}
+            labeled={false}
+            activeColor='#4E1E66'
+            inactiveColor='#f3f0f5'
+            // PickUP: make the height dynamic
+            barStyle={{ height: 100, backgroundColor: '#1a1e47', borderTopColor: '#474115', borderTopWidth: 2, }}
+        >
+            <Tab.Screen name="Home" component={HomeComponent} />
+            <Tab.Screen name="Global" component={Global} />
+            <Tab.Screen name="More" component={SettingsStackScreen} />
+            <Tab.Screen name="History" component={History} />
         </Tab.Navigator>
     );
 };

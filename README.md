@@ -16,6 +16,7 @@ Grapes-App is a mobile app for mental health and wellness; a pocket-size version
 - [Stack](#stack)
 - [Licenses](#licenses)
 - [Future Features](#future-features)
+- [Contact](#get-in-touch)
 
 ## What is GRAPES©?
 GRAPES© is a daily practice. Each day, choose a simple activity from each of the different categories. GRAPES is great for anyone, but particularly can help with those who experience anxiety and depression. It can help you to feel more balanced and improve your mood. 
@@ -64,9 +65,12 @@ Learn more about what's behind GRAPES© and how it can help you:
 
 ## Get your GRAPES© on!
 
-[![Run in Expo Go](https://img.shields.io/badge/Run%20in%20Expo%20Go-a8e4a0.svg?style=flat-square&logo=EXPO&labelColor=4E1E66&logoColor=fff)](https://expo.dev/%40nini_bee/grapes-app?serviceType=eas&distribution=expo-go&scheme=exp%2Bgrapes-app&channel=master&sdkVersion=49.0.0)
+[![Run in Expo Go](https://img.shields.io/badge/Run%20in%20Expo%20Go-a8e4a0.svg?style=flat-square&logo=EXPO&labelColor=4E1E66&logoColor=fff)](https://expo.dev/%40nini_bee/grapes-app?serviceType=eas&distribution=expo-go&scheme=exp%2Bgrapes-app&channel=master&sdkVersion=49.0.0) &nbsp;&nbsp;&nbsp;&nbsp;
+[![Or try the public beta mode](https://img.shields.io/badge/or_try_the_public_beta-🧪-4E1E66)](https://expo.dev/%40nini_bee/grapes-app?serviceType=eas&distribution=expo-go&scheme=exp%2Bgrapes-app&channel=dev&sdkVersion=49.0.0)
 
-[![Download on the Apple App Store](https://img.shields.io/badge/App%20Store-a8e4a0.svg?style=flat-square&logo=App-Store&labelColor=4E1E66&logoColor=fff)](https://apps.apple.com/us/app/grapes-app/id6458539604)
+
+
+[![Download on the Apple App Store](https://img.shields.io/badge/App%20Store-a8e4a0.svg?style=flat-square&logo=App-Store&labelColor=4E1E66&logoColor=fff)](https://apps.apple.com/us/app/grapes-app/id6458539604)&nbsp; &nbsp;<i>(free download)</i>
 
 [![App Privacy Policy](https://img.shields.io/badge/Grapes_App-privacy_policy-4E1E66)](https://grapes-admin.vercel.app/?privacypolicy)
 
@@ -86,6 +90,7 @@ Learn more about what's behind GRAPES© and how it can help you:
 - [React](https://reactjs.org/)
 - [WSL2](https://ubuntu.com/tutorials/install-ubuntu-on-wsl2-on-windows-11-with-gui-support#1-overview)
 - [Bash](https://www.gnu.org/software/bash/)
+- [Metro](https://facebook.github.io/metro/)
 - [Babel](https://babeljs.io/)
 - [VSCode](https://code.visualstudio.com/)
 
@@ -96,15 +101,13 @@ Learn more about what's behind GRAPES© and how it can help you:
 
 
 ## Future Features
-- ability to reset password from within the app. (currently have to go to admin page)
-- dynamic width for the global page. (for ipad)
 - create build and release for android. (if there is demand)
 - ability to display each day to a widget on their os.
-- optional push notifications reminding users
+- optional push notifications reminding users to fill-out or complete their daily GRAPES©.
 - implement caching if needed
-- potentially convert data to blob storage for scaling if needed
+- potentially convert backend data to blob storage for scaling if needed
 
 ## Get in touch
-[![Shelby Rothman Developer Website](https://img.shields.io/badge/Shelby%20Rothman🧑‍💻-4E1E66)](https://shelbyrothman.com/) &nbsp;  &nbsp;  &nbsp; 
+[![Shelby Rothman Developer Website](https://img.shields.io/badge/Shelby_Rothman-🧑‍💻-4E1E66)](https://shelbyrothman.com/) &nbsp;  &nbsp;  &nbsp; 
 [![Email the Developer](https://img.shields.io/badge/Email%20📧-a8e4a0)](mailto:shel.programmer@gmail.com) &nbsp;  &nbsp;  &nbsp; 
 [![Follow Shelby on Github](https://img.shields.io/github/followers/Q118.svg?label=Follow&style=for-the-badge&logo=github&logoColor=FFFFFF&labelColor=4E1E66&logoWidth=20&color=a8e4a0)](https://github.com/Q118)

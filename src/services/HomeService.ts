@@ -2,7 +2,7 @@ import { PostgrestError } from "@supabase/supabase-js";
 import { supabase } from "../initSupabase";
 import { RawGlobalGrape, GrapeResponse, RawGrapeDayLetter } from "../types";
 import { getUTCDate } from "../utils";
-
+import { cleanStringNoExtraSpace } from "../utils";
 
 /**
  * @class HomeService
@@ -23,8 +23,10 @@ export class HomeService {
     };
 
     private handleError(error: Partial<PostgrestError>) {
-        console.log(error);
-        throw new Error(error.message);
+        const errorString = JSON.stringify(error, undefined, 2);
+        if (errorString.includes('violates unique constraint')) return;
+        console.error('Home Service Error: ', JSON.stringify(error, undefined, 2));
+        return;
     }
 
     private doesRowExist = async (user_id: string, utc_today: string): Promise<boolean> => {
@@ -49,14 +51,15 @@ export class HomeService {
     private addRow = async (grape: Partial<GrapeResponse>): Promise<GrapeResponse | null> => {
         const { data, error } = await supabase
             .from(this.tableName)
-            .insert(grape) 
+            .insert(grape)
             .select() // in v2 you have to select the new record
         if (error) this.handleError(error);
         return data ? data[ 0 ] : null;
     };
 
     updateLetter = async ({ letter, value, user_id }: RawGrapeDayLetter): Promise<GrapeResponse | null> => {
-        const data = await this.upsertRow({ [ letter ]: value, user_id });
+        const trimmedValue = cleanStringNoExtraSpace(value);
+        const data = await this.upsertRow({ [ letter ]: trimmedValue, user_id });
         return data ? data : null;
     }
 
@@ -90,23 +93,21 @@ export class HomeService {
 
     static getOrCreateToday = async (user_id: string): Promise<GrapeResponse | null> => {
         let resVal: GrapeResponse | null = null;
+        const homeService = new HomeService();
         try {
-            const homeService = new HomeService();
             const today = getUTCDate();
             const existence = await homeService.doesRowExist(user_id, today);
-            console.log('existence of todays grape', existence);
             if (existence) {
                 resVal = await homeService.getRow(user_id, today);
+                return resVal;
             } else {
-                console.log("existence," , existence)
                 resVal = await homeService.addRow({ user_id, created_at: today });
-                
+                return resVal;
             }
-        } catch (error) {
-            // this should really only catch if duplcation is attempted but we catch to be sure
-            // console.error(error);
+        } catch (error: any) {
+            homeService.handleError(error);
+            return null;
         }
-        return resVal;
     }
 
 }

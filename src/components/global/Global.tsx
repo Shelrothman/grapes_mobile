@@ -1,106 +1,106 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useFocusEffect } from "@react-navigation/native";
-import { View, Text, SafeAreaView, FlatList, Pressable, NativeScrollEvent } from 'react-native';
+import { View, Text, SafeAreaView, FlatList, RefreshControl } from 'react-native';
 import { SharedLetter } from './SharedLetter';
 import { GlobalService } from '../../services/GlobalService';;
-import { RawSharedLetter } from '../../types';
+import { SharedLetterUI } from '../../types';
 import { global_styles } from '../../styles/global';
 import Loading from '../../utils/Loading';
 import { copyToClipboard } from '../../utils';
-import { Ionicons } from '@expo/vector-icons';
-import { isCloseToBottom } from '../../utils';
+import { LastCard } from './LastCard';
 
 
 export function Global() {
-    const [ globalData, setGlobalData ] = useState<RawSharedLetter[] | null>(null);
-    const [ isLoading, setIsLoading ] = useState(true);
-    const [ loadMoreVisibility, setLoadMoreVisibility ] = useState<boolean>(false);
+    const [ globalData, setGlobalData ] = useState<SharedLetterUI[] | null>(null);
+    const [ isInitialLoading, setIsInitialLoading ] = useState(true);
+    const [ refreshing, setRefreshing ] = useState(false);
     const [ currentPage, setCurrentPage ] = useState<number>(1);
-    const [ bottomText, setBottomText ] = useState<string>(' Load More');
-    const [ disableLoadMore, setDisableLoadMore ] = useState<boolean>(false);
+    const [ noMoreLeft, setNoMoreLeft ] = useState<boolean>(false);
+    const [ maxLength, setMaxLength ] = useState<number>(10);
+    const flatListRef = React.useRef<React.MutableRefObject<FlatList<SharedLetterUI>> | null>(null);
     const globalService = new GlobalService();
 
     useFocusEffect( // * this runs only when the screen is refocused
         React.useCallback(() => {
-            fetchData().then(() => setIsLoading(false));
-            return () => { resetPage() };
+            fetchData().finally(() => setIsInitialLoading(false));
+            return () => {
+                cleanup();
+            }
         }, [])
     );
 
-    function resetPage() {
-        setGlobalData(null);
-        setIsLoading(true);
+    const onRefresh = React.useCallback(() => {
+        setIsInitialLoading(true);
+        setRefreshing(true);
+        fetchData().finally(() => {
+            return cleanup();
+        });
+    }, []);
+
+    const cleanup = () => {
+        setRefreshing(false);
+        setIsInitialLoading(false);
+        setNoMoreLeft(false);
         setCurrentPage(1);
-        setBottomText(' Load More');
-        setDisableLoadMore(false);
-    }
+    };
 
     async function fetchData() {
         try {
             const response = await globalService.getLastTenRows(); // get ten most recent
             setGlobalData(response);
+            const maxCount = await globalService.getTotalRows();
+            setMaxLength(maxCount);
         } catch (error) {
-            setIsLoading(false);
             console.error('Error fetching data:', error);
         }
-    };
-
-    const handleOnScroll = (nativeEvent: NativeScrollEvent) => {
-        if (isCloseToBottom(nativeEvent)) setLoadMoreVisibility(true);
-        else setLoadMoreVisibility(false);
     };
 
     async function fetchNextSet() {
         try {
             const response = await globalService.getAllRowsWithPagination(10, currentPage);
-            if (response && response.length < 1) {
-                return false;
-            } else {
-                setGlobalData([ ...globalData ? globalData : [], ...(response as RawSharedLetter[]) ]);
-                return true;
-            }
+            if (!response || response.length < 1) return;
+            return setGlobalData([ ...globalData ? globalData : [], ...(response as SharedLetterUI[]) ]);
         } catch (error) {
-            setIsLoading(false);
             console.error('Error fetching data:', error);
+            return;
         }
     };
 
-    const handlePressLoadMore = () => {
-        setIsLoading(true);
-        fetchNextSet().then((res) => {
-            if (!res) { // then there are no more rows to fetch
-                setDisableLoadMore(true);
-            } else {
+    const handleLoadMore = () => {
+        if (maxLength > globalData!.length) {
+            console.log('more left.. supposedly', maxLength, globalData!.length);
+            return fetchNextSet().then(() => {
                 setCurrentPage((prev) => prev + 1);
-            }
-        }).finally(() => setIsLoading(false));
+            }).catch((err: any) => {
+                console.error('Error fetching in loadMore:', err);
+            });
+        } else {
+            if (noMoreLeft) return; // * this is to prevent the last card from being added multiple times
+            setGlobalData([ ...globalData ? globalData : [], { id: '0', letter: 'z', value: '', user_name: '', user_id: '' } ]);
+            return setNoMoreLeft(true);
+        }
     };
 
-
     return (
-        <SafeAreaView style={global_styles.global_container}>
-            <View style={global_styles.title_container}>
-                <Text style={global_styles.title}>Global Feed (inspiration)</Text>
-            </View>
-            <View style={{ marginBottom: 20 }}>
-                {isLoading ? <Loading /> : (
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#1a1e47" }}>
+            <Text style={global_styles.title}>Global Feed (inspiration)</Text>
+            <View style={{ paddingBottom: 20, marginBottom: 20 }}>
+                {isInitialLoading ? <Loading /> : (
                     <FlatList
+                        // @ts-ignore
+                        ref={flatListRef}
                         data={globalData ? globalData : []}
-                        renderItem={({ item }) => <SharedLetter {...item} onCopyClick={copyToClipboard} />}
-                        showsVerticalScrollIndicator={false}
-                        onScroll={({ nativeEvent }) => handleOnScroll(nativeEvent)}
-                        alwaysBounceVertical={false} bounces={false}
+                        renderItem={({ item }) => {
+                            // @ts-ignore // * <-- bc of the last cards scroll to top function
+                            if (item.id === '0') return (<LastCard onClick={() => flatListRef.current?.scrollToOffset({ offset: 0 })} />);
+                            return (<SharedLetter {...item} onCopyClick={copyToClipboard} />)
+                        }}
+                        alwaysBounceVertical={false}
+                        scrollEnabled={true}
+                        keyExtractor={(item, index) => item.id.toString()}
+                        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+                        onEndReached={() => handleLoadMore()}
                     />
-                )}
-                {!disableLoadMore && (
-                    <Pressable
-                        style={{ display: loadMoreVisibility === true ? 'flex' : 'none', ...global_styles.load_container }}
-                        onPress={() => handlePressLoadMore()} disabled={disableLoadMore}
-                    >
-                        {isLoading ? <Text>Loading...</Text> : (
-                            <Text><Ionicons name="md-cloud-download" size={24} color="#2E3944" />{bottomText}</Text>
-                        )}
-                    </Pressable>
                 )}
             </View>
         </SafeAreaView>

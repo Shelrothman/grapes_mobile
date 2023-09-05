@@ -8,6 +8,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { HistoryService } from "../../services/HistoryService";
 import { resToGrape } from '../../utils';
 
+import { getLocalDateForTitle } from '../../utils';
+
 type HomeGrapeItemProps = {
     date: string;
     /** the expanded day being viewed */
@@ -18,8 +20,8 @@ type HomeGrapeItemProps = {
 };
 
 
-const ExpandDownIcon = () => <MaterialCommunityIcons name="arrow-expand-down" size={24} color="#cb9de2" style={history_styles.expander} />
-const ExpandLeftIcon = () => <MaterialCommunityIcons name="arrow-expand-left" size={24} color="#cb9de2" style={history_styles.expander} />
+const ExpandDownIcon = () => <MaterialCommunityIcons name="arrow-expand-down" size={24} color="#c6bfc9" style={history_styles.expander} />
+const ExpandLeftIcon = () => <MaterialCommunityIcons name="arrow-expand-left" size={24} color="#c6bfc9" style={history_styles.expander} />
 
 /**
  * @component - wrapper of HomeGrapeBox containing the Title/date of the grape day
@@ -38,16 +40,25 @@ export function HistoryGrapeDay({ date, day, setDay, setGrape_date }: HomeGrapeI
 
     const handlePress = async () => {
         if (day !== null) return setDayAndValidity(null, null);
-        const historyService = new HistoryService();
-        setGrape_date(date); // control which one is expanded
-        const viewGrape = await historyService.getGrapeByDate(date);
-        if (!viewGrape) return setDayAndValidity([], false);
-        return setDayAndValidity(resToGrape(viewGrape).day, true);
+        try {
+            const historyService = new HistoryService();
+            setGrape_date(date); // control which one is expanded
+            const viewGrape = await historyService.getGrapeByDate(date);
+            if (!viewGrape) return setDayAndValidity([], false);
+            return setDayAndValidity(resToGrape(viewGrape).day, true);
+        } catch (error) {
+            return setDayAndValidity([], false);
+            // console.log(error);
+        }
     };
 
+    //[ { "calendar": "gregory", "timeZone": "Europe/Warsaw", "uses24hourClock": true, "firstWeekday": 1 } ]
+    // console.log(userDeviceTimeList);
     // dateTitle in UTC time bc it is UTC in the db SO THAT the data matches...
     const dateTitle: string = new Date(date).toUTCString().slice(0, 16);
     // * always in Www, dd Mmm yyyy hh:mm:ss GMT format.. aka 16 chars long
+
+    // {/* {formatDateToTitle(new Date(date).toLocaleString('en-US', { timeZone: getCalendars()[ 0 ].timeZone! })) */}
 
     return (
         <View style={{ alignItems: 'center', marginTop: 30, }}>
@@ -56,7 +67,7 @@ export function HistoryGrapeDay({ date, day, setDay, setGrape_date }: HomeGrapeI
                 onPressIn={handlePressIn} onPressOut={handlePressOut}
                 onPress={handlePress} key={date}
             >
-                <Text style={history_styles.date_text} key={date}>{dateTitle}</Text>
+                <Text style={history_styles.date_text} key={date}> {getLocalDateForTitle(date)} </Text>
                 {day == null ? <ExpandDownIcon /> : <ExpandLeftIcon />}
             </Pressable>
             <View style={history_styles.box_container}>

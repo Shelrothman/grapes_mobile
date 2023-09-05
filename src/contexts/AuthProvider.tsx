@@ -45,9 +45,12 @@ const sessionToUser = (session: Session | null): any => {
         return {
             user_uid: session.user!.id,
             //* if userName is null, use email 
-            display_name: displayName || session.user!.email || '',
+            display_name: displayName,
             email: session.user!.email as string,
         };
+    }).catch((err) => {
+        console.error(err);
+        return null;
     });
 };
 

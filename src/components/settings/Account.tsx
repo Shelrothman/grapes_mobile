@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { ScrollView, KeyboardAvoidingView, Platform, Alert, Button, View } from "react-native";
+import React, { useState } from "react";
+import { ScrollView, KeyboardAvoidingView, Platform, Alert, View, Linking, Text } from "react-native";
 import { useHeaderHeight } from '@react-navigation/elements';
 import { supabase } from '../../initSupabase';
 import { useAuthContext, AuthUser } from "../../contexts/AuthProvider";
 import { AccountService } from "../../services/AccountService";
 import Loading from "../../utils/Loading";
 import { FormRowWrapper } from "../../utils/FormRowWrapper";
-import { MyMap } from "../../utils/constants";
+import { FormState } from "../../types";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useFocusEffect } from "@react-navigation/native";
+import { Button } from 'react-native-rapi-ui';
 
-type FormState = MyMap & {
-    /** the displayName for the user, defaults to their email */
-    display: string;
-    email: string;
-    password: string;
-};
 
 async function handleLogout() {
     const { error } = await supabase.auth.signOut();
@@ -21,26 +18,33 @@ async function handleLogout() {
     if (error) alert(error.message);
 };
 
+const support_url = "https://grapes-admin.vercel.app/?emailupdate?id=";
+
+
 export function Account() {
     const { sessionUser, setSessionUser } = useAuthContext();
-    const [ loading, setLoading ] = useState<boolean>(false);
+    const [ loading, setLoading ] = useState<boolean>(true);
     const height = useHeaderHeight();
-    const [ formState, setFormState ] = useState<FormState>({
+    const defaultFormState: FormState = {
         display: sessionUser?.display_name || sessionUser?.email || "",
         email: sessionUser?.email || "",
         password: "********",
-    });
+    };
+    const [ formState, setFormState ] = useState<FormState>(defaultFormState);
 
-    useEffect(() => {
-        setFormState({
-            display: sessionUser?.display_name || sessionUser?.email || "",
-            email: sessionUser?.email || "",
-            password: "********",
-        });
-    }, [ sessionUser ]);
+    useFocusEffect( // * this runs only when the screen is refocused
+        React.useCallback(() => {
+            setFormState(defaultFormState);
+            setLoading(false);
+            return () => {
+                setFormState(defaultFormState);
+                setLoading(true);
+            };
+        }, [ sessionUser ])
+    );
 
     const showConfirmDialog = (key: string) => Alert.alert("Are you sure?",
-        `Are you sure you want to permanetly change your ${key === 'display' ? 'display name' : key}?`, [
+        `Are you sure you want to permanently change your ${key === 'display' ? 'display name' : key}?`, [
         { text: "Cancel", style: "cancel", onPress: () => handleCancelClick(key) },
         {
             text: "OK", onPress: () => {
@@ -56,13 +60,11 @@ export function Account() {
         { text: "OK", onPress: async () => await handleLogout() },
     ]);
 
-
     function handleCancelClick(key: string) {
         if (key === 'email') return setFormState({ ...formState, email: sessionUser!.email });
         if (key === 'password') return setFormState({ ...formState, password: "********" });
         if (key === 'display') return setFormState({ ...formState, display: sessionUser!.display_name });
     };
-
 
     async function handleConfirmChange(key: string) {
         const displayKey: string = key === 'display' ? 'display name' : key;
@@ -80,8 +82,7 @@ export function Account() {
                 if (key === 'email') setSessionUser!({ ...sessionUser, email: formState.email } as AuthUser);
                 if (key === 'display') setSessionUser!({ ...sessionUser, display_name: formState.display } as AuthUser);
                 return alert(`${displayKey} updated!`);
-            }
-            else if (user == null) {
+            } else if (user == null) {
                 handleCancelClick(key);
                 return alert(`Error updating ${displayKey}.`);
             }
@@ -91,30 +92,62 @@ export function Account() {
         }
     };
 
+    const confirmEmailChange = () => Alert.alert("Are you sure?",
+        "This will direct you to an external webpage to enter your new email value. Your current session will be logged out.", [
+        { text: "Cancel", style: "cancel", onPress: () => handleCancelClick('email') },
+        { text: "Take me there", onPress: async () => await handleEmailChange() },
+    ]);
+
+    const handleEmailChange = async () => {
+        setLoading(true);
+        if (sessionUser && sessionUser.user_uid) {
+            await Linking.openURL(support_url + sessionUser.user_uid);
+            // then log them out so they can verify their new email
+            setLoading(false);
+            await handleLogout();
+        }
+        return setLoading(false);
+    };
 
     return (
-        <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled
-            style={{ flex: 1, paddingHorizontal: 20 }} keyboardVerticalOffset={height + 200}
-        >
-            {loading ? <Loading /> : (
-                <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: "#2E3944", marginTop: 20, paddingBottom: 40 }} >
-                    <View style={{ marginBottom: 20, borderColor: '#4E1E66', borderWidth: 2, backgroundColor: "#3d4b59", borderRadius: 10 }}>
-                        <Button color="#a8e4a0" title='Logout' onPress={() => showConfirmLogout()} />
-                    </View>
-                    <FormRowWrapper label="Display Name" inputValue={formState.display}
-                        onChangeText={(text) => setFormState({ ...formState, display: text })}
-                        onButtonPress={() => showConfirmDialog('display')} key="display"
-                    />
-                    {/* <FormRowWrapper label="Email" inputValue={formState.email}
-                        onChangeText={(text) => setFormState({ ...formState, email: text })}
-                        onButtonPress={() => showConfirmDialog('email')} key="email"
-                    /> */}
-                    <FormRowWrapper label="Password" inputValue={formState.password}
-                        onChangeText={(text) => setFormState({ ...formState, password: text })}
-                        onButtonPress={() => showConfirmDialog('password')} key="password"
-                    />
-                </ScrollView>
-            )}
-        </KeyboardAvoidingView>
+        <SafeAreaView style={{ flex: 1, }}>
+            <KeyboardAvoidingView behavior={Platform.OS == "ios" ? "padding" : "height"} enabled
+                style={{ flex: 1 }} keyboardVerticalOffset={height + 100}
+            >
+                {loading ? <Loading /> : (
+                    <ScrollView contentContainerStyle={{ flexGrow: 1, backgroundColor: "#1a1e47", paddingBottom: 40, }}
+                        keyboardShouldPersistTaps='handled'
+                    >
+                        <View style={{ marginBottom: 20, minWidth: '85%', maxWidth: '85%', alignSelf: 'center', }}>
+                            <Button
+                                color="#3d4b59"
+                                leftContent={<Text style={{ color: '#a8e4a0', fontFamily: 'Grape-Header-b', fontSize: 14, backgroundColor: '#3d4b59', }}>Logout</Text>}
+                                textStyle={{ color: '#a8e4a0', fontFamily: 'Body-Reg', fontSize: 16, }}
+                                onPress={() => showConfirmLogout()}
+                                style={{ borderRadius: 10, backgroundColor: '#3d4b59', borderColor: '#a8e4a0', borderWidth: 1, }}
+                            />
+                        </View>
+                        <FormRowWrapper label="Display Name" inputValue={formState.display}
+                            onChangeText={(text) => setFormState({ ...formState, display: text })}
+                            onButtonPress={() => showConfirmDialog('display')}
+                            key="display"
+                            btnText="Save Display Name"
+                            initialValue={sessionUser?.display_name || ""}
+                        />
+                        <FormRowWrapper label="Email" inputValue={formState.email}
+                            onChangeText={(text) => setFormState({ ...formState, email: text })}
+                            onButtonPress={() => confirmEmailChange()}
+                            key="email" btnText="Change Email"
+                            initialValue={sessionUser?.email || ""}
+                        />
+                        <FormRowWrapper label="New Password" inputValue={formState.password}
+                            initialValue={defaultFormState.password}
+                            onChangeText={(text) => setFormState({ ...formState, password: text })}
+                            onButtonPress={() => showConfirmDialog('password')} key="password" btnText="Change Password"
+                        />
+                    </ScrollView>
+                )}
+            </KeyboardAvoidingView>
+        </SafeAreaView>
     )
 }

@@ -1,13 +1,26 @@
 import { AuthError, PostgrestError } from "@supabase/supabase-js";
 import { supabase, User } from "../initSupabase";
-
-
+import { GrapesUser } from "../types";
+import { cleanStringNoExtraSpace } from "../utils";
 /**
  * @class AccountService - services cruding the authenticated user's account configuration
  * ! to handle any errors in here, just throw an Error if there is one and then 
  * in the calling function, catch it and handle it there
  */
+
+const TABLE_NAME = 'user_names';
+
 export class AccountService {
+    userNameTable: string;
+
+
+    constructor() {
+        this.userNameTable = TABLE_NAME;
+        this.changeConfig = this.changeConfig.bind(this);
+        this.changeDisplayName = this.changeDisplayName.bind(this);
+        this.changeEmail = this.changeEmail.bind(this);
+        this.changePassword = this.changePassword.bind(this);
+    }
 
     private changeEmail = async (emailVal: string): Promise<User | AuthError | null> => {
         const {
@@ -17,6 +30,13 @@ export class AccountService {
         if (error) return error;
         return user;
     };
+
+    private getTotalRows = async (): Promise<number> => {
+        const { data, count } = await supabase
+            .from(this.userNameTable)
+            .select('*', { count: 'exact', head: true })
+        return count ? count : 0;
+    }
 
     private changePassword = async (passwordVal: string): Promise<User | AuthError | null> => {
         const {
@@ -31,7 +51,7 @@ export class AccountService {
         const user_id = (await supabase.auth.getSession()).data.session?.user?.id;
         if (user_id) {
             const { data, error } = await supabase
-                .from('user_names')
+                .from(this.userNameTable)
                 .upsert({ id: user_id, user_name: displayVal })
                 .select();
             if (error) return error;
@@ -40,38 +60,38 @@ export class AccountService {
         return null;
     };
 
-    /*
-                    const userString: string = JSON.stringify(user);
-                const _user = JSON.parse(userString);
-                if ((_user.message && _user.message.includes('unique constraint')) && key === 'display') {
-                    handleCancelClick(key); // reset the value back
-                    return alert(`Display Name already exists, please choose another.`);
-                }
-    */
+    /** used during reset password */
+    static getUserByEmail = async (email: string): Promise<GrapesUser | null | PostgrestError> => {
+        const { data, error } = await supabase
+            .from(TABLE_NAME)
+            .select('*')
+            .eq('email_val', email);
+        if (error) return error;
+        return data ? data[ 0 ] : null;
+    };
 
-    static setUpNewUser = async (email: string, id: string): Promise<any> => {
-        const { data, error } = await supabase.from('user_names')
-            .insert({ id, user_name: email, email_val: email })
+    setUpNewUser = async (email: string, id: string): Promise<any> => {
+        const count = await this.getTotalRows();
+        const user_name = `user00g${count + 1}`;
+        const { data, error } = await supabase.from(this.userNameTable)
+            .insert({ id, user_name, email_val: email })
             .select();
         if (error) return error;
-        // todo HANDLE THE UNIQUE CONSTRAINT ERROR HERE
-
         return data ? data[ 0 ] : null;
     };
 
 
     changeConfig = async (configVal: string = "", configKey: string): Promise<User | null | AuthError | PostgrestError> => {
         try {
-
             if (configVal.length === 0) throw new Error("Cannot send an empty value");
             if (configVal === '********' && configKey === 'password') throw new Error("Password value not changed!");
             let retVal: User | null | AuthError | PostgrestError = null;
             switch (configKey) {
-                case "email": retVal = await this.changeEmail(configVal);
+                case "email": retVal = await this.changeEmail(cleanStringNoExtraSpace(configVal));
                     break;
-                case "password": retVal = await this.changePassword(configVal);
+                case "password": retVal = await this.changePassword(cleanStringNoExtraSpace(configVal));
                     break;
-                case "display": retVal = await this.changeDisplayName(configVal);
+                case "display": retVal = await this.changeDisplayName(cleanStringNoExtraSpace(configVal))
                     break;
             }
             return retVal;

@@ -1,5 +1,7 @@
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 // import * as packageJSON from '../../../package.json';
+
+
 /**
  * render this list into SectionList
  */
@@ -20,7 +22,7 @@ export const DataList: any = [
                     { letter: "r", letterTitle: "R is for Relaxation", letterValue: "Take time to relax and unwind from stress. Examples include taking a bath, reading a book, or playing with a pet." },
                     { letter: "a", letterTitle: "A is for Accomplishment", letterValue: "Commit to completing at least one task. Examples include doing the laundry or completing something from your to-do list." },
                     { letter: "p", letterTitle: "P is for Pleasure", letterValue: "Do something that you enjoy and makes you feel good. Examples include listening to your favorite music or treating yourself to a tasty snack." },
-                    { letter: "e", letterTitle: "E is for Exercise", letterValue: "Get moving to improve your move and health. Examples include doing some stretches or going for a walk." },
+                    { letter: "e", letterTitle: "E is for Exercise", letterValue: "Get moving to improve your mood and health. Examples include doing some stretches or going for a walk." },
                     { letter: "s", letterTitle: "S is for Social", letterValue: "Connect and interact with others. Examples include making small talk to a neighbor or having dinner with a friend." },
                 ]
             },
@@ -48,16 +50,16 @@ export const DataList: any = [
         title: 'How to use this App', expandableProp: true,
         data: [
             {
-                title: "Home Screen", value: "The home screen is where you can edit your grape for the day. Tap on the text in the letter you want to edit, fill it in, then hit save! From the home screen, you can share any of your letters to the global feed. ",
-                icon: <Ionicons name="home-outline" size={24} color="#cb9de2" />
+                title: "Home Screen", value: "The home screen is where you can edit your grape for the day. Tap on the text in the letter you want to edit, fill it in, then return out or tap anywhere outside the input to save your letter automatically!",
+                icon: <Ionicons name="home-outline" size={24} color="#c6bfc9" />
             },
             {
-                title: "Global Screen", value: "The global screen is where you can view other people's grapes for inspiration and ideas. You can copy any of the values directly and use.",
-                icon: <Ionicons name="earth-outline" size={24} color="#cb9de2" />
+                title: "Global Screen", value: "The global screen is where you can view other people's grapes for inspiration and ideas. You can copy any of the values directly to paste and use in your own.",
+                icon: <Ionicons name="earth-outline" size={24} color="#c6bfc9" />
             },
             {
-                title: "History Screen", value: "The history screen is where you can view your past grapes. Keep in mind we don't store your data past one month.",
-                icon: <MaterialIcons name="history" size={24} color="#cb9de2" />
+                title: "History Screen", value: "The history screen is where you can view your past grapes. Keep in mind we don't store your data past one month. On this screen, tap on a date to expand the letters for that day. From each letter row, you can optionally tap the share icon to share that individual letter to the Global feed.",
+                icon: <MaterialIcons name="history" size={24} color="#c6bfc9" />
             }
         ]
     },
@@ -113,7 +115,7 @@ export const DataList: any = [
                 value: [
                     {
                         linkTitle: "📝 Write a review",
-                        link: "https://jsonplaceholder.typicode.com/posts/2"
+                        link: `itms-apps://itunes.apple.com/app/viewContentsUserReviews/id${require("../../../eas.json").submit.production.ios.ascAppId}?action=write-review`
                     }, 
                     {
                         linkTitle: "⭐ Star the project on Github",

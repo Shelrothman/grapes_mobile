@@ -6,7 +6,6 @@ import { buildDateArray, isCloseToBottom } from "../../utils";
 import { GrapeDayLetter } from "../../types";
 import { Ionicons } from '@expo/vector-icons';
 
-
 /** 
  * @description users history page of their past grape days
  */
@@ -38,7 +37,7 @@ export default function History() {
     return (
         <SafeAreaView style={history_styles.container}>
             <View style={history_styles.title_container}>
-                <Text style={history_styles.title}>My Past G.R.A.P.E.S</Text>
+                <Text style={history_styles.title}>My Past G.R.A.P.E.S.</Text>
             </View>
             <FlatList
                 data={dates.map(date => ({ created_at: date, day: expandedDay }))}
@@ -58,7 +57,7 @@ export default function History() {
             />
             <Pressable style={{ display: loadMoreVisibility === true ? 'flex' : 'none', ...history_styles.load_container }}
                 onPress={() => handlePressLoadMore()}>
-                <Text><Ionicons name="md-cloud-download" size={24} color="#2E3944" />{' '}Load More</Text>
+                <Text style={{ fontFamily: 'Body-Reg', }}><Ionicons name="md-cloud-download" size={24} color="#1a1e47" />{' '}Load More</Text>
             </Pressable>
             <Text style={{
                 ...history_styles.load_container,

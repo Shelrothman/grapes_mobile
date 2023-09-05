@@ -1,9 +1,10 @@
 import { View, Text, SectionList, SafeAreaView } from 'react-native';
-import { A } from '@expo/html-elements';
+import { A } from '@expo/html-elements'; // use like 'Linking' @expo-linking, just a wrapper as an element.
 import { setting_styles } from '../../styles/settings';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { GrapeIcons } from '../../utils/Icons';
 import { DataList } from './DataList';
+
 
 type renderItemProps = {
     title?: string;
@@ -21,16 +22,16 @@ function RenderItem({ title = "", value, icon, }: renderItemProps) {
                     {value.filter(Boolean).map((item: any, index: number) => {
                         if (Object.keys(item).includes("letter")) {
                             return <View key={index}>
-                                <Text style={{ fontWeight: "bold", color: "white", fontSize: 16 }}>
-                                    <GrapeIcons letter={item.letter} color="#cb9de2" size={25} />{` `}{item.letterTitle}
+                                <Text style={{ fontWeight: "bold", color: "white", fontSize: 16, fontFamily: 'Grape-Header-a' }}>
+                                    <GrapeIcons letter={item.letter} color="#c6bfc9" size={25} />{` `}{item.letterTitle}
                                 </Text>
-                                <Text style={{ color: "white", fontSize: 16, marginLeft: 20, }}>
+                                <Text style={{ color: "white", fontSize: 16, marginLeft: 20, fontFamily: 'Body-Reg' }}>
                                     {item.letterValue}{'\n'}
                                 </Text>
                             </View>
                         } else if (Object.keys(item).includes("link")) {
                             return <View key={index}>
-                                <A href={`${item.link}`} style={{ color: "#a8e4a0", fontSize: 16, marginLeft: 20, marginBottom: 10 }}>
+                                <A href={`${item.link}`} style={{ color: "white", fontSize: 16, marginLeft: 20, marginBottom: 10, fontFamily: 'Body-Reg', textDecorationLine: 'underline'}}>
                                     {item.linkTitle}{` `}<MaterialCommunityIcons name="open-in-new" size={20} color="#a8e4a0" />
                                 </A>
                             </View>
@@ -38,7 +39,7 @@ function RenderItem({ title = "", value, icon, }: renderItemProps) {
                     })}
                 </View>
             }
-            return <Text style={{ fontSize: 16, color: "white" }}>{value}</Text>;
+            return <Text style={{ fontSize: 16, color: "white", fontFamily: 'Body-Reg' }}>{value}</Text>;
         }
     };
 
@@ -61,7 +62,7 @@ export function About() {
             <SectionList
                 sections={DataList}
                 renderSectionHeader={({ section: { title } }) => (
-                    <View style={{ backgroundColor: "#4E1E66", alignItems: 'center' }}>
+                    <View style={{ backgroundColor: "#608a5c", alignItems: 'center' }}>
                         <Text style={setting_styles.header}>{title}</Text>
                     </View>
                 )}
