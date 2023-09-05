@@ -52,9 +52,6 @@ export function HomeFormWrapper({ label, setFormState, formState }: FormRowWrapp
 
     return (
         <View key={label} style={my_styles.card}>
-            {/* <View style={my_styles.titleContainer}>
-                {IconContainer(true, label)}{GrapeTitleComponent(label)}{IconContainer(false, label)}
-            </View> */}
             <LetterHeader label={label} />
             <View style={my_styles.inputParent} key={`${label}-parent`}>
                 <TextInput

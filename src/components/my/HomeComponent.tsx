@@ -11,6 +11,7 @@ import { HomePageService } from "../../services/ui";
 import { getLocalDateForTitle } from "../../utils";
 
 // todo: make sure i double checkd there even a change before posting to db (like if they tap in but no change)
+// * aka... need a state to then compare...
 
 export default function HomeComponent() {
     const height = useHeaderHeight();

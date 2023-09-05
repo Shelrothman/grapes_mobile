@@ -6,9 +6,6 @@ import { buildDateArray, isCloseToBottom } from "../../utils";
 import { GrapeDayLetter } from "../../types";
 import { Ionicons } from '@expo/vector-icons';
 
-//!! todo: pu here... 
-
-
 /** 
  * @description users history page of their past grape days
  */

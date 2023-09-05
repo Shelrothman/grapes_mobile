@@ -39,7 +39,7 @@ const MainTabs = () => {
             labeled={false}
             activeColor='#4E1E66'
             inactiveColor='#f3f0f5'
-            // todo: make the height dynamic
+            // PickUP: make the height dynamic
             barStyle={{ height: 100, backgroundColor: '#1a1e47', borderTopColor: '#474115', borderTopWidth: 2, }}
         >
             <Tab.Screen name="Home" component={HomeComponent} />

@@ -7,8 +7,6 @@ import { ShareService } from "../../services/ShareService";
 import { defaultGrape } from "../../utils/constants";
 
 type ShareComponentProps = {
-    /** indicates if in edit mode */
-    editMode: boolean;
     btnSize: number;
     grape_day_letter: GrapeDayLetter;
     setLoading: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,7 +20,7 @@ type ShareComponentProps = {
  * @description a button and utility to share to the global feed
  * used in both the list in home and the individual letter edit view
  */
-export function ShareComponent({ btnSize, grape_day_letter, setLoading, editMode, color }: ShareComponentProps) {
+export function ShareComponent({ btnSize, grape_day_letter, setLoading, color }: ShareComponentProps) {
     const { sessionUser } = useAuthContext();
 
     const showConfirmDialog = () => {
@@ -43,7 +41,7 @@ export function ShareComponent({ btnSize, grape_day_letter, setLoading, editMode
 
 
     return (
-        <View style={!editMode ? my_styles.share_container : my_styles.share_container_edit}>
+        <View style={my_styles.share_container}>
             <Ionicons.Button name="md-share" size={btnSize} color={color ? color : '#a8e4a0'}
                 backgroundColor='transparent'
                 onPress={showConfirmDialog}

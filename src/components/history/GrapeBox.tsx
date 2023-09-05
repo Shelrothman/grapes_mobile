@@ -49,10 +49,7 @@ export function HistoryGrapeBox({ day, validGrape }: HomeGrapeLetterRowProps) {
                             </Text>
                         </View>
                         <View style={history_styles.shareCol}>
-                            <ShareComponent color="#4E1E66" btnSize={25}
-                                grape_day_letter={day} setLoading={setLoading} editMode={false}
-                                // loading={loading} setLoading={setLoading}s
-                            />
+                            <ShareComponent color="#4E1E66" btnSize={25} grape_day_letter={day} setLoading={setLoading} />
                         </View>
                     </View>
                 ))}

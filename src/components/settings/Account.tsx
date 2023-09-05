@@ -11,16 +11,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useFocusEffect } from "@react-navigation/native";
 import { Button } from 'react-native-rapi-ui';
 
-// todo: clean everything up and modulate to a servie like did for home ui
-
-// !! shoot! the problem now is like in the web i canm update and send new doisplay name. but not working from ios...wtf
-// * well its bc its responding with a 409
-// ! so i need to error handle better for that!
-// * but also the 409 is bc of the relation to the shared_letters hollding the username from the other tabkle so it makes a conflict
-/*
-    "message": "update or delete on table \"user_names\" violates foreign key constraint \"shared_letters_user_name_fkey\" on table \"shared_letters\""
-! so i need to use the user_uid instead of the display name in the shared letters table and THEN change the logic for when posting to the shared letters table, it sends the id instead of the display name and then CHANGE the history feed to read from the user_names table instead of the shared letters table to get the displayname property based on that id.
-*/
 
 async function handleLogout() {
     const { error } = await supabase.auth.signOut();
@@ -42,7 +32,6 @@ export function Account() {
     };
     const [ formState, setFormState ] = useState<FormState>(defaultFormState);
 
-
     useFocusEffect( // * this runs only when the screen is refocused
         React.useCallback(() => {
             setFormState(defaultFormState);
@@ -53,7 +42,6 @@ export function Account() {
             };
         }, [ sessionUser ])
     );
-
 
     const showConfirmDialog = (key: string) => Alert.alert("Are you sure?",
         `Are you sure you want to permanently change your ${key === 'display' ? 'display name' : key}?`, [
@@ -72,13 +60,11 @@ export function Account() {
         { text: "OK", onPress: async () => await handleLogout() },
     ]);
 
-
     function handleCancelClick(key: string) {
         if (key === 'email') return setFormState({ ...formState, email: sessionUser!.email });
         if (key === 'password') return setFormState({ ...formState, password: "********" });
         if (key === 'display') return setFormState({ ...formState, display: sessionUser!.display_name });
     };
-
 
     async function handleConfirmChange(key: string) {
         const displayKey: string = key === 'display' ? 'display name' : key;
@@ -122,8 +108,6 @@ export function Account() {
         }
         return setLoading(false);
     };
-
-
 
     return (
         <SafeAreaView style={{ flex: 1, }}>

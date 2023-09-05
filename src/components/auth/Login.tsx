@@ -52,7 +52,6 @@ export default function ({ navigation, }: NativeStackScreenProps<AuthStackParamL
                         secureTextEntry={true} onChangeText={(text) => setPassword(text)}
                     />
                     <View style={{ marginTop: 20, padding: 5, flexDirection: 'row', justifyContent: 'center' }}>
-                        {/* // todo:  change this and other buttons in auth flow to use touchopacoity wrapping the texts*/}
                         <Button onPress={() => { login(); }}
                             disabled={loading}
                             color="#a8e4a0" style={{ borderWidth: 2, borderRadius: 10, borderColor: '#474115', minWidth: '85%', maxWidth: '85%' }}
