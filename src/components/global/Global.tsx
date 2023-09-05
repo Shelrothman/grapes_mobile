@@ -30,7 +30,6 @@ export function Global() {
     );
 
     const onRefresh = React.useCallback(() => {
-        // TODO: caching would be nice here
         setIsInitialLoading(true);
         setRefreshing(true);
         fetchData().finally(() => {
@@ -84,9 +83,7 @@ export function Global() {
 
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "#1a1e47" }}>
-            <View style={global_styles.title_container}>
-                <Text style={global_styles.title}>Global Feed (inspiration)</Text>
-            </View>
+            <Text style={global_styles.title}>Global Feed (inspiration)</Text>
             <View style={{ paddingBottom: 20, marginBottom: 20 }}>
                 {isInitialLoading ? <Loading /> : (
                     <FlatList

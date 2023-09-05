@@ -18,7 +18,6 @@ export default function HomeComponent() {
     const [ grapeFormState, setGrapeFormState ] = useState<Home_Grape | null>(null);
     /** state to hold the initial state of the grapeData on load So That we can compare the values before posting erroneously */
     const [initialState, setInitialState] = useState<Home_Grape | null>(null);
-    // PICKUP: grapeDataOnLoad setGrapeDataOnLoad.// to use for comparing to not send it erroneously
 
     /** memoize the fetchData function so that it only runs when the sessionUser changes or when the screen is re-focused */
     useFocusEffect(

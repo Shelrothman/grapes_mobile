@@ -8,19 +8,12 @@ import Loading from "./utils/Loading";
 
 
 export default function App() {
-    // const images = [
-    //     require("../assets/images/login.png"),
-    //     require("../assets/images/register.png"),
-    //     require("../assets/images/forget.png"),
-    // ];
-
-    // ! just neeed to ujpdae4 the nav screens     to hnew fohts
 
     const GRAPE_FONTS = {
         "Body-Reg": require("./assets/fonts/Nunito-Regular.ttf"),
         "Grape-Header-a": require("./assets/fonts/Nunito-Black.ttf"),
         "Grape-Header-b": require("./assets/fonts/Nunito-Bold.ttf"),
-        "Screen-Header": require("./assets/fonts/Nunito-Light.ttf"),
+        "Screen-Header": require("./assets/fonts/Nunito-Black.ttf"),
         "Reg-Italic": require("./assets/fonts/Nunito-Italic.ttf"),
         "Bold-Italic": require("./assets/fonts/Nunito-BoldItalic.ttf"),
     };

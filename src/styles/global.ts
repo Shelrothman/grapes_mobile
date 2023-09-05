@@ -5,20 +5,7 @@ import { StyleSheet } from 'react-native';
  * and their children
  */
 export const global_styles = StyleSheet.create({
-    title: {
-        fontSize: 20,
-        fontFamily: 'Screen-Header',
-        color: '#c6bfc9',
-        alignSelf: 'center',
-        marginTop: 10,
-    },
-    title_container: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        alignSelf: 'center',
-        marginTop: 10,
-    },
+    title: { fontSize: 20, fontFamily: 'Screen-Header', color: '#c6bfc9', alignSelf: 'center', marginTop: 10, },
     // sharedLetter styles
     button: { paddingRight: 0, marginRight: 0, },
     userBtn: { borderRadius: 10, padding: 10, },
