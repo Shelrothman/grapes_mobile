@@ -23,7 +23,10 @@ export class HomeService {
     };
 
     private handleError(error: Partial<PostgrestError>) {
+        const errorString = JSON.stringify(error, undefined, 2);
+        if (errorString.includes('violates unique constraint')) return;
         console.error('Home Service Error: ', JSON.stringify(error, undefined, 2));
+        return;
     }
 
     private doesRowExist = async (user_id: string, utc_today: string): Promise<boolean> => {
