@@ -1,5 +1,7 @@
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 // import * as packageJSON from '../../../package.json';
+
+
 /**
  * render this list into SectionList
  */
@@ -113,7 +115,7 @@ export const DataList: any = [
                 value: [
                     {
                         linkTitle: "📝 Write a review",
-                        link: "https://jsonplaceholder.typicode.com/posts/2"
+                        link: `itms-apps://itunes.apple.com/app/viewContentsUserReviews/id${require("../../../eas.json").submit.production.ios.ascAppId}?action=write-review`
                     }, 
                     {
                         linkTitle: "⭐ Star the project on Github",

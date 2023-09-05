@@ -1,9 +1,10 @@
 import { View, Text, SectionList, SafeAreaView } from 'react-native';
-import { A } from '@expo/html-elements';
+import { A } from '@expo/html-elements'; // use like 'Linking' @expo-linking, just a wrapper as an element.
 import { setting_styles } from '../../styles/settings';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { GrapeIcons } from '../../utils/Icons';
 import { DataList } from './DataList';
+
 
 type renderItemProps = {
     title?: string;

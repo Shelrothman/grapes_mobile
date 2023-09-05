@@ -35,7 +35,6 @@ export const global_styles = StyleSheet.create({
         minWidth: '85%',
         alignSelf: 'center',
     },
-
     card_body: {
         borderBottomColor: '#c6bfc9',
         borderBottomWidth: 0.5,
@@ -43,25 +42,11 @@ export const global_styles = StyleSheet.create({
         backgroundColor: '#3d4b59',
         alignItems: 'center',
     },
-    card_footer: {
-        flexDirection: 'row', justifyContent: 'space-between',
-        paddingTop: 3,
-        paddingBottom: 3,
-    },
-    card_footer_last: {
-        flexDirection: 'row', justifyContent: 'center',
-        paddingBottom: 3,
-    },
-    suffix_container: { justifyContent: 'flex-end', marginBottom: 5, fontFamily: 'Body-Reg', },
-    fullTitle_container: { flexDirection: 'row', justifyContent: 'center', },
-    value: {
-        fontSize: 18, color: 'white',
-        fontFamily: 'Reg-Italic',
-    },
+    card_footer: { flexDirection: 'row', justifyContent: 'space-between', paddingTop: 3, paddingBottom: 3, },
+    card_footer_last: { flexDirection: 'row', justifyContent: 'center', paddingBottom: 3, },
+    value: { fontSize: 18, color: 'white', fontFamily: 'Reg-Italic', },
     share_container: { justifyContent: 'center', marginLeft: 5, },
-    shared_by_container: {
-        justifyContent: 'center', marginRight: 5,
-    },
+    shared_by_container: { justifyContent: 'center', marginRight: 5, },
     shared_by: { fontSize: 12, color: '#c6bfc9', fontFamily: 'Body-Reg' },
     load_container: {
         padding: 10,

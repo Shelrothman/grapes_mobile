@@ -1,50 +1,50 @@
 {
-  "name": "grapes-app",
-  "displayName": "grapes-app",
-  "expo": {
     "name": "grapes-app",
-    "slug": "grapes-app",
-    "version": "1.0.2",
-    "orientation": "portrait",
-    "icon": "https://user-images.githubusercontent.com/62257716/264522331-c7610181-a16f-4ad0-9fcc-ed7272234c98.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "https://user-images.githubusercontent.com/62257716/264520512-4dc72e4e-bd28-4eb1-886f-56b3efb001c4.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#1a1e47"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "G080523.0",
-      "runtimeVersion": {
-        "policy": "sdkVersion"
-      }
-    },
-    "web": {
-      "favicon": "https://user-images.githubusercontent.com/62257716/258604320-4c2b3b04-262e-4f6e-86a4-5e0569e6711a.png",
-      "bundler": "metro",
-      "runtimeVersion": {
-        "policy": "sdkVersion"
-      }
-    },
-    "extra": {
-      "eas": {
-        "projectId": "dcb3fd06-2e7e-4c68-995b-8e772d1f041c"
-      }
-    },
-    "owner": "nini_bee",
-    "runtimeVersion": {
-      "policy": "sdkVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/dcb3fd06-2e7e-4c68-995b-8e772d1f041c"
-    },
-    "android": {},
-    "plugins": [
-      "expo-localization"
-    ]
-  }
+    "displayName": "grapes-app",
+    "expo": {
+        "name": "grapes-app",
+        "slug": "grapes-app",
+        "version": "1.0.2",
+        "orientation": "portrait",
+        "icon": "https://user-images.githubusercontent.com/62257716/264522331-c7610181-a16f-4ad0-9fcc-ed7272234c98.png",
+        "userInterfaceStyle": "light",
+        "splash": {
+            "image": "https://user-images.githubusercontent.com/62257716/264520512-4dc72e4e-bd28-4eb1-886f-56b3efb001c4.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#1a1e47"
+        },
+        "assetBundlePatterns": [
+            "**/*"
+        ],
+        "ios": {
+            "supportsTablet": true,
+            "bundleIdentifier": "G080523.0",
+            "runtimeVersion": {
+                "policy": "sdkVersion"
+            }
+        },
+        "web": {
+            "favicon": "https://user-images.githubusercontent.com/62257716/258604320-4c2b3b04-262e-4f6e-86a4-5e0569e6711a.png",
+            "bundler": "metro",
+            "runtimeVersion": {
+                "policy": "sdkVersion"
+            }
+        },
+        "extra": {
+            "eas": {
+                "projectId": "dcb3fd06-2e7e-4c68-995b-8e772d1f041c"
+            }
+        },
+        "owner": "nini_bee",
+        "runtimeVersion": {
+            "policy": "sdkVersion"
+        },
+        "updates": {
+            "url": "https://u.expo.dev/dcb3fd06-2e7e-4c68-995b-8e772d1f041c"
+        },
+        "android": {},
+        "plugins": [
+            "expo-localization"
+        ]
+    }
 }

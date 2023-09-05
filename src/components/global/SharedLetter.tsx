@@ -18,7 +18,6 @@ type SharedLetterProps = GlobalGrape & {
 
 export function SharedLetter({ user_name, letter, value, onCopyClick }: SharedLetterProps) {
 
-    // todo: delete all unused styles in global.ts
 
     return (
         <View style={global_styles.card}>
