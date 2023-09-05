@@ -16,7 +16,8 @@ export default function HomeComponent() {
     const { sessionUser } = useAuthContext();
     const [ isLoading, setIsLoading ] = useState<boolean>(true);
     const [ grapeFormState, setGrapeFormState ] = useState<Home_Grape | null>(null);
-
+    /** state to hold the initial state of the grapeData on load So That we can compare the values before posting erroneously */
+    const [initialState, setInitialState] = useState<Home_Grape | null>(null);
     // PICKUP: grapeDataOnLoad setGrapeDataOnLoad.// to use for comparing to not send it erroneously
 
     /** memoize the fetchData function so that it only runs when the sessionUser changes or when the screen is re-focused */
@@ -28,7 +29,7 @@ export default function HomeComponent() {
 
     async function fetchData() {
         if (sessionUser == null || sessionUser == undefined) return;
-        await HomePageService.fetchOrSetDataOnFocus( sessionUser!.user_uid, setGrapeFormState, );
+        await HomePageService.fetchOrSetDataOnFocus( sessionUser!.user_uid, setGrapeFormState, setInitialState);
     }
 
     return (
@@ -42,7 +43,7 @@ export default function HomeComponent() {
                     <ScrollView keyboardShouldPersistTaps='handled' contentContainerStyle={{ flexGrow: 1, backgroundColor: "#1a1e47", paddingBottom: 40, }}>
                         {[ 'G', 'R', 'A', 'P', 'E', 'S' ].map((letter, index) => (
                             <HomeFormWrapper
-                                label={letter} key={index}
+                                label={letter} key={index} initialState={initialState}
                                 setFormState={setGrapeFormState} formState={grapeFormState}
                             />
                         ))}

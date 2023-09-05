@@ -1,5 +1,3 @@
-// todo: ensure i use all these
-
 import { MyMap } from "../utils/constants";
 
 export type FormState = MyMap & {

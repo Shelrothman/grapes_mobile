@@ -30,11 +30,7 @@ export function SettingsStackScreen() {
                 },
                 tabBarActiveTintColor: '#608a5c',
                 tabBarInactiveTintColor: '#85a3ad',
-                tabBarStyle: {
-                    backgroundColor: '#a8e4a0',
-                    paddingTop: height * 0.05,
-                    fontFamily: 'Body-Reg',
-                },
+                tabBarStyle: { backgroundColor: '#a8e4a0', paddingTop: height * 0.05, fontFamily: 'Body-Reg', },
                 tabBarIndicatorStyle: { backgroundColor: '#608a5c', height: 5 },
             })}>
             <Tab.Screen name="About" component={About} options={{ title: 'About GRAPES™', swipeEnabled: false }} />
