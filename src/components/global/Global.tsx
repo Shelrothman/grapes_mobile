@@ -7,51 +7,50 @@ import { SharedLetterUI } from '../../types';
 import { global_styles } from '../../styles/global';
 import Loading from '../../utils/Loading';
 import { copyToClipboard } from '../../utils';
-import { Ionicons } from '@expo/vector-icons';
-import { isCloseToBottom } from '../../utils';
+// import { Ionicons } from '@expo/vector-icons';
+// import { isCloseToBottom } from '../../utils';
+
+
+// !! PICKUP:  infiniste scroll is set upppp.. now just need to see why the bottom div isnt showing... and maybe need a set bittim text statedjsklasljdaskl
+// * or just have the last card be in itself the button
 
 
 export function Global() {
     const [ globalData, setGlobalData ] = useState<SharedLetterUI[] | null>(null);
     const [ isInitialLoading, setIsInitialLoading ] = useState(true);
-
-
     const [ isMoreLoading, setIsMoreLoading ] = useState(false);
     const [ refreshing, setRefreshing ] = useState(false);
-
-    const [ needToLoadMore, setNeedToLoadMore ] = useState<boolean>(false);
-    // * for each odf ^ these states its reallylike shoule we load more.
-
-    const flatListRef = React.useRef<React.MutableRefObject<FlatList<SharedLetterUI>> | null>(null);
-
+    const [ needToLoadMore, setNeedToLoadMore ] = useState<boolean>(true);
     const [ currentPage, setCurrentPage ] = useState<number>(1);
     const [ noMoreLeft, setNoMoreLeft ] = useState<boolean>(false);
     const [ maxLength, setMaxLength ] = useState<number>(10);
+    const flatListRef = React.useRef<React.MutableRefObject<FlatList<SharedLetterUI>> | null>(null);
     const globalService = new GlobalService();
 
     useFocusEffect( // * this runs only when the screen is refocused
         React.useCallback(() => {
             fetchData().finally(() => setIsInitialLoading(false));
             return () => {
-                setNoMoreLeft(false);
-                setNeedToLoadMore(false);
+                cleanup();
             }
         }, [])
     );
 
-    // !! PICKUP:  infiniste scroll is set upppp.. now just need to see why the bottom div isnt showing...
 
-    // const onRefresh = React.useCallback(() => {
-    const onRefresh = () => {
+    const onRefresh = React.useCallback(() => {
         // TODO: caching would be nice here
         setIsInitialLoading(true);
         setRefreshing(true);
         fetchData().finally(() => {
-            setRefreshing(false);
-            setIsInitialLoading(false);
-            setNoMoreLeft(false);
-            setCurrentPage(1);
+            return cleanup();
         });
+    }, []);
+
+    const cleanup = () => {
+        setRefreshing(false);
+        setIsInitialLoading(false);
+        setNoMoreLeft(false);
+        setCurrentPage(1);
     };
 
 
@@ -65,13 +64,6 @@ export function Global() {
             console.error('Error fetching data:', error);
         }
     };
-
-    // const handleOnScroll = (event: NativeScrollEvent) => {
-    //     const isBottom = isCloseToBottom(event);
-    //     if (isBottom) {
-    //         setNeedToLoadMore(true);
-    //     }
-    // };
 
 
     async function fetchNextSet() {
@@ -125,19 +117,19 @@ export function Global() {
                         onEndReached={() => handleLoadMore()}
                     />
                 )}
-            </View>
-            {noMoreLeft && (
+                {/* {noMoreLeft && ( */}
                 <Pressable
                     style={{ display: needToLoadMore ? 'flex' : 'none', ...global_styles.load_container }}
                     onPress={() => handleLoadMore()}
                     disabled={isMoreLoading}
                 >
-                    {isMoreLoading ? <Text>Loading...</Text> : (
-                        // <Text><Ionicons name="md-cloud-download" size={24} color="#1a1e47" />{bottomText}</Text>
-                        <Text>Back To Top</Text>
-                    )}
+                    {/* {isMoreLoading ? <Text>Loading...</Text> : ( */}
+                    {/* // <Text><Ionicons name="md-cloud-download" size={24} color="#1a1e47" />{bottomText}</Text> */}
+                    <Text>Back To Top</Text>
+                    {/* )} */}
                 </Pressable>
-            )}
+                {/* )} */}
+            </View>
         </SafeAreaView>
     )
 }

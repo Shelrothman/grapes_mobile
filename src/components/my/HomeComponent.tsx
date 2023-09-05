@@ -16,9 +16,9 @@ export default function HomeComponent() {
     const height = useHeaderHeight();
     const { sessionUser } = useAuthContext();
     const [ isLoading, setIsLoading ] = useState<boolean>(true);
-    const [ isError, setIsError ] = useState<boolean>(false);
+    // const [ isError, setIsError ] = useState<boolean>(false);
     const [ grapeFormState, setGrapeFormState ] = useState<Home_Grape | null>(null);
-    
+
     // PICKUP: grapeDataOnLoad setGrapeDataOnLoad.// to use for comparing to not send it erroneously
 
     /** memoize the fetchData function so that it only runs when the sessionUser changes or when the screen is re-focused */
@@ -33,7 +33,7 @@ export default function HomeComponent() {
         await HomePageService.fetchDataOnFocus(
             sessionUser!.user_uid,
             setGrapeFormState,
-            setIsError
+            // setIsError
         );
     }
 
@@ -43,10 +43,7 @@ export default function HomeComponent() {
                 style={{ flex: 1, }} keyboardVerticalOffset={height}
             >
                 <Text style={my_styles.date_title}> Today: {getLocalDateForTitle()} </Text>
-                {isLoading ? <Loading /> : isError ? (<View style={my_styles.main_container}>
-                    <Text style={my_styles.date_title}>Internal Server Error</Text>
-                    <Text style={my_styles.date_title}>Please try again later</Text>
-                </View>) : grapeFormState && (
+                {grapeFormState && (
                     <ScrollView keyboardShouldPersistTaps='handled' contentContainerStyle={{ flexGrow: 1, backgroundColor: "#1a1e47", paddingBottom: 40, }}>
                         {[ 'G', 'R', 'A', 'P', 'E', 'S' ].map((letter, index) => (
                             <HomeFormWrapper

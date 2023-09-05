@@ -16,17 +16,20 @@ export class HomePageService {
     static async fetchDataOnFocus(
         user_uid: string,
         setGrapeFormState: React.Dispatch<React.SetStateAction<Home_Grape | null>>,
-        setIsError: React.Dispatch<React.SetStateAction<boolean>>,
+        // setIsError: React.Dispatch<React.SetStateAction<boolean>>,
     ) {
         try {
             const response = await HomeService.getOrCreateToday(user_uid);
             // todo: caching mechanism or something around here or in HomeService
-            if (response !== null) return setGrapeFormState(resToHomeGrape(response));
-            else console.error('response was null wha?');
+            // if (response !== null) 
+            if (response) return setGrapeFormState(resToHomeGrape(response));
+            // else console.error('response was null wha?');
             //FIXME:  lets figure ^^this out over next few days
         } catch (error) {
-            console.error('Error fetching data:', error);
-            setIsError(true);
+            // console.error('Error fetching data on focus:', error);
+            // doesnt get to here but in the chance it does, set it to the default grape
+            // setIsError(true);
+            return setGrapeFormState(resToHomeGrape(defaultGrape));
         }
     }
 

@@ -96,14 +96,15 @@ export class HomeService {
             const existence = await homeService.doesRowExist(user_id, today);
             if (existence) {
                 resVal = await homeService.getRow(user_id, today);
+                return resVal;
             } else {
                 resVal = await homeService.addRow({ user_id, created_at: today });
+                return resVal;
             }
         } catch (error: any) {
             homeService.handleError(error);
             return null;
         }
-        return resVal;
     }
 
 }
