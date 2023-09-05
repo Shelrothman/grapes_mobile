@@ -10,14 +10,11 @@ import { Home_Grape } from "../../types";
 import { HomePageService } from "../../services/ui";
 import { getLocalDateForTitle } from "../../utils";
 
-// todo: make sure i double checkd there even a change before posting to db (like if they tap in but no change)
-// * aka... need a state to then compare...
 
 export default function HomeComponent() {
     const height = useHeaderHeight();
     const { sessionUser } = useAuthContext();
     const [ isLoading, setIsLoading ] = useState<boolean>(true);
-    // const [ isError, setIsError ] = useState<boolean>(false);
     const [ grapeFormState, setGrapeFormState ] = useState<Home_Grape | null>(null);
 
     // PICKUP: grapeDataOnLoad setGrapeDataOnLoad.// to use for comparing to not send it erroneously
@@ -31,11 +28,7 @@ export default function HomeComponent() {
 
     async function fetchData() {
         if (sessionUser == null || sessionUser == undefined) return;
-        await HomePageService.fetchDataOnFocus(
-            sessionUser!.user_uid,
-            setGrapeFormState,
-            // setIsError
-        );
+        await HomePageService.fetchOrSetDataOnFocus( sessionUser!.user_uid, setGrapeFormState, );
     }
 
     return (
@@ -44,6 +37,7 @@ export default function HomeComponent() {
                 style={{ flex: 1, }} keyboardVerticalOffset={height}
             >
                 <Text style={my_styles.date_title}> Today: {getLocalDateForTitle()} </Text>
+                {isLoading && <Loading />}
                 {grapeFormState && (
                     <ScrollView keyboardShouldPersistTaps='handled' contentContainerStyle={{ flexGrow: 1, backgroundColor: "#1a1e47", paddingBottom: 40, }}>
                         {[ 'G', 'R', 'A', 'P', 'E', 'S' ].map((letter, index) => (

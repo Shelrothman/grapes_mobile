@@ -1,7 +1,5 @@
 import { View, ActivityIndicator } from "react-native";
 
-// todo: customize this loading screen further.. 🍇
-
 export default function () {
     return (
         <View style={{

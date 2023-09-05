@@ -12,7 +12,7 @@ import { defaultGrape } from "../../utils/constants";
 export class HomePageService {
 
 
-    static async fetchDataOnFocus(
+    static async fetchOrSetDataOnFocus(
         user_uid: string,
         setGrapeFormState: React.Dispatch<React.SetStateAction<Home_Grape | null>>,
     ) {
