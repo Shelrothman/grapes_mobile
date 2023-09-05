@@ -45,10 +45,12 @@ export const global_styles = StyleSheet.create({
     },
     card_footer: {
         flexDirection: 'row', justifyContent: 'space-between',
-        // padding: 5,
         paddingTop: 3,
         paddingBottom: 3,
-
+    },
+    card_footer_last: {
+        flexDirection: 'row', justifyContent: 'center',
+        paddingBottom: 3,
     },
     suffix_container: { justifyContent: 'flex-end', marginBottom: 5, fontFamily: 'Body-Reg', },
     fullTitle_container: { flexDirection: 'row', justifyContent: 'center', },
@@ -68,5 +70,6 @@ export const global_styles = StyleSheet.create({
         backgroundColor: '#c6bfc9',
         borderRadius: 10,
         alignItems: 'center',
+        fontFamily: 'Body-Reg',
     },
 });

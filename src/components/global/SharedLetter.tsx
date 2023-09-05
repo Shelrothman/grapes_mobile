@@ -5,8 +5,8 @@
  */
 import { Text, View } from 'react-native';
 import { GlobalGrape } from '../../types';
-import { GrapeIcons } from '../../utils/Icons';
-import { GRAPE_DAY } from '../../utils/constants';
+// import { GrapeIcons } from '../../utils/Icons';
+// import { GRAPE_DAY } from '../../utils/constants';
 import { FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import { global_styles } from '../../styles/global';
 import { LetterHeader } from "../../utils/LetterHeader";
