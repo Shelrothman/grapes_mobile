@@ -68,7 +68,7 @@ export function Global() {
 
     const handleLoadMore = () => {
         if (maxLength > globalData!.length) {
-            console.log('more left.. supposedly', maxLength, globalData!.length);
+            // console.log('more left.. supposedly', maxLength, globalData!.length);
             return fetchNextSet().then(() => {
                 setCurrentPage((prev) => prev + 1);
             }).catch((err: any) => {
