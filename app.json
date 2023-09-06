@@ -19,6 +19,7 @@
         "ios": {
             "supportsTablet": true,
             "bundleIdentifier": "G080523.0",
+            "buildNumber": "2",
             "runtimeVersion": {
                 "policy": "sdkVersion"
             }
