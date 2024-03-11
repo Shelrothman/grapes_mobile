@@ -8,7 +8,7 @@ export const my_styles = StyleSheet.create({
     share_container: { flexDirection: 'row', borderBottomEndRadius: 10, borderBottomStartRadius: 10, paddingBottom: 10, },
     clearButtonParent: { justifyContent: "center", alignItems: "center", marginRight: 5, borderRadius: 50, },
     inputParent: { flexDirection: "row", justifyContent: "space-between", backgroundColor: '#3d4b59', borderRadius: 10, paddingRight: 5, },
-    card: { 
+    card: {
         borderWidth: 2,
         borderRadius: 10,
         marginTop: 40,

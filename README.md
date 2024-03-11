@@ -4,9 +4,9 @@ Grapes-App is a mobile app for mental health and wellness; a pocket-size version
 
 *Research shows that the simple act of planning your daily activities can increase your success at personal development, accomplishing long term goals, and reducing stress and anxiety.*
 
-**This app is free to all and will remain that way. If you would like to help me cover the costs of maintaining it, please donate to [Venmo (shel-grapes-dev)](https://account.venmo.com/u/shel-grapes-dev) and help support it!**
+**This app is free to all and will remain that way. If you would like to help me cover the costs of maintaining it, please donate to [Venmo (shelRothman)](https://account.venmo.com/u/shelRothman) and help support it!**
 
-[![Donate](https://img.shields.io/badge/Donate-Venmo-g.svg)](https://account.venmo.com/u/shel-grapes-dev)
+[![Donate](https://img.shields.io/badge/Donate-Venmo-g.svg)](https://account.venmo.com/u/shelRothman)
 
 **Table of Contents**
 - [What is GRAPES©?](#what-is-grapes)
@@ -110,4 +110,4 @@ Learn more about what's behind GRAPES© and how it can help you:
 ## Get in touch
 [![Shelby Rothman Developer Website](https://img.shields.io/badge/Shelby_Rothman-🧑‍💻-4E1E66)](https://shelbyrothman.com/) &nbsp;  &nbsp;  &nbsp; 
 [![Email the Developer](https://img.shields.io/badge/Email%20📧-a8e4a0)](mailto:shel.programmer@gmail.com) &nbsp;  &nbsp;  &nbsp; 
-[![Follow Shelby on Github](https://img.shields.io/github/followers/Q118.svg?label=Follow&style=for-the-badge&logo=github&logoColor=FFFFFF&labelColor=4E1E66&logoWidth=20&color=a8e4a0)](https://github.com/Q118)
+[![Follow Shelby on Github](https://img.shields.io/github/followers/Shelrothman.svg?label=Follow&style=for-the-badge&logo=github&logoColor=FFFFFF&labelColor=4E1E66&logoWidth=20&color=a8e4a0)](https://github.com/ShelRothman)

@@ -52,7 +52,7 @@ export function HomeFormWrapper({ label, setFormState, formState, initialState }
         /**
          * !this is the hack that makes it work WITH multiline 
          * * keep in mind `scrollEnabled` only works for ios
-         *  @link https://github.com/facebook/react-native/issues/16826 
+         *  @link  https://github.com/facebook/react-native/issues/16826#issuecomment-1648175628 
          * */
         scrollEnabled: false, multiline: true,
         returnKeyType: 'done', keyboardType: 'default', blurOnSubmit: true,
