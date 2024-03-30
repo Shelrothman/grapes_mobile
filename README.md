@@ -45,11 +45,11 @@ forgiveness. Examples include taking time to think about all you are thankful fo
 <details>
 <summary>View Screenshots</summary>
 <p align="left">
-  <img src="https://user-images.githubusercontent.com/62257716/258556234-8026afc5-4cad-40e2-99ea-43f532b1f53a.PNG" width="320" />
-  <img src="https://user-images.githubusercontent.com/62257716/258557320-867fc272-9b8a-4d7a-83d9-484dbcc6671a.PNG" width="320" />
-  <img src="https://user-images.githubusercontent.com/62257716/258557353-fe5997d1-a5b4-4d3c-af83-79396f65cebf.PNG" width="320" />
-  <img src="https://user-images.githubusercontent.com/62257716/258557371-7c97cb1a-26f3-4bdb-8790-6b3faee4fd93.PNG" width="320" />
-  <img src="https://user-images.githubusercontent.com/62257716/258557394-f8d95340-c9c1-4e4c-b28d-4c4a4f5b2fb4.PNG" width="320" />
+  <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource126/v4/0e/df/d0/0edfd069-ff23-ffc1-6758-d3ec1a7b5cb9/e4f2b354-e93b-4911-a865-04c8677d4574_home_iphone.png/230x0w.webp" width="320" />
+  <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource126/v4/46/3e/a2/463ea2f3-9e89-7cf3-747c-6b5813fe4bd5/e4532ad7-7fd0-49db-b767-af0a3aa26461_homeInput_iphone2.png/230x0w.webp" width="320" />
+  <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource116/v4/03/df/74/03df7441-f125-b314-3ce4-c0737ae29731/e3a654c6-e568-4938-800f-9e9c2a171bf0_history_iphone.png/230x0w.webp" width="320" />
+  <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource116/v4/2c/e8/9c/2ce89c0f-b78e-0f66-90a4-f1525b331b3c/2464d53a-22d5-4417-84c4-804c6a0ca766_info_iphone.png/230x0w.webp" width="320" />
+  <img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource116/v4/7d/34/ba/7d34ba78-c9a8-b7c4-2695-b9d27f983525/74247742-770a-4747-afbb-1d54466e2296_login_iphone.png/230x0w.webp" width="320" />
 </p>
 </details>
 
